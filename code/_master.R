@@ -96,4 +96,10 @@ source(file.path(CODDIR, "D1_conetwork.R"))
 
 source(file.path(CODDIR, "C1_ministry_analysis.R"))
 
+# -- E PIPELINE: Supriya Sule individual MP report --------------------------
+# Standalone — generates figures + tables for sule_report.qmd
+# Run: Rscript code/E1_sule_report.R  (or quarto render sule_report.qmd)
+
+source(file.path(CODDIR, "E1_sule_report.R"))
+
 cat("\n=== Pipeline complete. Outputs in:", OUTDIR, "===\n")
