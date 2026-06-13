@@ -1,0 +1,162 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Inter", "Helvetica Neue", Arial, sans-serif;
+$headings-font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+$headings-font-weight: 600;
+$body-color: #1a1a2e;
+$link-color: #e76f51;
+$primary: #264653;
+$navbar-bg: #264653;
+$navbar-fg: #ffffff;
+$footer-bg: #f8f9fa;
+$toc-font-size: 0.85rem;
+
+/*-- scss:rules --*/
+
+/* Google Font import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Hero banner */
+.hero {
+  background: linear-gradient(135deg, #264653 0%, #2a9d8f 100%);
+  color: white;
+  padding: 4rem 2rem 3rem 2rem;
+  margin: -1.5rem -1.5rem 3rem -1.5rem;
+  border-radius: 0 0 8px 8px;
+}
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  border: none;
+}
+.hero .subtitle {
+  font-size: 1.15rem;
+  opacity: 0.88;
+  max-width: 700px;
+  line-height: 1.6;
+}
+.hero .meta {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+.hero .badge-row {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.hero .badge-item {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* Key findings callout strip */
+.finding-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin: 2.5rem 0;
+}
+.finding-card {
+  background: #f8f9fa;
+  border-left: 4px solid #2a9d8f;
+  border-radius: 4px;
+  padding: 1.2rem 1.4rem;
+}
+.finding-card .number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #264653;
+  line-height: 1;
+}
+.finding-card .label {
+  font-size: 0.82rem;
+  color: #555;
+  margin-top: 0.3rem;
+  line-height: 1.4;
+}
+
+/* Section headers */
+h2 {
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.4rem;
+  margin-top: 3rem;
+  color: #264653;
+}
+h3 {
+  color: #2a9d8f;
+  margin-top: 2rem;
+}
+
+/* Figures */
+img {
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+.quarto-figure {
+  margin: 2rem 0;
+}
+figcaption {
+  font-size: 0.84rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 0.6rem;
+  line-height: 1.5;
+}
+
+/* Data table */
+.data-pill {
+  display: inline-block;
+  background: #264653;
+  color: white;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Method table */
+table {
+  font-size: 0.88rem;
+}
+th {
+  background: #264653;
+  color: white;
+}
+
+/* Pipeline code block */
+pre.pipeline {
+  background: #1a1a2e;
+  color: #a8dadc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+/* Callout overrides */
+.callout-tip {
+  border-left-color: #2a9d8f;
+}
+.callout-note {
+  border-left-color: #264653;
+}
+
+/* Footer */
+.nav-footer {
+  border-top: 1px solid #dee2e6;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* Responsive: stack finding cards on mobile */
+@media (max-width: 768px) {
+  .finding-strip { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.8rem; }
+}

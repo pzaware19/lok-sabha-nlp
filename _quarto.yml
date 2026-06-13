@@ -1,0 +1,34 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "What Does India's Parliament Talk About?"
+  favicon: output/figures/ideological_space.png
+  navbar:
+    left:
+      - text: "Findings"
+        href: index.html#findings
+      - text: "Methodology"
+        href: index.html#methodology
+      - text: "Code"
+        href: https://github.com/pzaware19/lok-sabha-nlp
+        icon: github
+  page-footer:
+    center: "Piyush Zaware · MPP, University of Chicago · Applied Economics Researcher, Northwestern Kellogg"
+
+format:
+  html:
+    theme:
+      light: [flatly, custom.scss]
+    toc: true
+    toc-location: right
+    toc-title: "Contents"
+    toc-depth: 2
+    smooth-scroll: true
+    code-fold: true
+    fig-align: center
+    fig-cap-location: bottom
+    number-sections: false
+    link-external-newwindow: true
+    html-math-method: katex
