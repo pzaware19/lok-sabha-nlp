@@ -161,6 +161,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">The Data</a></li>
   <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">How It Works</a></li>
   <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Results</a></li>
+  <li><a href="#bertopic" id="toc-bertopic" class="nav-link" data-scroll-target="#bertopic">BERTopic: Topics Without the Bag-of-Words Assumption</a></li>
+  <li><a href="#ministry" id="toc-ministry" class="nav-link" data-scroll-target="#ministry">Ministry Targeting</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
   <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproducing This</a></li>
   <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a></li>
@@ -603,6 +605,69 @@ Note
 <figure class="figure">
 <p><img src="output/figures/final_summary_panel.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Ideological space, document map, BJP trajectory, and topic evolution in one panel.</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="bertopic" class="level2">
+<h2 class="anchored" data-anchor-id="bertopic">BERTopic: Topics Without the Bag-of-Words Assumption</h2>
+<p>LDA treats each document as a bag of tokens. It doesn’t know that “railway” and “train” are related, or that “farmer suicide” is a compound concept. BERTopic uses sentence embeddings instead — each question is projected into a 384-dimensional semantic space using a multilingual transformer, then HDBSCAN finds clusters of semantically similar questions, and c-TF-IDF extracts the distinctive terms per cluster.</p>
+<p>Running BERTopic on all 11,841 starred questions (not the party-session aggregates) finds 29 coherent topics. About 25% of questions land in the outlier cluster — questions that don’t fit neatly into any topic. That’s not a failure; it’s honest. LDA forces every document into every topic with some weight; BERTopic refuses to.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/bertopic_top_terms.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>BERTopic top terms per topic, ranked by c-TF-IDF score. Each panel is one topic cluster. Terms are distinctive to the cluster, not just frequent overall — so parliamentary boilerplate drops out.</figcaption>
+</figure>
+</div>
+<p>The topics that emerge are sharper than LDA’s. Railway infrastructure, power and energy, MGNREGS and rural employment, pharmaceutical drugs, banking and loans, forest and pollution, sugar mills, coastal fisheries, AIIMS and hospitals — each topic has a clean semantic core. The LDA equivalent mixes these because the token “wise” and “proposed” appear everywhere and pollute topic boundaries.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/bertopic_vs_lda.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Method comparison: LDA vs BERTopic on the same corpus.</figcaption>
+</figure>
+</div>
+<p>The two methods agree on the broad thematic structure of parliamentary questioning but disagree in resolution. LDA gives 15 coarse topics with noisy term lists. BERTopic gives 29 finer topics with cleaner terms — at the cost of a 25% outlier rate and higher computational time.</p>
+<hr>
+</section>
+<section id="ministry" class="level2">
+<h2 class="anchored" data-anchor-id="ministry">Ministry Targeting</h2>
+<p>Every starred question is addressed to a specific ministry. That’s a second signal on top of the text — not just <em>what</em> parties talk about, but <em>who</em> they hold accountable. The analysis here asks whether parties target ministries strategically, or whether the distribution of questions across ministries roughly mirrors each party’s overall question volume.</p>
+<p>The baseline is proportional questioning: if BJP asks 40% of all questions and Defence gets 5% of all questions, then BJP asking 2% of its questions to Defence is expected. The Pearson residual measures the deviation from that null.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ministry_excess_heatmap.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Excess ministry targeting. Each cell shows the Pearson residual (observed minus expected, scaled by sqrt of expected). Red = over-questions; blue = under-questions. The pattern reveals legislative strategy.</figcaption>
+</figure>
+</div>
+<p>A few things stand out. INC concentrates disproportionately on Finance and Home Affairs — the two ministries most exposed to accountability questions about economic policy and internal security. Left parties over-question Labour and Employment by a substantial margin. Regional parties target niche ministries tied to their state economies: Textiles, Fisheries, Steel.</p>
+<section id="ministry-concentration" class="level3">
+<h3 class="anchored" data-anchor-id="ministry-concentration">Ministry concentration</h3>
+<p>Some parties spread their questions across many ministries. Others concentrate fire. The Herfindahl-Hirschman Index (sum of squared ministry shares) measures this — higher means more concentrated.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ministry_concentration.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Ministry concentration by party (Herfindahl index). Label shows each party’s top ministry and the share of its questions directed there.</figcaption>
+</figure>
+</div>
+<p>DMK and the Left are the most concentrated — both have narrow, consistent mandates. BJP and Regional are the most diffuse, which makes sense: BJP has a broad governing agenda and regional parties have heterogeneous state-specific priorities.</p>
+</section>
+<section id="how-targeting-has-shifted-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="how-targeting-has-shifted-over-time">How targeting has shifted over time</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ministry_temporal.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>BJP vs INC ministry targeting, 16th to 18th Lok Sabha. Each panel is one ministry. Lines show the share of each party’s starred questions directed there per Lok Sabha.</figcaption>
+</figure>
+</div>
+<p>BJP’s targeting of Defence and Home Affairs grows across Lok Sabhas, consistent with an expanding security and sovereignty agenda. INC’s concentration on Finance increases in the 17th and 18th LS — as the opposition, it tracks economic policy failures more intensively when the government’s fiscal record becomes more contestable.</p>
+</section>
+<section id="the-targeting-network" class="level3">
+<h3 class="anchored" data-anchor-id="the-targeting-network">The targeting network</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ministry_network.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Bipartite party-ministry network. Edges connect parties to ministries they over-question (Pearson residual &gt; 1.5). Edge thickness proportional to excess targeting.</figcaption>
 </figure>
 </div>
 <hr>

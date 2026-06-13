@@ -262,6 +262,52 @@ A few things stand out. "Farmer" sits near drought, MSP, and irrigation. It is a
 
 ---
 
+## BERTopic: Topics Without the Bag-of-Words Assumption {#bertopic}
+
+LDA treats each document as a bag of tokens. It doesn't know that "railway" and "train" are related, or that "farmer suicide" is a compound concept. BERTopic uses sentence embeddings instead — each question is projected into a 384-dimensional semantic space using a multilingual transformer, then HDBSCAN finds clusters of semantically similar questions, and c-TF-IDF extracts the distinctive terms per cluster.
+
+Running BERTopic on all 11,841 starred questions (not the party-session aggregates) finds 29 coherent topics. About 25% of questions land in the outlier cluster — questions that don't fit neatly into any topic. That's not a failure; it's honest. LDA forces every document into every topic with some weight; BERTopic refuses to.
+
+![BERTopic top terms per topic, ranked by c-TF-IDF score. Each panel is one topic cluster. Terms are distinctive to the cluster, not just frequent overall — so parliamentary boilerplate drops out.](output/figures/bertopic_top_terms.png){width=100%}
+
+The topics that emerge are sharper than LDA's. Railway infrastructure, power and energy, MGNREGS and rural employment, pharmaceutical drugs, banking and loans, forest and pollution, sugar mills, coastal fisheries, AIIMS and hospitals — each topic has a clean semantic core. The LDA equivalent mixes these because the token "wise" and "proposed" appear everywhere and pollute topic boundaries.
+
+![Method comparison: LDA vs BERTopic on the same corpus.](output/figures/bertopic_vs_lda.png){width=80%}
+
+The two methods agree on the broad thematic structure of parliamentary questioning but disagree in resolution. LDA gives 15 coarse topics with noisy term lists. BERTopic gives 29 finer topics with cleaner terms — at the cost of a 25% outlier rate and higher computational time.
+
+---
+
+## Ministry Targeting {#ministry}
+
+Every starred question is addressed to a specific ministry. That's a second signal on top of the text — not just *what* parties talk about, but *who* they hold accountable. The analysis here asks whether parties target ministries strategically, or whether the distribution of questions across ministries roughly mirrors each party's overall question volume.
+
+The baseline is proportional questioning: if BJP asks 40% of all questions and Defence gets 5% of all questions, then BJP asking 2% of its questions to Defence is expected. The Pearson residual measures the deviation from that null.
+
+![Excess ministry targeting. Each cell shows the Pearson residual (observed minus expected, scaled by sqrt of expected). Red = over-questions; blue = under-questions. The pattern reveals legislative strategy.](output/figures/ministry_excess_heatmap.png){width=100%}
+
+A few things stand out. INC concentrates disproportionately on Finance and Home Affairs — the two ministries most exposed to accountability questions about economic policy and internal security. Left parties over-question Labour and Employment by a substantial margin. Regional parties target niche ministries tied to their state economies: Textiles, Fisheries, Steel.
+
+### Ministry concentration
+
+Some parties spread their questions across many ministries. Others concentrate fire. The Herfindahl-Hirschman Index (sum of squared ministry shares) measures this — higher means more concentrated.
+
+![Ministry concentration by party (Herfindahl index). Label shows each party's top ministry and the share of its questions directed there.](output/figures/ministry_concentration.png){width=90%}
+
+DMK and the Left are the most concentrated — both have narrow, consistent mandates. BJP and Regional are the most diffuse, which makes sense: BJP has a broad governing agenda and regional parties have heterogeneous state-specific priorities.
+
+### How targeting has shifted over time
+
+![BJP vs INC ministry targeting, 16th to 18th Lok Sabha. Each panel is one ministry. Lines show the share of each party's starred questions directed there per Lok Sabha.](output/figures/ministry_temporal.png){width=100%}
+
+BJP's targeting of Defence and Home Affairs grows across Lok Sabhas, consistent with an expanding security and sovereignty agenda. INC's concentration on Finance increases in the 17th and 18th LS — as the opposition, it tracks economic policy failures more intensively when the government's fiscal record becomes more contestable.
+
+### The targeting network
+
+![Bipartite party-ministry network. Edges connect parties to ministries they over-question (Pearson residual > 1.5). Edge thickness proportional to excess targeting.](output/figures/ministry_network.png){width=90%}
+
+---
+
 ## What the Results Do Not Tell You {#robustness}
 
 ### The incumbency confound

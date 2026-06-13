@@ -73,4 +73,15 @@ source(file.path(CODDIR, "A7_clustering.R"))
 source(file.path(CODDIR, "A8_visualization.R"))
 source(file.path(CODDIR, "A9_incumbency_robustness.R"))
 
+# -- B PIPELINE: BERTopic (Python) -------------------------------------------
+# Independent of A pipeline — runs on individual starred questions
+# Requires: pip3 install bertopic sentence-transformers
+
+system(paste("python3", shQuote(file.path(CODDIR, "B1_bertopic.py"))))
+
+# -- C PIPELINE: Ministry Targeting ------------------------------------------
+# Independent of A pipeline — uses raw parquet + party lookup
+
+source(file.path(CODDIR, "C1_ministry_analysis.R"))
+
 cat("\n=== Pipeline complete. Outputs in:", OUTDIR, "===\n")
