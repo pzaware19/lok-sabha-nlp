@@ -54,15 +54,10 @@ print(f"  Starred questions: {len(starred):,}")
 # party_lookup maps cleaned MP name → party_family
 # Build it from the party_session metadata + original MP matching
 
-lookup_path = os.path.join(TMPDIR, "party_lookup.csv")
-if os.path.exists(lookup_path):
-    lookup = pd.read_csv(lookup_path)
-    print(f"  Party lookup rows: {len(lookup):,}")
-else:
-    # Fall back: use doc_meta_mp.csv which has primary_mp → party_family
-    lookup = pd.read_csv(os.path.join(TMPDIR, "doc_meta_mp.csv"))
-    lookup = lookup.rename(columns={"primary_mp": "mp_clean", "doc_mp": "mp_raw"})
-    print(f"  Using doc_meta_mp.csv: {len(lookup):,} rows")
+# Use the full mp_party_lookup.csv (1,642 MPs from Wikipedia scrape)
+lookup_path = os.path.join(ROOT, "input", "mp_party_lookup.csv")
+lookup = pd.read_csv(lookup_path)
+print(f"  Party lookup rows: {len(lookup):,}")
 
 # Normalize MP names for matching
 def norm(s):
@@ -70,25 +65,18 @@ def norm(s):
         return ""
     return str(s).upper().strip()
 
-# members is an Arrow list column — each row is a list of MP name strings
-# Extract first element safely
+# members is a numpy.ndarray per row (Arrow list type read via pandas)
 def first_member(x):
-    if isinstance(x, (list, tuple)) and len(x) > 0:
-        return norm(x[0])
-    if isinstance(x, str) and len(x) > 0:
-        return norm(x.split(";")[0].split("\n")[0].split(",")[0])
-    return ""
+    try:
+        items = list(x)         # works for ndarray, list, tuple
+        return norm(items[0]) if items else ""
+    except Exception:
+        return norm(str(x)) if x else ""
 
 starred["primary_member"] = starred["members"].apply(first_member)
 
-# Try to match against lookup
-if "mp_raw" in lookup.columns:
-    lookup["mp_key"] = lookup["mp_raw"].apply(norm)
-elif "mp_clean" in lookup.columns:
-    lookup["mp_key"] = lookup["mp_clean"].apply(norm)
-else:
-    lookup["mp_key"] = lookup.iloc[:, 0].apply(norm)
-
+# Build lookup from mp_name column
+lookup["mp_key"] = lookup["mp_name"].apply(norm)
 mp_to_party = dict(zip(lookup["mp_key"], lookup["party_family"]))
 
 starred["party_family"] = starred["primary_member"].map(mp_to_party)

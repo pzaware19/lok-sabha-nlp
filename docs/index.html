@@ -163,6 +163,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Results</a></li>
   <li><a href="#bertopic" id="toc-bertopic" class="nav-link" data-scroll-target="#bertopic">BERTopic: Topics Without the Bag-of-Words Assumption</a></li>
   <li><a href="#ministry" id="toc-ministry" class="nav-link" data-scroll-target="#ministry">Ministry Targeting</a></li>
+  <li><a href="#sentiment" id="toc-sentiment" class="nav-link" data-scroll-target="#sentiment">Tone and Adversarialism</a></li>
+  <li><a href="#ner" id="toc-ner" class="nav-link" data-scroll-target="#ner">Geographic Focus: Where Parties Look</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
   <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproducing This</a></li>
   <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a></li>
@@ -195,6 +197,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="badge-item">
 <p>LDA · STM · Word2Vec · UMAP</p>
+</div>
+<div class="badge-item">
+<p>BERTopic · VADER · spaCy NER</p>
 </div>
 </div>
 </section>
@@ -670,6 +675,150 @@ Note
 <figcaption>Bipartite party-ministry network. Edges connect parties to ministries they over-question (Pearson residual &gt; 1.5). Edge thickness proportional to excess targeting.</figcaption>
 </figure>
 </div>
+<hr>
+</section>
+</section>
+<section id="sentiment" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment">Tone and Adversarialism</h2>
+<p>Parliamentary questions have a formal grammar: “Will the Minister of X please state whether…” That structure is mandatory. But within it, the choice of framing differs. <em>Has the government failed to protect minorities?</em> is adversarial. <em>What schemes has the government launched to promote farmer welfare?</em> is aspirational. VADER extracts this signal by scoring the compound sentiment of each question’s text.</p>
+<p>The overall distribution is positive — parliamentary questions are written to get answers, not to insult. But the relative differences across parties are informative.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/sentiment_distribution.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Share of adversarial vs aspirational questions by party. Adversarial = VADER compound ≤ −0.05. Parties ordered by adversarialism rate.</figcaption>
+</figure>
+</div>
+<p><strong>Left parties are the most adversarial</strong>, with 25% of their starred questions classified as negative in tone. INC follows at 16%, slightly above BJP at 13%. This is consistent with the incumbency gradient — opposition parties have more reason to frame questions as government failures — but the Left’s high rate is notable even adjusting for their perpetual opposition status across all three Lok Sabhas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/sentiment_party.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Mean VADER compound score by party with 95% confidence bands, faceted by government vs opposition status.</figcaption>
+</figure>
+</div>
+<section id="do-adversarialism-levels-change-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="do-adversarialism-levels-change-over-time">Do adversarialism levels change over time?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/sentiment_temporal.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Adversarialism by party across 16th–18th Lok Sabhas. The 18th LS (2024–) is the most recent and shows the sharpest partisan divergence yet.</figcaption>
+</figure>
+</div>
+<p>The temporal pattern shows a widening gap. Opposition parties — particularly INC and the Left — become more adversarial across Lok Sabhas, while BJP’s tone stays relatively stable. Whether this reflects deteriorating political relations, a more combative opposition strategy, or the changing nature of issues in Parliament is not identified here.</p>
+</section>
+<section id="which-ministries-attract-the-most-critical-questioning" class="level3">
+<h3 class="anchored" data-anchor-id="which-ministries-attract-the-most-critical-questioning">Which ministries attract the most critical questioning?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/sentiment_ministry.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Ministry-level adversarialism rate. Fill colour = mean compound score. Ministries with 50+ starred questions shown.</figcaption>
+</figure>
+</div>
+<p>Home Affairs and Finance attract the most adversarial questioning. That tracks the ministry-targeting analysis above: these are the ministries INC and the Left concentrate on, and they concentrate there <em>because</em> the questions they ask about security and fiscal policy are inherently more confrontational.</p>
+</section>
+<section id="which-topics-attract-adversarial-framing" class="level3">
+<h3 class="anchored" data-anchor-id="which-topics-attract-adversarial-framing">Which topics attract adversarial framing?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/sentiment_topic.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>BERTopic topics by mean compound score (x) and adversarialism rate (y). Topics toward the bottom-left attract the most critical questioning.</figcaption>
+</figure>
+</div>
+<p>The topic-level view maps cleanly onto the subject matter. Topics about judicial matters, security incidents, and minority welfare attract the most adversarial framing. Topics about infrastructure schemes, tourism, and sports attract almost none.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>VADER caveat.</strong> VADER was calibrated on social media and news text, not formal parliamentary English. The parliamentary register inflates positive scores because declarative, neutral language reads as “not negative.” Absolute score levels are not meaningful — the within-sample variation across parties and ministries is.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="ner" class="level2">
+<h2 class="anchored" data-anchor-id="ner">Geographic Focus: Where Parties Look</h2>
+<p>Every question comes with text that mentions specific places. spaCy’s NER pipeline (en_core_web_sm) extracts the states named in each question. This lets us ask: do regional parties really concentrate their parliamentary activity on their home states? And how does BJP’s geographic spread as a national governing party compare?</p>
+<p>The answer is stark.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ner_state_heatmap.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Share of each party’s matched starred questions that name each state. Blank = not mentioned. Labels shown for shares ≥ 0.5%.</figcaption>
+</figure>
+</div>
+<p><strong>Regional parties are entirely concentrated.</strong> Left mentions only Kerala. TDP mentions only Telangana and Andhra Pradesh. DMK’s state mentions go almost entirely to Tamil Nadu-adjacent issues. JDU’s geographic focus on Bihar is the highest HHI among parties with substantial question volume.</p>
+<p><strong>BJP is the most diffuse.</strong> As the national governing party, its MPs raise questions touching 14 different states. No single state accounts for more than 15% of its geographic mentions.</p>
+<section id="geographic-concentration-index" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-concentration-index">Geographic concentration index</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ner_state_concentration.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Herfindahl index of state mentions by party. JDU and Left are the most geographically concentrated; BJP is the most diffuse.</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Party</th>
+<th>HHI</th>
+<th>Top state</th>
+<th>Share</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Left</td>
+<td>1.00</td>
+<td>Kerala</td>
+<td>100%</td>
+</tr>
+<tr class="even">
+<td>TDP</td>
+<td>1.00</td>
+<td>Telangana/AP</td>
+<td>100%</td>
+</tr>
+<tr class="odd">
+<td>JDU</td>
+<td>0.58</td>
+<td>Bihar</td>
+<td>74%</td>
+</tr>
+<tr class="even">
+<td>Regional</td>
+<td>0.30</td>
+<td>Odisha</td>
+<td>51%</td>
+</tr>
+<tr class="odd">
+<td>INC</td>
+<td>0.16</td>
+<td>Kerala</td>
+<td>32%</td>
+</tr>
+<tr class="even">
+<td>BJP</td>
+<td>0.11</td>
+<td>Jharkhand</td>
+<td>15%</td>
+</tr>
+</tbody>
+</table>
+<p><em>HHI = 1 means all state mentions go to one state; HHI near 0 means uniform spread. INC’s Kerala concentration reflects the large number of Kerala MPs in the matched sample.</em></p>
+</section>
+<section id="who-gets-named" class="level3">
+<h3 class="anchored" data-anchor-id="who-gets-named">Who gets named?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ner_top_persons.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Top individuals named per party in starred questions (spaCy PERSON entities). Parliamentary boilerplate titles excluded.</figcaption>
+</figure>
+</div>
+<p>Person naming follows a pattern: government parties name bureaucrats and scheme beneficiaries, opposition parties name politicians they are holding accountable. The specific individuals vary but the structural difference is consistent.</p>
 <hr>
 </section>
 </section>

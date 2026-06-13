@@ -73,11 +73,17 @@ source(file.path(CODDIR, "A7_clustering.R"))
 source(file.path(CODDIR, "A8_visualization.R"))
 source(file.path(CODDIR, "A9_incumbency_robustness.R"))
 
-# -- B PIPELINE: BERTopic (Python) -------------------------------------------
+# -- B PIPELINE: BERTopic + Sentiment + NER (Python → R viz) ----------------
 # Independent of A pipeline — runs on individual starred questions
-# Requires: pip3 install bertopic sentence-transformers
+# Requires: pip3 install bertopic sentence-transformers vaderSentiment spacy
+#           python3 -m spacy download en_core_web_sm
 
 system(paste("python3", shQuote(file.path(CODDIR, "B1_bertopic.py"))))
+source(file.path(CODDIR, "B2_bertopic_viz.R"))
+system(paste("python3", shQuote(file.path(CODDIR, "B3_sentiment.py"))))
+source(file.path(CODDIR, "B5_sentiment_viz.R"))
+system(paste("python3", shQuote(file.path(CODDIR, "B4_ner.py"))))
+source(file.path(CODDIR, "B6_ner_viz.R"))
 
 # -- C PIPELINE: Ministry Targeting ------------------------------------------
 # Independent of A pipeline — uses raw parquet + party lookup

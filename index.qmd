@@ -29,6 +29,9 @@ Piyush Zaware
 ::: {.badge-item}
 LDA · STM · Word2Vec · UMAP
 :::
+::: {.badge-item}
+BERTopic · VADER · spaCy NER
+:::
 :::
 :::
 
@@ -305,6 +308,77 @@ BJP's targeting of Defence and Home Affairs grows across Lok Sabhas, consistent 
 ### The targeting network
 
 ![Bipartite party-ministry network. Edges connect parties to ministries they over-question (Pearson residual > 1.5). Edge thickness proportional to excess targeting.](output/figures/ministry_network.png){width=90%}
+
+---
+
+## Tone and Adversarialism {#sentiment}
+
+Parliamentary questions have a formal grammar: "Will the Minister of X please state whether..." That structure is mandatory. But within it, the choice of framing differs. *Has the government failed to protect minorities?* is adversarial. *What schemes has the government launched to promote farmer welfare?* is aspirational. VADER extracts this signal by scoring the compound sentiment of each question's text.
+
+The overall distribution is positive — parliamentary questions are written to get answers, not to insult. But the relative differences across parties are informative.
+
+![Share of adversarial vs aspirational questions by party. Adversarial = VADER compound ≤ −0.05. Parties ordered by adversarialism rate.](output/figures/sentiment_distribution.png){width=100%}
+
+**Left parties are the most adversarial**, with 25% of their starred questions classified as negative in tone. INC follows at 16%, slightly above BJP at 13%. This is consistent with the incumbency gradient — opposition parties have more reason to frame questions as government failures — but the Left's high rate is notable even adjusting for their perpetual opposition status across all three Lok Sabhas.
+
+![Mean VADER compound score by party with 95% confidence bands, faceted by government vs opposition status.](output/figures/sentiment_party.png){width=100%}
+
+### Do adversarialism levels change over time?
+
+![Adversarialism by party across 16th–18th Lok Sabhas. The 18th LS (2024–) is the most recent and shows the sharpest partisan divergence yet.](output/figures/sentiment_temporal.png){width=90%}
+
+The temporal pattern shows a widening gap. Opposition parties — particularly INC and the Left — become more adversarial across Lok Sabhas, while BJP's tone stays relatively stable. Whether this reflects deteriorating political relations, a more combative opposition strategy, or the changing nature of issues in Parliament is not identified here.
+
+### Which ministries attract the most critical questioning?
+
+![Ministry-level adversarialism rate. Fill colour = mean compound score. Ministries with 50+ starred questions shown.](output/figures/sentiment_ministry.png){width=90%}
+
+Home Affairs and Finance attract the most adversarial questioning. That tracks the ministry-targeting analysis above: these are the ministries INC and the Left concentrate on, and they concentrate there *because* the questions they ask about security and fiscal policy are inherently more confrontational.
+
+### Which topics attract adversarial framing?
+
+![BERTopic topics by mean compound score (x) and adversarialism rate (y). Topics toward the bottom-left attract the most critical questioning.](output/figures/sentiment_topic.png){width=90%}
+
+The topic-level view maps cleanly onto the subject matter. Topics about judicial matters, security incidents, and minority welfare attract the most adversarial framing. Topics about infrastructure schemes, tourism, and sports attract almost none.
+
+::: {.callout-note}
+**VADER caveat.** VADER was calibrated on social media and news text, not formal parliamentary English. The parliamentary register inflates positive scores because declarative, neutral language reads as "not negative." Absolute score levels are not meaningful — the within-sample variation across parties and ministries is.
+:::
+
+---
+
+## Geographic Focus: Where Parties Look {#ner}
+
+Every question comes with text that mentions specific places. spaCy's NER pipeline (en_core_web_sm) extracts the states named in each question. This lets us ask: do regional parties really concentrate their parliamentary activity on their home states? And how does BJP's geographic spread as a national governing party compare?
+
+The answer is stark.
+
+![Share of each party's matched starred questions that name each state. Blank = not mentioned. Labels shown for shares ≥ 0.5%.](output/figures/ner_state_heatmap.png){width=100%}
+
+**Regional parties are entirely concentrated.** Left mentions only Kerala. TDP mentions only Telangana and Andhra Pradesh. DMK's state mentions go almost entirely to Tamil Nadu-adjacent issues. JDU's geographic focus on Bihar is the highest HHI among parties with substantial question volume.
+
+**BJP is the most diffuse.** As the national governing party, its MPs raise questions touching 14 different states. No single state accounts for more than 15% of its geographic mentions.
+
+### Geographic concentration index
+
+![Herfindahl index of state mentions by party. JDU and Left are the most geographically concentrated; BJP is the most diffuse.](output/figures/ner_state_concentration.png){width=90%}
+
+| Party | HHI | Top state | Share |
+|-------|-----|-----------|-------|
+| Left  | 1.00 | Kerala | 100% |
+| TDP   | 1.00 | Telangana/AP | 100% |
+| JDU   | 0.58 | Bihar | 74% |
+| Regional | 0.30 | Odisha | 51% |
+| INC   | 0.16 | Kerala | 32% |
+| BJP   | 0.11 | Jharkhand | 15% |
+
+*HHI = 1 means all state mentions go to one state; HHI near 0 means uniform spread. INC's Kerala concentration reflects the large number of Kerala MPs in the matched sample.*
+
+### Who gets named?
+
+![Top individuals named per party in starred questions (spaCy PERSON entities). Parliamentary boilerplate titles excluded.](output/figures/ner_top_persons.png){width=100%}
+
+Person naming follows a pattern: government parties name bureaucrats and scheme beneficiaries, opposition parties name politicians they are holding accountable. The specific individuals vary but the structural difference is consistent.
 
 ---
 
