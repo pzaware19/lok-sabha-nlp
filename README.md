@@ -230,6 +230,6 @@ The approach is validated by the fact that the recovered ordering — Left < AAP
 ## Author
 
 **Piyush Zaware**  
-PhD student in Economics, University of Chicago  
-Applied researcher, Global Poverty Research Laboratory, Northwestern Kellogg  
+MPP, University of Chicago  
+Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg  
 Co-founder & CTO, [Pollity.in](https://pollity.in)
