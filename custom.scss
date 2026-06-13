@@ -95,10 +95,11 @@ body::before {
 }
 .hero .subtitle {
   font-size: 1.05rem;
-  color: rgba(245, 230, 211, 0.8);
+  color: #E8D9C5;
   max-width: 680px;
   line-height: 1.7;
-  font-weight: 300;
+  font-weight: 400;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 .hero .meta {
   margin-top: 1.8rem;
@@ -115,14 +116,15 @@ body::before {
   flex-wrap: wrap;
 }
 .hero .badge-item {
-  background: rgba(255, 153, 51, 0.12);
-  border: 1px solid rgba(255, 153, 51, 0.35);
+  background: rgba(255, 153, 51, 0.22);
+  border: 1px solid rgba(255, 153, 51, 0.7);
   border-radius: 3px;
-  padding: 0.25rem 0.8rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: rgba(245, 230, 211, 0.85);
-  letter-spacing: 0.02em;
+  padding: 0.28rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #FFD099;
+  letter-spacing: 0.025em;
+  text-shadow: none;
 }
 
 /* Stat row */
