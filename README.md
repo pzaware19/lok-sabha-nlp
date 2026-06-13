@@ -231,5 +231,4 @@ The approach is validated by the fact that the recovered ordering — Left < AAP
 
 **Piyush Zaware**  
 MPP, University of Chicago  
-Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg  
-Co-founder & CTO, [Pollity.in](https://pollity.in)
+Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg
