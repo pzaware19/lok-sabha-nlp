@@ -393,6 +393,49 @@ Betweenness centrality identifies MPs who bridge otherwise disconnected clusters
 
 The diagonal dominates. Within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.
 
+## Gender and Representation {#gender}
+
+```{r gender-setup, include=FALSE}
+source("code/F1_gender_sc.R")
+gs <- readRDS(file.path(TABDIR, "gender_sc_summary.rds"))
+```
+
+Women MPs are identified through parliamentary honorifics (Shrimati, Smt, Kumari, Ms, Mrs) in the official question records. SC/ST status is identified from the `(SC)` and `(ST)` reservation tags attached to constituency names in the MP lookup — the cleanest proxy available without external affidavit data.
+
+::: {.callout-note}
+**Coverage:** `r gs$female_q` starred questions (`r gs$female_pct`% of the corpus) are from women MPs identifiable by honorific. SC reserved-seat MPs account for `r gs$sc_pct`% of questions; ST reserved-seat MPs for `r gs$st_pct`%. The gender figure is a lower bound — women MPs who appear without honorific in the records are not captured.
+:::
+
+### Do women MPs target different ministries?
+
+![Women MPs' questions are disproportionately directed at Women & Child Development, Health, and Education. Men MPs concentrate more on infrastructure-adjacent ministries. The gap confirms a constituency-of-identity effect alongside geographic constituency effects.](output/figures/gender_ministry.png){width=90%}
+
+### Which parties field more women questioners?
+
+![Share of each party's starred questions where the primary questioner is a woman MP. Parties with fewer than 30 starred questions excluded.](output/figures/gender_party.png){width=85%}
+
+### Are women MPs more or less adversarial?
+
+![VADER compound score distributions by gender. A rightward shift = more neutral framing.](output/figures/gender_tone.png){width=85%}
+
+### What language is distinctive to women MPs?
+
+![TF-IDF: words used significantly more by women MPs than by male MPs. The vocabulary reveals a welfare and rights frame distinct from the infrastructure and sectoral frame of male MPs.](output/figures/gender_vocab.png){width=85%}
+
+## SC/ST Representation {#scst}
+
+Reserved constituencies are constitutionally mandated to return SC or ST MPs. The question is whether these MPs use their parliamentary voice differently: do they redirect questions toward ministries that directly serve their communities?
+
+### Ministry targeting: SC and ST vs general seats
+
+![Top panel: SC reserved-seat MPs' ministry focus relative to general-seat MPs. Bottom panel: ST reserved-seat MPs. The ST result is unambiguous — Tribal Affairs is dramatically over-represented, as expected. The SC result shows Social Justice and Labour elevated, but also some unexpected concentrations.](output/figures/scst_ministry.png){width=90%}
+
+The ST pattern is the cleaner finding: MPs from tribal reserved constituencies disproportionately direct questions at Tribal Affairs, Rural Development, and Forests — the ministries most directly affecting their electorate. The SC pattern is more diffuse, reflecting the broader geographic spread of SC constituencies across India's economic landscape.
+
+### SC/ST question volume by party
+
+![Number of starred questions from SC and ST reserved-seat MPs, broken down by party. BJP has the largest absolute volume given its size, but the share figures tell a different story about which parties activate their SC/ST MPs most.](output/figures/scst_party.png){width=85%}
+
 ## What the Results Do Not Tell You {#robustness}
 
 ### The incumbency confound

@@ -102,4 +102,7 @@ source(file.path(CODDIR, "C1_ministry_analysis.R"))
 
 source(file.path(CODDIR, "E1_sule_report.R"))
 
+# -- F PIPELINE: Gender and SC/ST representation -----------------------------
+source(file.path(CODDIR, "F1_gender_sc.R"))
+
 cat("\n=== Pipeline complete. Outputs in:", OUTDIR, "===\n")
