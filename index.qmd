@@ -264,44 +264,31 @@ A few things stand out. "Farmer" sits near drought, MSP, and irrigation. It is a
 
 ## What the Results Do Not Tell You {#robustness}
 
-The main findings are robust enough to take seriously, but one methodological issue deserves honest treatment before claiming that these patterns are ideological.
-
 ### The incumbency confound
 
-Parliamentary questions are not a pure record of ideology. They are also a record of political position. A party in government asks: is the highway project on schedule? Is fertiliser subsidy reaching farmers? A party in opposition asks: why are minorities being targeted? Why is the auditor's report being suppressed? These are structurally different questions, and the difference is positional, not necessarily ideological.
+Parliamentary questions are not a pure record of ideology. They are also a record of political position. A party in government asks: is the highway project on schedule? Is fertiliser subsidy reaching farmers? A party in opposition asks: why is the auditor's report suppressed? Why are minorities being targeted? These are structurally different questions, and the difference is positional, not necessarily ideological.
 
-The figure below documents this confound directly. Across the 205 party-session documents, government parties (BJP, TDP in 16th LS, JDU in 17th–18th LS) systematically emphasise different topics than opposition parties, even before any ideological interpretation is applied.
+The figure below documents this directly. Across the 205 party-session documents, NDA government parties systematically emphasise different topics than opposition parties, independent of any ideological interpretation.
 
-![Government vs. opposition topic profiles across 15 LDA topics. Positive bars indicate topics more prevalent in NDA government party documents; negative bars indicate topics more prevalent in opposition documents.](output/figures/incumbency_topic_profiles.png){width=90%}
+![Government vs. opposition topic profiles across 15 LDA topics. Positive bars indicate topics asked about more by NDA government parties; negative bars indicate topics asked about more by opposition parties.](output/figures/incumbency_topic_profiles.png){width=90%}
 
-### What adjusting for incumbency does
+### Why this cannot be fixed with the available data
 
-To test how much of the ideological signal is positional, each document's Kozlowski ideology score was regressed on a binary `in_government` indicator and the residuals were taken. The adjusted party positions are shown alongside the unadjusted ones below.
+The natural response is to partial out incumbency status and see what remains. The problem is that this only works if some parties switch sides across the sample period, giving within-party variation to identify the incumbency effect separately from ideology. In this dataset, BJP is in government for every Lok Sabha observed, and INC is in opposition for every Lok Sabha observed. So incumbency status is perfectly collinear with party identity for the two parties the comparison hinges on. Regressing out `in_gov` does not remove the incumbency effect — it removes the BJP-INC contrast itself, which is circular.
 
-![Left: raw party positions on the Kozlowski dimensions. Right: positions after partialling out the incumbency indicator. Party ordering on the adjusted plot is substantially compressed.](output/figures/ideology_incumbency_adjusted.png){width=100%}
+The only genuine switchers are **TDP** (NDA in 16th LS, opposition in 17th, NDA again in 18th) and **JDU** (opposition in 16th, NDA in 17th and 18th). TDP won only 3 Lok Sabha seats in 2019, so its 17th LS corpus is too sparse. That leaves JDU as the primary source of within-party variation — not enough to credibly identify the incumbency effect across 13 parties.
 
-The adjustment compresses the BJP-INC contrast considerably. In the raw data, BJP sits at +0.026 on the Hindutva dimension and INC at -0.174. After adjusting, BJP moves to -0.028 and INC to +0.015 — the gap largely closes.
+The STM with incumbency added as a covariate (`~ bjp + inc + left + lok_num + session + in_gov`) does not solve this either. When party indicators and `in_gov` are jointly included in the prevalence formula, the model faces the same multicollinearity. The `in_gov` coefficient is identified mainly from the three switchers.
 
-This is the honest read: **the crude residualization over-corrects**. Because BJP appears only as a government party and INC only as an opposition party across all three Lok Sabhas, you cannot separately identify incumbency effects from ideological differences using only the between-party variation. The residual is not interpretable as pure ideology.
+![STM party effects (BJP, INC, Left) and the incumbency effect, estimated jointly. The incumbency coefficient is identified primarily from TDP and JDU switching; BJP and INC coefficients remain confounded with their respective incumbency status.](output/figures/stm_incumbency_effects.png){width=100%}
 
-### Where identification comes from
+### What follows from this
 
-The only clean within-party variation in this dataset comes from two switchers:
+The main findings should be read as descriptive text differences, not identified ideological positions. The claim that BJP MPs and Left MPs write differently is well-supported — they clearly do. Whether that difference reflects ideology, government responsibilities, or both is not separable with this research design.
 
-- **TDP** — exited NDA in March 2018 (between 16th and 17th LS) over Andhra Pradesh special status, then rejoined NDA in 2024. Unfortunately, TDP won only 3 Lok Sabha seats in 2019, so its 17th LS corpus is too sparse to support a meaningful comparison.
-- **JDU** — contested 2014 alone (2 seats, opposition) and returned to NDA for 2019 and 2024.
+Proper identification would require an instrument for coalition entry (something that predicts which parties join NDA but is uncorrelated with their vocabulary independent of incumbency) or a regression discontinuity around close elections that determine coalition composition. Neither is feasible here.
 
-With only two switchers, and TDP's 17th LS data being thin, the design does not have enough within-party variation to fully identify incumbency effects separately from ideology.
-
-![STM party effects (BJP, INC) and incumbency effect across 20 topics, estimated from a model that includes both party indicators and the in_gov covariate. Topics where party effects survive are genuinely separable from incumbency; topics where only in_gov is significant are position-driven.](output/figures/stm_incumbency_effects.png){width=100%}
-
-### What this means for the main findings
-
-The claim that BJP uses more Hindu nationalist language than the Left does not require separating incumbency from ideology — it simply requires that BJP and Left MPs write differently, which they do. The Kozlowski dimension captures this text difference cleanly.
-
-What the incumbency adjustment complicates is the causal interpretation: does BJP use nationalist vocabulary *because* of its ideology, or *because* governing parties in BJP's position respond to different governance demands? Answering that question properly would require an instrument for coalition entry, or a regression discontinuity design around coalition formation thresholds — neither feasible here.
-
-The BJP trajectory result (monotonic rise in Hindutva score across three Lok Sabhas) is also better interpreted as descriptive than structural: BJP's vocabulary has shifted, but whether that shift is ideological deepening or a response to political context is not identified.
+The BJP trajectory finding (Hindutva score rising monotonically across three Lok Sabhas) faces the additional problem of having only three data points, and the political context changed sharply between them — Ayodhya verdict, CAA, Article 370 revocation all fall between the 16th and 17th LS. The text shift is real; whether it is ideological deepening or a contextual response is not identified.
 
 ---
 
