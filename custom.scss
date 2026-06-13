@@ -56,30 +56,31 @@ $toc-font-size: 0.85rem;
   font-weight: 500;
 }
 
-/* Key findings callout strip */
-.finding-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-  margin: 2.5rem 0;
+/* Stat row */
+.stat-row {
+  display: flex;
+  gap: 3.5rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  padding: 1.8rem 0;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
 }
-.finding-card {
-  background: #f8f9fa;
-  border-left: 4px solid #2a9d8f;
-  border-radius: 4px;
-  padding: 1.2rem 1.4rem;
+.stat {
+  text-align: left;
 }
-.finding-card .number {
-  font-size: 2rem;
+.stat-num {
+  font-size: 2.6rem;
   font-weight: 700;
   color: #264653;
   line-height: 1;
 }
-.finding-card .label {
-  font-size: 0.82rem;
-  color: #555;
-  margin-top: 0.3rem;
-  line-height: 1.4;
+.stat-label {
+  font-size: 0.72rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 0.35rem;
 }
 
 /* Section headers */

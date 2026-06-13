@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-80a66261715bbc0e3b0f6d065ea9bc03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-897faf5010358904c05757564b1241b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -200,31 +200,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">The Data</h2>
-<div class="finding-strip">
-<div class="finding-card">
-<div class="number">
-<p>150K</p>
-</div>
-<div class="label">
-<p>Total parliamentary questions, 16th through 18th Lok Sabha</p>
-</div>
-</div>
-<div class="finding-card">
-<div class="number">
-<p>13</p>
-</div>
-<div class="label">
-<p>Parties: BJP, INC, Left, BSP, AAP, TMC, SP, JDU, DMK, TDP, RJD, Shiv Sena, Regional</p>
-</div>
-</div>
-<div class="finding-card">
-<div class="number">
-<p>205</p>
-</div>
-<div class="label">
-<p>Documents, one per party per parliamentary session</p>
-</div>
-</div>
+<div class="stat-row">
+  <div class="stat"><div class="stat-num">150,629</div><div class="stat-label">questions</div></div>
+  <div class="stat"><div class="stat-num">13</div><div class="stat-label">parties</div></div>
+  <div class="stat"><div class="stat-num">205</div><div class="stat-label">documents</div></div>
+  <div class="stat"><div class="stat-num">3,258</div><div class="stat-label">vocabulary terms</div></div>
 </div>
 <p>The dataset is <a href="https://huggingface.co/datasets/opensansad/lok-sabha-qa"><code>opensansad/lok-sabha-qa</code></a> on HuggingFace, covering the 16th (2014–2019), 17th (2019–2024), and 18th (2024–) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.</p>
 <p>Party matching came from scraping Wikipedia’s constituency lists for all three Lok Sabhas. The match rate on starred questions was 38%, which gives enough coverage for BJP, INC, and most major opposition parties to work with reliably.</p>

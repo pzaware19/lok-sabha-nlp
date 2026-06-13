@@ -40,32 +40,14 @@ I scraped the complete archive from HuggingFace, matched MPs to their parties vi
 
 ## The Data {#data}
 
-::: {.finding-strip}
-::: {.finding-card}
-::: {.number}
-150K
-:::
-::: {.label}
-Total parliamentary questions, 16th through 18th Lok Sabha
-:::
-:::
-::: {.finding-card}
-::: {.number}
-13
-:::
-::: {.label}
-Parties: BJP, INC, Left, BSP, AAP, TMC, SP, JDU, DMK, TDP, RJD, Shiv Sena, Regional
-:::
-:::
-::: {.finding-card}
-::: {.number}
-205
-:::
-::: {.label}
-Documents, one per party per parliamentary session
-:::
-:::
-:::
+```{=html}
+<div class="stat-row">
+  <div class="stat"><div class="stat-num">150,629</div><div class="stat-label">questions</div></div>
+  <div class="stat"><div class="stat-num">13</div><div class="stat-label">parties</div></div>
+  <div class="stat"><div class="stat-num">205</div><div class="stat-label">documents</div></div>
+  <div class="stat"><div class="stat-num">3,258</div><div class="stat-label">vocabulary terms</div></div>
+</div>
+```
 
 The dataset is [`opensansad/lok-sabha-qa`](https://huggingface.co/datasets/opensansad/lok-sabha-qa) on HuggingFace, covering the 16th (2014–2019), 17th (2019–2024), and 18th (2024–) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.
 
