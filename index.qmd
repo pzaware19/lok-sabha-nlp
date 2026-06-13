@@ -410,17 +410,13 @@ Women MPs are identified through parliamentary honorifics (Shrimati, Smt, Kumari
 
 ![Women MPs' questions are disproportionately directed at Women & Child Development, Health, and Education. Men MPs concentrate more on infrastructure-adjacent ministries. The gap confirms a constituency-of-identity effect alongside geographic constituency effects.](output/figures/gender_ministry.png){width=90%}
 
-### Which parties field more women questioners?
-
-![Share of each party's starred questions where the primary questioner is a woman MP. Parties with fewer than 30 starred questions excluded.](output/figures/gender_party.png){width=85%}
-
 ### Are women MPs more or less adversarial?
 
 ![VADER compound score distributions by gender. A rightward shift = more neutral framing.](output/figures/gender_tone.png){width=85%}
 
 ### What language is distinctive to women MPs?
 
-![TF-IDF: words used significantly more by women MPs than by male MPs. The vocabulary reveals a welfare and rights frame distinct from the infrastructure and sectoral frame of male MPs.](output/figures/gender_vocab.png){width=85%}
+![Log-ratio of word frequencies (women vs men MPs), filtered to words appearing at least 10 times in the corpus. Positive = women use this word proportionally more. The vocabulary reveals a welfare and rights frame distinct from the infrastructure and sectoral frame of male MPs.](output/figures/gender_vocab.png){width=85%}
 
 ## SC/ST Representation {#scst}
 

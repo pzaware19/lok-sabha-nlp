@@ -141,42 +141,66 @@ cat(sprintf("  Party-matched: %d (%.1f%%)\n",
 cat(sprintf("  SC MP questions: %d\n", sum(starred$is_sc, na.rm=TRUE)))
 cat(sprintf("  ST MP questions: %d\n", sum(starred$is_st, na.rm=TRUE)))
 
-# Ministry cleaning
+# Ministry cleaning — comprehensive recode + truncation fallback
 ministry_recode <- c(
-  "AGRICULTURE AND FARMERS WELFARE" = "Agriculture",
-  "AGRICULTURE"                     = "Agriculture",
-  "RAILWAYS"                        = "Railways",
-  "FINANCE"                         = "Finance",
-  "HOME AFFAIRS"                    = "Home Affairs",
-  "HEALTH AND FAMILY WELFARE"       = "Health",
-  "HEALTH"                          = "Health",
-  "COMMUNICATIONS"                  = "Communications",
-  "EDUCATION"                       = "Education",
-  "HUMAN RESOURCE DEVELOPMENT"      = "Education",
-  "ROAD TRANSPORT AND HIGHWAYS"     = "Road Transport",
-  "COMMERCE AND INDUSTRY"           = "Commerce",
-  "SOCIAL JUSTICE AND EMPOWERMENT"  = "Social Justice",
-  "POWER"                           = "Power",
-  "EXTERNAL AFFAIRS"                = "External Affairs",
-  "HOUSING AND URBAN AFFAIRS"       = "Urban Development",
-  "WOMEN AND CHILD DEVELOPMENT"     = "Women & Child",
-  "LABOUR AND EMPLOYMENT"           = "Labour",
-  "RURAL DEVELOPMENT"               = "Rural Development",
-  "DEFENCE"                         = "Defence",
-  "PETROLEUM AND NATURAL GAS"       = "Petroleum",
-  "JAL SHAKTI"                      = "Jal Shakti",
-  "WATER RESOURCES"                 = "Jal Shakti",
-  "TRIBAL AFFAIRS"                  = "Tribal Affairs",
-  "STEEL"                           = "Steel",
-  "TEXTILES"                        = "Textiles",
-  "MINORITY AFFAIRS"                = "Minority Affairs",
-  "SCIENCE AND TECHNOLOGY"          = "Science & Tech",
-  "INFORMATION AND BROADCASTING"    = "I&B",
-  "COAL"                            = "Coal",
-  "MINES"                           = "Mines",
-  "PANCHAYATI RAJ"                  = "Panchayati Raj",
-  "MICRO,SMALL AND MEDIUM ENTERPRISES" = "MSME",
-  "CONSUMER AFFAIRS, FOOD AND PUBLIC DISTRIBUTION" = "Food & Consumer"
+  "AGRICULTURE AND FARMERS WELFARE"                      = "Agriculture",
+  "AGRICULTURE"                                          = "Agriculture",
+  "RAILWAYS"                                             = "Railways",
+  "FINANCE"                                              = "Finance",
+  "HOME AFFAIRS"                                         = "Home Affairs",
+  "HEALTH AND FAMILY WELFARE"                            = "Health",
+  "HEALTH"                                               = "Health",
+  "COMMUNICATIONS"                                       = "Communications",
+  "EDUCATION"                                            = "Education",
+  "HUMAN RESOURCE DEVELOPMENT"                           = "Education",
+  "ROAD TRANSPORT AND HIGHWAYS"                          = "Road Transport",
+  "COMMERCE AND INDUSTRY"                                = "Commerce",
+  "SOCIAL JUSTICE AND EMPOWERMENT"                       = "Social Justice",
+  "POWER"                                                = "Power",
+  "EXTERNAL AFFAIRS"                                     = "External Affairs",
+  "HOUSING AND URBAN AFFAIRS"                            = "Urban Development",
+  "WOMEN AND CHILD DEVELOPMENT"                          = "Women & Child",
+  "LABOUR AND EMPLOYMENT"                                = "Labour",
+  "RURAL DEVELOPMENT"                                    = "Rural Development",
+  "DEFENCE"                                              = "Defence",
+  "PETROLEUM AND NATURAL GAS"                            = "Petroleum",
+  "JAL SHAKTI"                                           = "Jal Shakti",
+  "WATER RESOURCES"                                      = "Jal Shakti",
+  "TRIBAL AFFAIRS"                                       = "Tribal Affairs",
+  "STEEL"                                                = "Steel",
+  "TEXTILES"                                             = "Textiles",
+  "MINORITY AFFAIRS"                                     = "Minority Affairs",
+  "SCIENCE AND TECHNOLOGY"                               = "Science & Tech",
+  "INFORMATION AND BROADCASTING"                         = "I&B",
+  "COAL"                                                 = "Coal",
+  "MINES"                                                = "Mines",
+  "PANCHAYATI RAJ"                                       = "Panchayati Raj",
+  "MICRO,SMALL AND MEDIUM ENTERPRISES"                   = "MSME",
+  "CONSUMER AFFAIRS, FOOD AND PUBLIC DISTRIBUTION"       = "Food & Consumer",
+  "NEW AND RENEWABLE ENERGY"                             = "Renewables",
+  "SKILL DEVELOPMENT AND ENTREPRENEURSHIP"               = "Skill Dev.",
+  "FISHERIES, ANIMAL HUSBANDRY AND DAIRYING"             = "Fisheries & Animal",
+  "ELECTRONICS AND INFORMATION TECHNOLOGY"               = "Electronics & IT",
+  "ENVIRONMENT, FOREST AND CLIMATE CHANGE"               = "Environment",
+  "LAW AND JUSTICE"                                      = "Law & Justice",
+  "CIVIL AVIATION"                                       = "Civil Aviation",
+  "YOUTH AFFAIRS AND SPORTS"                             = "Youth & Sports",
+  "TOURISM"                                              = "Tourism",
+  "CHEMICALS AND FERTILIZERS"                            = "Chemicals",
+  "CULTURE"                                              = "Culture",
+  "AYUSH"                                                = "Ayush",
+  "AYURVEDA,YOGA & NATUROPATHY,UNANI,SIDDHA AND HOMEOPATHY (AYUSH)" = "Ayush",
+  "FOOD PROCESSING INDUSTRIES"                           = "Food Processing",
+  "PORTS, SHIPPING AND WATERWAYS"                        = "Ports & Shipping",
+  "SHIPPING"                                             = "Ports & Shipping",
+  "COOPERATIVE"                                          = "Cooperatives",
+  "COOPERATION"                                          = "Cooperatives",
+  "STATISTICS AND PROGRAMME IMPLEMENTATION"              = "Statistics",
+  "PARLIAMENTARY AFFAIRS"                                = "Parl. Affairs",
+  "PERSONNEL, PUBLIC GRIEVANCES AND PENSIONS"            = "Personnel & Pensions",
+  "CORPORATE AFFAIRS"                                    = "Corporate Affairs",
+  "HEAVY INDUSTRIES"                                     = "Heavy Industries",
+  "MICRO, SMALL AND MEDIUM ENTERPRISES"                  = "MSME"
 )
 
 starred <- starred %>%
@@ -310,6 +334,15 @@ if (file.exists(sent_path)) {
   cat("\nGender sentiment comparison:\n")
   print(gender_sent)
 
+  # Annotation x positions: offset slightly so they don't pile up
+  w_x <- gender_sent$mean_score[gender_sent$gender == "Women MPs"]
+  m_x <- gender_sent$mean_score[gender_sent$gender == "Men MPs"]
+  # If values are within 0.05 of each other, nudge apart
+  if (abs(w_x - m_x) < 0.05) {
+    w_x <- w_x + 0.06
+    m_x <- m_x - 0.06
+  }
+
   p_gender_tone <- ggplot(starred_sent,
                           aes(x = sent_compound,
                               fill = if_else(is_female, "Women MPs", "Men MPs"),
@@ -320,12 +353,12 @@ if (file.exists(sent_path)) {
                       name = NULL) +
     scale_colour_manual(values = c("Women MPs" = PURPLE, "Men MPs" = TEAL),
                         name = NULL) +
-    annotate("text", x = gender_sent$mean_score[gender_sent$gender=="Women MPs"],
-             y = 3.5, label = paste0("Women\nμ=", gender_sent$mean_score[gender_sent$gender=="Women MPs"]),
-             colour = PURPLE, size = 3.2, fontface = "bold") +
-    annotate("text", x = gender_sent$mean_score[gender_sent$gender=="Men MPs"],
-             y = 3.5, label = paste0("Men\nμ=", gender_sent$mean_score[gender_sent$gender=="Men MPs"]),
-             colour = TEAL, size = 3.2, fontface = "bold") +
+    annotate("text", x = w_x, y = 3.8,
+             label  = paste0("Women\nμ=", gender_sent$mean_score[gender_sent$gender=="Women MPs"]),
+             colour = PURPLE, size = 3.2, fontface = "bold", hjust = 0.5) +
+    annotate("text", x = m_x, y = 2.4,
+             label  = paste0("Men\nμ=", gender_sent$mean_score[gender_sent$gender=="Men MPs"]),
+             colour = TEAL, size = 3.2, fontface = "bold", hjust = 0.5) +
     labs(
       title    = "Question tone by gender",
       subtitle = "VADER compound score. Left of 0 = adversarial framing.",
@@ -359,7 +392,9 @@ custom_stop <- c("will","minister","whether","government","please",
                   "members","question","starred","unstarred","lok","sabha",
                   stopwords::stopwords("en"))
 
-gender_corpus <- starred %>%
+# Log-ratio approach: removes proper-noun inflation from the TF-IDF imbalance
+# (292 female vs 11,589 male questions → TF-IDF picks up MP names, not policy words)
+gender_word_counts <- starred %>%
   mutate(
     text_c = map_chr(question_text, clean_text),
     doc    = if_else(is_female, "Women MPs", "Men MPs")
@@ -368,21 +403,34 @@ gender_corpus <- starred %>%
   unnest_tokens(word, text_c) %>%
   filter(!word %in% custom_stop,
          str_detect(word, "^[a-z]+$"), nchar(word) >= 4) %>%
-  count(doc, word) %>%
-  bind_tf_idf(word, doc, n)
+  count(doc, word)
 
-p_gender_vocab <- gender_corpus %>%
-  filter(doc == "Women MPs") %>%
-  slice_max(tf_idf, n = 20) %>%
-  mutate(word = fct_reorder(word, tf_idf)) %>%
-  ggplot(aes(x = word, y = tf_idf, fill = tf_idf)) +
+n_words_f <- sum(gender_word_counts$n[gender_word_counts$doc == "Women MPs"])
+n_words_m <- sum(gender_word_counts$n[gender_word_counts$doc == "Men MPs"])
+
+log_ratio_words <- gender_word_counts %>%
+  pivot_wider(names_from = doc, values_from = n, values_fill = 0) %>%
+  rename(f_n = `Women MPs`, m_n = `Men MPs`) %>%
+  filter(f_n + m_n >= 10, f_n >= 3) %>%   # must appear enough times total and in female corpus
+  mutate(
+    f_rate    = (f_n + 0.5) / (n_words_f + 0.5),
+    m_rate    = (m_n + 0.5) / (n_words_m + 0.5),
+    log_ratio = log2(f_rate / m_rate)
+  )
+
+top_female_lr <- log_ratio_words %>%
+  slice_max(log_ratio, n = 20) %>%
+  mutate(word = fct_reorder(word, log_ratio))
+
+p_gender_vocab <- top_female_lr %>%
+  ggplot(aes(x = word, y = log_ratio, fill = log_ratio)) +
   geom_col(width = 0.75, show.legend = FALSE) +
   coord_flip() +
   scale_fill_gradient(low = "#E8D5F0", high = PURPLE) +
   labs(
-    title    = "Words most distinctive to women MPs' questions",
-    subtitle = "TF-IDF vs all male MP questions combined.",
-    x = NULL, y = "TF-IDF score"
+    title    = "Policy words women MPs use more than men",
+    subtitle = "Log2 ratio of word rates (women vs men), filtered to words appearing ≥10 times total.\nPositive = women use this word proportionally more.",
+    x = NULL, y = "Log₂ ratio (women / men)"
   ) +
   theme_minimal(base_size = 11) +
   theme(plot.title = element_text(face = "bold", colour = NAVY),
