@@ -1,11 +1,11 @@
 # What Does India's Parliament Actually Talk About?
 ### Unsupervised Machine Learning on 150,000 Lok Sabha Questions (2014–2026)
 
-Every parliamentary session, Indian MPs submit hundreds of written questions to government ministries. Taken together, these questions are a paper trail of what each party actually cares about — agriculture subsidies, minority rights, road infrastructure, defence procurement, labour rights — stated in their own words, on the record.
+Every parliamentary session, Indian MPs submit hundreds of written questions to government ministries. Taken together, these questions are a paper trail of what each party actually cares about: agriculture subsidies, minority rights, road infrastructure, defence procurement, labour rights, all stated in their own words, on the record.
 
 This project mines the complete archive of starred (oral) questions from the 16th, 17th, and 18th Lok Sabha using unsupervised machine learning: no pre-assigned labels, no ideological coding. Just text, and methods that learn structure from it.
 
-The central question: **can you recover the ideological map of Indian politics purely from how MPs phrase their questions?** The short answer is yes — and the results are sharper than expected.
+The central question: **can you recover the ideological map of Indian politics purely from how MPs phrase their questions?** The short answer is yes, and the results are sharper than expected.
 
 ---
 
@@ -19,7 +19,7 @@ The central question: **can you recover the ideological map of Indian politics p
 | Parties covered | BJP, INC, Left (CPI/CPM), BSP, AAP, TMC, SP, JDU, DMK, TDP, RJD, Shiv Sena, Regional |
 | MP–party matching | Wikipedia scrape of "List of members of the Nth Lok Sabha" (3 pages) |
 
-All data is downloaded automatically — no manual steps required.
+All data is downloaded automatically. No manual steps required.
 
 ---
 
@@ -71,7 +71,7 @@ Raw Questions (150K)
 
 ### 1. Ideological Space of Indian Parties
 
-Word embeddings recover a recognisable left–right and secular–nationalist structure from parliamentary language alone — with no human annotation.
+Word embeddings recover a recognisable left-right and secular-nationalist structure from parliamentary language alone, with no human annotation.
 
 <p align="center">
   <img src="output/figures/ideological_space.png" width="700"/>
@@ -81,7 +81,7 @@ Word embeddings recover a recognisable left–right and secular–nationalist st
 
 **Highlights:**
 - BJP and Shiv Sena cluster at the Hindu-nationalist end; Left parties and AAP at the secular end
-- INC sits in the centre-left — consistent with its "big tent" identity
+- INC sits in the centre-left, consistent with its "big tent" identity
 - The economic axis separates SP/BSP (pro-poor language) from BJP/TDP (market/growth language)
 
 ---
@@ -94,11 +94,11 @@ Word embeddings recover a recognisable left–right and secular–nationalist st
 
 *BJP's average position on the Hindutva dimension (higher = more nationalist language) across the 16th, 17th, and 18th Lok Sabha sessions.*
 
-The score increases from the 16th to the 18th LS — the language BJP MPs use in Parliament has shifted measurably toward religious and nationalist vocabulary over a decade in government.
+The score increases from the 16th to the 18th LS. The language BJP MPs use in Parliament has shifted measurably toward religious and nationalist vocabulary over a decade in government.
 
 ---
 
-### 3. What Each Party Questions — LDA Topic Heatmap
+### 3. What Each Party Questions: LDA Topic Heatmap
 
 <p align="center">
   <img src="output/figures/lda_party_heatmap.png" width="800"/>
@@ -106,7 +106,7 @@ The score increases from the 16th to the 18th LS — the language BJP MPs use in
 
 *Rows = LDA topics (K=15); columns = parties. Colour intensity = average topic weight. Brighter = party strongly emphasises that topic.*
 
-BJP concentrates on infrastructure and defence; INC on accountability and governance; Left parties on labour and wages. Regional parties show sharp, idiosyncratic peaks — NCP on Maharashtra agriculture, DMK on Tamil Nadu water disputes — which makes sense: their mandate is narrow and local.
+BJP concentrates on infrastructure and defence; INC on accountability and governance; Left parties on labour and wages. Regional parties show sharp, idiosyncratic peaks (NCP on Maharashtra agriculture, DMK on Tamil Nadu water disputes), which makes sense: their mandate is narrow and local.
 
 ---
 
@@ -118,7 +118,7 @@ BJP concentrates on infrastructure and defence; INC on accountability and govern
 
 *Each point = one party in one parliamentary session. Plotted in 2D via UMAP from the 3,258-term TF-IDF space. Parties that use similar language cluster together.*
 
-BJP and INC form the two largest, most central clouds. Left parties cluster tightly. Regional parties scatter to the periphery — consistent with their narrow, state-specific focus.
+BJP and INC form the two largest, most central clouds. Left parties cluster tightly. Regional parties scatter to the periphery, consistent with their narrow, state-specific focus.
 
 ---
 
@@ -148,7 +148,7 @@ BJP and INC form the two largest, most central clouds. Left parties cluster tigh
   <img src="output/figures/semantic_neighbors.png" width="900"/>
 </p>
 
-*Nearest neighbours in the word2vec embedding space for ten politically salient seed words. Reveals how concepts cluster in parliamentary language — e.g. what words appear in the same contexts as "caste", "terrorism", "farmer".*
+*Nearest neighbours in the word2vec embedding space for ten politically salient seed words. Reveals how concepts cluster in parliamentary language, e.g. what words appear in the same contexts as "caste", "terrorism", "farmer".*
 
 ---
 
@@ -167,7 +167,7 @@ BJP and INC form the two largest, most central clouds. Left parties cluster tigh
 **Requirements:** R 4.3+
 
 ```r
-# Install R and run — everything else is automatic
+# Install R and run; everything else is automatic
 source("code/_master.R")
 ```
 
@@ -223,7 +223,7 @@ Lok_Sabha_Questions/
 
 This project applies the **Kozlowski, Taddy & Evans (2019)** method (*"The Geometry of Culture"*, American Sociological Review) to Indian parliamentary data. The core idea: ideological dimensions can be encoded as *directions* in a word embedding space, defined by antonym pairs (e.g. `hindu` − `secular`). Party positions are then recovered by projecting their TF-IDF-weighted vocabulary onto these directions.
 
-The approach is validated by the fact that the recovered ordering — Left < AAP < INC < BJP on the Hindutva dimension — matches the widely accepted ideological ordering of Indian parties.
+The approach is validated by the fact that the recovered ordering (Left < AAP < INC < BJP on the Hindutva dimension) matches the widely accepted ideological ordering of Indian parties.
 
 ---
 
