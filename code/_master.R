@@ -85,6 +85,12 @@ source(file.path(CODDIR, "B5_sentiment_viz.R"))
 system(paste("python3", shQuote(file.path(CODDIR, "B4_ner.py"))))
 source(file.path(CODDIR, "B6_ner_viz.R"))
 
+# -- D PIPELINE: Co-Questioning Network --------------------------------------
+# Independent of A and B pipelines — uses raw parquet + party lookup
+# Requires: ggraph, tidygraph (auto-installed)
+
+source(file.path(CODDIR, "D1_conetwork.R"))
+
 # -- C PIPELINE: Ministry Targeting ------------------------------------------
 # Independent of A pipeline — uses raw parquet + party lookup
 

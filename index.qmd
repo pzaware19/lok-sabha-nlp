@@ -32,6 +32,9 @@ LDA · STM · Word2Vec · UMAP
 ::: {.badge-item}
 BERTopic · VADER · spaCy NER
 :::
+::: {.badge-item}
+Co-questioning Network · igraph
+:::
 :::
 :::
 
@@ -383,6 +386,46 @@ The answer is stark.
 ![Top individuals named per party in starred questions (spaCy PERSON entities). Parliamentary boilerplate titles excluded.](output/figures/ner_top_persons.png){width=100%}
 
 Person naming follows a pattern: government parties name bureaucrats and scheme beneficiaries, opposition parties name politicians they are holding accountable. The specific individuals vary but the structural difference is consistent.
+
+---
+
+## Co-Questioning Networks {#conetwork}
+
+Every starred question lists co-signatories alongside the primary MP. About 39% of questions have two or more MPs attached — a structural feature of Indian parliamentary practice where parties coordinate to ensure ministerial coverage. This creates a natural network: an edge between two MPs every time they co-sign a question.
+
+The network has **324 MPs** (matched nodes), **739 co-signing pairs**, and a graph density of 0.014. The overwhelming pattern is within-party — MPs co-sign almost exclusively with their own party.
+
+![Full MP co-questioning network. Node colour = party. Edge colour: grey = within-party, orange = cross-party. Node size = total co-signed questions (weighted degree). Labels on top 3% by betweenness.](output/figures/conet_full.png){width=100%}
+
+### How partisan is it?
+
+Louvain community detection finds **15 communities** with modularity **0.656** — very high. A random network with the same degree sequence would have modularity near 0; 0.656 means co-questioning is strongly partitioned by party identity. BJP dominates 13 of the 15 communities. Only 2 communities are >80% a single party (pure); the remaining 13 are mixed but BJP-majority, reflecting BJP's sheer size advantage.
+
+### Cross-party coordination: who bridges party lines?
+
+Filtering to cross-party edges only reveals the structure of coalition politics rather than party discipline.
+
+![Cross-party co-questioning edges only. Each edge connects MPs from different parties. Edge width = number of questions co-signed together. Labels = MPs with 3+ cross-party partners.](output/figures/conet_cross_party.png){width=100%}
+
+The top cross-party pairs are almost all **NDA coalition partners**: BJP-JDU, BJP-Shiv Sena, BJP-Regional (BJD/TDP bloc). These are parties that governed together, allocated portfolio questions jointly, and coordinated legislative agendas. The clearest case: C.N. Annadurai (DMK) co-signed 4 questions with a Regional party MP — DMK was in the INDIA opposition alliance and coordinated with non-BJP regional parties.
+
+### Cross-party rate has fallen over time
+
+![Cross-party co-questioning rate by Lok Sabha. 16th LS (2014–2019) had 44% cross-party pairs; 17th LS (2019–2024) dropped to 34%.](output/figures/conet_temporal.png){width=75%}
+
+Cross-party co-signing fell from **44% in the 16th LS to 34% in the 17th LS**. One interpretation: as BJP's NDA coalition became more institutionalised, formal coordination replaced the informal cross-signing that characterised the coalition's early years. Another: partisan polarisation hardened, making cross-party coordination politically costlier.
+
+### Who are the bridge MPs?
+
+![Top 25 MPs by betweenness centrality. High betweenness = MP lies on the shortest path between otherwise disconnected parts of the network.](output/figures/conet_top_connectors.png){width=90%}
+
+Betweenness centrality identifies MPs who bridge otherwise disconnected clusters. These are not necessarily the most prolific co-signers — they are the connectors whose absence would most fragment the network. The top connectors are predominantly BJP MPs from swing states (Bihar, Jharkhand, Rajasthan) who co-sign across regional and national party groupings. A JDU MP (Bihar-NDA) bridging the BJP cluster to the regional bloc is a recurring pattern.
+
+### Party × party co-questioning matrix
+
+![Party co-questioning matrix. Diagonal = within-party co-signing. Off-diagonal = cross-party pairs. Cell values = total co-signed questions.](output/figures/conet_party_matrix.png){width=85%}
+
+The diagonal dominates — within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.
 
 ---
 
