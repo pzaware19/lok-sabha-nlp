@@ -209,7 +209,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <p>Starred questions are one of the more underused datasets in Indian political science. Every session, MPs submit written questions to ministries before the House sits. A minister has to be present to answer them. That matters, because it means parties use these questions deliberately. What is the government doing about farmer suicides? What is the status of the highway in Bihar? How many minorities were displaced? These are not speeches. They are on-the-record demands, filed by name, attached to a party.</p>
 <p>I scraped the complete archive from HuggingFace, matched MPs to their parties via Wikipedia, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.</p>
-<hr>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">The Data</h2>
 <div class="stat-row">
@@ -249,7 +248,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<hr>
 </section>
 <section id="methodology" class="level2">
 <h2 class="anchored" data-anchor-id="methodology">How It Works</h2>
@@ -337,7 +335,6 @@ Note
 <p>Source: <a href="https://doi.org/10.1177/0003122419877135">“The Geometry of Culture”</a>, <em>American Sociological Review</em>, 2019.</p>
 </div>
 </div>
-<hr>
 </section>
 </section>
 <section id="findings" class="level2">
@@ -433,7 +430,6 @@ Note
 </tbody>
 </table>
 <p><em>Positive Hindutva = more nationalist vocabulary. Positive Economic Left = more labour/welfare vocabulary. Positive Rural = more agrarian vocabulary.</em></p>
-<hr>
 </section>
 <section id="bjps-language-has-shifted" class="level3">
 <h3 class="anchored" data-anchor-id="bjps-language-has-shifted">2. BJP’s Language Has Shifted</h3>
@@ -445,7 +441,6 @@ Note
 </figure>
 </div>
 <p>It is not a dramatic jump. But it is monotonic across 16th, 17th, and 18th, which covers a decade in government. The vocabulary BJP MPs reach for when they question ministries has gradually shifted toward religious and civilisational terms. Whether you read that as ideological deepening or just a party mirroring its base is a separate question. The shift is there in the text either way.</p>
-<hr>
 </section>
 <section id="what-parliament-actually-talks-about" class="level3">
 <h3 class="anchored" data-anchor-id="what-parliament-actually-talks-about">3. What Parliament Actually Talks About</h3>
@@ -472,7 +467,6 @@ Note
 </figure>
 </div>
 <p>BJP dominates infrastructure and defence topics. INC clusters around governance, accountability, and judicial matters, which makes sense for a party in opposition trying to question process rather than specific policies. Left parties are concentrated almost entirely on labour, wages, and public sector employment. Regional parties light up on narrow, state-specific topics: NCP on Maharashtra agriculture, DMK on water disputes and Dravidian cultural issues.</p>
-<hr>
 </section>
 <section id="party-effects-and-time-trends" class="level3">
 <h3 class="anchored" data-anchor-id="party-effects-and-time-trends">4. Party Effects and Time Trends</h3>
@@ -498,7 +492,6 @@ Note
 </div>
 </div>
 <p>The time trend shows which parliamentary concerns have grown and which have faded across Lok Sabhas. Some infrastructure topics expand over time; some governance topics contract. The BJP-INC contrast separates them cleanly on the dimensions you would expect: BJP on infrastructure and development, INC on accountability and oversight.</p>
-<hr>
 </section>
 <section id="mapping-the-corpus" class="level3">
 <h3 class="anchored" data-anchor-id="mapping-the-corpus">5. Mapping the Corpus</h3>
@@ -524,7 +517,6 @@ Note
 </div>
 </div>
 <p>Both methods put BJP and INC at the centre as the two largest clouds. Left parties form a tight knot, which is what you would expect from parties that have a fairly consistent ideological line on what to ask about. Regional parties scatter outward, pulled by their state-specific vocabularies. The two projections agree on the broad picture but differ in how they treat the smaller parties: t-SNE stretches them further apart.</p>
-<hr>
 </section>
 <section id="which-parties-sound-like-each-other" class="level3">
 <h3 class="anchored" data-anchor-id="which-parties-sound-like-each-other">6. Which Parties Sound Like Each Other</h3>
@@ -556,7 +548,6 @@ Note
 <figcaption>Party positions in PCA space with GMM cluster colouring.</figcaption>
 </figure>
 </div>
-<hr>
 </section>
 <section id="which-ministries-get-questioned" class="level3">
 <h3 class="anchored" data-anchor-id="which-ministries-get-questioned">7. Which Ministries Get Questioned</h3>
@@ -568,7 +559,6 @@ Note
 </figure>
 </div>
 <p>BJP MPs question Railways and Road Transport heavily. INC focuses on Finance, Home Affairs, and External Affairs. Left parties concentrate on Labour and Employment almost exclusively relative to their size. Regional parties mirror their states: DMK on Textiles and Fisheries, TDP on Agriculture, NCP on Rural Development.</p>
-<hr>
 </section>
 <section id="topic-evolution-over-time" class="level3">
 <h3 class="anchored" data-anchor-id="topic-evolution-over-time">8. Topic Evolution Over Time</h3>
@@ -594,7 +584,6 @@ Note
 </div>
 </div>
 <p>BJP’s mix shifts between the 16th and 17th Lok Sabha, with infrastructure and agriculture expanding. INC’s mix is more stable but tilts gradually toward governance and accountability topics. An opposition party in India has limited levers; questioning government process on Finance and Home Affairs is one of them.</p>
-<hr>
 </section>
 <section id="what-words-live-near-each-other" class="level3">
 <h3 class="anchored" data-anchor-id="what-words-live-near-each-other">9. What Words Live Near Each Other</h3>
@@ -606,7 +595,6 @@ Note
 </figure>
 </div>
 <p>A few things stand out. “Farmer” sits near drought, MSP, and irrigation. It is a scarcity and welfare word in Parliament, not an entrepreneurial one. “Terrorism” clusters with border, security, and Pakistan, which says something about how the term gets deployed in questions versus how it is discussed in civil society. “Caste” is proximate to reservation, OBC, and scheduled: institutional usage rather than sociological. “Corruption” lands near scam, irregularity, and vigilance. MPs raise it in procedural terms.</p>
-<hr>
 </section>
 <section id="summary" class="level3">
 <h3 class="anchored" data-anchor-id="summary">10. Summary</h3>
@@ -616,7 +604,6 @@ Note
 <figcaption>Ideological space, document map, BJP trajectory, and topic evolution in one panel.</figcaption>
 </figure>
 </div>
-<hr>
 </section>
 </section>
 <section id="bertopic" class="level2">
@@ -637,7 +624,6 @@ Note
 </figure>
 </div>
 <p>The two methods agree on the broad thematic structure of parliamentary questioning but disagree in resolution. LDA gives 15 coarse topics with noisy term lists. BERTopic gives 29 finer topics with cleaner terms — at the cost of a 25% outlier rate and higher computational time.</p>
-<hr>
 </section>
 <section id="ministry" class="level2">
 <h2 class="anchored" data-anchor-id="ministry">Ministry Targeting</h2>
@@ -679,7 +665,6 @@ Note
 <figcaption>Bipartite party-ministry network. Edges connect parties to ministries they over-question (Pearson residual &gt; 1.5). Edge thickness proportional to excess targeting.</figcaption>
 </figure>
 </div>
-<hr>
 </section>
 </section>
 <section id="sentiment" class="level2">
@@ -741,7 +726,6 @@ Note
 <p><strong>VADER caveat.</strong> VADER was calibrated on social media and news text, not formal parliamentary English. The parliamentary register inflates positive scores because declarative, neutral language reads as “not negative.” Absolute score levels are not meaningful — the within-sample variation across parties and ministries is.</p>
 </div>
 </div>
-<hr>
 </section>
 </section>
 <section id="ner" class="level2">
@@ -847,7 +831,6 @@ Note
 </figure>
 </div>
 <p>Person naming follows a pattern: government parties name bureaucrats and scheme beneficiaries, opposition parties name politicians they are holding accountable. The specific individuals vary but the structural difference is consistent.</p>
-<hr>
 </section>
 </section>
 <section id="conetwork" class="level2">
@@ -904,7 +887,6 @@ Note
 </figure>
 </div>
 <p>The diagonal dominates — within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.</p>
-<hr>
 </section>
 </section>
 <section id="robustness" class="level2">
@@ -937,7 +919,6 @@ Note
 <p>The main findings should be read as descriptive text differences, not identified ideological positions. The claim that BJP MPs and Left MPs write differently is well-supported — they clearly do. Whether that difference reflects ideology, government responsibilities, or both is not separable with this research design.</p>
 <p>Proper identification would require an instrument for coalition entry (something that predicts which parties join NDA but is uncorrelated with their vocabulary independent of incumbency) or a regression discontinuity around close elections that determine coalition composition. Neither is feasible here.</p>
 <p>The BJP trajectory finding (Hindutva score rising monotonically across three Lok Sabhas) faces the additional problem of having only three data points, and the political context changed sharply between them — Ayodhya verdict, CAA, Article 370 revocation all fall between the 16th and 17th LS. The text shift is real; whether it is ideological deepening or a contextual response is not identified.</p>
-<hr>
 </section>
 </section>
 <section id="reproduce" class="level2">
@@ -946,7 +927,6 @@ Note
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"code/_master.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Downloads the data, installs packages, runs A1 through A8. Takes about 15 minutes. The word2vec step is cached after the first run so re-running is fast.</p>
 <p>Full code on <a href="https://github.com/pzaware19/lok-sabha-nlp">GitHub</a>.</p>
-<hr>
 </section>
 <section id="about" class="level2">
 <h2 class="anchored" data-anchor-id="about">About</h2>
