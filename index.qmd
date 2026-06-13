@@ -244,41 +244,41 @@ A few things stand out. "Farmer" sits near drought, MSP, and irrigation. It is a
 
 ## BERTopic: Topics Without the Bag-of-Words Assumption {#bertopic}
 
-LDA treats each document as a bag of tokens. It doesn't know that "railway" and "train" are related, or that "farmer suicide" is a compound concept. BERTopic uses sentence embeddings instead — each question is projected into a 384-dimensional semantic space using a multilingual transformer, then HDBSCAN finds clusters of semantically similar questions, and c-TF-IDF extracts the distinctive terms per cluster.
+LDA treats each document as a bag of tokens. It doesn't know that "railway" and "train" are related, or that "farmer suicide" is a compound concept. BERTopic uses sentence embeddings instead: each question is projected into a 384-dimensional semantic space using a multilingual transformer, then HDBSCAN finds clusters of semantically similar questions, and c-TF-IDF extracts the distinctive terms per cluster.
 
-Running BERTopic on all 11,841 starred questions (not the party-session aggregates) finds 29 coherent topics. About 25% of questions land in the outlier cluster — questions that don't fit neatly into any topic. That's not a failure; it's honest. LDA forces every document into every topic with some weight; BERTopic refuses to.
+Running BERTopic on all 11,841 starred questions (not the party-session aggregates) finds 29 coherent topics. About 25% of questions land in the outlier cluster, questions with no clean fit to any topic. That's not a failure; it's honest. LDA forces every document into every topic with some weight; BERTopic refuses to.
 
-![BERTopic top terms per topic, ranked by c-TF-IDF score. Each panel is one topic cluster. Terms are distinctive to the cluster, not just frequent overall — so parliamentary boilerplate drops out.](output/figures/bertopic_top_terms.png){width=100%}
+![BERTopic top terms per topic, ranked by c-TF-IDF score. Each panel is one topic cluster. Terms are distinctive to the cluster, not just frequent overall, so parliamentary boilerplate drops out.](output/figures/bertopic_top_terms.png){width=100%}
 
-The topics that emerge are sharper than LDA's. Railway infrastructure, power and energy, MGNREGS and rural employment, pharmaceutical drugs, banking and loans, forest and pollution, sugar mills, coastal fisheries, AIIMS and hospitals — each topic has a clean semantic core. The LDA equivalent mixes these because the token "wise" and "proposed" appear everywhere and pollute topic boundaries.
+The topics that emerge are sharper than LDA's. Railway infrastructure, power and energy, MGNREGS and rural employment, pharmaceutical drugs, banking and loans, forest and pollution, sugar mills, coastal fisheries, AIIMS and hospitals. Each topic has a clean semantic core. The LDA equivalent mixes these because the token "wise" and "proposed" appear everywhere and pollute topic boundaries.
 
 ![Method comparison: LDA vs BERTopic on the same corpus.](output/figures/bertopic_vs_lda.png){width=80%}
 
-The two methods agree on the broad thematic structure of parliamentary questioning but disagree in resolution. LDA gives 15 coarse topics with noisy term lists. BERTopic gives 29 finer topics with cleaner terms — at the cost of a 25% outlier rate and higher computational time.
+The two methods agree on the broad thematic structure of parliamentary questioning but disagree in resolution. LDA gives 15 coarse topics with noisy term lists. BERTopic gives 29 finer topics with cleaner terms, at the cost of a 25% outlier rate and higher computational time.
 
 ## Ministry Targeting {#ministry}
 
-Every starred question is addressed to a specific ministry. That's a second signal on top of the text — not just *what* parties talk about, but *who* they hold accountable. The analysis here asks whether parties target ministries strategically, or whether the distribution of questions across ministries roughly mirrors each party's overall question volume.
+Every starred question is addressed to a specific ministry. That's a second signal on top of the text: not just *what* parties talk about, but *who* they hold accountable. The analysis here asks whether parties target ministries strategically, or whether the distribution of questions across ministries roughly mirrors each party's overall question volume.
 
 The baseline is proportional questioning: if BJP asks 40% of all questions and Defence gets 5% of all questions, then BJP asking 2% of its questions to Defence is expected. The Pearson residual measures the deviation from that null.
 
 ![Excess ministry targeting. Each cell shows the Pearson residual (observed minus expected, scaled by sqrt of expected). Red = over-questions; blue = under-questions. The pattern reveals legislative strategy.](output/figures/ministry_excess_heatmap.png){width=100%}
 
-A few things stand out. INC concentrates disproportionately on Finance and Home Affairs — the two ministries most exposed to accountability questions about economic policy and internal security. Left parties over-question Labour and Employment by a substantial margin. Regional parties target niche ministries tied to their state economies: Textiles, Fisheries, Steel.
+A few things stand out. INC concentrates disproportionately on Finance and Home Affairs, the two ministries most exposed to accountability questions about economic policy and internal security. Left parties over-question Labour and Employment by a substantial margin. Regional parties target niche ministries tied to their state economies: Textiles, Fisheries, Steel.
 
 ### Ministry concentration
 
-Some parties spread their questions across many ministries. Others concentrate fire. The Herfindahl-Hirschman Index (sum of squared ministry shares) measures this — higher means more concentrated.
+Some parties spread their questions across many ministries. Others concentrate fire. The Herfindahl-Hirschman Index (sum of squared ministry shares) measures this; higher values mean more concentrated.
 
 ![Ministry concentration by party (Herfindahl index). Label shows each party's top ministry and the share of its questions directed there.](output/figures/ministry_concentration.png){width=90%}
 
-DMK and the Left are the most concentrated — both have narrow, consistent mandates. BJP and Regional are the most diffuse, which makes sense: BJP has a broad governing agenda and regional parties have heterogeneous state-specific priorities.
+DMK and the Left are the most concentrated, both with narrow, consistent mandates. BJP and Regional are the most diffuse. BJP has a broad governing agenda; regional parties have heterogeneous state-specific priorities.
 
 ### How targeting has shifted over time
 
 ![BJP vs INC ministry targeting, 16th to 18th Lok Sabha. Each panel is one ministry. Lines show the share of each party's starred questions directed there per Lok Sabha.](output/figures/ministry_temporal.png){width=100%}
 
-BJP's targeting of Defence and Home Affairs grows across Lok Sabhas, consistent with an expanding security and sovereignty agenda. INC's concentration on Finance increases in the 17th and 18th LS — as the opposition, it tracks economic policy failures more intensively when the government's fiscal record becomes more contestable.
+BJP's targeting of Defence and Home Affairs grows across Lok Sabhas, consistent with an expanding security and sovereignty agenda. INC's concentration on Finance increases in the 17th and 18th LS. As the opposition, it tracks economic policy failures more intensively when the government's fiscal record becomes more contestable.
 
 ### The targeting network
 
@@ -288,11 +288,11 @@ BJP's targeting of Defence and Home Affairs grows across Lok Sabhas, consistent 
 
 Parliamentary questions have a formal grammar: "Will the Minister of X please state whether..." That structure is mandatory. But within it, the choice of framing differs. *Has the government failed to protect minorities?* is adversarial. *What schemes has the government launched to promote farmer welfare?* is aspirational. VADER extracts this signal by scoring the compound sentiment of each question's text.
 
-The overall distribution is positive — parliamentary questions are written to get answers, not to insult. But the relative differences across parties are informative.
+The overall distribution is positive. Parliamentary questions are written to get answers, not to insult. But the relative differences across parties are informative.
 
 ![Share of adversarial vs aspirational questions by party. Adversarial = VADER compound ≤ −0.05. Parties ordered by adversarialism rate.](output/figures/sentiment_distribution.png){width=100%}
 
-**Left parties are the most adversarial**, with 25% of their starred questions classified as negative in tone. INC follows at 16%, slightly above BJP at 13%. This is consistent with the incumbency gradient — opposition parties have more reason to frame questions as government failures — but the Left's high rate is notable even adjusting for their perpetual opposition status across all three Lok Sabhas.
+**Left parties are the most adversarial**, with 25% of their starred questions classified as negative in tone. INC follows at 16%, slightly above BJP at 13%. This is consistent with the incumbency gradient: opposition parties have more reason to frame questions as government failures. But the Left's high rate is notable even adjusting for their perpetual opposition status across all three Lok Sabhas.
 
 ![Mean VADER compound score by party with 95% confidence bands, faceted by government vs opposition status.](output/figures/sentiment_party.png){width=100%}
 
@@ -300,7 +300,7 @@ The overall distribution is positive — parliamentary questions are written to 
 
 ![Adversarialism by party across 16th–18th Lok Sabhas. The 18th LS (2024–) is the most recent and shows the sharpest partisan divergence yet.](output/figures/sentiment_temporal.png){width=90%}
 
-The temporal pattern shows a widening gap. Opposition parties — particularly INC and the Left — become more adversarial across Lok Sabhas, while BJP's tone stays relatively stable. Whether this reflects deteriorating political relations, a more combative opposition strategy, or the changing nature of issues in Parliament is not identified here.
+The temporal pattern shows a widening gap. Opposition parties (particularly INC and the Left) become more adversarial across Lok Sabhas, while BJP's tone stays relatively stable. Whether this reflects deteriorating political relations, a more combative opposition strategy, or the changing nature of issues in Parliament is not identified here.
 
 ### Which ministries attract the most critical questioning?
 
@@ -315,7 +315,7 @@ Home Affairs and Finance attract the most adversarial questioning. That tracks t
 The topic-level view maps cleanly onto the subject matter. Topics about judicial matters, security incidents, and minority welfare attract the most adversarial framing. Topics about infrastructure schemes, tourism, and sports attract almost none.
 
 ::: {.callout-note}
-**VADER caveat.** VADER was calibrated on social media and news text, not formal parliamentary English. The parliamentary register inflates positive scores because declarative, neutral language reads as "not negative." Absolute score levels are not meaningful — the within-sample variation across parties and ministries is.
+**VADER caveat.** VADER was calibrated on social media and news text, not formal parliamentary English. The parliamentary register inflates positive scores because declarative, neutral language reads as "not negative." Absolute score levels are not meaningful; the within-sample variation across parties and ministries is.
 :::
 
 ## Geographic Focus: Where Parties Look {#ner}
@@ -357,15 +357,15 @@ Person naming follows a pattern: government parties name bureaucrats and scheme 
 
 ## Co-Questioning Networks {#conetwork}
 
-Every starred question lists co-signatories alongside the primary MP. About 39% of questions have two or more MPs attached — a structural feature of Indian parliamentary practice where parties coordinate to ensure ministerial coverage. This creates a natural network: an edge between two MPs every time they co-sign a question.
+Every starred question lists co-signatories alongside the primary MP. About 39% of questions have two or more MPs attached, a structural feature of Indian parliamentary practice where parties coordinate to ensure ministerial coverage. This creates a natural network: an edge between two MPs every time they co-sign a question.
 
-The network has **324 MPs** (matched nodes), **739 co-signing pairs**, and a graph density of 0.014. The overwhelming pattern is within-party — MPs co-sign almost exclusively with their own party.
+The network has **324 MPs** (matched nodes), **739 co-signing pairs**, and a graph density of 0.014. The overwhelming pattern is within-party. MPs co-sign almost exclusively with their own party.
 
 ![Full MP co-questioning network. Node colour = party. Edge colour: grey = within-party, orange = cross-party. Node size = total co-signed questions (weighted degree). Labels on top 3% by betweenness.](output/figures/conet_full.png){width=100%}
 
 ### How partisan is it?
 
-Louvain community detection finds **15 communities** with modularity **0.656** — very high. A random network with the same degree sequence would have modularity near 0; 0.656 means co-questioning is strongly partitioned by party identity. BJP dominates 13 of the 15 communities. Only 2 communities are >80% a single party (pure); the remaining 13 are mixed but BJP-majority, reflecting BJP's sheer size advantage.
+Louvain community detection finds **15 communities** with modularity **0.656**, which is very high. A random network with the same degree sequence would have modularity near 0; 0.656 means co-questioning is strongly partitioned by party identity. BJP dominates 13 of the 15 communities. Only 2 communities are >80% a single party (pure); the remaining 13 are mixed but BJP-majority, reflecting BJP's sheer size advantage.
 
 ### Cross-party coordination: who bridges party lines?
 
@@ -373,7 +373,7 @@ Filtering to cross-party edges only reveals the structure of coalition politics 
 
 ![Cross-party co-questioning edges only. Each edge connects MPs from different parties. Edge width = number of questions co-signed together. Labels = MPs with 3+ cross-party partners.](output/figures/conet_cross_party.png){width=100%}
 
-The top cross-party pairs are almost all **NDA coalition partners**: BJP-JDU, BJP-Shiv Sena, BJP-Regional (BJD/TDP bloc). These are parties that governed together, allocated portfolio questions jointly, and coordinated legislative agendas. The clearest case: C.N. Annadurai (DMK) co-signed 4 questions with a Regional party MP — DMK was in the INDIA opposition alliance and coordinated with non-BJP regional parties.
+The top cross-party pairs are almost all **NDA coalition partners**: BJP-JDU, BJP-Shiv Sena, BJP-Regional (BJD/TDP bloc). These are parties that governed together, allocated portfolio questions jointly, and coordinated legislative agendas. The clearest case: C.N. Annadurai (DMK) co-signed 4 questions with a Regional party MP. DMK was in the INDIA opposition alliance and coordinated with non-BJP regional parties.
 
 ### Cross-party rate has fallen over time
 
@@ -385,13 +385,13 @@ Cross-party co-signing fell from **44% in the 16th LS to 34% in the 17th LS**. O
 
 ![Top 25 MPs by betweenness centrality. High betweenness = MP lies on the shortest path between otherwise disconnected parts of the network.](output/figures/conet_top_connectors.png){width=90%}
 
-Betweenness centrality identifies MPs who bridge otherwise disconnected clusters. These are not necessarily the most prolific co-signers — they are the connectors whose absence would most fragment the network. The top connectors are predominantly BJP MPs from swing states (Bihar, Jharkhand, Rajasthan) who co-sign across regional and national party groupings. A JDU MP (Bihar-NDA) bridging the BJP cluster to the regional bloc is a recurring pattern.
+Betweenness centrality identifies MPs who bridge otherwise disconnected clusters. These are not necessarily the most prolific co-signers; they are the connectors whose absence would most fragment the network. The top connectors are predominantly BJP MPs from swing states (Bihar, Jharkhand, Rajasthan) who co-sign across regional and national party groupings. A JDU MP (Bihar-NDA) bridging the BJP cluster to the regional bloc is a recurring pattern.
 
 ### Party × party co-questioning matrix
 
 ![Party co-questioning matrix. Diagonal = within-party co-signing. Off-diagonal = cross-party pairs. Cell values = total co-signed questions.](output/figures/conet_party_matrix.png){width=85%}
 
-The diagonal dominates — within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.
+The diagonal dominates. Within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.
 
 ## What the Results Do Not Tell You {#robustness}
 
@@ -405,9 +405,9 @@ The figure below documents this directly. Across the 205 party-session documents
 
 ### Why this cannot be fixed with the available data
 
-The natural response is to partial out incumbency status and see what remains. The problem is that this only works if some parties switch sides across the sample period, giving within-party variation to identify the incumbency effect separately from ideology. In this dataset, BJP is in government for every Lok Sabha observed, and INC is in opposition for every Lok Sabha observed. So incumbency status is perfectly collinear with party identity for the two parties the comparison hinges on. Regressing out `in_gov` does not remove the incumbency effect — it removes the BJP-INC contrast itself, which is circular.
+The natural response is to partial out incumbency status and see what remains. The problem is that this only works if some parties switch sides across the sample period, giving within-party variation to identify the incumbency effect separately from ideology. In this dataset, BJP is in government for every Lok Sabha observed, and INC is in opposition for every Lok Sabha observed. So incumbency status is perfectly collinear with party identity for the two parties the comparison hinges on. Regressing out `in_gov` does not remove the incumbency effect. It removes the BJP-INC contrast itself, which is circular.
 
-The only genuine switchers are **TDP** (NDA in 16th LS, opposition in 17th, NDA again in 18th) and **JDU** (opposition in 16th, NDA in 17th and 18th). TDP won only 3 Lok Sabha seats in 2019, so its 17th LS corpus is too sparse. That leaves JDU as the primary source of within-party variation — not enough to credibly identify the incumbency effect across 13 parties.
+The only genuine switchers are **TDP** (NDA in 16th LS, opposition in 17th, NDA again in 18th) and **JDU** (opposition in 16th, NDA in 17th and 18th). TDP won only 3 Lok Sabha seats in 2019, so its 17th LS corpus is too sparse. That leaves JDU as the primary source of within-party variation, not enough to credibly identify the incumbency effect across 13 parties.
 
 The STM with incumbency added as a covariate (`~ bjp + inc + left + lok_num + session + in_gov`) does not solve this either. When party indicators and `in_gov` are jointly included in the prevalence formula, the model faces the same multicollinearity. The `in_gov` coefficient is identified mainly from the three switchers.
 
@@ -415,11 +415,11 @@ The STM with incumbency added as a covariate (`~ bjp + inc + left + lok_num + se
 
 ### What follows from this
 
-The main findings should be read as descriptive text differences, not identified ideological positions. The claim that BJP MPs and Left MPs write differently is well-supported — they clearly do. Whether that difference reflects ideology, government responsibilities, or both is not separable with this research design.
+The main findings should be read as descriptive text differences, not identified ideological positions. The claim that BJP MPs and Left MPs write differently is well-supported. They clearly do. Whether that difference reflects ideology, government responsibilities, or both is not separable with this research design.
 
 Proper identification would require an instrument for coalition entry (something that predicts which parties join NDA but is uncorrelated with their vocabulary independent of incumbency) or a regression discontinuity around close elections that determine coalition composition. Neither is feasible here.
 
-The BJP trajectory finding (Hindutva score rising monotonically across three Lok Sabhas) faces the additional problem of having only three data points, and the political context changed sharply between them — Ayodhya verdict, CAA, Article 370 revocation all fall between the 16th and 17th LS. The text shift is real; whether it is ideological deepening or a contextual response is not identified.
+The BJP trajectory finding (Hindutva score rising monotonically across three Lok Sabhas) faces the additional problem of having only three data points, and the political context changed sharply between them: the Ayodhya verdict, CAA, and Article 370 revocation all fall between the 16th and 17th LS. The text shift is real; whether it is ideological deepening or a contextual response is not identified.
 
 ## Reproducing This {#reproduce}
 
