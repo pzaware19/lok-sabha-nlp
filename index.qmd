@@ -13,7 +13,7 @@ Mapping the ideological landscape of Indian democracy from 150,000 parliamentary
 :::
 
 ::: {.meta}
-Piyush Zaware &nbsp;·&nbsp; MPP, University of Chicago &nbsp;·&nbsp; Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg
+Piyush Zaware
 :::
 
 ::: {.badge-row}
@@ -303,5 +303,3 @@ The master file downloads all data from HuggingFace (no account needed), install
 ## About
 
 **Piyush Zaware**
-MPP, University of Chicago
-Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg

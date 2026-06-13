@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "What Does India’s Parliament Actually Talk About?",
     "section": "",
-    "text": "Mapping the ideological landscape of Indian democracy from 150,000 parliamentary questions using unsupervised machine learning. No labels, no hand-coding, just text.\n\n\nPiyush Zaware  ·  MPP, University of Chicago  ·  Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg\n\n\n\n150,000 Questions\n\n\n16th – 18th Lok Sabha (2014–2026)\n\n\n13 Parties\n\n\nLDA · STM · Word2Vec · UMAP\nEvery parliamentary session, Indian MPs submit hundreds of written questions to government ministries. These are not speeches or debates. They are targeted, on-the-record demands for information: what is the government doing about farmer suicides, what is the status of highway construction in Bihar, how many minorities were displaced last year. Taken together, across three Lok Sabhas and 13 parties, they form a detailed paper trail of what each party actually cares about.\nThis project mines the complete archive of starred (oral) questions from the 16th, 17th, and 18th Lok Sabha using unsupervised machine learning. The central question: can you recover the ideological map of Indian politics purely from how MPs phrase their questions, without any human annotation?\nThe answer is yes, and the results are sharper than expected."
+    "text": "Mapping the ideological landscape of Indian democracy from 150,000 parliamentary questions using unsupervised machine learning. No labels, no hand-coding, just text.\n\n\nPiyush Zaware\n\n\n\n150,000 Questions\n\n\n16th – 18th Lok Sabha (2014–2026)\n\n\n13 Parties\n\n\nLDA · STM · Word2Vec · UMAP\nEvery parliamentary session, Indian MPs submit hundreds of written questions to government ministries. These are not speeches or debates. They are targeted, on-the-record demands for information: what is the government doing about farmer suicides, what is the status of highway construction in Bihar, how many minorities were displaced last year. Taken together, across three Lok Sabhas and 13 parties, they form a detailed paper trail of what each party actually cares about.\nThis project mines the complete archive of starred (oral) questions from the 16th, 17th, and 18th Lok Sabha using unsupervised machine learning. The central question: can you recover the ideological map of Indian politics purely from how MPs phrase their questions, without any human annotation?\nThe answer is yes, and the results are sharper than expected."
   },
   {
     "objectID": "index.html#data",
@@ -39,6 +39,6 @@
     "href": "index.html#about",
     "title": "What Does India’s Parliament Actually Talk About?",
     "section": "About",
-    "text": "About\nPiyush Zaware MPP, University of Chicago Applied Economics Researcher, Global Poverty Research Laboratory, Northwestern Kellogg"
+    "text": "About\nPiyush Zaware"
   }
 ]
