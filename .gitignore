@@ -1,0 +1,16 @@
+# Large data files — download automatically via A1_download_questions.R
+tmp/
+input/
+
+# R session artifacts
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Large model objects (reproducible from code)
+output/models/*.rds
+
+# OS
+.DS_Store
+Thumbs.db
