@@ -1,17 +1,11 @@
 # What Does India's Parliament Actually Talk About?
 ### Unsupervised Machine Learning on 150,000 Lok Sabha Questions (2014–2026)
 
-> *Every sitting of India's lower house of Parliament, elected members submit hundreds of written questions to government ministries. This project applies text-mining and machine learning to the complete record of starred questions from the 16th, 17th, and 18th Lok Sabha — mapping the ideological landscape of Indian democracy from the words MPs choose to ask.*
+Every parliamentary session, Indian MPs submit hundreds of written questions to government ministries. Taken together, these questions are a paper trail of what each party actually cares about — agriculture subsidies, minority rights, road infrastructure, defence procurement, labour rights — stated in their own words, on the record.
 
----
+This project mines the complete archive of starred (oral) questions from the 16th, 17th, and 18th Lok Sabha using unsupervised machine learning: no pre-assigned labels, no ideological coding. Just text, and methods that learn structure from it.
 
-## The Big Picture
-
-Indian MPs submit **starred (oral) questions** to government ministries every session. These questions are a direct window into what each party cares about — agriculture subsidies, minority rights, infrastructure, defence, labour — framed in their own words.
-
-This project asks: **can we recover the ideological structure of Indian politics purely from the language of parliamentary questions, without any human labels?**
-
-Using three unsupervised learning methods — topic models, word embeddings, and clustering — the answer is yes.
+The central question: **can you recover the ideological map of Indian politics purely from how MPs phrase their questions?** The short answer is yes — and the results are sharper than expected.
 
 ---
 
@@ -100,7 +94,7 @@ Word embeddings recover a recognisable left–right and secular–nationalist st
 
 *BJP's average position on the Hindutva dimension (higher = more nationalist language) across the 16th, 17th, and 18th Lok Sabha sessions.*
 
-The score increases from the 16th to the 18th LS, consistent with BJP's documented ideological consolidation post-2019.
+The score increases from the 16th to the 18th LS — the language BJP MPs use in Parliament has shifted measurably toward religious and nationalist vocabulary over a decade in government.
 
 ---
 
@@ -112,7 +106,7 @@ The score increases from the 16th to the 18th LS, consistent with BJP's document
 
 *Rows = LDA topics (K=15); columns = parties. Colour intensity = average topic weight. Brighter = party strongly emphasises that topic.*
 
-BJP dominates infrastructure and defence topics; INC emphasises accountability and governance; Left parties concentrate on labour and wages; regional parties show idiosyncratic peaks on state-specific concerns.
+BJP concentrates on infrastructure and defence; INC on accountability and governance; Left parties on labour and wages. Regional parties show sharp, idiosyncratic peaks — NCP on Maharashtra agriculture, DMK on Tamil Nadu water disputes — which makes sense: their mandate is narrow and local.
 
 ---
 
@@ -239,5 +233,3 @@ The approach is validated by the fact that the recovered ordering — Left < AAP
 PhD student in Economics, University of Chicago  
 Applied researcher, Global Poverty Research Laboratory, Northwestern Kellogg  
 Co-founder & CTO, [Pollity.in](https://pollity.in)
-
-*This project was developed as part of the Unsupervised Machine Learning course at UChicago.*
