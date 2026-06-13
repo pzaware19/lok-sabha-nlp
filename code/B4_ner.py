@@ -177,8 +177,32 @@ doc_out = matched[["id", "lok_no", "session_no", "party_family", "ministry"]].co
 doc_out["n_gpe"]    = [len(g) for g in gpe_lists]
 doc_out["n_person"] = [len(p) for p in person_lists]
 doc_out["n_org"]    = [len(o) for o in org_lists]
+# State detection: combine spaCy GPE tags with direct string matching.
+# spaCy en_core_web_sm sometimes tags "Tamil Nadu" as NORP instead of GPE,
+# so direct matching is more reliable for Indian state names.
+import re as _re
+
+STATE_PATTERNS = {s: _re.compile(r'\b' + _re.escape(s.title()) + r'\b', _re.IGNORECASE)
+                  for s in INDIA_STATES}
+# Also match common abbreviations
+STATE_PATTERNS["UP"] = _re.compile(r'\bUP\b')
+STATE_PATTERNS["MP"] = _re.compile(r'\bM\.?P\.?\b')
+
+def extract_states(text, gpe_list):
+    """Merge NER GPE states with direct regex matching."""
+    found = set()
+    for g in gpe_list:
+        if g in INDIA_STATES:
+            found.add(g)
+    # Direct string match — catches what NER misses (e.g. Tamil Nadu tagged as NORP)
+    for state, pat in STATE_PATTERNS.items():
+        if pat.search(text):
+            found.add(state)
+    return found
+
 doc_out["states_mentioned"] = [
-    ";".join([g for g in gpe if g in INDIA_STATES]) for gpe in gpe_lists
+    ";".join(sorted(extract_states(txt, gpe)))
+    for txt, gpe in zip(matched["text_ner"].tolist(), gpe_lists)
 ]
 doc_out.to_csv(os.path.join(TABDIR, "ner_doc.csv"), index=False)
 print("\nSaved: ner_doc.csv")

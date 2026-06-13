@@ -365,12 +365,16 @@ The answer is stark.
 
 | Party | HHI | Top state | Share |
 |-------|-----|-----------|-------|
-| Left  | 1.00 | Kerala | 100% |
-| TDP   | 1.00 | Telangana/AP | 100% |
-| JDU   | 0.58 | Bihar | 74% |
-| Regional | 0.30 | Odisha | 51% |
-| INC   | 0.16 | Kerala | 32% |
-| BJP   | 0.11 | Jharkhand | 15% |
+| BSP   | 1.00 | Uttar Pradesh | 100% |
+| SP    | 1.00 | Uttar Pradesh | 100% |
+| Left  | 0.72 | Kerala | 83% |
+| TDP   | 0.68 | Andhra Pradesh | 82% |
+| Shiv Sena | 0.67 | Maharashtra | 81% |
+| DMK   | 0.58 | Tamil Nadu | 74% |
+| JDU   | 0.26 | Bihar | 49% |
+| Regional | 0.13 | Odisha | 31% |
+| INC   | 0.09 | Kerala | 19% |
+| BJP   | 0.07 | Uttar Pradesh | 13% |
 
 *HHI = 1 means all state mentions go to one state; HHI near 0 means uniform spread. INC's Kerala concentration reflects the large number of Kerala MPs in the matched sample.*
 

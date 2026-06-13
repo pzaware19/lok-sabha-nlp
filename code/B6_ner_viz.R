@@ -61,16 +61,31 @@ INDIA_STATES <- c(
 # ============================================================
 # SECTION 1: State × party heatmap (share_pct within party)
 # ============================================================
+# Use ner_doc states_mentioned column: it uses exact INDIA_STATES set matching,
+# which is more reliable than spaCy NER tags for Indian state names.
+# The ner_gpe_party.csv keeps only top-60 global GPEs, which can cut states
+# that are rare globally but important for a specific party (e.g. Tamil Nadu for DMK).
 #{
 
-gpe_party <- read_csv(file.path(TABDIR, "ner_gpe_party.csv"),
-                      show_col_types = FALSE)
+ner_doc <- read_csv(file.path(TABDIR, "ner_doc.csv"), show_col_types = FALSE)
 
-# Filter to Indian states only
-state_party <- gpe_party %>%
-  filter(entity %in% INDIA_STATES,
-         party_family %in% names(PARTY_COLORS),
-         n_questions >= 3)
+# Explode states_mentioned (semicolon-separated) to one row per state mention
+state_party_raw <- ner_doc %>%
+  filter(!is.na(states_mentioned), states_mentioned != "") %>%
+  mutate(states_mentioned = str_split(states_mentioned, ";")) %>%
+  unnest(states_mentioned) %>%
+  mutate(entity = str_trim(states_mentioned)) %>%
+  filter(entity != "", entity != "nan") %>%
+  count(party_family, entity, name = "n_questions")
+
+party_totals_st <- ner_doc %>%
+  count(party_family, name = "party_total")
+
+state_party <- state_party_raw %>%
+  left_join(party_totals_st, by = "party_family") %>%
+  mutate(share_pct = 100 * n_questions / party_total) %>%
+  filter(party_family %in% names(PARTY_COLORS),
+         n_questions >= 2)
 
 # Top 15 states by total mentions across parties
 top_states <- state_party %>%
@@ -129,7 +144,7 @@ state_conc <- state_party %>%
     hhi_state    = sum(state_share^2),
     top_state    = entity[which.max(n_questions)],
     top_share    = max(state_share),
-    n_states     = n_distinct(entity[n_questions > 0]),
+    n_states     = n_distinct(entity),
     total_q      = first(party_total),
     .groups      = "drop"
   ) %>%
