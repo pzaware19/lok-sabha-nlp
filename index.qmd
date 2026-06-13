@@ -9,7 +9,7 @@ format:
 # What Does India's Parliament Actually Talk About?
 
 ::: {.subtitle}
-Mapping the ideological landscape of Indian democracy from 150,000 parliamentary questions using unsupervised machine learning. No labels, no hand-coding, just text.
+I ran unsupervised machine learning on 150,000 parliamentary questions from three Lok Sabhas. No labels, no hand-coding. Just the raw text of what Indian MPs ask the government, and what falls out when you let the data speak.
 :::
 
 ::: {.meta}
@@ -32,11 +32,9 @@ LDA · STM · Word2Vec · UMAP
 :::
 :::
 
-Every parliamentary session, Indian MPs submit hundreds of written questions to government ministries. These are not speeches or debates. They are targeted, on-the-record demands for information: what is the government doing about farmer suicides, what is the status of highway construction in Bihar, how many minorities were displaced last year. Taken together, across three Lok Sabhas and 13 parties, they form a detailed paper trail of what each party actually cares about.
+Starred questions are one of the more underused datasets in Indian political science. Every session, MPs submit written questions to ministries before the House sits. A minister has to be present to answer them. That matters, because it means parties use these questions deliberately. What is the government doing about farmer suicides? What is the status of the highway in Bihar? How many minorities were displaced? These are not speeches. They are on-the-record demands, filed by name, attached to a party.
 
-This project mines the complete archive of starred (oral) questions from the 16th, 17th, and 18th Lok Sabha using unsupervised machine learning. The central question: **can you recover the ideological map of Indian politics purely from how MPs phrase their questions, without any human annotation?**
-
-The answer is yes, and the results are sharper than expected.
+I scraped the complete archive from HuggingFace, matched MPs to their parties via Wikipedia, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.
 
 ---
 
@@ -48,7 +46,7 @@ The answer is yes, and the results are sharper than expected.
 150K
 :::
 ::: {.label}
-Total parliamentary questions across the 16th, 17th, and 18th Lok Sabha
+Total parliamentary questions, 16th through 18th Lok Sabha
 :::
 :::
 ::: {.finding-card}
@@ -56,7 +54,7 @@ Total parliamentary questions across the 16th, 17th, and 18th Lok Sabha
 13
 :::
 ::: {.label}
-Parties covered: BJP, INC, Left, BSP, AAP, TMC, SP, JDU, DMK, TDP, RJD, Shiv Sena, Regional
+Parties: BJP, INC, Left, BSP, AAP, TMC, SP, JDU, DMK, TDP, RJD, Shiv Sena, Regional
 :::
 :::
 ::: {.finding-card}
@@ -64,16 +62,16 @@ Parties covered: BJP, INC, Left, BSP, AAP, TMC, SP, JDU, DMK, TDP, RJD, Shiv Sen
 205
 :::
 ::: {.label}
-Documents in the corpus (one per party per parliamentary session)
+Documents, one per party per parliamentary session
 :::
 :::
 :::
 
-The dataset is the [`opensansad/lok-sabha-qa`](https://huggingface.co/datasets/opensansad/lok-sabha-qa) corpus on HuggingFace: 150,629 questions covering the 16th (2014–2019), 17th (2019–2024), and 18th (2024–) Lok Sabha. The analysis focuses on **starred questions**, the oral variety submitted by MPs before each session. Starred questions are richer in political content than unstarred written submissions. A minister must be present to answer them in the House, which means parties use them strategically.
+The dataset is [`opensansad/lok-sabha-qa`](https://huggingface.co/datasets/opensansad/lok-sabha-qa) on HuggingFace, covering the 16th (2014–2019), 17th (2019–2024), and 18th (2024–) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.
 
-MP-to-party mapping was constructed by scraping Wikipedia's constituency member lists for all three Lok Sabhas (three pages, automated, no API needed). This yielded a 38% match rate on starred questions, covering BJP, INC, and most major opposition parties with sufficient observations for reliable estimation.
+Party matching came from scraping Wikipedia's constituency lists for all three Lok Sabhas. The match rate on starred questions was 38%, which gives enough coverage for BJP, INC, and most major opposition parties to work with reliably.
 
-After matching, the corpus was preprocessed into **205 party-session documents**: one document per party per parliamentary session, treated as the unit of analysis. Each document is the concatenated text of all starred questions submitted by that party in that session.
+The unit of analysis is the **party-session document**: all starred questions submitted by a party in a given session, concatenated into one text. That gives 205 documents and a 3,258-term vocabulary after pruning.
 
 | | |
 |---|---|
@@ -88,7 +86,7 @@ After matching, the corpus was preprocessed into **205 party-session documents**
 
 ## How It Works {#methodology}
 
-The pipeline runs end-to-end in R from a single command.
+Everything runs from a single R script.
 
 ```
 source("code/_master.R")
@@ -112,43 +110,43 @@ party heatmap   + party/time      ideological dims
                 covariates
   └────┬────────────┴──────────────────┘
        │
-  A7: Clustering   ← HAC + GMM Gaussian mixture on TF-IDF PCA
+  A7: Clustering   ← HAC + GMM on TF-IDF PCA
        │
   A8: Visualization ← UMAP, t-SNE, stacked area, heatmaps
 ```
 
 ### Methods
 
-| Method | What it does | Key output |
+| Method | What it does | Output |
 |--------|-------------|--------|
-| **LDA** (Latent Dirichlet Allocation) | Discovers K recurring topics without supervision. Each document is a mixture of topics; each topic is a distribution over words. | 15 topics, each party's topic weights |
-| **STM** (Structural Topic Model) | Extends LDA by allowing party identity and Lok Sabha number to shift topic prevalence. Asks: does BJP talk about topic 7 more than INC, and did that change over time? | Marginal effects of party on each topic |
-| **Word2Vec + Kozlowski (2019)** | Trains a 100-dimensional word embedding on all 150K questions. Recovers ideological dimensions as directions in embedding space using antonym pairs. | Party scores on Hindutva, Left-Right, Rural-Urban axes |
-| **HAC** (Hierarchical Agglomerative Clustering) | Groups parties by cosine distance in TF-IDF space. No prespecified number of clusters. | Dendrogram showing party linguistic families |
-| **GMM** (Gaussian Mixture Model) | Soft clustering of party-session documents in PCA space, with BIC-selected number of clusters. | 6-cluster solution with probabilistic assignments |
-| **UMAP / t-SNE** | Non-linear dimensionality reduction from 3,258 dimensions to 2D for visualization. | Visual map of the document corpus |
+| **LDA** | Finds recurring topics across all documents without supervision. Each document is a mixture; each topic is a set of words. | 15 topics, party topic weights |
+| **STM** | Same as LDA but lets party identity and time shift topic prevalence. Asks whether BJP talks more about topic X than INC, and whether that changed. | Marginal party and time effects per topic |
+| **Word2Vec + Kozlowski (2019)** | Trains word embeddings on 150K questions. Ideological dimensions are directions in this space, defined by antonym pairs. | Party positions on Hindutva, Left-Right, Rural-Urban |
+| **HAC** | Hierarchical clustering of parties by vocabulary distance. No preset number of clusters. | Dendrogram |
+| **GMM** | Soft clustering of party-session documents in PCA space. | 6-cluster solution |
+| **UMAP / t-SNE** | Dimensionality reduction from 3,258 dimensions to 2D. | Visual maps of the corpus |
 
 ::: {.callout-note}
-**The Kozlowski method explained.** An ideological dimension is a direction in word embedding space. The Hindutva dimension, for example, is the vector from the centroid of {secular, minority, mosque, constitution, equality} toward the centroid of {hindu, mandir, temple, cow, ram, ayodhya}. Each party's position is computed as the TF-IDF-weighted average projection of their full vocabulary onto this direction. The method requires no labelled data. It recovers ideology purely from which words appear in similar contexts.
+**On the word embedding approach.** The idea from Kozlowski, Taddy & Evans (2019) is that you can encode an ideological dimension as a direction in word embedding space. The Hindutva dimension, for example, runs from words like {secular, minority, mosque, constitution} toward words like {hindu, mandir, temple, cow, ram, ayodhya}. A party's position on this axis is just the average projection of its vocabulary onto that direction, weighted by TF-IDF. No human labelling involved.
 
-Source: Kozlowski, Taddy & Evans (2019), ["The Geometry of Culture"](https://doi.org/10.1177/0003122419877135), *American Sociological Review*.
+Source: ["The Geometry of Culture"](https://doi.org/10.1177/0003122419877135), *American Sociological Review*, 2019.
 :::
 
 ---
 
-## Key Findings {#findings}
+## Results {#findings}
 
-### 1. The Ideological Map of Indian Parties
+### 1. The Ideological Map
 
-The most direct test of the method: do word embeddings recover a structure that resembles the known ideological landscape of Indian politics?
+Start with the simplest question: does the word embedding space recover anything that looks like Indian political ideology?
 
-![Party positions on two ideological dimensions recovered by word2vec. X-axis = economic left to right (positive = more market/growth language). Y-axis = secular to Hindu nationalist (positive = more religious/nationalist vocabulary). Each point is a party's mean position across all sessions.](output/figures/ideological_space.png){width=85%}
+![Party positions on two ideological dimensions. X-axis runs from pro-labour/welfare language on the left to market/growth language on the right. Y-axis runs from secular to Hindu nationalist vocabulary. Each point is a party's mean across all sessions.](output/figures/ideological_space.png){width=85%}
 
-The structure matches what a political scientist would draw by hand. BJP and Shiv Sena sit at the Hindu-nationalist pole. Left parties (CPI, CPI-M) and AAP cluster at the secular end. INC occupies the centre-left, consistent with its broad-tent identity.
+It does. BJP and Shiv Sena are at the nationalist end. Left parties and AAP are at the secular end. INC is in the centre-left. The ordering you'd expect if you just asked a political scientist to draw it by hand is basically what comes out.
 
-On the economic axis, the ordering is also informative. BSP and RJD use strongly redistributive, pro-poor language. BJP and TDP skew toward market, investment, and growth vocabulary. AAP sits in an unusual quadrant: secular but economically rightward, which aligns with its urban governance and anti-corruption brand rather than a classic left programme.
+The economic axis has some surprises. BSP and RJD use the most redistributive, pro-poor language in Parliament. TDP, despite being a regional party, skews strongly toward market and investment vocabulary. AAP is the interesting case: it sits secular but economically rightward, which fits its governance-and-anti-corruption brand but puts it in an odd place relative to the traditional left.
 
-**Party scores on all three dimensions:**
+**Scores on all three dimensions:**
 
 | Party | Hindutva | Economic Left | Rural/Agrarian |
 |-------|----------|--------------|----------------|
@@ -168,135 +166,131 @@ On the economic axis, the ordering is also informative. BSP and RJD use strongly
 
 ---
 
-### 2. BJP's Language Has Shifted Over a Decade in Government
+### 2. BJP's Language Has Shifted
 
-The Hindutva score, BJP's average position on the nationalist dimension, increases monotonically from the 16th to the 18th Lok Sabha.
+BJP's score on the Hindutva dimension goes up with each Lok Sabha.
 
-![BJP's mean Hindutva score per Lok Sabha. Higher values indicate more nationalist and religious vocabulary in parliamentary questions. Derived from word2vec projections of the full BJP question corpus.](output/figures/bjp_hindutva_trajectory.png){width=70%}
+![BJP's mean Hindutva score per Lok Sabha. Higher = more religious and nationalist vocabulary in parliamentary questions.](output/figures/bjp_hindutva_trajectory.png){width=70%}
 
-The shift is not dramatic, but it is consistent and monotonic across all three Lok Sabhas. The language BJP MPs choose when questioning government ministries has moved measurably toward religious and civilisational vocabulary over a decade in power. This is observable without coding a single document by hand.
-
----
-
-### 3. Topic Discovery: What Parliament Talks About
-
-LDA identifies 15 latent topics from the corpus. The perplexity curve below shows how model fit improves with more topics; K=15 was selected as the elbow point before diminishing returns.
-
-![Held-out perplexity as a function of number of topics K. Lower perplexity = better generalization. K=15 selected at the elbow.](output/figures/lda_k_selection.png){width=65%}
-
-The top terms for each topic reveal coherent parliamentary themes.
-
-![Top terms per LDA topic by four ranking methods (probability, FREX, lift, score). Each column is one topic.](output/figures/lda_top_terms.png){width=100%}
-
-The topics that emerge include: railway and transport infrastructure, agricultural welfare and farmer issues, sugar industry and pricing, judicial and electoral matters, public health and AIIMS, education and universities, water resources and river projects, petroleum and energy, defence and border security, and state-level budgetary allocations.
-
-**Topic distribution by party:**
-
-![LDA topic heatmap. Rows = 15 topics, columns = parties. Colour intensity = average topic weight. Brighter = that party more strongly emphasises the topic.](output/figures/lda_party_heatmap.png){width=90%}
-
-BJP concentrates on infrastructure, defence, and state-level development. INC focuses on governance, accountability, and judicial matters. Left parties show strong concentration on labour, wages, and public sector employment. Regional parties show sharp, idiosyncratic peaks consistent with their state-specific mandates: NCP on Maharashtra agriculture, DMK on Tamil Nadu water disputes and Dravidian cultural issues.
+It is not a dramatic jump. But it is monotonic across 16th, 17th, and 18th, which covers a decade in government. The vocabulary BJP MPs reach for when they question ministries has gradually shifted toward religious and civilisational terms. Whether you read that as ideological deepening or just a party mirroring its base is a separate question. The shift is there in the text either way.
 
 ---
 
-### 4. Structural Topic Model: Party Effects and Time Trends
+### 3. What Parliament Actually Talks About
 
-The Structural Topic Model extends LDA by allowing party identity and Lok Sabha number to predict topic prevalence directly, estimating a marginal effect for each covariate on each topic.
+LDA finds 15 recurring topics. The curve below shows how model fit improves as you add more topics; 15 was chosen at the point where adding more stops helping much.
+
+![Held-out perplexity by number of topics. Lower = better fit. K=15 at the elbow.](output/figures/lda_k_selection.png){width=65%}
+
+The topics that emerge are coherent and recognisable.
+
+![Top terms per topic across four ranking methods. Each column is one topic.](output/figures/lda_top_terms.png){width=100%}
+
+You get railway and highway infrastructure, farmer welfare and MSP, sugar industry regulation, judicial and electoral oversight, public health and AIIMS, higher education, water and river projects, petroleum pricing, border and defence, and state-level budget allocations. These are not surprising. They are the recurring preoccupations of Indian parliamentary life.
+
+What is interesting is how unevenly they are distributed across parties.
+
+![LDA topic heatmap. Each row is a topic, each column is a party. Brighter = that party asks more questions on that topic relative to its overall volume.](output/figures/lda_party_heatmap.png){width=90%}
+
+BJP dominates infrastructure and defence topics. INC clusters around governance, accountability, and judicial matters, which makes sense for a party in opposition trying to question process rather than specific policies. Left parties are concentrated almost entirely on labour, wages, and public sector employment. Regional parties light up on narrow, state-specific topics: NCP on Maharashtra agriculture, DMK on water disputes and Dravidian cultural issues.
+
+---
+
+### 4. Party Effects and Time Trends
+
+STM goes further than LDA by estimating how party identity and time shift topic prevalence directly.
 
 ::: {layout-ncol=2}
-![STM topic effects of Lok Sabha number. Red dots indicate topics whose prevalence changed significantly (p < 0.05) across the 16th, 17th, and 18th Lok Sabha. Positive = growing topic; negative = declining topic.](output/figures/stm_effects_lok.png)
+![Topics growing or shrinking across the three Lok Sabhas. Red = statistically significant shift (p < 0.05). Positive = topic is asked about more over time.](output/figures/stm_effects_lok.png)
 
-![BJP vs INC topic contrast. Each point is one topic. X-axis = marginal INC effect; Y-axis = marginal BJP effect. Topics in the upper-left are BJP-specific; topics in the lower-right are INC-specific.](output/figures/stm_bjp_inc_contrast.png)
+![BJP vs INC topic contrast. Each point is one topic. Upper left = BJP-specific topics. Lower right = INC-specific topics.](output/figures/stm_bjp_inc_contrast.png)
 :::
 
-The time trend plot shows which topics have grown or shrunk in parliamentary questioning across the three Lok Sabhas. The BJP-INC contrast plot shows the topics most differentially associated with each party, net of the overall topic distribution. Topics in the upper-left quadrant are distinctively BJP; those in the lower-right are distinctively INC.
+The time trend shows which parliamentary concerns have grown and which have faded across Lok Sabhas. Some infrastructure topics expand over time; some governance topics contract. The BJP-INC contrast separates them cleanly on the dimensions you would expect: BJP on infrastructure and development, INC on accountability and oversight.
 
 ---
 
-### 5. The Document Map
+### 5. Mapping the Corpus
 
-Each of the 205 party-session documents projected from the full 3,258-term TF-IDF space into 2D. Two projection methods side by side: UMAP (preserves global structure) and t-SNE (emphasises local cluster separation).
+All 205 party-session documents projected from the 3,258-term TF-IDF space down to two dimensions. UMAP on the left preserves global structure; t-SNE on the right sharpens local clusters.
 
 ::: {layout-ncol=2}
-![UMAP projection of 205 party-session documents. Each point is one party in one parliamentary session. Proximity indicates similar vocabulary. Points coloured by party.](output/figures/umap_party_session.png)
+![UMAP. Each point is one party in one session. Colour = party.](output/figures/umap_party_session.png)
 
-![t-SNE projection of the same 205 documents. t-SNE uses a different cost function that sharpens local clusters at the cost of global structure.](output/figures/tsne_party_session.png)
+![t-SNE of the same 205 documents.](output/figures/tsne_party_session.png)
 :::
 
-Both methods agree on the broad structure. BJP and INC form the two largest and most central clusters, reflecting their dominant presence across all sessions. Left parties cluster tightly together. Regional parties scatter to the periphery, consistent with their narrow, state-specific focus. The two methods differ mainly in how compressed the regional party cloud appears, with t-SNE pulling the smaller parties further apart.
+Both methods put BJP and INC at the centre as the two largest clouds. Left parties form a tight knot, which is what you would expect from parties that have a fairly consistent ideological line on what to ask about. Regional parties scatter outward, pulled by their state-specific vocabularies. The two projections agree on the broad picture but differ in how they treat the smaller parties: t-SNE stretches them further apart.
 
 ---
 
-### 6. Clustering: Which Parties Use Similar Language?
+### 6. Which Parties Sound Like Each Other
 
-Two clustering approaches applied to the same TF-IDF party vectors: hierarchical agglomerative clustering, which builds a dendrogram without requiring a prespecified number of clusters, and Gaussian mixture modelling in PCA space, which yields a soft probabilistic assignment.
+Two clustering approaches on the same TF-IDF vectors: HAC builds a tree without requiring a preset number of groups, GMM fits soft clusters in PCA space.
 
 ::: {layout-ncol=2}
-![Hierarchical clustering dendrogram. Height = cosine distance between party TF-IDF vectors. Parties that merge at low heights use very similar parliamentary language.](output/figures/hac_dendrogram.png)
+![Hierarchical dendrogram. Parties that merge at low heights have similar vocabulary.](output/figures/hac_dendrogram.png)
 
-![GMM clustering in PCA space. BIC-selected solution: 6 clusters. Points coloured by cluster assignment. Party labels indicate mean cluster position.](output/figures/gmm_pca_clusters.png)
+![GMM clustering in PCA space. Six clusters, BIC-selected.](output/figures/gmm_pca_clusters.png)
 :::
 
-The dendrogram reveals a clear structure: BJP and NDA-aligned parties (JDU, TDP) cluster together, reflecting shared government priorities. INC, SP, and BSP form a second cluster with a common welfare-oriented vocabulary. Left parties sit as a tight sub-cluster within the opposition grouping. Regional parties (TMC, DMK, AIADMK) form a separate branch.
+The dendrogram groups BJP with JDU and TDP, which both governed alongside BJP and reflect shared infrastructure priorities in their questions. INC, SP, and BSP cluster together with a shared welfare-oriented vocabulary. Left parties form their own tight sub-cluster. Regional parties (TMC, DMK) branch off separately.
 
-The GMM solution with 6 clusters roughly tracks this structure but further separates the micro-regional parties that appear in only one Lok Sabha.
-
-**Party positions in PCA-cluster space:**
-
-![Embedding clusters: party positions in the first two principal components of TF-IDF space, with GMM cluster colouring overlaid.](output/figures/embedding_clusters.png){width=80%}
+![Party positions in PCA space with GMM cluster colouring.](output/figures/embedding_clusters.png){width=80%}
 
 ---
 
-### 7. Ministry Focus: Where Each Party Directs Its Questions
+### 7. Which Ministries Get Questioned
 
-Parliamentary questions are addressed to specific ministries. The heatmap below shows each party's distribution of questions across ministries, revealing surveillance priorities.
+Questions are addressed to specific ministries. This shows where each party directs its scrutiny.
 
-![Ministry focus heatmap. Colour = share of questions directed at each ministry, by party. Reveals which policy domains each party watches most closely.](output/figures/ministry_heatmap.png){width=90%}
+![Share of questions directed at each ministry, by party.](output/figures/ministry_heatmap.png){width=90%}
 
-BJP MPs question the Ministry of Railways and Road Transport heavily, consistent with the party's infrastructure-first governance brand. INC concentrates on Finance, Home Affairs, and External Affairs, the domains of national accountability. Left parties direct disproportionate attention to Labour and Employment. Regional parties show ministry distributions that closely track their state's economic profile: DMK on Textiles and Fisheries, TDP on Agriculture.
+BJP MPs question Railways and Road Transport heavily. INC focuses on Finance, Home Affairs, and External Affairs. Left parties concentrate on Labour and Employment almost exclusively relative to their size. Regional parties mirror their states: DMK on Textiles and Fisheries, TDP on Agriculture, NCP on Rural Development.
 
 ---
 
-### 8. How Topics Have Evolved Over Time
+### 8. Topic Evolution Over Time
 
-Topic composition across parliamentary sessions, shown separately for BJP and INC to highlight how each party's agenda has shifted.
+How have the topics each party raises shifted across sessions?
 
 ::: {layout-ncol=2}
-![BJP topic evolution across sessions of the 16th and 17th Lok Sabha. Each band is one LDA topic. Width = share of that session's BJP questions attributed to the topic.](output/figures/topic_stacked_bjp.png)
+![BJP topic composition by session, 16th and 17th Lok Sabha. Each band is one topic.](output/figures/topic_stacked_bjp.png)
 
-![INC topic evolution across the same period. INC was in opposition for both the 16th and 17th Lok Sabha, which shapes what it chooses to question.](output/figures/topic_stacked_inc.png)
+![INC topic composition across the same period. INC was in opposition throughout.](output/figures/topic_stacked_inc.png)
 :::
 
-BJP's topic mix shifts noticeably between the 16th and 17th Lok Sabha, with infrastructure and agriculture topics expanding. INC's mix is more stable but shows a gradual shift toward governance and institutional accountability topics, consistent with an opposition party trying to hold government to account on process rather than policy.
+BJP's mix shifts between the 16th and 17th Lok Sabha, with infrastructure and agriculture expanding. INC's mix is more stable but tilts gradually toward governance and accountability topics. An opposition party in India has limited levers; questioning government process on Finance and Home Affairs is one of them.
 
 ---
 
-### 9. Semantic Neighbours of Key Political Terms
+### 9. What Words Live Near Each Other
 
-The word2vec embedding trained on 150K questions allows us to ask: what words appear in the most similar contexts to a given political term? The nearest neighbours reveal how concepts are linguistically entangled in Indian parliamentary discourse.
+The embedding lets you ask: what words appear in the most similar contexts to a given term? This is a rough map of how concepts cluster in parliamentary language.
 
-![Nearest neighbours in embedding space for ten politically salient seed words. Each panel shows the eight closest words by cosine similarity.](output/figures/semantic_neighbors.png){width=100%}
+![Nearest neighbours for ten political seed words. Each panel shows the eight closest by cosine similarity.](output/figures/semantic_neighbors.png){width=100%}
 
-Some findings worth noting. "Farmer" sits close to drought, MSP, irrigation, and kisan, placing it firmly in a welfare-scarcity frame rather than an entrepreneurial one. "Terrorism" clusters with border, security, and Pakistan rather than with domestic extremism terms, indicating how the term is deployed in parliamentary questioning. "Caste" is proximate to reservation, OBC, and scheduled, pointing to its institutional rather than sociological usage in Parliament. "Corruption" sits close to scam, irregularity, and vigilance, reflecting the procedural register in which MPs raise accountability concerns.
-
----
-
-### 10. Summary Panel
-
-![Combined summary panel: ideological space (top left), UMAP (top right), BJP Hindutva trajectory (bottom left), and topic evolution (bottom right).](output/figures/final_summary_panel.png){width=100%}
+A few things stand out. "Farmer" sits near drought, MSP, and irrigation. It is a scarcity and welfare word in Parliament, not an entrepreneurial one. "Terrorism" clusters with border, security, and Pakistan, which says something about how the term gets deployed in questions versus how it is discussed in civil society. "Caste" is proximate to reservation, OBC, and scheduled: institutional usage rather than sociological. "Corruption" lands near scam, irregularity, and vigilance. MPs raise it in procedural terms.
 
 ---
 
-## Reproducing the Analysis {#reproduce}
+### 10. Summary
 
-**Requirements:** R 4.3+. All packages install automatically.
+![Ideological space, document map, BJP trajectory, and topic evolution in one panel.](output/figures/final_summary_panel.png){width=100%}
+
+---
+
+## Reproducing This {#reproduce}
+
+**R 4.3+.** Everything else installs automatically.
 
 ```r
 source("code/_master.R")
 ```
 
-The master file downloads all data from HuggingFace (no account needed), installs dependencies, and runs the full pipeline A1 through A8. Total runtime is roughly 15 minutes on a modern laptop. The word2vec training step is the most compute-intensive; it is cached after the first run.
+Downloads the data, installs packages, runs A1 through A8. Takes about 15 minutes. The word2vec step is cached after the first run so re-running is fast.
 
-**Full code and data on [GitHub](https://github.com/pzaware19/lok-sabha-nlp).**
+Full code on [GitHub](https://github.com/pzaware19/lok-sabha-nlp).
 
 ---
 
