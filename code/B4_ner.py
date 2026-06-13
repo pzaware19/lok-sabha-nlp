@@ -103,16 +103,69 @@ INDIA_STATES = {
     "TAMIL NADU", "TELANGANA", "TRIPURA", "UTTAR PRADESH", "UTTARAKHAND",
     "WEST BENGAL", "DELHI", "JAMMU AND KASHMIR", "LADAKH", "PUDUCHERRY",
     "ANDAMAN AND NICOBAR", "LAKSHADWEEP", "CHANDIGARH",
-    # Abbreviations / common variants
     "UP", "MP", "AP", "HP", "J&K"
 }
 
-# Parliamentary boilerplate persons to exclude
-BOILERPLATE_PERSONS = {
+# Non-person tokens that spaCy mis-tags as PERSON
+NON_PERSON_TOKENS = INDIA_STATES | {
+    # Honorifics alone (without a name)
+    "SHRIMATI", "SHRI", "DR", "PROF", "SMT", "SH",
+    # Scheme / programme names
+    "PMAY", "PMGSY", "MGNREGS", "NREGA", "AYUSHMAN", "PRADHAN",
+    "JALDOOT", "SWACHH", "UJJWALA", "KISAN", "KISHAN",
+    # Common non-person nouns in parliament
     "MINISTER", "PRIME MINISTER", "PRESIDENT", "SPEAKER", "CHAIRMAN",
     "SECRETARY", "HONORABLE", "HON", "MEMBER", "SIR", "MADAM",
-    "THE PRIME MINISTER", "THE MINISTER"
+    "THE PRIME MINISTER", "THE MINISTER", "RAILWAYS", "STATEWISE",
+    "CONSTITUENCY", "QUESTION", "ANSWER", "GOVERNMENT", "BACKWARD CLASSES",
+    "GRAM PANCHAYATS", "COVID", "DEAN", "PATEL", "GEORGE BAKER",
+    "QUESTION NO", "DISTRIBUTION LOK SABHA STARRED",
 }
+
+_VOWELS = set("AEIOU")
+_NON_PERSON_WORDS = {
+    "STATEWISE", "RAILWAYS", "DISTRIBUTION", "BACKWARD", "GRAM", "COVID",
+    "CONSTITUENCY", "QUESTION", "PANCHAYATS", "COAL", "KENDRAS", "TRIBES",
+    "JHANSI", "KOTAGIRI", "VKSJ", "BILL", "COVID-19", "COVID19",
+    "SCHEDULED", "BHAGALPUR", "SEONI", "SITAMARHI", "KENDRIYA",
+    "VIDYALAYAS", "MAHATMA",    # Mahatma is a title, not a surname alone
+}
+
+def _is_valid_person(text_u):
+    """Return True if the entity looks like a real person name."""
+    # Devanagari / Hindi characters → garbled transliteration
+    if re.search(r'[ऀ-ॿऀ-ॿ]', text_u):
+        return False
+    # Strip to letters only for further checks
+    clean = re.sub(r'[^A-Z\s]', '', text_u).strip()
+    if len(clean) < 4:
+        return False
+    # All tokens ≤ 3 chars (initials only, no real name component)
+    tokens = clean.split()
+    if tokens and all(len(t) <= 3 for t in tokens):
+        return False
+    # Any single token is >4 chars but has <25% vowels → garbled transliteration
+    for t in tokens:
+        if len(t) > 4:
+            vowel_ratio = sum(1 for c in t if c in _VOWELS) / len(t)
+            if vowel_ratio < 0.15:   # e.g. VKSJ=0%, LKOZTFUD=12.5%
+                return False
+    # Exact match in blocklist
+    if text_u in NON_PERSON_TOKENS:
+        return False
+    # Any token matches a known non-person word
+    for tok in text_u.split():
+        if tok in INDIA_STATES or tok in _NON_PERSON_WORDS:
+            return False
+    return True
+
+def _clean_person_name(text_u):
+    """Strip leading honorific prefixes for cleaner display."""
+    for prefix in ("SHRIMATI ", "SHRI ", "DR. ", "DR ", "PROF. ", "PROF ", "SMT. ", "SMT "):
+        if text_u.startswith(prefix):
+            text_u = text_u[len(prefix):]
+    # Remove trailing colon or punctuation
+    return text_u.rstrip(":.,;")
 
 def clean_text(t):
     if pd.isna(t):
@@ -153,8 +206,8 @@ for i in range(0, len(texts), batch_size):
             if ent.label_ == "GPE":
                 gpe.append(text_u)
             elif ent.label_ == "PERSON":
-                if text_u not in BOILERPLATE_PERSONS and len(text_u) > 3:
-                    person.append(text_u)
+                if _is_valid_person(text_u):
+                    person.append(_clean_person_name(text_u))
             elif ent.label_ == "ORG":
                 if len(text_u) > 2:
                     org.append(text_u)
