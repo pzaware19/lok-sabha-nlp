@@ -71,5 +71,6 @@ source(file.path(CODDIR, "A5_stm_topics.R"))
 source(file.path(CODDIR, "A6_word_embeddings.R"))
 source(file.path(CODDIR, "A7_clustering.R"))
 source(file.path(CODDIR, "A8_visualization.R"))
+source(file.path(CODDIR, "A9_incumbency_robustness.R"))
 
 cat("\n=== Pipeline complete. Outputs in:", OUTDIR, "===\n")
