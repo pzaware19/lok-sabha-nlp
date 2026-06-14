@@ -169,6 +169,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#manifesto" id="toc-manifesto" class="nav-link" data-scroll-target="#manifesto">Manifestos vs Parliament</a></li>
   <li><a href="#discipline" id="toc-discipline" class="nav-link" data-scroll-target="#discipline">Opposition Discipline Index</a></li>
   <li><a href="#religion" id="toc-religion" class="nav-link" data-scroll-target="#religion">Religion and Parliamentary Questions</a></li>
+  <li><a href="#electoral" id="toc-electoral" class="nav-link" data-scroll-target="#electoral">Electoral Incentives: Do Margins Shape Questions?</a></li>
+  <li><a href="#idealpoints" id="toc-idealpoints" class="nav-link" data-scroll-target="#idealpoints">Ideal Points from Question Vocabulary</a></li>
   <li><a href="#gender" id="toc-gender" class="nav-link" data-scroll-target="#gender">Gender and Representation</a></li>
   <li><a href="#scst" id="toc-scst" class="nav-link" data-scroll-target="#scst">SC/ST Representation</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
@@ -1195,6 +1197,129 @@ Note
 <p>The Minority Affairs questioning rate by religion confirms the identity-representation mechanism: <strong>Muslim MPs question Minority Affairs at the highest rate</strong>, followed by Christian MPs. Sikh MPs show a relatively lower rate, consistent with Sikh political identity being more strongly channelled through Punjab-state issues (agriculture, water, Chandigarh) than through the central Minority Affairs Ministry. The Other/Hindu baseline is near zero, as expected: Minority Affairs has no natural constituency among majority-community MPs.</p>
 </div>
 </div>
+<hr>
+</section>
+</section>
+<section id="electoral" class="level2">
+<h2 class="anchored" data-anchor-id="electoral">Electoral Incentives: Do Margins Shape Questions?</h2>
+<p>The electoral connection in legislatures is one of the central mechanisms in political economy: legislators who fear losing their seat should work harder to signal effort to constituents. Starred questions are one of the few visible, public effort signals available to Indian MPs. This section links ECI election results (2014 and 2019) to question behavior to test whether the margin of victory shapes how MPs use this instrument.</p>
+<p><strong>Method:</strong> Margin of victory is computed as (winner votes - runner-up votes) / total votes cast, using the Bhavnani national election dataset (2014) and the ECI 2019 constituency-level results. MPs are classified as Marginal (margin below 10%), Competitive (10-25%), or Safe (above 25%). Merged to Lok Sabha question data by normalized constituency name.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/elec_margin_volume.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Marginal seat MPs ask fewer starred questions on average. Each point represents one margin-of-victory decile; the dashed line is the OLS fit. The upward slope confirms that electoral security, not insecurity, is associated with higher question activity.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The electoral security hypothesis predicts the opposite of what most accountability theories expect. Marginal seat MPs (average 13.2 questions in the 16th LS, 11.2 in the 17th) ask fewer starred questions than competitive (14.1 in the 16th) or safe seat MPs. This is not because safe seat MPs are more motivated: it reflects <strong>selection</strong>. Safe seats are typically won by experienced, senior politicians who have built up a legislative practice over multiple terms. Marginal seats often feature first-term MPs still learning the institution. The margin effect is partly a tenure effect.</p>
+</div>
+</div>
+<section id="what-topics-do-marginal-vs-safe-seat-mps-focus-on" class="level3">
+<h3 class="anchored" data-anchor-id="what-topics-do-marginal-vs-safe-seat-mps-focus-on">What topics do marginal vs safe seat MPs focus on?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/elec_margin_vocab.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Top words by log2 ratio: safe seat MPs vs marginal seat MPs. Positive = safe seat MPs use this word disproportionately. Negative = marginal seat MPs use it more.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The vocabulary divergence is more revealing than the volume difference. Safe seat MPs use more abstract, institutional vocabulary (finance, policy, regulation, national schemes). Marginal seat MPs show higher rates of words tied to local delivery and specific central schemes: terms connected to road, water, rural, employment, and district-level programs. This is consistent with constituent service signaling under electoral pressure: MPs whose seats are at risk shift toward visible, local deliverables rather than broad policy engagement.</p>
+</div>
+</div>
+</section>
+<section id="question-intensity-across-the-lok-sabha-cycle" class="level3">
+<h3 class="anchored" data-anchor-id="question-intensity-across-the-lok-sabha-cycle">Question intensity across the Lok Sabha cycle</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/elec_temporal_spike.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Normalised question volume by session, 16th Lok Sabha (2014-2019). Shaded area marks the final three sessions before dissolution.</figcaption>
+</figure>
+</div>
+<p>All three MP groups increase activity in pre-dissolution sessions, but the spike is sharpest for marginal seat MPs, consistent with electoral signaling intensifying as the election approaches.</p>
+</section>
+<section id="ministry-targeting-by-seat-safety" class="level3">
+<h3 class="anchored" data-anchor-id="ministry-targeting-by-seat-safety">Ministry targeting by seat safety</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/elec_safe_vs_marginal.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Percentage point difference in ministry share: safe seat MPs minus marginal seat MPs. Positive = safe MPs over-index; negative = marginal MPs over-index.</figcaption>
+</figure>
+</div>
+<p>Safe seat MPs over-index on Finance, External Affairs, and Home Affairs: ministries with national policy scope. Marginal seat MPs over-index on Rural Development, Agriculture, and Housing: ministries whose outputs are visible and attributable at the constituency level. The pattern is consistent with the distributive politics literature on targeted spending and credit-claiming under electoral competition.</p>
+<hr>
+</section>
+</section>
+<section id="idealpoints" class="level2">
+<h2 class="anchored" data-anchor-id="idealpoints">Ideal Points from Question Vocabulary</h2>
+<p>A standard approach to measuring political positions in legislatures is ideal point estimation: project legislators into a low-dimensional space where proximity means similarity in behavior. NOMINATE does this for US roll-call votes; here we apply the same logic to question vocabulary using SVD (the W3-2 matrix factorization framework). Each MP is represented by their TF-IDF word vector; truncated SVD extracts the two dimensions that explain the most cross-MP variation.</p>
+<p><strong>Method:</strong> Build a 395-MP by 3,921-word TF-IDF matrix (MPs as documents, words as features). Column-center to remove average term frequency (equivalent to mean-centering before PCA). Run truncated SVD via irlba; extract 2 components. The left singular vectors scaled by singular values give MP coordinates; right singular vectors give word loadings.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ideal_2d.png" class="img-fluid figure-img" style="width:95.0%"></p>
+<figcaption>2D ideal point scatter for 395 Indian MPs across the 16th-18th Lok Sabha. Each point is one MP; diamonds are party centroids.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The central finding is what does NOT appear: Indian MPs do not sort into a clear left-right spectrum in question vocabulary. BJP, INC, Left, and Shiv Sena centroids all cluster near the origin. TDP is the clearest outlier, displaced strongly on Dimension 2. This is the opposite of what NOMINATE finds for US Congress, where a single ideological axis explains most roll-call variation.</p>
+<p>The explanation is structural: starred questions are not party-whipped. Unlike roll-call votes, MPs face no party pressure on which topics to raise. The result is that question vocabulary variation is dominated by constituency-level agendas (which state the MP represents, which industries their constituents work in, which central schemes matter locally) rather than by party ideology. The ideal point space recovers <strong>geographic and sectoral cleavages</strong>, not ideological ones.</p>
+</div>
+</div>
+<section id="dimension-1-the-primary-axis-of-variation" class="level3">
+<h3 class="anchored" data-anchor-id="dimension-1-the-primary-axis-of-variation">Dimension 1: the primary axis of variation</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ideal_dim1_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Distribution of MP ideal points along Dimension 1, by party. Sorted by median. Overlap between parties is high.</figcaption>
+</figure>
+</div>
+<p>Dimension 1 explains the most variance but does not track party affiliation. The distributions for BJP, INC, Left, and Regional parties largely overlap. This is the key finding: the primary source of variation in what Indian MPs ask about is not which party they belong to, but who their constituents are.</p>
+</section>
+<section id="dimension-2-regional-parties-diverge" class="level3">
+<h3 class="anchored" data-anchor-id="dimension-2-regional-parties-diverge">Dimension 2: regional parties diverge</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ideal_dim2_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Distribution of MP ideal points along Dimension 2, by party.</figcaption>
+</figure>
+</div>
+<p>Dimension 2 shows more party-level structure. TDP is strongly separated (negative), consistent with TDP MPs focusing heavily on Andhra Pradesh-specific issues (Polavaram dam, Amaravati, bifurcation consequences). The Left occupies a distinct positive position, reflecting their labour and welfare vocabulary. National parties (BJP, INC) cluster at the centre, consistent with their need to cover the full range of national policy.</p>
+</section>
+<section id="what-drives-the-dimensions-word-loadings" class="level3">
+<h3 class="anchored" data-anchor-id="what-drives-the-dimensions-word-loadings">What drives the dimensions? Word loadings</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/ideal_word_loadings.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Word loadings in the 2D SVD space. Words in each quadrant define what that direction measures. Words far from origin have strong loading on both dimensions.</figcaption>
+</figure>
+</div>
+<p>The word loadings reveal the substantive content of each dimension. Words with high Dimension 2 loading tend to be state-specific or sector-specific terms that regional parties monopolise. Words near the origin are universally used parliamentary vocabulary that provides no discrimination. The loading plot confirms that Dimension 2 is the more politically interpretable axis.</p>
 <hr>
 </section>
 </section>
