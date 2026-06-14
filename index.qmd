@@ -395,35 +395,99 @@ The diagonal dominates. Within-party co-signing is an order of magnitude larger 
 
 ## Manifestos vs Parliament {#manifesto}
 
-Parties publish election manifestos full of promises. Once elected, do their MPs actually raise those topics in parliament? And does the opposition hold the ruling party accountable for its own unfulfilled promises? This section compares the vocabulary of party manifestos (2014, 2019, 2024 editions) to the starred questions their MPs raised in the corresponding Lok Sabha.
+Election manifestos are the public contract between a party and its voters. But parliament is where that contract is tested. This section asks two questions: **do parties actually raise in parliament what they promised in their manifestos?** And **does the opposition use parliament to hold the ruling party to its own commitments?**
 
-**Method:** TF-IDF cosine similarity between a party's manifesto word distribution and its MPs' starred question word distribution, for each party × Lok Sabha combination. Higher cosine = more manifesto language bleeds into parliamentary questions.
+Sixteen manifestos are compared — BJP and INC across three elections (2014, 2019, 2024), plus AIADMK, NCP, AITC, CPI(M), and DMK where data permits. For each party × Lok Sabha combination, we compute the TF-IDF cosine similarity between manifesto word frequencies and the starred question word frequencies of that party's MPs in the subsequent parliament. Higher cosine means more manifesto language actually surfaces in questions.
+
+All MP names, constituency names, and parliamentary boilerplate are stripped before the comparison to ensure we're measuring policy vocabulary, not procedural noise.
 
 ### How aligned are parties with their own manifestos?
 
-![TF-IDF cosine similarity between each party's election manifesto and its MPs' subsequent starred questions. Higher = manifesto vocabulary and question vocabulary are more similar. BJP scores are higher when it is in opposition (note the 17th LS dip) and INC shows consistent but lower alignment throughout.](output/figures/manifesto_alignment_heatmap.png){width=90%}
+![TF-IDF cosine similarity between each party's election manifesto and its MPs' subsequent starred questions in the corresponding Lok Sabha. Both parties sustain meaningful but imperfect alignment. BJP scores slightly higher than INC throughout. INC dips in the 17th LS after its second consecutive election loss.](output/figures/manifesto_alignment_heatmap.png){width=90%}
 
 ::: {.callout-note}
-BJP's 17th Lok Sabha alignment (0.096) is lower than the 16th (0.191) — a ruling party with a massive mandate in 2019 may have shifted from parliamentary questioning toward executive delivery, reducing its need to probe ministries via starred questions.
+## What the numbers mean
+
+Both parties land in the **0.18–0.24 cosine range** — meaningfully above zero (random text would score near zero) but well below 1.0 (identical vocabulary). Manifestos and questions are written in different registers for different audiences, so perfect alignment is neither expected nor desirable. The interesting signal is the variation.
+
+**BJP (0.239 → 0.225 → 0.223):** Highest in the 16th LS — the 2014 election carried the biggest mandate and the freshest manifesto agenda. The gradual drift across three terms suggests that as governance proceeds, the parliamentary agenda increasingly reflects emerging crises and administrative demands rather than original manifesto promises.
+
+**INC (0.207 → 0.183 → 0.202):** The 17th LS (2019–24) shows INC's lowest alignment. After a second consecutive landslide defeat, INC entered the 17th Lok Sabha organisationally weakened. Their questions in this period are more reactive — responding to events — than manifesto-driven. The partial recovery in the 18th LS as the INDIA alliance consolidates is visible.
+
+**The ruling party effect:** BJP consistently outscores INC by ~3–5 percentage points. A ruling party directly shapes policy implementation and can use its own MPs' questions to highlight scheme performance and progress — tightening the link between manifesto promises and parliamentary activity. The opposition's questions are partly dictated by whatever crises arise, pulling them off-manifesto.
 :::
 
 ### What did BJP promise but not question?
 
-![Orange = words prominent in BJP manifestos but largely absent from BJP MPs' starred questions. Navy = topics BJP MPs questioned that barely appear in their manifestos. The gap reveals which promises stayed on paper.](output/figures/manifesto_bjp_promise_gap.png){width=90%}
+The gap between a party's manifesto vocabulary and its parliamentary questions reveals which promises remain on paper and which get translated into legislative scrutiny.
 
-### Does the opposition hold BJP to its promises?
+![Orange bars = words prominent in BJP manifestos but relatively absent from BJP MPs' starred questions. Navy = topics BJP MPs questioned heavily that barely appear in their manifestos. The asymmetry reveals two different registers of political language.](output/figures/manifesto_bjp_promise_gap.png){width=90%}
 
-Which BJP manifesto words does INC actually pick up in parliament, and which does it ignore?
+::: {.callout-note}
+## Two registers of political language
 
-![Left panel: BJP manifesto vocabulary that INC MPs actively used in starred questions — these are the promises INC chose to hold BJP accountable for. Right panel: BJP manifesto vocabulary INC MPs largely ignored.](output/figures/manifesto_opposition_accountability.png){width=90%}
+The gap is not a failure of follow-through — it reflects a structural difference between **campaign rhetoric** and **parliamentary procedure**.
+
+**Promised but not questioned (orange):** Words like *global*, *expand*, *nation*, *governance*, *citizens*, *expanding*, *ensure* dominate the manifesto-only side. These are aspiration words — they describe a direction of travel rather than a specific policy instrument. They are effective on the campaign trail but have no natural home in a starred question, which must be concrete enough to demand a factual ministerial reply.
+
+**Questioned beyond the manifesto (navy):** *Scheme*, *funds*, *farmers*, *pradesh*, *reasons*, *department*, *projects* are almost invisible in the manifesto but dominate BJP MPs' actual questions. These are the words of governance administration — asking how many funds have been released, why a project is delayed, what the scheme eligibility criteria are. The manifesto doesn't say "scheme-wise fund release status"; it says "we will transform India." Parliament inverts this: questions are granular, evidence-demanding, and state-specific.
+
+This is a general finding that would apply to any party: manifestos operate in the language of vision, parliament operates in the language of accountability.
+:::
+
+### Does the opposition hold BJP to its own promises?
+
+If parliament functions as an accountability mechanism, INC MPs should be picking up BJP's manifesto vocabulary and asking whether the commitments have been met. The figure below shows which BJP manifesto words INC adopted and which they left alone.
+
+![Left panel: BJP manifesto words that INC MPs actively used in starred questions — these are the promises INC chose to scrutinise. Right panel: BJP manifesto words INC MPs largely did not pick up.](output/figures/manifesto_opposition_accountability.png){width=90%}
+
+::: {.callout-note}
+## INC's accountability strategy: broad but shallow
+
+INC MPs pick up **almost every major BJP manifesto word** — development, education, infrastructure, health, water, technology, employment, sector, quality — but at volumes typically 30–60% lower than BJP MPs ask about the same topics. This is consistent with a **broad monitoring strategy**: INC tracks the full manifesto agenda rather than concentrating on a small set of high-priority promises.
+
+The notable exception is *nation* — a word BJP uses 112 times across its manifestos, but which INC MPs use in zero starred questions. This is not accidental. Nation (*rashtra*) as a political concept has been rhetorically claimed by BJP as its own terrain. INC MPs avoid the word in parliamentary questions — which are factual, not ideological — where it would be impossible to contest BJP's ownership of the concept.
+
+The words INC does *not* pick up from BJP manifestos tend to be BJP-specific branding terms (*yojana* names, scheme-specific jargon) rather than substantive policy areas. INC monitors the policy; it largely ignores the packaging.
+:::
 
 ### Did BJP MPs keep questioning their 2014 agenda across three terms?
 
-![Tracking BJP's top 2014 manifesto keywords in starred questions across three Lok Sabhas. A rising line = that agenda item is gaining traction; a falling line = fading from parliamentary attention despite being a manifesto commitment.](output/figures/manifesto_bjp_drift.png){width=90%}
+The 2014 manifesto was BJP's most consequential in a generation — promising infrastructure, manufacturing, digital India, and good governance after a decade of UPA rule. How much of that original agenda survived in BJP MPs' parliamentary questions across three Lok Sabhas?
+
+![Each line tracks one of BJP's top 2014 manifesto keywords in BJP MPs' starred questions across the 16th, 17th, and 18th Lok Sabha. A rising line = gaining traction; a falling line = fading parliamentary attention.](output/figures/manifesto_bjp_drift.png){width=90%}
+
+::: {.callout-note}
+## The 2014 agenda in parliament: what stuck and what faded
+
+The trajectory reveals three types of manifesto words:
+
+**Durable anchors** — words like *development*, *farmers*, *health*, *water*, *rural* that remain consistently prominent across all three Lok Sabhas. These reflect India's structural governance challenges that no government can defer.
+
+**Rising items** — topics that gain prominence after 2014, suggesting that initial policy initiatives created new parliamentary activity around them. Infrastructure and technology show this pattern.
+
+**Fading promises** — words that were prominent in BJP's 2014 manifesto but decline in question frequency across terms. These may represent promises that were either delivered (reducing the need to question), quietly dropped, or superseded by newer priorities in the 2019 and 2024 manifestos.
+
+The overall picture is one of **gradual drift**: BJP's questions in the 18th LS resemble their 2014 manifesto significantly less than their 16th LS questions did, consistent with the alignment score decline (0.239 → 0.223).
+:::
 
 ### Manifesto vocabulary vs question vocabulary: BJP and INC side by side
 
-![Top 20 distinctive words per party per source (manifesto vs questions). Green bars appear in both the manifesto top-20 and the questions top-20 — true alignment. Grey appears in only one source.](output/figures/manifesto_top_words_comparison.png){width=100%}
+A direct comparison of the top words in each party's manifesto and questions reveals the translation loss between the two documents.
+
+![Top 20 most distinctive words per party per source. Green bars appear in both the manifesto top-20 AND the questions top-20 — genuine overlap. Grey bars appear in only one. The proportion of green reveals how much manifesto language actually bleeds into parliament.](output/figures/manifesto_top_words_comparison.png){width=100%}
+
+::: {.callout-note}
+## What both parties share — and what separates them
+
+**Shared manifesto territory:** Both BJP and INC manifestos heavily feature *development*, *national*, *education*, *women*, *infrastructure*, *security*, *policy*, *services*, *health*, *water*. The overlap is striking — Indian political parties at the national level compete on remarkably similar governance agendas.
+
+**BJP manifesto distinctives:** *Manufacturing*, *mission*, *technology*, *governance*, *global*, *tribal* — BJP's economic nationalism frame and its specific scheme branding (*yojana*, *mission*) are more prominent than in INC's manifesto.
+
+**INC manifesto distinctives:** *Promises*, *rights*, *institutions*, *scheduled*, *farmers*, *growth* — INC's language centres more on entitlements, institutional protection, and explicitly naming vulnerable groups. The word *promises* itself appears 211 times in INC manifestos across three elections — a self-referential acknowledgment of the accountability contract.
+
+**The questions register:** Both parties' questions converge on *scheme*, *funds*, *farmers*, *states*, *projects*, *welfare*, *water* — the operational vocabulary of parliamentary oversight. The ideological differences of the manifesto largely disappear in the question hall.
+:::
 
 ---
 
