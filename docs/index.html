@@ -167,6 +167,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ner" id="toc-ner" class="nav-link" data-scroll-target="#ner">Geographic Focus: Where Parties Look</a></li>
   <li><a href="#conetwork" id="toc-conetwork" class="nav-link" data-scroll-target="#conetwork">Co-Questioning Networks</a></li>
   <li><a href="#manifesto" id="toc-manifesto" class="nav-link" data-scroll-target="#manifesto">Manifestos vs Parliament</a></li>
+  <li><a href="#discipline" id="toc-discipline" class="nav-link" data-scroll-target="#discipline">Opposition Discipline Index</a></li>
+  <li><a href="#religion" id="toc-religion" class="nav-link" data-scroll-target="#religion">Religion and Parliamentary Questions</a></li>
   <li><a href="#gender" id="toc-gender" class="nav-link" data-scroll-target="#gender">Gender and Representation</a></li>
   <li><a href="#scst" id="toc-scst" class="nav-link" data-scroll-target="#scst">SC/ST Representation</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
@@ -1023,6 +1025,174 @@ Note
 <p><strong>BJP manifesto distinctives:</strong> <em>Manufacturing</em>, <em>mission</em>, <em>technology</em>, <em>governance</em>, <em>global</em>, <em>tribal</em>. BJP’s economic nationalism frame and its specific scheme branding (<em>yojana</em>, <em>mission</em>) are more prominent than in INC’s manifesto.</p>
 <p><strong>INC manifesto distinctives:</strong> <em>Promises</em>, <em>rights</em>, <em>institutions</em>, <em>scheduled</em>, <em>farmers</em>, <em>growth</em>. INC’s language centres more on entitlements, institutional protection, and explicitly naming vulnerable groups. The word <em>promises</em> itself appears 211 times in INC manifestos across three elections, a self-referential acknowledgment of the accountability contract.</p>
 <p><strong>The questions register:</strong> Both parties’ questions converge on <em>scheme</em>, <em>funds</em>, <em>farmers</em>, <em>states</em>, <em>projects</em>, <em>welfare</em>, <em>water</em>, the operational vocabulary of parliamentary oversight. The ideological differences of the manifesto largely disappear in the question hall.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="discipline" class="level2">
+<h2 class="anchored" data-anchor-id="discipline">Opposition Discipline Index</h2>
+<p>A disciplined parliamentary party speaks with one voice: its MPs ask about the same topics using similar vocabulary. An undisciplined one has MPs pulling in different directions, each following their own constituency agenda. This section quantifies that divergence.</p>
+<p><strong>Method:</strong> For each MP with at least 5 starred questions, we build a TF-IDF vector over their question vocabulary. The discipline score for a party is the average cosine similarity between each MP’s vector and the party’s centroid (pooled) vector. A score near 1 means every MP sounds the same; a score near 0 means every MP is asking about different things.</p>
+<section id="how-coordinated-is-each-party" class="level3">
+<h3 class="anchored" data-anchor-id="how-coordinated-is-each-party">How coordinated is each party?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/discipline_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Average cosine similarity of each MP’s question vocabulary to their party’s centroid. Higher = MPs converge on shared vocabulary = more coordinated questioning. Numbers in parentheses show the total MP count included.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The counterintuitive result: BJP is less disciplined than INC
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>BJP scores <strong>0.107</strong> in the 16th LS vs INC’s <strong>0.197</strong> — INC is notably more coordinated despite being in opposition. This flips the conventional narrative. The explanation is structural:</p>
+<p><strong>Why ruling parties are less disciplined:</strong> BJP sent 272–303 MPs to each Lok Sabha. With that many MPs spread across hundreds of constituencies, the party cannot enforce a single questioning agenda. Each MP has their own local infrastructure project, state scheme, or sectoral concern. The result is a wide vocabulary of questions that reduces the average similarity to any centroid.</p>
+<p><strong>Why smaller opposition parties are more disciplined:</strong> INC (44–52 eligible MPs in our data) has fewer MPs, and each MP carries a higher proportion of the party’s total questioning load. Smaller parties like Left and TDP score highest precisely because they have 5–15 MPs all focused on a narrow issue set (labour rights, Andhra Pradesh concerns).</p>
+<p><strong>Regional parties:</strong> Left, BSP, TDP, JDU all score above 0.3 — well above both national parties. These are single-issue or single-region parties where thematic focus is by design.</p>
+</div>
+</div>
+</section>
+<section id="discipline-across-three-lok-sabhas" class="level3">
+<h3 class="anchored" data-anchor-id="discipline-across-three-lok-sabhas">Discipline across three Lok Sabhas</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/discipline_heatmap.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Discipline score by party across the 16th, 17th and 18th Lok Sabha. Error bars show standard error.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>BJP’s discipline <strong>rises</strong> from 0.107 in the 16th LS to 0.161 in the 18th. The 18th Lok Sabha returned a smaller BJP cohort (240 seats vs 303 in the 17th), forcing the party to deploy fewer MPs on a similar range of questions. A smaller caucus is mechanically more coordinated.</p>
+<p>INC also rises — from 0.197 in the 16th to 0.22 in the 18th — consistent with the INDIA alliance giving INC a clearer opposition identity and reducing the reactive, event-driven questioning that depressed the 17th LS score.</p>
+</div>
+</div>
+</section>
+<section id="which-bjp-and-inc-mps-diverge-most-from-their-party" class="level3">
+<h3 class="anchored" data-anchor-id="which-bjp-and-inc-mps-diverge-most-from-their-party">Which BJP and INC MPs diverge most from their party?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/discipline_mp_scatter.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Each dot is one MP in the 16th, 17th or 18th Lok Sabha. Y-axis = cosine similarity to party centroid. MPs at the bottom have question vocabularies most different from their party’s average — driven by local/personal agendas. MPs at the top are the party’s most “on-message” questioners.</figcaption>
+</figure>
+</div>
+</section>
+<section id="bjp-vs-inc-discipline-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="bjp-vs-inc-discipline-over-time">BJP vs INC discipline over time</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/discipline_time.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Trend line of BJP and INC discipline scores across three Lok Sabhas. Note the convergence in the 18th LS as BJP’s seat count fell and INC’s alliance coordination improved.</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="religion" class="level2">
+<h2 class="anchored" data-anchor-id="religion">Religion and Parliamentary Questions</h2>
+<p>Indian parliamentary democracy has no formal religious caucus system. But if identity shapes agenda, religious minority MPs might systematically direct questions toward ministries that serve their communities. This section uses name-pattern inference to identify Muslim, Sikh, and Christian MPs and tests whether their questioning behaviour differs from the majority.</p>
+<p><strong>Method:</strong> Islamic first names (Mohammad, Abdul, Syed, Ghulam, etc.) and surnames (Ansari, Siddiqui, Qureshi, etc.) flag Muslim MPs. Punjabi first names combined with Singh/Kaur flag Sikh MPs. South Indian Christian surnames (Varghese, Mathew, Thomas, George, Sebastian, etc.) flag Christian MPs. All others are pooled as Other/Hindu. This is a lower bound: Muslim MPs without Arabic-origin names are not captured.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Coverage:</strong> 151 starred questions (1.3% of corpus) are from Muslim-identified MPs. 68 from Sikh-identified MPs, 67 from Christian-identified MPs. These are lower bounds — Muslim MPs represent roughly 5–6% of Parliament seats, so the identification rate of 1.3% reflects naming pattern limits, not the actual share.</p>
+</div>
+</div>
+<section id="do-muslim-mps-target-different-ministries" class="level3">
+<h3 class="anchored" data-anchor-id="do-muslim-mps-target-different-ministries">Do Muslim MPs target different ministries?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/religion_ministry.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Percentage point difference in ministry share: Muslim MPs minus non-Muslim MPs. Positive = Muslim MPs disproportionately question this ministry. The Minority Affairs result is the clearest signal.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Minority Affairs is the strongest signal — but it is not the whole story
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Minority Affairs</strong> is the ministry Muslim MPs disproportionately target, which is the expected finding: the ministry exists precisely to serve religious minorities and Muslim MPs use parliament to scrutinise it.</p>
+<p>What is more interesting are the secondary signals. Muslim MPs also over-index on ministries covering <strong>urban affairs, housing, labour</strong>, and <strong>education</strong> — reflecting the socioeconomic concentration of India’s Muslim population in urban centres with specific infrastructure and employment deficits.</p>
+<p>The ministry Muslim MPs <strong>question less</strong> than others reveals the political constraints on minority MPs in the current parliament. Topics like Defence and Home Affairs, which carry strong majoritarian framing, are under-represented in Muslim MPs’ question portfolios relative to their share of parliament. This is consistent with minority MPs avoiding terrain coded as politically hostile.</p>
+</div>
+</div>
+</section>
+<section id="which-parties-send-muslim-mps-to-the-question-floor" class="level3">
+<h3 class="anchored" data-anchor-id="which-parties-send-muslim-mps-to-the-question-floor">Which parties send Muslim MPs to the question floor?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/religion_party.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Share of each party’s starred questions where the primary MP is identified as Muslim. Parties are sorted by Muslim MP questioning share.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The distribution of Muslim MP questions across parties reflects both <strong>seat allocation</strong> (which parties field Muslim candidates) and <strong>question activity</strong> (how actively those MPs use starred questions). Regional parties from states with large Muslim populations — SP, RJD, AIMIM — show high shares. INC’s Muslim MP share reflects its historical Muslim voter base and the candidates it fields. BJP’s near-zero share is consistent with its candidate selection pattern across three Lok Sabhas.</p>
+</div>
+</div>
+</section>
+<section id="what-policy-vocabulary-do-muslim-mps-use-more" class="level3">
+<h3 class="anchored" data-anchor-id="what-policy-vocabulary-do-muslim-mps-use-more">What policy vocabulary do Muslim MPs use more?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/religion_vocab.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Log2 ratio of word frequencies: Muslim MPs vs all other MPs. Filtered to words appearing at least 10 times total. Positive = Muslim MPs use this word proportionally more in their questions.</figcaption>
+</figure>
+</div>
+</section>
+<section id="do-religious-minorities-disproportionately-question-the-minority-affairs-ministry" class="level3">
+<h3 class="anchored" data-anchor-id="do-religious-minorities-disproportionately-question-the-minority-affairs-ministry">Do religious minorities disproportionately question the Minority Affairs Ministry?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/religion_minority_affairs.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Percentage of each religion group’s starred questions directed at the Minority Affairs Ministry.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Minority Affairs questioning rate by religion confirms the identity-representation mechanism: <strong>Muslim MPs question Minority Affairs at the highest rate</strong>, followed by Christian MPs. Sikh MPs show a relatively lower rate, consistent with Sikh political identity being more strongly channelled through Punjab-state issues (agriculture, water, Chandigarh) than through the central Minority Affairs Ministry. The Other/Hindu baseline is near zero, as expected — Minority Affairs has no natural constituency among majority-community MPs.</p>
 </div>
 </div>
 <hr>
