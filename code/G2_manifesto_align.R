@@ -138,45 +138,34 @@ cat(sprintf("  Starred (LS 16-18, party-matched): %d questions\n", nrow(starred)
 #{
 cat("Tokenising...\n")
 
-PARLIAMENT_STOP <- c(
-  "will","minister","whether","government","please","state","details",
-  "thereof","taken","steps","also","further","said","country","india",
-  "hon","aware","regard","provide","information","thereon","proposed",
-  "members","question","starred","unstarred","lok","sabha","shri",
-  "smt","please","refer","statement","fact","reply","part","per",
-  "crore","lakh","rupees","year","years","number","total","list",
-  stopwords::stopwords("en")
-)
+# Load shared stop words + MP name blocklist (builds COMBINED_STOP)
+source(file.path(CODDIR, "._stop_words.R"))
 
 # Question word counts per (party_family, lok_no) — built first so we can
 # use the question vocabulary as a filter for manifesto words.
-# Questions come from a structured parliamentary database (no PDF OCR/hyphenation),
-# so any word appearing there is a valid English token.
 q_words <- starred %>%
   select(party_family, lok_no, question_text) %>%
   unnest_tokens(word, question_text) %>%
-  filter(!word %in% PARLIAMENT_STOP,
+  filter(!word %in% COMBINED_STOP,
          str_detect(word, "^[a-z]+$"), nchar(word) >= 5) %>%
   count(party_family, lok_no, word, name = "n_q")
 
-# Valid word set: any word that appears in questions corpus.
-# Used to filter manifesto tokens — PDF hyphenation creates fragments like
-# "commi" (commitment), "nancial" (financial), "icipation" (participation)
-# that appear in manifesto PDFs but not in structured question text.
+# Valid word set from questions corpus (structured text, no OCR artifacts).
+# Filtering manifesto tokens here removes PDF hyphenation fragments and
+# Hindi transliterations that don't appear in parliamentary question text.
 q_valid_words <- q_words %>% distinct(word) %>% pull(word)
 
 # Manifesto word counts per (party, lok_no)
-# nchar >= 5 + must appear in question corpus = removes PDF fragments
 man_words <- manifesto_raw %>%
   select(party_q, lok_no, text) %>%
   unnest_tokens(word, text) %>%
-  filter(!word %in% PARLIAMENT_STOP,
+  filter(!word %in% COMBINED_STOP,
          str_detect(word, "^[a-z]+$"), nchar(word) >= 5,
          word %in% q_valid_words) %>%
   count(party_q, lok_no, word, name = "n_man")
 
-cat(sprintf("  Manifesto vocab (after fragment filter): %d unique words\n", n_distinct(man_words$word)))
-cat(sprintf("  Question vocab:  %d unique words\n", n_distinct(q_words$word)))
+cat(sprintf("  Manifesto vocab (clean): %d unique words\n", n_distinct(man_words$word)))
+cat(sprintf("  Question vocab (clean):  %d unique words\n", n_distinct(q_words$word)))
 #}
 
 # ============================================================

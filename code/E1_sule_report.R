@@ -274,20 +274,14 @@ tfidf_corpus <- bind_rows(
     select(doc, text_c)
 )
 
-custom_stop <- c("will", "minister", "whether", "government", "please",
-                  "state", "details", "thereof", "taken", "steps",
-                  "also", "further", "said", "country", "india",
-                  "hon", "aware", "regard", "provide", "information",
-                  "thereon", "thereunder", "proposed", "considered",
-                  "members", "question", "starred", "unstarred",
-                  "lok", "sabha", "rajya", "session", "parliament",
-                  stopwords::stopwords("en"))
+# Load shared stop words + MP name blocklist (exports COMBINED_STOP)
+source(file.path(CODDIR, "._stop_words.R"))
 
 word_tfidf <- tfidf_corpus %>%
   unnest_tokens(word, text_c) %>%
-  filter(!word %in% custom_stop,
+  filter(!word %in% COMBINED_STOP,
          str_detect(word, "^[a-z]+$"),
-         nchar(word) >= 4) %>%
+         nchar(word) >= 5) %>%
   count(doc, word) %>%
   bind_tf_idf(word, doc, n) %>%
   filter(doc == "Supriya Sule") %>%
@@ -598,9 +592,9 @@ sule_by_ls <- sule %>%
 
 tfidf_by_ls <- sule_by_ls %>%
   unnest_tokens(word, text_c) %>%
-  filter(!word %in% custom_stop,
+  filter(!word %in% COMBINED_STOP,
          str_detect(word, "^[a-z]+$"),
-         nchar(word) >= 4) %>%
+         nchar(word) >= 5) %>%
   count(lok_label, word) %>%
   bind_tf_idf(word, lok_label, n) %>%
   group_by(lok_label) %>%

@@ -385,15 +385,11 @@ clean_text <- function(t) {
   str_squish(t)
 }
 
-custom_stop <- c("will","minister","whether","government","please",
-                  "state","details","thereof","taken","steps","also",
-                  "further","said","country","india","hon","aware",
-                  "regard","provide","information","thereon","proposed",
-                  "members","question","starred","unstarred","lok","sabha",
-                  stopwords::stopwords("en"))
+# Load shared stop words + MP name blocklist
+source(file.path(CODDIR, "._stop_words.R"))
 
-# Log-ratio approach: removes proper-noun inflation from the TF-IDF imbalance
-# (292 female vs 11,589 male questions → TF-IDF picks up MP names, not policy words)
+# Log-ratio approach: removes proper-noun inflation from the TF-IDF imbalance.
+# COMBINED_STOP now includes MP names so they won't appear as "distinctive".
 gender_word_counts <- starred %>%
   mutate(
     text_c = map_chr(question_text, clean_text),
@@ -401,8 +397,8 @@ gender_word_counts <- starred %>%
   ) %>%
   filter(nchar(text_c) > 30) %>%
   unnest_tokens(word, text_c) %>%
-  filter(!word %in% custom_stop,
-         str_detect(word, "^[a-z]+$"), nchar(word) >= 4) %>%
+  filter(!word %in% COMBINED_STOP,
+         str_detect(word, "^[a-z]+$"), nchar(word) >= 5) %>%
   count(doc, word)
 
 n_words_f <- sum(gender_word_counts$n[gender_word_counts$doc == "Women MPs"])
