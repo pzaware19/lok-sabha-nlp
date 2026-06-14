@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -159,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#what-does-indias-parliament-actually-talk-about" id="toc-what-does-indias-parliament-actually-talk-about" class="nav-link active" data-scroll-target="#what-does-indias-parliament-actually-talk-about">What Does India’s Parliament Actually Talk About?</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">The Data</a></li>
-  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">How It Works</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methods</a></li>
   <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Results</a></li>
   <li><a href="#bertopic" id="toc-bertopic" class="nav-link" data-scroll-target="#bertopic">BERTopic: Topics Without the Bag-of-Words Assumption</a></li>
   <li><a href="#ministry" id="toc-ministry" class="nav-link" data-scroll-target="#ministry">Ministry Targeting</a></li>
@@ -174,7 +139,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#gender" id="toc-gender" class="nav-link" data-scroll-target="#gender">Gender and Representation</a></li>
   <li><a href="#scst" id="toc-scst" class="nav-link" data-scroll-target="#scst">SC/ST Representation</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
-  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproducing This</a></li>
   <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a></li>
   </ul>
 </nav>
@@ -215,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <p>Starred questions are one of the more underused datasets in Indian political science. Every session, MPs submit written questions to ministries before the House sits. A minister has to be present to answer them. That matters, because it means parties use these questions deliberately. What is the government doing about farmer suicides? What is the status of the highway in Bihar? How many minorities were displaced? These are not speeches. They are on-the-record demands, filed by name, attached to a party.</p>
-<p>I scraped the complete archive from HuggingFace, matched MPs to their parties via Wikipedia, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.</p>
+<p>I assembled the complete archive of Lok Sabha starred questions, matched MPs to their parties, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.</p>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">The Data</h2>
 <div class="stat-row">
@@ -224,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="stat"><div class="stat-num">205</div><div class="stat-label">documents</div></div>
   <div class="stat"><div class="stat-num">3,258</div><div class="stat-label">vocabulary terms</div></div>
 </div>
-<p>The dataset is <a href="https://huggingface.co/datasets/opensansad/lok-sabha-qa"><code>opensansad/lok-sabha-qa</code></a> on HuggingFace, covering the 16th (2014–2019), 17th (2019–2024), and 18th (2024–) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.</p>
+<p>The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.</p>
 <p>Party matching came from scraping Wikipedia’s constituency lists for all three Lok Sabhas. The match rate on starred questions was 38%, which gives enough coverage for BJP, INC, and most major opposition parties to work with reliably.</p>
 <p>The unit of analysis is the <strong>party-session document</strong>: all starred questions submitted by a party in a given session, concatenated into one text. That gives 205 documents and a 3,258-term vocabulary after pruning.</p>
 <table class="caption-top table">
@@ -257,31 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </section>
 <section id="methodology" class="level2">
-<h2 class="anchored" data-anchor-id="methodology">How It Works</h2>
-<p>Everything runs from a single R script.</p>
-<pre><code>source("code/_master.R")</code></pre>
-<pre><code>Raw Questions (150K)
-       │
-  A1: Download        ← HuggingFace parquet files, no authentication
-       │
-  A2: Party Labels    ← Wikipedia scrape, MP to party lookup
-       │
-  A3: Preprocess      ← Tokenize, stem, remove boilerplate, build DTM
-       │              ← 205 party×session documents, 3,258-term vocabulary
-       │
-  ┌────┴────────────┬──────────────────┐
-  ▼                 ▼                  ▼
-A4: LDA         A5: STM           A6: Word2Vec
-K=15 topics     K=20 topics       Kozlowski (2019)
-party heatmap   + party/time      ideological dims
-                covariates
-  └────┬────────────┴──────────────────┘
-       │
-  A7: Clustering   ← HAC + GMM on TF-IDF PCA
-       │
-  A8: Visualization ← UMAP, t-SNE, stacked area, heatmaps</code></pre>
-<section id="methods" class="level3">
-<h3 class="anchored" data-anchor-id="methods">Methods</h3>
+<h2 class="anchored" data-anchor-id="methodology">Methods</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 27%">
@@ -342,7 +282,6 @@ Note
 <p>Source: <a href="https://doi.org/10.1177/0003122419877135">“The Geometry of Culture”</a>, <em>American Sociological Review</em>, 2019.</p>
 </div>
 </div>
-</section>
 </section>
 <section id="findings" class="level2">
 <h2 class="anchored" data-anchor-id="findings">Results</h2>
@@ -1421,13 +1360,6 @@ Note
 <p>Proper identification would require an instrument for coalition entry (something that predicts which parties join NDA but is uncorrelated with their vocabulary independent of incumbency) or a regression discontinuity around close elections that determine coalition composition. Neither is feasible here.</p>
 <p>The BJP trajectory finding (Hindutva score rising monotonically across three Lok Sabhas) faces the additional problem of having only three data points, and the political context changed sharply between them: the Ayodhya verdict, CAA, and Article 370 revocation all fall between the 16th and 17th LS. The text shift is real; whether it is ideological deepening or a contextual response is not identified.</p>
 </section>
-</section>
-<section id="reproduce" class="level2">
-<h2 class="anchored" data-anchor-id="reproduce">Reproducing This</h2>
-<p><strong>R 4.3+.</strong> Everything else installs automatically.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"code/_master.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Downloads the data, installs packages, runs A1 through A8. Takes about 15 minutes. The word2vec step is cached after the first run so re-running is fast.</p>
-<p>Full code on <a href="https://github.com/pzaware19/lok-sabha-nlp">GitHub</a>.</p>
 </section>
 <section id="about" class="level2">
 <h2 class="anchored" data-anchor-id="about">About</h2>

@@ -40,7 +40,7 @@ Co-questioning Network · igraph
 
 Starred questions are one of the more underused datasets in Indian political science. Every session, MPs submit written questions to ministries before the House sits. A minister has to be present to answer them. That matters, because it means parties use these questions deliberately. What is the government doing about farmer suicides? What is the status of the highway in Bihar? How many minorities were displaced? These are not speeches. They are on-the-record demands, filed by name, attached to a party.
 
-I scraped the complete archive from HuggingFace, matched MPs to their parties via Wikipedia, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.
+I assembled the complete archive of Lok Sabha starred questions, matched MPs to their parties, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.
 
 ## The Data {#data}
 
@@ -53,7 +53,7 @@ I scraped the complete archive from HuggingFace, matched MPs to their parties vi
 </div>
 ```
 
-The dataset is [`opensansad/lok-sabha-qa`](https://huggingface.co/datasets/opensansad/lok-sabha-qa) on HuggingFace, covering the 16th (2014–2019), 17th (2019–2024), and 18th (2024–) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.
+The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.
 
 Party matching came from scraping Wikipedia's constituency lists for all three Lok Sabhas. The match rate on starred questions was 38%, which gives enough coverage for BJP, INC, and most major opposition parties to work with reliably.
 
@@ -68,38 +68,8 @@ The unit of analysis is the **party-session document**: all starred questions su
 | Party-session documents | 205 |
 | Vocabulary (after pruning) | 3,258 terms |
 
-## How It Works {#methodology}
+## Methods {#methodology}
 
-Everything runs from a single R script.
-
-```
-source("code/_master.R")
-```
-
-```
-Raw Questions (150K)
-       │
-  A1: Download        ← HuggingFace parquet files, no authentication
-       │
-  A2: Party Labels    ← Wikipedia scrape, MP to party lookup
-       │
-  A3: Preprocess      ← Tokenize, stem, remove boilerplate, build DTM
-       │              ← 205 party×session documents, 3,258-term vocabulary
-       │
-  ┌────┴────────────┬──────────────────┐
-  ▼                 ▼                  ▼
-A4: LDA         A5: STM           A6: Word2Vec
-K=15 topics     K=20 topics       Kozlowski (2019)
-party heatmap   + party/time      ideological dims
-                covariates
-  └────┬────────────┴──────────────────┘
-       │
-  A7: Clustering   ← HAC + GMM on TF-IDF PCA
-       │
-  A8: Visualization ← UMAP, t-SNE, stacked area, heatmaps
-```
-
-### Methods
 
 | Method | What it does | Output |
 |--------|-------------|--------|
@@ -744,18 +714,6 @@ The main findings should be read as descriptive text differences, not identified
 Proper identification would require an instrument for coalition entry (something that predicts which parties join NDA but is uncorrelated with their vocabulary independent of incumbency) or a regression discontinuity around close elections that determine coalition composition. Neither is feasible here.
 
 The BJP trajectory finding (Hindutva score rising monotonically across three Lok Sabhas) faces the additional problem of having only three data points, and the political context changed sharply between them: the Ayodhya verdict, CAA, and Article 370 revocation all fall between the 16th and 17th LS. The text shift is real; whether it is ideological deepening or a contextual response is not identified.
-
-## Reproducing This {#reproduce}
-
-**R 4.3+.** Everything else installs automatically.
-
-```r
-source("code/_master.R")
-```
-
-Downloads the data, installs packages, runs A1 through A8. Takes about 15 minutes. The word2vec step is cached after the first run so re-running is fast.
-
-Full code on [GitHub](https://github.com/pzaware19/lok-sabha-nlp).
 
 ## About
 
