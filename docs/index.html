@@ -166,6 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sentiment" id="toc-sentiment" class="nav-link" data-scroll-target="#sentiment">Tone and Adversarialism</a></li>
   <li><a href="#ner" id="toc-ner" class="nav-link" data-scroll-target="#ner">Geographic Focus: Where Parties Look</a></li>
   <li><a href="#conetwork" id="toc-conetwork" class="nav-link" data-scroll-target="#conetwork">Co-Questioning Networks</a></li>
+  <li><a href="#manifesto" id="toc-manifesto" class="nav-link" data-scroll-target="#manifesto">Manifestos vs Parliament</a></li>
   <li><a href="#gender" id="toc-gender" class="nav-link" data-scroll-target="#gender">Gender and Representation</a></li>
   <li><a href="#scst" id="toc-scst" class="nav-link" data-scroll-target="#scst">SC/ST Representation</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
@@ -889,6 +890,71 @@ Note
 </figure>
 </div>
 <p>The diagonal dominates. Within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.</p>
+</section>
+</section>
+<section id="manifesto" class="level2">
+<h2 class="anchored" data-anchor-id="manifesto">Manifestos vs Parliament</h2>
+<p>Parties publish election manifestos full of promises. Once elected, do their MPs actually raise those topics in parliament? And does the opposition hold the ruling party accountable for its own unfulfilled promises? This section compares the vocabulary of party manifestos (2014, 2019, 2024 editions) to the starred questions their MPs raised in the corresponding Lok Sabha.</p>
+<p><strong>Method:</strong> TF-IDF cosine similarity between a party’s manifesto word distribution and its MPs’ starred question word distribution, for each party × Lok Sabha combination. Higher cosine = more manifesto language bleeds into parliamentary questions.</p>
+<section id="how-aligned-are-parties-with-their-own-manifestos" class="level3">
+<h3 class="anchored" data-anchor-id="how-aligned-are-parties-with-their-own-manifestos">How aligned are parties with their own manifestos?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/manifesto_alignment_heatmap.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>TF-IDF cosine similarity between each party’s election manifesto and its MPs’ subsequent starred questions. Higher = manifesto vocabulary and question vocabulary are more similar. BJP scores are higher when it is in opposition (note the 17th LS dip) and INC shows consistent but lower alignment throughout.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>BJP’s 17th Lok Sabha alignment (0.096) is lower than the 16th (0.191) — a ruling party with a massive mandate in 2019 may have shifted from parliamentary questioning toward executive delivery, reducing its need to probe ministries via starred questions.</p>
+</div>
+</div>
+</section>
+<section id="what-did-bjp-promise-but-not-question" class="level3">
+<h3 class="anchored" data-anchor-id="what-did-bjp-promise-but-not-question">What did BJP promise but not question?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/manifesto_bjp_promise_gap.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Orange = words prominent in BJP manifestos but largely absent from BJP MPs’ starred questions. Navy = topics BJP MPs questioned that barely appear in their manifestos. The gap reveals which promises stayed on paper.</figcaption>
+</figure>
+</div>
+</section>
+<section id="does-the-opposition-hold-bjp-to-its-promises" class="level3">
+<h3 class="anchored" data-anchor-id="does-the-opposition-hold-bjp-to-its-promises">Does the opposition hold BJP to its promises?</h3>
+<p>Which BJP manifesto words does INC actually pick up in parliament, and which does it ignore?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/manifesto_opposition_accountability.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Left panel: BJP manifesto vocabulary that INC MPs actively used in starred questions — these are the promises INC chose to hold BJP accountable for. Right panel: BJP manifesto vocabulary INC MPs largely ignored.</figcaption>
+</figure>
+</div>
+</section>
+<section id="did-bjp-mps-keep-questioning-their-2014-agenda-across-three-terms" class="level3">
+<h3 class="anchored" data-anchor-id="did-bjp-mps-keep-questioning-their-2014-agenda-across-three-terms">Did BJP MPs keep questioning their 2014 agenda across three terms?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/manifesto_bjp_drift.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Tracking BJP’s top 2014 manifesto keywords in starred questions across three Lok Sabhas. A rising line = that agenda item is gaining traction; a falling line = fading from parliamentary attention despite being a manifesto commitment.</figcaption>
+</figure>
+</div>
+</section>
+<section id="manifesto-vocabulary-vs-question-vocabulary-bjp-and-inc-side-by-side" class="level3">
+<h3 class="anchored" data-anchor-id="manifesto-vocabulary-vs-question-vocabulary-bjp-and-inc-side-by-side">Manifesto vocabulary vs question vocabulary: BJP and INC side by side</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/manifesto_top_words_comparison.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Top 20 distinctive words per party per source (manifesto vs questions). Green bars appear in both the manifesto top-20 and the questions top-20 — true alignment. Grey appears in only one source.</figcaption>
+</figure>
+</div>
+<hr>
 </section>
 </section>
 <section id="gender" class="level2">

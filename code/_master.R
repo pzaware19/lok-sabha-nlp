@@ -105,4 +105,9 @@ source(file.path(CODDIR, "E1_sule_report.R"))
 # -- F PIPELINE: Gender and SC/ST representation -----------------------------
 source(file.path(CODDIR, "F1_gender_sc.R"))
 
+# -- G PIPELINE: Manifesto vs Parliamentary Questions ------------------------
+# Run G1 (Python) first, then G2 (R)
+system(paste("python3", shQuote(file.path(CODDIR, "G1_manifesto_extract.py"))))
+source(file.path(CODDIR, "G2_manifesto_align.R"))
+
 cat("\n=== Pipeline complete. Outputs in:", OUTDIR, "===\n")

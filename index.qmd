@@ -393,6 +393,40 @@ Betweenness centrality identifies MPs who bridge otherwise disconnected clusters
 
 The diagonal dominates. Within-party co-signing is an order of magnitude larger than cross-party. Off-diagonal entries tell the coalition story: BJP-JDU and BJP-Shiv Sena are the strongest cross-party pairs. INC has almost no cross-party co-signing, consistent with its role as a standalone opposition bloc in all three Lok Sabhas.
 
+## Manifestos vs Parliament {#manifesto}
+
+Parties publish election manifestos full of promises. Once elected, do their MPs actually raise those topics in parliament? And does the opposition hold the ruling party accountable for its own unfulfilled promises? This section compares the vocabulary of party manifestos (2014, 2019, 2024 editions) to the starred questions their MPs raised in the corresponding Lok Sabha.
+
+**Method:** TF-IDF cosine similarity between a party's manifesto word distribution and its MPs' starred question word distribution, for each party × Lok Sabha combination. Higher cosine = more manifesto language bleeds into parliamentary questions.
+
+### How aligned are parties with their own manifestos?
+
+![TF-IDF cosine similarity between each party's election manifesto and its MPs' subsequent starred questions. Higher = manifesto vocabulary and question vocabulary are more similar. BJP scores are higher when it is in opposition (note the 17th LS dip) and INC shows consistent but lower alignment throughout.](output/figures/manifesto_alignment_heatmap.png){width=90%}
+
+::: {.callout-note}
+BJP's 17th Lok Sabha alignment (0.096) is lower than the 16th (0.191) — a ruling party with a massive mandate in 2019 may have shifted from parliamentary questioning toward executive delivery, reducing its need to probe ministries via starred questions.
+:::
+
+### What did BJP promise but not question?
+
+![Orange = words prominent in BJP manifestos but largely absent from BJP MPs' starred questions. Navy = topics BJP MPs questioned that barely appear in their manifestos. The gap reveals which promises stayed on paper.](output/figures/manifesto_bjp_promise_gap.png){width=90%}
+
+### Does the opposition hold BJP to its promises?
+
+Which BJP manifesto words does INC actually pick up in parliament, and which does it ignore?
+
+![Left panel: BJP manifesto vocabulary that INC MPs actively used in starred questions — these are the promises INC chose to hold BJP accountable for. Right panel: BJP manifesto vocabulary INC MPs largely ignored.](output/figures/manifesto_opposition_accountability.png){width=90%}
+
+### Did BJP MPs keep questioning their 2014 agenda across three terms?
+
+![Tracking BJP's top 2014 manifesto keywords in starred questions across three Lok Sabhas. A rising line = that agenda item is gaining traction; a falling line = fading from parliamentary attention despite being a manifesto commitment.](output/figures/manifesto_bjp_drift.png){width=90%}
+
+### Manifesto vocabulary vs question vocabulary: BJP and INC side by side
+
+![Top 20 distinctive words per party per source (manifesto vs questions). Green bars appear in both the manifesto top-20 and the questions top-20 — true alignment. Grey appears in only one source.](output/figures/manifesto_top_words_comparison.png){width=100%}
+
+---
+
 ## Gender and Representation {#gender}
 
 ```{r gender-setup, include=FALSE}
