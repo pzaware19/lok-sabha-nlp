@@ -7,8 +7,10 @@ website:
   favicon: output/figures/ideological_space.png
   navbar:
     left:
-      - text: "Findings"
+      - text: "LS Analysis"
         href: index.html#findings
+      - text: "LS vs RS"
+        href: comparison.html
       - text: "Methodology"
         href: index.html#methodology
       - text: "Code"
