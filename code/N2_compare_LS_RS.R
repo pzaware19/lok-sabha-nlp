@@ -91,35 +91,57 @@ rs_q <- read_parquet(file.path(TMPDIR, "rajyasabha_clean.parquet")) %>%
 
 cat(sprintf("  LS matched: %d | RS matched: %d\n", nrow(ls_q), nrow(rs_q)))
 
-# Question volume by party × house
+# Question volume by party × house (absolute)
 ls_vol <- ls_q %>% count(party_family, name = "n") %>% mutate(house = "Lok Sabha")
 rs_vol <- rs_q %>% count(party_family, name = "n") %>% mutate(house = "Rajya Sabha")
 
 vol <- bind_rows(ls_vol, rs_vol) %>%
   filter(party_family %in% c("BJP","INC","Left","TMC","SP","BSP","DMK","BJD",
                               "TDP","JDU","AIADMK","NCP","AAP","TRS","RJD"))
+
+# Member counts from crosswalks for per-member normalisation
+ls_mem <- cw_ls %>%
+  group_by(party_family) %>%
+  summarise(n_members = n_distinct(raw_name), .groups = "drop") %>%
+  mutate(house = "Lok Sabha")
+
+rs_mem <- cw_rs %>%
+  group_by(party_family) %>%
+  summarise(n_members = n_distinct(raw_name), .groups = "drop") %>%
+  mutate(house = "Rajya Sabha")
+
+vol_norm <- vol %>%
+  left_join(bind_rows(ls_mem, rs_mem), by = c("party_family", "house")) %>%
+  filter(!is.na(n_members), n_members >= 3) %>%
+  mutate(q_per_member = n / n_members)
 #}
 
 # =============================================================================
-# SECTION 2: Figure 1 - Question volume by party × house
+# SECTION 2: Figure 1 - Questions per member by party × house
 # =============================================================================
 #{
-cat("[N2] Figure 1: question volume by party × house...\n")
+cat("[N2] Figure 1: questions per member by party × house...\n")
 
-party_order_vol <- vol %>%
-  group_by(party_family) %>% summarise(tot = sum(n)) %>%
-  arrange(desc(tot)) %>% pull(party_family)
+key_parties_vol <- c("BJP","INC","Left","TMC","SP","BSP","DMK","TDP","JDU","NCP","AAP","RJD")
+vol_norm_filt <- vol_norm %>% filter(party_family %in% key_parties_vol)
 
-p1 <- ggplot(vol, aes(x = factor(party_family, levels = rev(party_order_vol)),
-                       y = n, fill = house)) +
+party_order_vol <- vol_norm_filt %>%
+  group_by(party_family) %>%
+  summarise(avg_qpm = mean(q_per_member, na.rm = TRUE)) %>%
+  arrange(avg_qpm) %>%
+  pull(party_family)
+
+p1 <- ggplot(vol_norm_filt,
+             aes(x = factor(party_family, levels = party_order_vol),
+                 y = q_per_member, fill = house)) +
   geom_col(position = "dodge", width = 0.7) +
   scale_fill_manual(values = c("Lok Sabha" = "#1A5276", "Rajya Sabha" = "#B7950B"),
                     name = NULL) +
   coord_flip() +
   labs(
-    title    = "Starred question volume: Lok Sabha vs Rajya Sabha",
-    subtitle = "Total matched starred questions per party, 2014-2025",
-    x = NULL, y = "Starred questions"
+    title    = "Starred questions per matched member: Lok Sabha vs Rajya Sabha",
+    subtitle = "Normalised by number of matched members per party per house, 2014-2025",
+    x = NULL, y = "Questions per matched member"
   ) +
   theme_minimal(base_size = 12) +
   theme(legend.position = "top", panel.grid.major.y = element_blank(),

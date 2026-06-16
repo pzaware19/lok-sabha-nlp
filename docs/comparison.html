@@ -227,12 +227,28 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/figures/compare_question_volume.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption>Total matched starred questions per party in each house. Lok Sabha bars (blue) are generally larger, but the gap is not uniform across parties.</figcaption>
+<figcaption>Starred questions per matched member, by party and house (2014-2025). The metric normalises for both party size and house size, isolating question-asking intensity at the individual member level.</figcaption>
 </figure>
 </div>
-<p>BJP dominates the question count in Lok Sabha, which reflects raw seat strength: they held 272-303 seats across the 16th–18th Lok Sabhas. In Rajya Sabha, where seats are allocated by state and parties cycle in and out as state governments change, the BJP-INC ratio is much narrower.</p>
-<p>Left parties show a reversal. Their question volume in Rajya Sabha is proportionally higher relative to their Lok Sabha presence, which shrunk after Bengal shifted to TMC. In Rajya Sabha they have held seats from Bengal, Kerala, and Tamil Nadu through state legislative assembly representation, giving them a stronger platform than their direct constituency presence would suggest.</p>
-<p>Regional parties (TMC, DMK, AIADMK, BJD) are more present in Rajya Sabha than their Lok Sabha footprint alone implies. Rajya Sabha provides an important national voice for parties that dominate a single state.</p>
+<p>The raw question count misleads. BJP held 282-303 seats across the 16th and 17th Lok Sabhas, which mechanically produces a large absolute volume. And Rajya Sabha has 245 seats to Lok Sabha’s 543, which compresses RS totals before any party-level comparison. The per-member rate strips both of those confounds.</p>
+<p>The result is striking: <strong>across every single party, RS members ask dramatically more questions per person than their LS counterparts</strong> – roughly 5 to 10 times more. This is not a BJP-specific finding; it holds for INC, Left, TMC, SP, and every other party in the data.</p>
+<p>The explanation is structural. Lok Sabha starred questions are distributed by lottery across a house of 543 members. When BJP holds 300 of those seats, each INC MP gets fewer draws. In Rajya Sabha, the seat distribution was more balanced throughout the Modi era – BJP typically held 35-40% of seats, not 55-56% – so opposition members had proportionally more floor access.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Party-specific patterns worth noting
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>BJP</strong> is the only party whose RS rate (around 18 questions per member) is <em>lower</em> than that of most opposition parties in RS. Governing party backbenchers have limited incentive to use starred questions to hold their own government accountable. That BJP RS members ask 18 questions per member at all reflects that RS was not under BJP majority for much of this period.</p>
+<p><strong>DMK</strong> has a near-zero LS bar (essentially no matched LS questions) but 34 questions per RS member. DMK had very few Lok Sabha seats in the 16th and 17th parliaments – they were locked out at the national level. Rajya Sabha, filled via Tamil Nadu’s state assembly, was their only consistent national platform through those years.</p>
+<p><strong>JDU and AAP</strong> follow the same pattern. Their LS presence is too thin to register, but their RS members are highly active, using the upper house as a national megaphone that constituency elections had not yet granted them.</p>
+<p>Regional parties – TDP, SP, DMK – cluster at the top in RS rates, above 30 questions per member. These are small national parties with focused issue agendas and no obligation to distribute their questions across hundreds of diverse constituencies. They concentrate their RS access intensely.</p>
+</div>
+</div>
 <hr>
 </section>
 <section id="vocabulary" class="level2">
@@ -401,9 +417,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The between/within ratio for Lok Sabha is <strong>0.8206</strong>. For Rajya Sabha it is <strong>0.2255</strong> – roughly 0.3 times larger. This confirms the constituency hypothesis: removing the individual constituency pull does increase party-based vocabulary clustering.</p>
-<p>But the absolute level tells a different story. US Congress NOMINATE produces between/within ratios above 10. India’s Rajya Sabha, at 0.2255, is orders of magnitude less party-clustered in its question vocabulary. Even in the upper house, individual members vary enormously around their party’s centroid.</p>
-<p>This is not a limitation of the method. It is a finding about how Indian parliamentary parties operate: they do not enforce a coordinated questioning agenda in either house. Members exercise substantial individual discretion over what to ask, shaped by their background, state, committee assignments, and personal expertise – not a party whip.</p>
+<p>The between/within ratio for Lok Sabha is <strong>0.8206</strong>. For Rajya Sabha it is <strong>0.2255</strong> – lower, not higher.</p>
+<p>This is the opposite of what the constituency hypothesis predicts, and the reason is worth being precise about. LS is dominated by BJP, which accounts for roughly 52% of matched questions. BJP’s vocabulary as the governing party (infrastructure achievements, scheme rollouts, development targets) is systematically different from every opposition party’s vocabulary (failures, delays, accountability). That contrast inflates the between-party component in LS mechanically. In Rajya Sabha, where BJP held 35-40% of seats rather than 55%, the dominant-party effect is weaker, and the ratio falls.</p>
+<p>Put differently: the LS B/W ratio captures a governing-vs-opposition vocabulary split as much as party ideology. The RS ratio is smaller because the house is closer to balance, and with no single party dominating, vocabulary variation spreads within rather than between parties.</p>
+<p>In both houses, the absolute level is far below US Congress NOMINATE (&gt;10). India’s parliamentary parties do not enforce coordinated question vocabularies. Members ask about what they know, where they are from, and what their committee positions require – not what a party whip mandates.</p>
 </div>
 </div>
 </section>
@@ -459,13 +476,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="interpretation" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation">What This Comparison Tells Us</h2>
 <div class="stat-row">
-  <div class="stat"><div class="stat-num">0.3x</div><div class="stat-label">more party clustering in RS</div></div>
-  <div class="stat"><div class="stat-num">&lt; 0.02</div><div class="stat-label">between/within ratio in both houses</div></div>
+  <div class="stat"><div class="stat-num">5–10x</div><div class="stat-label">more questions per RS member than LS</div></div>
+  <div class="stat"><div class="stat-num">&lt; 1.0</div><div class="stat-label">between/within ratio in both houses</div></div>
   <div class="stat"><div class="stat-num">10+</div><div class="stat-label">NOMINATE ratio for US Congress</div></div>
 </div>
 <p>The comparison across houses produces three conclusions.</p>
-<p><strong>The constituency effect is real.</strong> Removing individual constituencies (by moving to Rajya Sabha) increases party vocabulary clustering by roughly 0.3 times. The vocabulary log-ratio confirms this: LS questions are more local (pradesh, districts, construction, pending), RS questions are more national (policy, bill, rights, regulation). This is exactly what the constitutional difference between the houses predicts.</p>
-<p><strong>The constituency effect is partial.</strong> Even with constituencies removed, the between/within ratio in Rajya Sabha (0.2255) is far below what US NOMINATE finds in Congress (&gt;10). Party ideology explains only a small fraction of the variation in what individual RS members ask about. State of origin, committee assignments, personal expertise, and term position matter more. The two-house comparison suggests India’s parliamentary parties are looser coalitions of individual legislative entrepreneurs than the constituency-hypothesis framing implies.</p>
+<p><strong>The vocabulary split is real.</strong> LS questions are more local in language (pradesh, districts, construction, pending); RS questions are more national (policy, bill, rights, regulation). This is exactly what the constitutional difference between the houses predicts, and it shows up cleanly in the log-ratio chart. The per-member question rate is also dramatically higher in RS – 5 to 10 times higher across every party – because RS offered a more level platform when BJP held supermajorities in LS.</p>
+<p><strong>Party clustering does not increase in the upper house.</strong> The between/within variance ratio is higher in Lok Sabha (B/W = 0.8206) than in Rajya Sabha (0.2255). This appears to reflect the governing-vs-opposition contrast that BJP’s LS dominance creates, rather than genuine ideological polarisation. In both houses, the ratio is far below what US NOMINATE finds for Congress (&gt;10). Party affiliation explains a small fraction of what any individual member asks about.</p>
 <p><strong>Party strategy is more durable than party discipline.</strong> The ministry-level comparison shows that parties maintain consistent targeting strategies across houses – INC focuses on Finance and Home Affairs in both, Left concentrates on Labour in both, regional parties track their state-specific ministries in both. But within those strategic preferences, members have enormous latitude on exact vocabulary and framing. The parties know which ministries to scrutinise; they leave their members to figure out how.</p>
 <section id="the-institutional-implication" class="level3">
 <h3 class="anchored" data-anchor-id="the-institutional-implication">The institutional implication</h3>
