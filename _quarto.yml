@@ -11,6 +11,8 @@ website:
         href: index.html#findings
       - text: "LS vs RS"
         href: comparison.html
+      - text: "RS Analysis"
+        href: rs_analysis.html
       - text: "MP Profile"
         href: sule_report.html
       - text: "Methodology"

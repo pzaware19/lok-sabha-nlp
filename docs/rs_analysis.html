@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>sule_report – What Does India's Parliament Talk About?</title>
+<title>rs_analysis – What Does India's Parliament Talk About?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,11 +102,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">LS vs RS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./rs_analysis.html"> 
+    <a class="nav-link active" href="./rs_analysis.html" aria-current="page"> 
 <span class="menu-text">RS Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./sule_report.html" aria-current="page"> 
+    <a class="nav-link" href="./sule_report.html"> 
 <span class="menu-text">MP Profile</span></a>
   </li>  
   <li class="nav-item">
@@ -134,15 +134,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul class="collapse">
-  <li><a href="#supriya-sule-a-parliamentary-record-in-data" id="toc-supriya-sule-a-parliamentary-record-in-data" class="nav-link active" data-scroll-target="#supriya-sule-a-parliamentary-record-in-data">Supriya Sule: A Parliamentary Record in Data</a></li>
-  <li><a href="#activity" id="toc-activity" class="nav-link" data-scroll-target="#activity">Activity Profile</a></li>
+  <li><a href="#rajya-sabha-party-behaviour-in-the-upper-house" id="toc-rajya-sabha-party-behaviour-in-the-upper-house" class="nav-link active" data-scroll-target="#rajya-sabha-party-behaviour-in-the-upper-house">Rajya Sabha: Party Behaviour in the Upper House</a></li>
   <li><a href="#ministry" id="toc-ministry" class="nav-link" data-scroll-target="#ministry">Ministry Focus</a></li>
-  <li><a href="#persistence" id="toc-persistence" class="nav-link" data-scroll-target="#persistence">Persistence</a></li>
-  <li><a href="#vocabulary" id="toc-vocabulary" class="nav-link" data-scroll-target="#vocabulary">Vocabulary Fingerprint</a></li>
-  <li><a href="#sentiment" id="toc-sentiment" class="nav-link" data-scroll-target="#sentiment">Tone and Framing</a></li>
-  <li><a href="#network" id="toc-network" class="nav-link" data-scroll-target="#network">Co-Questioning Network</a></li>
-  <li><a href="#peers" id="toc-peers" class="nav-link" data-scroll-target="#peers">Maharashtra Peer Benchmark</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">What This Demonstrates</a></li>
+  <li><a href="#discipline" id="toc-discipline" class="nav-link" data-scroll-target="#discipline">Party Discipline</a></li>
+  <li><a href="#sentiment" id="toc-sentiment" class="nav-link" data-scroll-target="#sentiment">Tone and Adversarialism</a></li>
+  <li><a href="#idealpoints" id="toc-idealpoints" class="nav-link" data-scroll-target="#idealpoints">Ideal Points</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">What the Upper House Reveals</a></li>
   </ul>
 </nav>
     </div>
@@ -152,161 +149,176 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="supriya-sule-a-parliamentary-record-in-data" class="level1 hero">
-<h1>Supriya Sule: A Parliamentary Record in Data</h1>
+<section id="rajya-sabha-party-behaviour-in-the-upper-house" class="level1 hero">
+<h1>Rajya Sabha: Party Behaviour in the Upper House</h1>
 <div class="subtitle">
-<p>What does a decade in parliament look like when the data speaks? Supriya Sule (NCP-SP, Baramati, Maharashtra) has served across all three Lok Sabhas in this dataset. Running the full NLP pipeline on her 35 starred questions – and benchmarking her against every other Maharashtra MP – produces a legislative profile that is constituency-anchored, consistently agricultural, and unusual in its tone.</p>
+<p>India’s upper house is structurally different from the Lok Sabha: members represent states, not constituencies, and are elected by state legislatures rather than voters directly. If parliamentary question behaviour in the Lok Sabha is driven by constituency-service demands, the Rajya Sabha offers a natural experiment – the same parties, the same legal framework, but no constituency to service. What changes?</p>
 </div>
 <div class="meta">
 <p>Piyush Zaware</p>
 </div>
 <div class="badge-row">
 <div class="badge-item">
-<p>35 Starred Questions</p>
+<p>2,541 Matched Questions</p>
 </div>
 <div class="badge-item">
-<p>16th · 17th · 18th Lok Sabha</p>
+<p>333 Members</p>
 </div>
 <div class="badge-item">
-<p>NCP-SP · Baramati</p>
+<p>17 Party Groups</p>
 </div>
 <div class="badge-item">
-<p>TF-IDF · BERTopic · VADER · Co-network</p>
+<p>2014 – 2025</p>
 </div>
 </div>
 </section>
-<p>This is the parliament-wide analysis applied to one person. The same methods that characterise BJP’s vocabulary trajectory or Left’s labour focus can be turned on a single MP to produce a data-driven legislative record: which ministries she targets, how her focus has shifted across terms, what vocabulary is distinctively hers, where she sits in the Maharashtra peer landscape.</p>
-<p>Baramati in Pune district is industrial and agricultural – Maruti Suzuki’s plant is nearby, the sugar belt runs through it, and the seat has been held by the Pawar family since 1967. That context should show up in the data, and it does.</p>
+<p>This page applies the full Lok Sabha analysis pipeline to Rajya Sabha starred questions. The same methods – ministry targeting, party discipline, sentiment, ideal points – now run on a house where the constituency rationale for question behaviour is removed. The results reveal which patterns survive the removal of constituency pressure and which collapse.</p>
+<p>The comparison.qmd page covered the LS-vs-RS difference on a handful of metrics. This page goes deeper on each dimension for the RS alone.</p>
 <hr>
-<section id="activity" class="level2">
-<h2 class="anchored" data-anchor-id="activity">Activity Profile</h2>
-<div class="stat-row">
-  <div class="stat"><div class="stat-num">35</div><div class="stat-label">starred questions (all roles)</div></div>
-  <div class="stat"><div class="stat-num">16 / 43</div><div class="stat-label">rank among Maharashtra MPs (volume)</div></div>
-  <div class="stat"><div class="stat-num">16</div><div class="stat-label">distinct co-signatories</div></div>
-  <div class="stat"><div class="stat-num">3</div><div class="stat-label">consecutive Lok Sabhas</div></div>
-</div>
+<section id="ministry" class="level2">
+<h2 class="anchored" data-anchor-id="ministry">Ministry Focus</h2>
+<p>Which ministries do Rajya Sabha parties concentrate on, and how does that concentration differ from the parliament-wide average?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="output/figures/sule_temporal.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Starred questions by session across all three Lok Sabhas. Orange = primary questioner; grey = co-signatory. The 16th LS shows the highest sustained activity.</figcaption>
+<p><img src="output/figures/rs_ministry_heatmap.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Ministry question shares by party in Rajya Sabha. Each row is a party; each column a ministry; colour = share of that party’s starred questions going to that ministry.</figcaption>
 </figure>
 </div>
-<p>Sule is active across all three parliaments with no extended silence. The primary vs co-signatory split is roughly even in the 16th LS. In the 17th and 18th, co-signatory questions form a larger share – consistent with a smaller NCP caucus coordinating tighter around fewer primary slots after 2019 and 2024.</p>
+<p>The ministry heatmap immediately reveals regional party concentration. DMK (Tamil Nadu) and TDP (Andhra Pradesh) show narrow bands of colour – most questions go to a small number of ministries. National parties (BJP, INC) show broad horizontal colour, consistent with covering the full policy agenda.</p>
+<section id="who-targets-what-excess-over-expected" class="level3">
+<h3 class="anchored" data-anchor-id="who-targets-what-excess-over-expected">Who targets what – excess over expected</h3>
+<p>Pearson residuals show which ministry-party combinations represent genuine over-targeting after removing the mechanical effect of question volume.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/rs_ministry_excess_heatmap.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Pearson residuals (excess targeting) for RS parties × ministries. Red = over-targeted relative to the party’s question share; blue = under-targeted.</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Five things to know
+<span class="screen-reader-only">Note</span>The five strongest ministry concentrations in Rajya Sabha
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><strong>Agriculture dominates.</strong> Agriculture takes 11.5% of her questions – 5.5 percentage points above the parliament-wide average. Baramati is sugarcane country.</li>
-<li><strong>Sustained pressure.</strong> Agriculture appears across 7 distinct sessions. This is not a one-off.</li>
-<li><strong>Coordinated bloc.</strong> She co-signs as frequently as she leads – NCP questions as a team.</li>
-<li><strong>Calmer than her own party.</strong> 0% adversarial tone (VADER) vs ~17% for INC/NCP peers. She asks for data, not drama.</li>
-<li><strong>Declined over time.</strong> 47 questions in the 16th LS, 21 in the 17th, 10 in the 18th (ongoing).</li>
-</ol>
-</div>
-</div>
-<hr>
-</section>
-<section id="ministry" class="level2">
-<h2 class="anchored" data-anchor-id="ministry">Ministry Focus</h2>
-<p><strong>Agriculture leads by a substantial margin</strong> at 11.5% of her questions – roughly double the parliament-wide rate. Baramati’s sugar cooperatives, irrigation access, and MSP policy make it a constituency essential.</p>
-<p>What is absent is as informative as what is present. Defence, External Affairs, and Petroleum are conspicuously under-represented. These are ministries with limited Baramati relevance and high national-party framing. Her file is constituency-driven rather than national-policy driven.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="output/figures/sule_ministry.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Supriya Sule’s ministry targeting compared to the all-MP national average. Orange = Sule; grey = average. Agriculture leads by a substantial margin, followed by Railways, Education, and Health.</figcaption>
-</figure>
-</div>
-<section id="over--and-under-questioning" class="level3">
-<h3 class="anchored" data-anchor-id="over--and-under-questioning">Over- and under-questioning</h3>
-<p>Pearson residuals show which ministries she targets harder or softer than expected given her overall activity level – stripping out the volume effect so that concentrated bets show up clearly.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="output/figures/sule_excess.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption>Pearson residuals for Sule’s ministry targeting. Red = she over-questions this ministry relative to her question share; blue = under-questions. Captures strategic concentration, not just volume.</figcaption>
-</figure>
-</div>
-<p>Social Justice and Road Transport also show positive excess, consistent with NCP’s voter base in Maharashtra’s OBC communities and the constituency’s infrastructure needs.</p>
-</section>
-<section id="how-her-ministry-focus-shifted-across-terms" class="level3">
-<h3 class="anchored" data-anchor-id="how-her-ministry-focus-shifted-across-terms">How her ministry focus shifted across terms</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="output/figures/sule_ministry_trend.png" class="img-fluid figure-img" style="width:95.0%"></p>
-<figcaption>Ministry share per Lok Sabha. Rising lines = growing focus; falling lines = deprioritised.</figcaption>
-</figure>
-</div>
-<p>The trend reveals a consistent core (Agriculture always dominant) with tactical shifts. Education and Health questions grow in the 17th and 18th LS, consistent with NCP’s changed political position and the COVID context shaping the early 18th LS.</p>
-<hr>
-</section>
-</section>
-<section id="persistence" class="level2">
-<h2 class="anchored" data-anchor-id="persistence">Persistence</h2>
-<p>A persistent questioner returns to the same ministry across multiple sessions. Repeat questioning signals a sustained accountability campaign rather than a one-off response to a news peg.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="output/figures/sule_persistence.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Ministry persistence heatmap. Each cell = questions to that ministry in that session. Dashed lines divide Lok Sabhas. Colour across many columns = sustained pressure campaign.</figcaption>
-</figure>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Top ministries by cross-session persistence</caption>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 24%">
+<col style="width: 19%">
+<col style="width: 39%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Ministry</th>
-<th style="text-align: right;">Sessions</th>
-<th style="text-align: right;">Questions</th>
+<th>Party</th>
+<th>Ministry</th>
+<th>Excess</th>
+<th>Interpretation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Agriculture</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">9</td>
+<td>TDP</td>
+<td>Commerce &amp; Industry</td>
+<td>+3.3</td>
+<td>Andhra Pradesh’s special economic status and AP industrial zones</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Education</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">6</td>
+<td>AIADMK</td>
+<td>Coal &amp; Mines</td>
+<td>+3.2</td>
+<td>Tamil Nadu’s dependence on coal for power generation</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Railways</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">6</td>
+<td>TDP</td>
+<td>Finance</td>
+<td>+2.7</td>
+<td>Revenue sharing, bifurcation compensation claims</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Finance</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
+<td>Left</td>
+<td>Human Resources</td>
+<td>+2.4</td>
+<td>Education policy as a Left issue area</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Home Affairs</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
+<td>DMK</td>
+<td>Communications &amp; IT</td>
+<td>+2.1</td>
+<td>Chennai’s IT corridor, telecom access in rural TN</td>
+</tr>
+</tbody>
+</table>
+<p>TDP’s outsized Finance excess is the most politically legible: these questions are largely about Andhra Pradesh’s demand for the special financial package promised during the state bifurcation in 2014, which has been a live political grievance across three parliaments.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="discipline" class="level2">
+<h2 class="anchored" data-anchor-id="discipline">Party Discipline</h2>
+<p>Party discipline here measures <strong>cosine similarity of TF-IDF vectors within a party</strong>: how alike are the vocabulary profiles of individual members within the same party? High discipline = members ask about very similar things. Low discipline = individual members pursue distinct personal agendas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/rs_discipline_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Party discipline scores in Rajya Sabha. Higher = more coordinated; error bars show within-party variation.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The discipline inversion: governing parties scatter, opposition parties coordinate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The governing party pattern is striking and counterintuitive. BJP has the <strong>lowest discipline</strong> among all parties with at least 4 RS members (0.185), while DMK has the <strong>highest</strong> (0.455). The most disciplined parties – DMK, AIADMK, TDP, BJD, RJD – are all regional parties with narrow state-specific agendas.</p>
+<p>The explanation runs through the logic of party size and role. BJP’s 90 RS members cover every state and every ministry; individual members have diverse portfolios because no one needs to coordinate. A 9-member DMK bloc, by contrast, has no room for redundancy: every question slot matters, so members coordinate around a tight Tamil Nadu-centred agenda.</p>
+<p>The governing vs opposition dynamic also matters. BJP members have less incentive to use starred questions as scrutiny tools against their own government. Their low discipline reflects a wide spread of individually chosen topics rather than collective opposition strategy.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Party</th>
+<th>Members</th>
+<th>Discipline score</th>
+<th>Role in most of this period</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BJP</td>
+<td>90</td>
+<td>0.185</td>
+<td>Governing party</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Communications</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">3</td>
+<td>INC</td>
+<td>85</td>
+<td>0.201</td>
+<td>Main opposition</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Health</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">3</td>
+<td>DMK</td>
+<td>9</td>
+<td>0.455</td>
+<td>State-focused opposition</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Road Transport</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">3</td>
+<td>Left</td>
+<td>22</td>
+<td>0.262</td>
+<td>Ideological opposition</td>
+</tr>
+<tr class="odd">
+<td>YSRCP</td>
+<td>4</td>
+<td>0.616</td>
+<td>State party</td>
 </tr>
 </tbody>
 </table>
@@ -314,70 +326,73 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 </section>
-<section id="vocabulary" class="level2">
-<h2 class="anchored" data-anchor-id="vocabulary">Vocabulary Fingerprint</h2>
-<p>Words most distinctive to Sule’s questions relative to all other MPs, scored by TF-IDF excess. These are the terms that appear disproportionately more in her questions than in the parliament-wide average.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="output/figures/sule_tfidf.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption>Words most distinctive to Sule’s questions by TF-IDF excess score. Higher bar = more distinctive to her.</figcaption>
-</figure>
-</div>
-<p><strong>Suzuki</strong> at the top reflects Maruti Suzuki’s Pune-area manufacturing presence – Sule questions industrial policy affecting the automotive sector that employs many Baramati-adjacent workers. <strong>DFCC</strong> (Dedicated Freight Corridor Corporation) appears because the Western DFCC corridor runs through Maharashtra. The legal and procedural vocabulary – <strong>reclassification</strong>, <strong>compliances</strong>, <strong>questionnaire</strong> – reflects a pattern of follow-up questions: Sule tracks policy implementation rather than making first-principles speeches.</p>
-<section id="topic-evolution-across-terms" class="level3">
-<h3 class="anchored" data-anchor-id="topic-evolution-across-terms">Topic evolution across terms</h3>
-<p>Which words are distinctive to the 16th LS, which to the 17th, which to the 18th? TF-IDF run within each Lok Sabha separately reveals agenda shifts.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="output/figures/sule_topic_evolution.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Top words distinguishing each Lok Sabha period from the others. A word appearing only in one term entered or left her agenda mid-career.</figcaption>
-</figure>
-</div>
-<hr>
-</section>
-</section>
 <section id="sentiment" class="level2">
-<h2 class="anchored" data-anchor-id="sentiment">Tone and Framing</h2>
-<p>Does she ask questions aggressively or neutrally? VADER sentiment scores each question’s language.</p>
+<h2 class="anchored" data-anchor-id="sentiment">Tone and Adversarialism</h2>
+<p>VADER sentiment scores each question title for emotional valence. Questions scoring below -0.05 on the compound scale are classified adversarial – they frame the question in critical or accusatory terms rather than neutral or aspirational terms.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="output/figures/sule_sentiment.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption>VADER sentiment distribution for Sule’s questions (orange) compared to NCP/INC peers (navy). Further right = more neutral or positive framing.</figcaption>
+<p><img src="output/figures/rs_sentiment_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Party adversarialism rates in Rajya Sabha. Higher = more critical/accusatory framing in starred question titles.</figcaption>
 </figure>
 </div>
-<p>Sule’s tone sits towards the neutral-to-positive end of the VADER distribution. Her questions lean aspirational (“what schemes has the government launched”, “what is the status of”) rather than adversarial (“why has the government failed”, “is the minister aware of the disaster”). <strong>0% adversarial rate</strong> (VADER compound below -0.05) vs ~17% for NCP/INC peers. She asks for facts, not fights – unusual for an opposition MP across three full terms.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The adversarialism spectrum
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>AIADMK at 45.1% adversarial and AAP at 73.3% bracket the entire range. AAP, despite having only 3 RS members, uses starred questions almost entirely as attack instruments. The Left at 70.1% follows a consistent ideological strategy of framing economic and labour questions in terms of failure and harm.</p>
+<p>BJP at 52.9% is in the middle of the distribution – higher than expected for a governing party. This reflects two dynamics: (1) BJP was not always in a RS majority during this period (they crossed 50% only around 2022-23), so many BJP RS questions are from a period of relative weakness; (2) BJP members who are not in the governing coalition at the state level also use questions adversarially against state-level INC governments.</p>
+<p>INC at 58.3% is more adversarial than BJP but less than Left or AAP – consistent with a broad national opposition that covers both attack-mode and constituency-service questions.</p>
+<p>The regional parties cluster in a middle band (47-54%), with the notable exception of JDU at 68.4%. JDU’s elevated adversarialism largely predates their return to the NDA coalition in 2022; their question register reflects their period as opposition.</p>
+</div>
+</div>
 <hr>
 </section>
-<section id="network" class="level2">
-<h2 class="anchored" data-anchor-id="network">Co-Questioning Network</h2>
+<section id="idealpoints" class="level2">
+<h2 class="anchored" data-anchor-id="idealpoints">Ideal Points</h2>
+<p>The same truncated SVD pipeline used for Lok Sabha ideal points runs on the RS question corpus. Each member is represented by their TF-IDF word vector; truncated SVD extracts the two dimensions of maximum cross-member variation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="output/figures/sule_cosignatories.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption>Sule’s co-signatory network within Maharashtra MPs. Node size = total co-signed questions; edge thickness = co-signed questions together.</figcaption>
+<p><img src="output/figures/rs_ideal_2d.png" class="img-fluid figure-img" style="width:95.0%"></p>
+<figcaption>2D ideal point scatter for 264 Rajya Sabha members. Diamonds are party centroids. BJP and INC centroids are visibly separated – more so than in the Lok Sabha scatter.</figcaption>
 </figure>
 </div>
-<p>Sule’s co-questioning network is dense and NCP-internal. She co-signs primarily with fellow NCP MPs. The network structure reflects NCP’s intra-party coordination: Sule is embedded within her party’s questioning bloc rather than serving as a cross-party bridge.</p>
-<hr>
-</section>
-<section id="peers" class="level2">
-<h2 class="anchored" data-anchor-id="peers">Maharashtra Peer Benchmark</h2>
-<p>How does she compare to all other matched Maharashtra MPs on four dimensions?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="output/figures/sule_peer_benchmark.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Sule ranked against all matched Maharashtra MPs. Orange star = Sule. Four metrics: starred questions (primary), ministry HHI (focus), co-signatory reach, adversarialism rate.</figcaption>
+<p><img src="output/figures/rs_dim1_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Party distributions along the primary SVD dimension. Wider separation between party distributions than in the Lok Sabha equivalent, but still substantial overlap within each party.</figcaption>
 </figure>
 </div>
-<p>The benchmark places Sule at rank 16 of 43 Maharashtra MPs on raw question volume – middle of the distribution. Her ministry HHI sits above median (more concentrated than average), her co-signatory reach is moderate, and she is among the least adversarial Maharashtra MPs on sentiment.</p>
-<p>The three peers who out-question her most are all BJP Maharashtra MPs with large caucuses behind them. That Sule matches mid-table in volume despite a smaller party presence is itself informative.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What changes when you remove constituency variation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Lok Sabha, party centroids on Dimension 1 are nearly coincident – BJP and INC overlap substantially. The LS analysis attributed this to constituency-service demands drowning out party-ideological signals: MPs from agrarian districts all ask similar questions regardless of party.</p>
+<p>In Rajya Sabha, the BJP centroid (0.00552) and INC centroid (-0.00206) are further apart. The normalised BJP-INC spread on Dim1 is roughly 8x larger in RS than LS. Removing individual constituency variation does expose a party-vocabulary signal.</p>
+<p>But within-party variance still dominates. The between-party variance is about 2% of the within-party variance (B/W ratio = 0.018). Even without constituency pressure, individual RS members vary enormously around their party’s centroid. Indian parliamentary questions – in either house – do not sort cleanly by party the way US roll-call votes do in NOMINATE.</p>
+<p>The RS is not a party-whipped legislature for starred questions. Members follow their own judgment, shaped by background, state, seniority, and committee assignments.</p>
+</div>
+</div>
 <hr>
 </section>
 <section id="interpretation" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation">What This Demonstrates</h2>
-<p>Running the parliament-wide methodology on a single MP produces a documentary record that captures what a legislative career looks like from the text up.</p>
-<p><strong>What comes through clearly:</strong> Baramati’s economic character – sugar, automotive manufacturing, freight infrastructure – appears directly in the vocabulary fingerprint and ministry targets. You do not need prior knowledge of Baramati’s geography to read the data; the data reconstructs it.</p>
-<p><strong>What stays hidden:</strong> National political positioning. Sule’s questions are constituency-centric. In the parliament-wide embedding space she does not appear as an ideologically distinctive outlier; she clusters near the NCP centre of mass. The constituency-service signal overwhelms the national political signal in her starred questions.</p>
-<p><strong>The broader implication:</strong> A tool that generates this profile automatically – for any MP, any constituency – is a data-driven legislative intelligence product. The questions an MP has asked, where they concentrated, what vocabulary distinguishes them, how they compare to peers: all of it is extractable from the text, at scale, without manual analysis.</p>
+<h2 class="anchored" data-anchor-id="interpretation">What the Upper House Reveals</h2>
+<p>Three structural patterns emerge from running the full pipeline on Rajya Sabha:</p>
+<p><strong>1. Regional parties are the most legible.</strong> DMK, TDP, AIADMK, BJD all show tight ministry concentration, high discipline, and clear Dimension 1 separation from national parties. Their RS delegations pursue a narrow agenda anchored to state-specific grievances. The starred question is a coordination mechanism for these parties, not an individual portfolio tool.</p>
+<p><strong>2. BJP’s RS behaviour reflects its governing position.</strong> Low discipline, mid-range adversarialism, wide ministry spread – these are the patterns of a large governing party whose members have diverse individual portfolios and limited collective incentive to use questions as opposition tools. When BJP was weaker in RS (pre-2022), its adversarialism was higher. The data captures that transition.</p>
+<p><strong>3. The constituency effect is real but incomplete.</strong> Removing constituency variation (by moving to RS) does increase party separation in vocabulary space. But the increase is modest – within-party variance still dwarfs between-party variance. Indian parliamentary questions, in both houses, are primarily an individual instrument. The party whip does not reach them.</p>
+<p>These patterns hold implications for anyone building MP intelligence tools: the strongest predictors of what a Rajya Sabha member asks about are their state, their seniority, and their committee portfolio – not their party manifesto.</p>
 <hr>
 <div style="font-size: 0.8rem; color: #888; margin-top: 3rem; border-top: 1px solid #E8DDD0; padding-top: 1rem;">
 <p>Piyush Zaware · University of Chicago</p>
