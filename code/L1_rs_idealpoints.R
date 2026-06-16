@@ -71,77 +71,18 @@ cat("  Year range:", min(rs_raw$year), "-", max(rs_raw$year), "\n")
 #}
 
 # =============================================================================
-# SECTION 2: Name normalization and party matching
+# SECTION 2: Party matching via RS crosswalk
 # =============================================================================
 #{
-cat("[L1] Matching RS members to parties...\n")
+cat("[L1] Matching RS members to parties via crosswalk...\n")
 
-# Normalize names: remove honorifics, collapse spaces, uppercase
-strip_hon_rs <- function(s) {
-  s <- str_to_upper(str_squish(replace_na(s, "")))
-  s <- str_remove_all(s, "\\b(SHRI|SHRIMATI|SMT\\.?|DR\\.?|PROF\\.?|MR\\.?|MRS\\.?|MS\\.?|SH\\.?|LATE)\\b")
-  str_squish(s)
-}
+rs_crosswalk <- read_csv(file.path(INPDIR, "rs_name_crosswalk.csv"),
+                         show_col_types = FALSE)
 
 rs_raw <- rs_raw %>%
-  mutate(name_norm = strip_hon_rs(name))
-
-# Load party lookup
-party_lookup <- read_csv(file.path(INPDIR, "rs_party_lookup.csv"),
-                         show_col_types = FALSE) %>%
-  mutate(
-    name_norm = strip_hon_rs(name),
-    party_family = case_when(
-      party %in% c("BJP")                        ~ "BJP",
-      party %in% c("INC")                        ~ "INC",
-      party %in% c("Left")                       ~ "Left",
-      party %in% c("TMC","AITC")                 ~ "TMC",
-      party %in% c("SP")                         ~ "SP",
-      party %in% c("BSP")                        ~ "BSP",
-      party %in% c("JDU","JD(U)")                ~ "JDU",
-      party %in% c("DMK")                        ~ "DMK",
-      party %in% c("BJD")                        ~ "BJD",
-      party %in% c("TDP")                        ~ "TDP",
-      party %in% c("TRS","BRS")                  ~ "TRS",
-      party %in% c("RJD")                        ~ "RJD",
-      party %in% c("AIADMK")                     ~ "AIADMK",
-      party %in% c("NCP")                        ~ "NCP",
-      party %in% c("YSRCP","YSR")                ~ "YSRCP",
-      party %in% c("AAP")                        ~ "AAP",
-      TRUE                                        ~ "Other"
-    )
-  ) %>%
-  arrange(desc(elected_year)) %>%
-  distinct(name_norm, .keep_all = TRUE)
-
-mp_party_rs <- setNames(party_lookup$party_family, party_lookup$name_norm)
-
-# Fuzzy match: for each RS question, try exact match then token overlap
-fuzzy_party <- function(name, lookup_names, lookup_parties, thresh = 0.5) {
-  if (name %in% lookup_names) return(lookup_parties[name])
-  tokens <- str_split(name, "\\s+")[[1]]
-  best_score <- 0; best_party <- NA_character_
-  for (i in seq_along(lookup_names)) {
-    lt <- str_split(lookup_names[i], "\\s+")[[1]]
-    score <- length(intersect(tokens, lt)) / max(length(union(tokens, lt)), 1)
-    if (score > best_score) { best_score <- score; best_party <- lookup_parties[i] }
-  }
-  if (best_score >= thresh) best_party else NA_character_
-}
-
-lookup_names   <- names(mp_party_rs)
-lookup_parties <- unname(mp_party_rs)
-
-rs_raw <- rs_raw %>%
-  mutate(
-    party_family = mp_party_rs[name_norm],
-    party_family = if_else(
-      is.na(party_family),
-      vapply(name_norm, fuzzy_party, character(1),
-             lookup_names = lookup_names, lookup_parties = lookup_parties),
-      party_family
-    )
-  )
+  mutate(raw_name = str_squish(replace_na(as.character(name), ""))) %>%
+  left_join(rs_crosswalk %>% select(raw_name, party_family),
+            by = "raw_name")
 
 matched <- mean(!is.na(rs_raw$party_family))
 cat(sprintf("  Party match rate: %.1f%%\n", matched * 100))
@@ -160,11 +101,11 @@ starred_rs <- rs_raw %>% filter(!is.na(party_family))
 
 # Members with enough questions
 member_q_counts <- starred_rs %>%
-  count(name_norm, name = "n_q") %>%
+  count(raw_name, name = "n_q") %>%
   filter(n_q >= MIN_Q)
 
 tokens_rs <- starred_rs %>%
-  semi_join(member_q_counts, by = "name_norm") %>%
+  semi_join(member_q_counts, by = "raw_name") %>%
   unnest_tokens(word, english) %>%
   filter(
     !word %in% COMBINED_STOP,
@@ -172,18 +113,18 @@ tokens_rs <- starred_rs %>%
   )
 
 word_doc_freq <- tokens_rs %>%
-  distinct(name_norm, word) %>%
+  distinct(raw_name, word) %>%
   count(word) %>%
   filter(n >= MIN_WORD_DOCS)
 
 tokens_rs <- tokens_rs %>% filter(word %in% word_doc_freq$word)
 
 cat(sprintf("  Vocabulary: %d words | Members: %d\n",
-            nrow(word_doc_freq), n_distinct(tokens_rs$name_norm)))
+            nrow(word_doc_freq), n_distinct(tokens_rs$raw_name)))
 
 tfidf_rs <- tokens_rs %>%
-  count(name_norm, word) %>%
-  bind_tf_idf(word, name_norm, n)
+  count(raw_name, word) %>%
+  bind_tf_idf(word, raw_name, n)
 #}
 
 # =============================================================================
@@ -192,11 +133,11 @@ tfidf_rs <- tokens_rs %>%
 #{
 cat("[L1] Running SVD...\n")
 
-mp_idx   <- tfidf_rs %>% distinct(name_norm) %>% mutate(i = row_number())
+mp_idx   <- tfidf_rs %>% distinct(raw_name) %>% mutate(i = row_number())
 word_idx <- tfidf_rs %>% distinct(word)      %>% mutate(j = row_number())
 
 mat_df <- tfidf_rs %>%
-  left_join(mp_idx,   by = "name_norm") %>%
+  left_join(mp_idx,   by = "raw_name") %>%
   left_join(word_idx, by = "word")
 
 M <- sparseMatrix(
@@ -204,7 +145,7 @@ M <- sparseMatrix(
   j    = mat_df$j,
   x    = mat_df$tf_idf,
   dims = c(nrow(mp_idx), nrow(word_idx)),
-  dimnames = list(mp_idx$name_norm, word_idx$word)
+  dimnames = list(mp_idx$raw_name, word_idx$word)
 )
 
 cat(sprintf("  Matrix: %d members x %d words\n", nrow(M), ncol(M)))
@@ -220,18 +161,18 @@ cat(sprintf("  Variance: D1=%.1f%%  D2=%.1f%%  D3=%.1f%%\n",
             var_expl[1]*100, var_expl[2]*100, var_expl[3]*100))
 
 rs_coords <- tibble(
-  name_norm = rownames(M),
+  raw_name = rownames(M),
   dim1 = svd_rs$u[,1] * svd_rs$d[1],
   dim2 = svd_rs$u[,2] * svd_rs$d[2]
 )
 
 # Attach party
 mp_party_tbl_rs <- starred_rs %>%
-  distinct(name_norm, party_family) %>%
-  group_by(name_norm) %>% slice(1) %>% ungroup()
+  distinct(raw_name, party_family) %>%
+  group_by(raw_name) %>% slice(1) %>% ungroup()
 
 rs_ideal <- rs_coords %>%
-  left_join(mp_party_tbl_rs, by = "name_norm") %>%
+  left_join(mp_party_tbl_rs, by = "raw_name") %>%
   mutate(party_family = replace_na(party_family, "Other"))
 
 rs_centroids <- rs_ideal %>%
@@ -415,7 +356,7 @@ if (file.exists(ls_centroids_path)) {
 #{
 cat("\n========== KEY STATS FOR ARTICLE ==========\n")
 cat("RS members in analysis:", nrow(rs_ideal), "\n")
-cat("Questions analysed:", nrow(starred_rs %>% semi_join(member_q_counts, by='name_norm')), "\n\n")
+cat("Questions analysed:", nrow(starred_rs %>% semi_join(member_q_counts, by='raw_name')), "\n\n")
 
 # Within-party variance vs between-party variance
 big_parties_stats <- rs_ideal %>% filter(party_family %in% big_parties_rs)

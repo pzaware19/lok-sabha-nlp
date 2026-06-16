@@ -86,50 +86,31 @@ n_female <- sum(starred$is_female, na.rm = TRUE)
 cat(sprintf("  Female MP questions (honorific): %d (%.1f%%)\n",
             n_female, 100 * n_female / nrow(starred)))
 
-# ── Load party lookup ───────────────────────────────────────────────────────
-lookup <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"),
-                   show_col_types = FALSE) %>%
-  mutate(mp_key = str_to_upper(str_squish(mp_name)))
+# ── Load crosswalk + constituency attributes ─────────────────────────────────
+crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"),
+                      show_col_types = FALSE)
 
-# Strip honorifics for matching
-strip_honorific <- function(s) {
-  s <- str_to_upper(str_squish(s))
-  s <- str_remove_all(s, "\\b(SHRIMATI|SMT\\.?|KUMARI|MRS\\.?|MS\\.?|DR\\.?|PROF\\.?|SH\\.?|SHRI\\.?)\\b")
-  str_squish(s)
-}
-norm_fl <- function(s) {
-  parts <- str_split(str_squish(s), "\\s+")[[1]]
-  if (length(parts) <= 2) return(s)
-  paste(parts[1], parts[length(parts)])
-}
-
-lookup <- lookup %>%
+lookup_attrs <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"),
+                         show_col_types = FALSE) %>%
   mutate(
-    mp_key_stripped = vapply(mp_key, strip_honorific, character(1)),
-    mp_key_norm     = vapply(mp_key_stripped, norm_fl, character(1)),
-    sc = str_detect(constituency, regex("\\(SC\\)", ignore_case = TRUE)),
-    st = str_detect(constituency, regex("\\(ST\\)", ignore_case = TRUE))
+    sc = str_detect(replace_na(constituency, ""), regex("\\(SC\\)", ignore_case = TRUE)),
+    st = str_detect(replace_na(constituency, ""), regex("\\(ST\\)", ignore_case = TRUE))
   ) %>%
-  arrange(desc(lok_no)) %>%
-  distinct(mp_key_norm, .keep_all = TRUE)
+  select(mp_name, constituency, sc, st) %>%
+  distinct(mp_name, .keep_all = TRUE)
 
-mp_to_party <- setNames(lookup$party_family, lookup$mp_key_norm)
-mp_to_sc    <- setNames(lookup$sc, lookup$mp_key_norm)
-mp_to_st    <- setNames(lookup$st, lookup$mp_key_norm)
-mp_to_const <- setNames(lookup$constituency, lookup$mp_key_norm)
+cat(sprintf("  SC constituencies: %d MPs\n", sum(lookup_attrs$sc, na.rm=TRUE)))
+cat(sprintf("  ST constituencies: %d MPs\n", sum(lookup_attrs$st, na.rm=TRUE)))
 
-cat(sprintf("  SC constituencies: %d MPs\n", sum(lookup$sc, na.rm=TRUE)))
-cat(sprintf("  ST constituencies: %d MPs\n", sum(lookup$st, na.rm=TRUE)))
-
-# Match starred → party / SC / ST
+# Match starred → party / SC / ST via crosswalk + lookup join
 starred <- starred %>%
+  left_join(crosswalk %>% select(raw_name, lok_no, party_family, matched_mp_name),
+            by = c("primary_raw" = "raw_name", "lok_no")) %>%
+  left_join(lookup_attrs, by = c("matched_mp_name" = "mp_name")) %>%
   mutate(
-    primary_stripped = vapply(primary_raw, strip_honorific, character(1)),
-    primary_norm     = vapply(primary_stripped, norm_fl, character(1)),
-    party_family     = mp_to_party[primary_norm],
-    is_sc            = coalesce(mp_to_sc[primary_norm], FALSE),
-    is_st            = coalesce(mp_to_st[primary_norm], FALSE),
-    seat_type        = case_when(
+    is_sc     = coalesce(sc, FALSE),
+    is_st     = coalesce(st, FALSE),
+    seat_type = case_when(
       is_sc ~ "SC Reserved",
       is_st ~ "ST Reserved",
       TRUE  ~ "General"

@@ -46,6 +46,14 @@ suppressPackageStartupMessages({
   library(ggrepel)
 })
 
+if (!exists("OUTDIR")) {
+  root   <- "/Users/piyushzaware/Documents/Unsupervised ML/Lok_Sabha_Questions"
+  INPDIR <- file.path(root, "input")
+  CODDIR <- file.path(root, "code")
+  OUTDIR <- file.path(root, "output")
+  TMPDIR <- file.path(root, "tmp")
+}
+
 FIGDIR <- file.path(OUTDIR, "figures")
 TABDIR <- file.path(OUTDIR, "tables")
 
@@ -113,16 +121,20 @@ cat("  Unique MP pairs:", n_distinct(paste(edge_rows$mp1, edge_rows$mp2)), "\n")
 # ============================================================
 #{
 
-mp_lookup <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"),
+crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"),
                       show_col_types = FALSE) %>%
-  mutate(mp_key = str_to_upper(str_squish(mp_name))) %>%
-  select(mp_key, party_family, constituency, lok_no) %>%
-  # If an MP appears in multiple Lok Sabhas keep most recent
+  mutate(raw_upper = str_to_upper(raw_name)) %>%
   arrange(desc(lok_no)) %>%
-  distinct(mp_key, .keep_all = TRUE)
+  distinct(raw_upper, .keep_all = TRUE)
 
-mp_to_party       <- setNames(mp_lookup$party_family, mp_lookup$mp_key)
-mp_to_constituency <- setNames(mp_lookup$constituency,  mp_lookup$mp_key)
+lookup_const <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"),
+                         show_col_types = FALSE) %>%
+  distinct(mp_name, constituency) %>%
+  deframe()
+
+mp_to_party        <- setNames(crosswalk$party_family, crosswalk$raw_upper)
+mp_to_constituency <- setNames(
+  lookup_const[crosswalk$matched_mp_name], crosswalk$raw_upper)
 
 edges <- edge_rows %>%
   mutate(

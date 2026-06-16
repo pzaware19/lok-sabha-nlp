@@ -44,6 +44,14 @@ suppressPackageStartupMessages({
   library(ggrepel)
 })
 
+if (!exists("OUTDIR")) {
+  root   <- "/Users/piyushzaware/Documents/Unsupervised ML/Lok_Sabha_Questions"
+  INPDIR <- file.path(root, "input")
+  CODDIR <- file.path(root, "code")
+  OUTDIR <- file.path(root, "output")
+  TMPDIR <- file.path(root, "tmp")
+}
+
 FIGDIR <- file.path(OUTDIR, "figures")
 TABDIR <- file.path(OUTDIR, "tables")
 
@@ -64,26 +72,16 @@ cat("  Total rows:", nrow(raw), "\n")
 starred <- raw %>% filter(type == "STARRED")
 cat("  Starred questions:", nrow(starred), "\n")
 
-# Load MP → party mapping
-mp_meta <- read_csv(file.path(TMPDIR, "doc_meta_mp.csv"), show_col_types = FALSE)
+crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"),
+                      show_col_types = FALSE)
 
-# Normalize names for matching
-norm_name <- function(x) str_squish(str_to_upper(str_trim(x)))
-
-# members is a list column (multiple MPs per question) — extract first element
 starred <- starred %>%
   mutate(
-    primary_member = norm_name(sapply(members, function(x) x[[1]]))
-  )
-
-# Build lookup: doc_mp is already uppercase in doc_meta_mp.csv
-mp_lookup <- mp_meta %>%
-  mutate(key = norm_name(doc_mp)) %>%
-  select(key, party_family) %>%
-  distinct()
-
-starred <- starred %>%
-  left_join(mp_lookup, by = c("primary_member" = "key"))
+    primary_member = map_chr(members, function(x)
+      tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_))
+  ) %>%
+  left_join(crosswalk %>% select(raw_name, lok_no, party_family),
+            by = c("primary_member" = "raw_name", "lok_no"))
 
 matched <- starred %>% filter(!is.na(party_family))
 cat("  Matched to party:", nrow(matched),

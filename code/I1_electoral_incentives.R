@@ -119,23 +119,9 @@ cat("  2019:", nrow(e19_margins), "constituencies\n")
 #{
 cat("[I1] Merging margins with MP lookup...\n")
 
-strip_hon <- function(s) {
-  s <- str_to_upper(str_squish(s))
-  str_remove_all(s,
-    "\\b(SHRIMATI|SMT\\.?|KUMARI|MRS\\.?|MS\\.?|DR\\.?|PROF\\.?|SH\\.?|SHRI\\.?)\\b")
-}
-norm_fl <- function(s) {
-  parts <- str_split(str_squish(s), "\\s+")[[1]]
-  if (length(parts) <= 2) return(s)
-  paste(parts[1], parts[length(parts)])
-}
-
 lookup <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"),
                    show_col_types = FALSE) %>%
   mutate(
-    mp_norm = vapply(vapply(str_to_upper(str_squish(mp_name)),
-                            strip_hon, character(1)),
-                     norm_fl, character(1)),
     constituency_norm = constituency %>%
       str_to_upper() %>%
       str_remove_all("\\s*\\(SC\\)|\\s*\\(ST\\)") %>%
@@ -159,7 +145,10 @@ mp_with_margin <- lookup %>%
       TRUE                          ~ "Competitive"
     )
   ) %>%
-  select(mp_norm, lok_no, party_family, margin_pct, vote_share, seat_type)
+  select(mp_name, lok_no, party_family, margin_pct, vote_share, seat_type)
+
+crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"),
+                      show_col_types = FALSE)
 
 cat("  MPs with margin data:", nrow(mp_with_margin), "\n")
 cat("  Seat type distribution:\n")
@@ -180,21 +169,21 @@ raw <- map_dfr(parquet_files, function(f)
 starred <- raw %>%
   filter(type == "STARRED", lok_no %in% c(16L, 17L)) %>%
   mutate(
-    primary_raw  = map_chr(members, function(x)
-      tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_)),
-    primary_norm = vapply(vapply(replace_na(primary_raw, ""),
-                                  strip_hon, character(1)),
-                           norm_fl, character(1))
+    primary_raw = map_chr(members, function(x)
+      tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_))
   ) %>%
-  filter(primary_norm != "")
+  filter(!is.na(primary_raw), primary_raw != "") %>%
+  left_join(crosswalk %>% select(raw_name, lok_no, matched_mp_name),
+            by = c("primary_raw" = "raw_name", "lok_no")) %>%
+  filter(!is.na(matched_mp_name))
 
-# Per-MP question count
+# Per-MP question count (keyed on canonical mp_name)
 mp_q_counts <- starred %>%
-  count(primary_norm, lok_no, name = "n_questions")
+  count(matched_mp_name, lok_no, name = "n_questions")
 
-# Merge with margin data
+# Merge with margin data via canonical mp_name
 mp_data <- mp_with_margin %>%
-  left_join(mp_q_counts, by = c("mp_norm" = "primary_norm", "lok_no")) %>%
+  left_join(mp_q_counts, by = c("mp_name" = "matched_mp_name", "lok_no")) %>%
   mutate(n_questions = replace_na(n_questions, 0)) %>%
   filter(n_questions >= MIN_Q)
 
@@ -203,8 +192,8 @@ cat("  MPs with margin + questions:", nrow(mp_data), "\n")
 # Join questions with seat type for vocabulary analysis
 starred_with_margin <- starred %>%
   inner_join(
-    mp_data %>% select(mp_norm, lok_no, seat_type),
-    by = c("primary_norm" = "mp_norm", "lok_no")
+    mp_data %>% select(mp_name, lok_no, seat_type),
+    by = c("matched_mp_name" = "mp_name", "lok_no")
   )
 #}
 
@@ -323,8 +312,8 @@ cat("[I1] Figure 3: temporal spike...\n")
 temporal <- starred %>%
   filter(lok_no == 16L) %>%
   inner_join(
-    mp_data %>% filter(lok_no == 16L) %>% select(mp_norm, seat_type),
-    by = c("primary_norm" = "mp_norm")
+    mp_data %>% filter(lok_no == 16L) %>% select(mp_name, seat_type),
+    by = c("matched_mp_name" = "mp_name")
   ) %>%
   mutate(session_no = as.integer(session_no)) %>%
   filter(!is.na(session_no)) %>%

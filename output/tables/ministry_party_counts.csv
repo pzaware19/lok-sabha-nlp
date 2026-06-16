@@ -1,341 +1,668 @@
 party_family,ministry_clean,n
-BJP,Agriculture,132
-BJP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",39
-BJP,Chemicals And Fertilizers,41
-BJP,Civil Aviation,51
-BJP,Coal,30
-BJP,Commerce,49
-BJP,Communications,47
-BJP,"Consumer Affairs, Food And Public Distribution",53
-BJP,Corporate Affairs,19
-BJP,Culture,44
-BJP,Defence,50
-BJP,Drinking Water And Sanitation,27
-BJP,Education,104
-BJP,Electronics And Information Technology,25
-BJP,"Environment,  Forests And Climate Change",101
-BJP,External Affairs,29
-BJP,Finance,90
-BJP,"Fisheries, Animal Husbandry And Dairying",18
-BJP,Food Processing Industries,25
-BJP,Health,152
-BJP,Home Affairs,67
-BJP,I&B,22
-BJP,Jal Shakti,39
-BJP,Labour,38
-BJP,Law And Justice,40
-BJP,"Micro,Small And Medium Enterprises",20
-BJP,Minority Affairs,8
-BJP,New And Renewable Energy,28
-BJP,Petroleum,49
-BJP,Power,37
-BJP,Railways,120
-BJP,Road Transport,76
-BJP,Rural Development,47
-BJP,Science & Tech,20
-BJP,Skill Development And Entrepreneurship,27
-BJP,Social Justice,25
-BJP,Textiles,30
-BJP,Tourism,49
-BJP,Tribal Affairs,30
-BJP,Urban Development,42
-BJP,"Water Resources, River Development And Ganaga Rejuvenation",31
-BJP,Women & Child,27
-BJP,Youth Affairs And Sports,43
-BSP,Agriculture,0
+AAP,Agriculture,1
+AAP,Atomic Energy,0
+AAP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",0
+AAP,Ayush,0
+AAP,Chemicals And Fertilizers,0
+AAP,Civil Aviation,0
+AAP,Coal,0
+AAP,Commerce,0
+AAP,Communications,1
+AAP,Communications And Information Technology,0
+AAP,"Consumer Affairs, Food And Public Distribution",0
+AAP,Cooperation,0
+AAP,Corporate Affairs,0
+AAP,Culture,2
+AAP,Defence,0
+AAP,Drinking Water And Sanitation,0
+AAP,Earth Sciences,0
+AAP,Education,0
+AAP,Electronics And Information Technology,0
+AAP,"Environment,  Forests And Climate Change",0
+AAP,"Environment, Forest And Climate Change",1
+AAP,External Affairs,0
+AAP,Finance,1
+AAP,"Fisheries, Animal Husbandry And Dairying",0
+AAP,Food Processing Industries,0
+AAP,Health,1
+AAP,Heavy Industries,0
+AAP,Heavy Industries And Public Enterprises,0
+AAP,Home Affairs,0
+AAP,Housing And Urban  Poverty Alleviation,0
+AAP,I&B,0
+AAP,Jal Shakti,1
+AAP,Labour,0
+AAP,Law And Justice,2
+AAP,"Micro, Small And Medium Enterprises",0
+AAP,"Micro,Small And Medium Enterprises",0
+AAP,Mines,0
+AAP,Minority Affairs,0
+AAP,New And Renewable Energy,1
+AAP,Panchayati Raj,0
+AAP,"Personnel, Public Grievances And Pensions",0
+AAP,Petroleum,1
+AAP,Planning,0
+AAP,"Ports, Shipping And Waterways",1
+AAP,Power,0
+AAP,Railways,0
+AAP,Road Transport,1
+AAP,Rural Development,1
+AAP,Science & Tech,0
+AAP,Shipping,0
+AAP,Skill Development And Entrepreneurship,0
+AAP,Social Justice,0
+AAP,Statistics And Programme Implementation,0
+AAP,Steel,0
+AAP,Textiles,0
+AAP,Tourism,0
+AAP,Tribal Affairs,0
+AAP,Urban Development,0
+AAP,"Water Resources, River Development And Ganaga Rejuvenation",1
+AAP,Women & Child,0
+AAP,Youth Affairs And Sports,0
+BJP,Agriculture,315
+BJP,Atomic Energy,24
+BJP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",90
+BJP,Ayush,33
+BJP,Chemicals And Fertilizers,104
+BJP,Civil Aviation,154
+BJP,Coal,68
+BJP,Commerce,128
+BJP,Communications,106
+BJP,Communications And Information Technology,25
+BJP,"Consumer Affairs, Food And Public Distribution",119
+BJP,Cooperation,29
+BJP,Corporate Affairs,61
+BJP,Culture,93
+BJP,Defence,88
+BJP,Drinking Water And Sanitation,42
+BJP,Earth Sciences,23
+BJP,Education,261
+BJP,Electronics And Information Technology,62
+BJP,"Environment,  Forests And Climate Change",170
+BJP,"Environment, Forest And Climate Change",17
+BJP,External Affairs,70
+BJP,Finance,235
+BJP,"Fisheries, Animal Husbandry And Dairying",47
+BJP,Food Processing Industries,56
+BJP,Health,375
+BJP,Heavy Industries,21
+BJP,Heavy Industries And Public Enterprises,17
+BJP,Home Affairs,151
+BJP,Housing And Urban  Poverty Alleviation,9
+BJP,I&B,56
+BJP,Jal Shakti,125
+BJP,Labour,91
+BJP,Law And Justice,80
+BJP,"Micro, Small And Medium Enterprises",16
+BJP,"Micro,Small And Medium Enterprises",43
+BJP,Mines,44
+BJP,Minority Affairs,30
+BJP,New And Renewable Energy,86
+BJP,Panchayati Raj,36
+BJP,"Personnel, Public Grievances And Pensions",22
+BJP,Petroleum,107
+BJP,Planning,28
+BJP,"Ports, Shipping And Waterways",19
+BJP,Power,84
+BJP,Railways,321
+BJP,Road Transport,181
+BJP,Rural Development,145
+BJP,Science & Tech,48
+BJP,Shipping,21
+BJP,Skill Development And Entrepreneurship,86
+BJP,Social Justice,71
+BJP,Statistics And Programme Implementation,15
+BJP,Steel,21
+BJP,Textiles,65
+BJP,Tourism,103
+BJP,Tribal Affairs,61
+BJP,Urban Development,112
+BJP,"Water Resources, River Development And Ganaga Rejuvenation",58
+BJP,Women & Child,97
+BJP,Youth Affairs And Sports,94
+BSP,Agriculture,1
+BSP,Atomic Energy,0
 BSP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",2
+BSP,Ayush,0
 BSP,Chemicals And Fertilizers,0
 BSP,Civil Aviation,0
 BSP,Coal,0
-BSP,Commerce,1
+BSP,Commerce,2
 BSP,Communications,1
-BSP,"Consumer Affairs, Food And Public Distribution",1
+BSP,Communications And Information Technology,0
+BSP,"Consumer Affairs, Food And Public Distribution",2
+BSP,Cooperation,0
 BSP,Corporate Affairs,0
 BSP,Culture,0
 BSP,Defence,0
 BSP,Drinking Water And Sanitation,0
+BSP,Earth Sciences,0
 BSP,Education,2
-BSP,Electronics And Information Technology,1
+BSP,Electronics And Information Technology,2
 BSP,"Environment,  Forests And Climate Change",1
+BSP,"Environment, Forest And Climate Change",0
 BSP,External Affairs,0
-BSP,Finance,1
+BSP,Finance,2
 BSP,"Fisheries, Animal Husbandry And Dairying",1
 BSP,Food Processing Industries,0
 BSP,Health,0
+BSP,Heavy Industries,1
+BSP,Heavy Industries And Public Enterprises,0
 BSP,Home Affairs,0
+BSP,Housing And Urban  Poverty Alleviation,0
 BSP,I&B,1
-BSP,Jal Shakti,3
+BSP,Jal Shakti,4
 BSP,Labour,0
-BSP,Law And Justice,0
+BSP,Law And Justice,2
+BSP,"Micro, Small And Medium Enterprises",0
 BSP,"Micro,Small And Medium Enterprises",0
-BSP,Minority Affairs,0
+BSP,Mines,0
+BSP,Minority Affairs,1
 BSP,New And Renewable Energy,0
+BSP,Panchayati Raj,0
+BSP,"Personnel, Public Grievances And Pensions",0
 BSP,Petroleum,1
-BSP,Power,0
-BSP,Railways,0
+BSP,Planning,0
+BSP,"Ports, Shipping And Waterways",0
+BSP,Power,1
+BSP,Railways,2
 BSP,Road Transport,0
-BSP,Rural Development,0
+BSP,Rural Development,3
 BSP,Science & Tech,0
+BSP,Shipping,0
 BSP,Skill Development And Entrepreneurship,1
 BSP,Social Justice,0
-BSP,Textiles,1
-BSP,Tourism,0
+BSP,Statistics And Programme Implementation,0
+BSP,Steel,0
+BSP,Textiles,2
+BSP,Tourism,1
 BSP,Tribal Affairs,0
 BSP,Urban Development,0
 BSP,"Water Resources, River Development And Ganaga Rejuvenation",0
 BSP,Women & Child,4
 BSP,Youth Affairs And Sports,1
-DMK,Agriculture,0
-DMK,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",1
-DMK,Chemicals And Fertilizers,1
-DMK,Civil Aviation,1
-DMK,Coal,0
-DMK,Commerce,2
-DMK,Communications,0
+DMK,Agriculture,23
+DMK,Atomic Energy,1
+DMK,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",5
+DMK,Ayush,0
+DMK,Chemicals And Fertilizers,8
+DMK,Civil Aviation,14
+DMK,Coal,3
+DMK,Commerce,8
+DMK,Communications,6
+DMK,Communications And Information Technology,0
 DMK,"Consumer Affairs, Food And Public Distribution",0
-DMK,Corporate Affairs,1
-DMK,Culture,2
-DMK,Defence,1
+DMK,Cooperation,1
+DMK,Corporate Affairs,2
+DMK,Culture,10
+DMK,Defence,4
 DMK,Drinking Water And Sanitation,0
-DMK,Education,7
-DMK,Electronics And Information Technology,1
-DMK,"Environment,  Forests And Climate Change",0
-DMK,External Affairs,0
-DMK,Finance,2
-DMK,"Fisheries, Animal Husbandry And Dairying",0
-DMK,Food Processing Industries,0
-DMK,Health,4
-DMK,Home Affairs,1
-DMK,I&B,2
-DMK,Jal Shakti,1
-DMK,Labour,0
-DMK,Law And Justice,1
-DMK,"Micro,Small And Medium Enterprises",1
-DMK,Minority Affairs,2
-DMK,New And Renewable Energy,0
-DMK,Petroleum,1
-DMK,Power,0
-DMK,Railways,3
-DMK,Road Transport,0
-DMK,Rural Development,0
-DMK,Science & Tech,0
-DMK,Skill Development And Entrepreneurship,1
-DMK,Social Justice,2
-DMK,Textiles,1
-DMK,Tourism,0
-DMK,Tribal Affairs,0
-DMK,Urban Development,0
+DMK,Earth Sciences,2
+DMK,Education,32
+DMK,Electronics And Information Technology,7
+DMK,"Environment,  Forests And Climate Change",7
+DMK,"Environment, Forest And Climate Change",2
+DMK,External Affairs,6
+DMK,Finance,26
+DMK,"Fisheries, Animal Husbandry And Dairying",6
+DMK,Food Processing Industries,7
+DMK,Health,28
+DMK,Heavy Industries,0
+DMK,Heavy Industries And Public Enterprises,1
+DMK,Home Affairs,4
+DMK,Housing And Urban  Poverty Alleviation,0
+DMK,I&B,4
+DMK,Jal Shakti,9
+DMK,Labour,9
+DMK,Law And Justice,10
+DMK,"Micro, Small And Medium Enterprises",0
+DMK,"Micro,Small And Medium Enterprises",6
+DMK,Mines,1
+DMK,Minority Affairs,4
+DMK,New And Renewable Energy,4
+DMK,Panchayati Raj,3
+DMK,"Personnel, Public Grievances And Pensions",1
+DMK,Petroleum,8
+DMK,Planning,0
+DMK,"Ports, Shipping And Waterways",5
+DMK,Power,2
+DMK,Railways,33
+DMK,Road Transport,10
+DMK,Rural Development,12
+DMK,Science & Tech,1
+DMK,Shipping,0
+DMK,Skill Development And Entrepreneurship,3
+DMK,Social Justice,5
+DMK,Statistics And Programme Implementation,3
+DMK,Steel,1
+DMK,Textiles,13
+DMK,Tourism,4
+DMK,Tribal Affairs,4
+DMK,Urban Development,13
 DMK,"Water Resources, River Development And Ganaga Rejuvenation",0
-DMK,Women & Child,3
-DMK,Youth Affairs And Sports,0
-INC,Agriculture,36
-INC,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",7
-INC,Chemicals And Fertilizers,8
-INC,Civil Aviation,26
-INC,Coal,6
-INC,Commerce,20
-INC,Communications,4
-INC,"Consumer Affairs, Food And Public Distribution",8
-INC,Corporate Affairs,0
-INC,Culture,6
-INC,Defence,11
-INC,Drinking Water And Sanitation,1
-INC,Education,27
-INC,Electronics And Information Technology,11
-INC,"Environment,  Forests And Climate Change",28
-INC,External Affairs,11
-INC,Finance,34
-INC,"Fisheries, Animal Husbandry And Dairying",10
-INC,Food Processing Industries,2
-INC,Health,44
-INC,Home Affairs,27
-INC,I&B,12
-INC,Jal Shakti,20
-INC,Labour,11
-INC,Law And Justice,16
-INC,"Micro,Small And Medium Enterprises",6
-INC,Minority Affairs,11
-INC,New And Renewable Energy,9
-INC,Petroleum,22
-INC,Power,9
-INC,Railways,38
-INC,Road Transport,17
-INC,Rural Development,13
-INC,Science & Tech,3
-INC,Skill Development And Entrepreneurship,5
-INC,Social Justice,7
-INC,Textiles,10
-INC,Tourism,7
-INC,Tribal Affairs,7
-INC,Urban Development,15
-INC,"Water Resources, River Development And Ganaga Rejuvenation",8
-INC,Women & Child,10
-INC,Youth Affairs And Sports,8
-JDU,Agriculture,5
-JDU,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",1
-JDU,Chemicals And Fertilizers,0
-JDU,Civil Aviation,5
-JDU,Coal,1
-JDU,Commerce,1
-JDU,Communications,3
-JDU,"Consumer Affairs, Food And Public Distribution",4
+DMK,Women & Child,8
+DMK,Youth Affairs And Sports,5
+INC,Agriculture,96
+INC,Atomic Energy,16
+INC,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",10
+INC,Ayush,7
+INC,Chemicals And Fertilizers,29
+INC,Civil Aviation,67
+INC,Coal,25
+INC,Commerce,46
+INC,Communications,25
+INC,Communications And Information Technology,5
+INC,"Consumer Affairs, Food And Public Distribution",28
+INC,Cooperation,2
+INC,Corporate Affairs,16
+INC,Culture,24
+INC,Defence,24
+INC,Drinking Water And Sanitation,6
+INC,Earth Sciences,8
+INC,Education,96
+INC,Electronics And Information Technology,24
+INC,"Environment,  Forests And Climate Change",48
+INC,"Environment, Forest And Climate Change",26
+INC,External Affairs,31
+INC,Finance,82
+INC,"Fisheries, Animal Husbandry And Dairying",20
+INC,Food Processing Industries,9
+INC,Health,122
+INC,Heavy Industries,2
+INC,Heavy Industries And Public Enterprises,1
+INC,Home Affairs,52
+INC,Housing And Urban  Poverty Alleviation,7
+INC,I&B,23
+INC,Jal Shakti,52
+INC,Labour,42
+INC,Law And Justice,23
+INC,"Micro, Small And Medium Enterprises",3
+INC,"Micro,Small And Medium Enterprises",13
+INC,Mines,6
+INC,Minority Affairs,13
+INC,New And Renewable Energy,16
+INC,Panchayati Raj,10
+INC,"Personnel, Public Grievances And Pensions",9
+INC,Petroleum,32
+INC,Planning,11
+INC,"Ports, Shipping And Waterways",8
+INC,Power,23
+INC,Railways,101
+INC,Road Transport,64
+INC,Rural Development,49
+INC,Science & Tech,6
+INC,Shipping,4
+INC,Skill Development And Entrepreneurship,10
+INC,Social Justice,20
+INC,Statistics And Programme Implementation,4
+INC,Steel,6
+INC,Textiles,11
+INC,Tourism,16
+INC,Tribal Affairs,15
+INC,Urban Development,33
+INC,"Water Resources, River Development And Ganaga Rejuvenation",16
+INC,Women & Child,28
+INC,Youth Affairs And Sports,19
+Independent,Agriculture,3
+Independent,Atomic Energy,0
+Independent,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",0
+Independent,Ayush,0
+Independent,Chemicals And Fertilizers,0
+Independent,Civil Aviation,4
+Independent,Coal,0
+Independent,Commerce,3
+Independent,Communications,1
+Independent,Communications And Information Technology,0
+Independent,"Consumer Affairs, Food And Public Distribution",1
+Independent,Cooperation,0
+Independent,Corporate Affairs,0
+Independent,Culture,1
+Independent,Defence,1
+Independent,Drinking Water And Sanitation,0
+Independent,Earth Sciences,0
+Independent,Education,3
+Independent,Electronics And Information Technology,1
+Independent,"Environment,  Forests And Climate Change",3
+Independent,"Environment, Forest And Climate Change",2
+Independent,External Affairs,1
+Independent,Finance,3
+Independent,"Fisheries, Animal Husbandry And Dairying",0
+Independent,Food Processing Industries,0
+Independent,Health,2
+Independent,Heavy Industries,0
+Independent,Heavy Industries And Public Enterprises,0
+Independent,Home Affairs,0
+Independent,Housing And Urban  Poverty Alleviation,1
+Independent,I&B,0
+Independent,Jal Shakti,4
+Independent,Labour,0
+Independent,Law And Justice,1
+Independent,"Micro, Small And Medium Enterprises",0
+Independent,"Micro,Small And Medium Enterprises",0
+Independent,Mines,0
+Independent,Minority Affairs,1
+Independent,New And Renewable Energy,0
+Independent,Panchayati Raj,0
+Independent,"Personnel, Public Grievances And Pensions",0
+Independent,Petroleum,0
+Independent,Planning,0
+Independent,"Ports, Shipping And Waterways",0
+Independent,Power,0
+Independent,Railways,2
+Independent,Road Transport,4
+Independent,Rural Development,0
+Independent,Science & Tech,0
+Independent,Shipping,0
+Independent,Skill Development And Entrepreneurship,0
+Independent,Social Justice,1
+Independent,Statistics And Programme Implementation,0
+Independent,Steel,0
+Independent,Textiles,0
+Independent,Tourism,0
+Independent,Tribal Affairs,3
+Independent,Urban Development,2
+Independent,"Water Resources, River Development And Ganaga Rejuvenation",1
+Independent,Women & Child,1
+Independent,Youth Affairs And Sports,2
+JDU,Agriculture,13
+JDU,Atomic Energy,0
+JDU,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",3
+JDU,Ayush,1
+JDU,Chemicals And Fertilizers,3
+JDU,Civil Aviation,6
+JDU,Coal,2
+JDU,Commerce,3
+JDU,Communications,5
+JDU,Communications And Information Technology,0
+JDU,"Consumer Affairs, Food And Public Distribution",6
+JDU,Cooperation,0
 JDU,Corporate Affairs,2
-JDU,Culture,3
-JDU,Defence,2
-JDU,Drinking Water And Sanitation,0
-JDU,Education,1
+JDU,Culture,6
+JDU,Defence,3
+JDU,Drinking Water And Sanitation,1
+JDU,Earth Sciences,0
+JDU,Education,7
 JDU,Electronics And Information Technology,1
 JDU,"Environment,  Forests And Climate Change",4
-JDU,External Affairs,0
-JDU,Finance,3
-JDU,"Fisheries, Animal Husbandry And Dairying",2
-JDU,Food Processing Industries,2
-JDU,Health,8
+JDU,"Environment, Forest And Climate Change",0
+JDU,External Affairs,2
+JDU,Finance,11
+JDU,"Fisheries, Animal Husbandry And Dairying",3
+JDU,Food Processing Industries,3
+JDU,Health,18
+JDU,Heavy Industries,0
+JDU,Heavy Industries And Public Enterprises,1
 JDU,Home Affairs,1
+JDU,Housing And Urban  Poverty Alleviation,0
 JDU,I&B,1
-JDU,Jal Shakti,4
-JDU,Labour,2
-JDU,Law And Justice,0
+JDU,Jal Shakti,5
+JDU,Labour,8
+JDU,Law And Justice,1
+JDU,"Micro, Small And Medium Enterprises",0
 JDU,"Micro,Small And Medium Enterprises",2
+JDU,Mines,0
 JDU,Minority Affairs,1
-JDU,New And Renewable Energy,0
-JDU,Petroleum,1
-JDU,Power,0
-JDU,Railways,8
-JDU,Road Transport,3
-JDU,Rural Development,6
-JDU,Science & Tech,1
+JDU,New And Renewable Energy,1
+JDU,Panchayati Raj,3
+JDU,"Personnel, Public Grievances And Pensions",1
+JDU,Petroleum,5
+JDU,Planning,3
+JDU,"Ports, Shipping And Waterways",1
+JDU,Power,3
+JDU,Railways,20
+JDU,Road Transport,11
+JDU,Rural Development,11
+JDU,Science & Tech,2
+JDU,Shipping,0
 JDU,Skill Development And Entrepreneurship,1
-JDU,Social Justice,1
-JDU,Textiles,1
-JDU,Tourism,0
+JDU,Social Justice,3
+JDU,Statistics And Programme Implementation,0
+JDU,Steel,2
+JDU,Textiles,4
+JDU,Tourism,5
 JDU,Tribal Affairs,0
-JDU,Urban Development,1
+JDU,Urban Development,5
 JDU,"Water Resources, River Development And Ganaga Rejuvenation",0
-JDU,Women & Child,2
+JDU,Women & Child,4
 JDU,Youth Affairs And Sports,1
-Left,Agriculture,6
-Left,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",0
-Left,Chemicals And Fertilizers,2
-Left,Civil Aviation,4
+Left,Agriculture,11
+Left,Atomic Energy,1
+Left,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",3
+Left,Ayush,0
+Left,Chemicals And Fertilizers,4
+Left,Civil Aviation,10
 Left,Coal,0
-Left,Commerce,0
-Left,Communications,1
-Left,"Consumer Affairs, Food And Public Distribution",0
-Left,Corporate Affairs,2
-Left,Culture,0
-Left,Defence,1
-Left,Drinking Water And Sanitation,1
-Left,Education,2
+Left,Commerce,1
+Left,Communications,2
+Left,Communications And Information Technology,3
+Left,"Consumer Affairs, Food And Public Distribution",5
+Left,Cooperation,0
+Left,Corporate Affairs,3
+Left,Culture,2
+Left,Defence,3
+Left,Drinking Water And Sanitation,3
+Left,Earth Sciences,1
+Left,Education,16
 Left,Electronics And Information Technology,0
-Left,"Environment,  Forests And Climate Change",0
-Left,External Affairs,2
-Left,Finance,4
-Left,"Fisheries, Animal Husbandry And Dairying",0
-Left,Food Processing Industries,0
-Left,Health,4
-Left,Home Affairs,5
-Left,I&B,0
-Left,Jal Shakti,0
-Left,Labour,3
-Left,Law And Justice,1
-Left,"Micro,Small And Medium Enterprises",0
-Left,Minority Affairs,0
-Left,New And Renewable Energy,1
-Left,Petroleum,0
+Left,"Environment,  Forests And Climate Change",2
+Left,"Environment, Forest And Climate Change",1
+Left,External Affairs,9
+Left,Finance,15
+Left,"Fisheries, Animal Husbandry And Dairying",2
+Left,Food Processing Industries,1
+Left,Health,11
+Left,Heavy Industries,0
+Left,Heavy Industries And Public Enterprises,1
+Left,Home Affairs,11
+Left,Housing And Urban  Poverty Alleviation,0
+Left,I&B,2
+Left,Jal Shakti,2
+Left,Labour,9
+Left,Law And Justice,4
+Left,"Micro, Small And Medium Enterprises",1
+Left,"Micro,Small And Medium Enterprises",1
+Left,Mines,0
+Left,Minority Affairs,2
+Left,New And Renewable Energy,2
+Left,Panchayati Raj,1
+Left,"Personnel, Public Grievances And Pensions",0
+Left,Petroleum,2
+Left,Planning,1
+Left,"Ports, Shipping And Waterways",1
 Left,Power,1
-Left,Railways,4
-Left,Road Transport,0
-Left,Rural Development,1
+Left,Railways,18
+Left,Road Transport,9
+Left,Rural Development,3
 Left,Science & Tech,0
-Left,Skill Development And Entrepreneurship,0
-Left,Social Justice,0
-Left,Textiles,1
-Left,Tourism,0
-Left,Tribal Affairs,0
-Left,Urban Development,0
+Left,Shipping,2
+Left,Skill Development And Entrepreneurship,2
+Left,Social Justice,5
+Left,Statistics And Programme Implementation,1
+Left,Steel,0
+Left,Textiles,2
+Left,Tourism,2
+Left,Tribal Affairs,4
+Left,Urban Development,3
 Left,"Water Resources, River Development And Ganaga Rejuvenation",1
-Left,Women & Child,3
-Left,Youth Affairs And Sports,0
-Regional,Agriculture,21
-Regional,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",3
-Regional,Chemicals And Fertilizers,7
-Regional,Civil Aviation,15
-Regional,Coal,9
-Regional,Commerce,17
-Regional,Communications,4
-Regional,"Consumer Affairs, Food And Public Distribution",19
-Regional,Corporate Affairs,2
-Regional,Culture,11
-Regional,Defence,12
-Regional,Drinking Water And Sanitation,5
-Regional,Education,24
-Regional,Electronics And Information Technology,4
-Regional,"Environment,  Forests And Climate Change",15
-Regional,External Affairs,6
-Regional,Finance,30
-Regional,"Fisheries, Animal Husbandry And Dairying",9
-Regional,Food Processing Industries,4
-Regional,Health,30
-Regional,Home Affairs,15
-Regional,I&B,6
-Regional,Jal Shakti,6
-Regional,Labour,13
-Regional,Law And Justice,9
-Regional,"Micro,Small And Medium Enterprises",6
-Regional,Minority Affairs,8
-Regional,New And Renewable Energy,10
-Regional,Petroleum,6
-Regional,Power,8
-Regional,Railways,23
-Regional,Road Transport,17
-Regional,Rural Development,11
-Regional,Science & Tech,5
-Regional,Skill Development And Entrepreneurship,5
-Regional,Social Justice,6
-Regional,Textiles,12
-Regional,Tourism,5
-Regional,Tribal Affairs,13
-Regional,Urban Development,9
-Regional,"Water Resources, River Development And Ganaga Rejuvenation",5
-Regional,Women & Child,14
-Regional,Youth Affairs And Sports,5
-RJD,Agriculture,2
+Left,Women & Child,10
+Left,Youth Affairs And Sports,2
+NCP,Agriculture,13
+NCP,Atomic Energy,2
+NCP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",1
+NCP,Ayush,1
+NCP,Chemicals And Fertilizers,1
+NCP,Civil Aviation,4
+NCP,Coal,2
+NCP,Commerce,7
+NCP,Communications,2
+NCP,Communications And Information Technology,1
+NCP,"Consumer Affairs, Food And Public Distribution",5
+NCP,Cooperation,0
+NCP,Corporate Affairs,1
+NCP,Culture,0
+NCP,Defence,0
+NCP,Drinking Water And Sanitation,2
+NCP,Earth Sciences,0
+NCP,Education,9
+NCP,Electronics And Information Technology,3
+NCP,"Environment,  Forests And Climate Change",4
+NCP,"Environment, Forest And Climate Change",0
+NCP,External Affairs,5
+NCP,Finance,14
+NCP,"Fisheries, Animal Husbandry And Dairying",1
+NCP,Food Processing Industries,1
+NCP,Health,5
+NCP,Heavy Industries,0
+NCP,Heavy Industries And Public Enterprises,2
+NCP,Home Affairs,7
+NCP,Housing And Urban  Poverty Alleviation,0
+NCP,I&B,1
+NCP,Jal Shakti,6
+NCP,Labour,4
+NCP,Law And Justice,0
+NCP,"Micro, Small And Medium Enterprises",0
+NCP,"Micro,Small And Medium Enterprises",1
+NCP,Mines,0
+NCP,Minority Affairs,0
+NCP,New And Renewable Energy,2
+NCP,Panchayati Raj,2
+NCP,"Personnel, Public Grievances And Pensions",2
+NCP,Petroleum,2
+NCP,Planning,1
+NCP,"Ports, Shipping And Waterways",2
+NCP,Power,4
+NCP,Railways,18
+NCP,Road Transport,6
+NCP,Rural Development,6
+NCP,Science & Tech,1
+NCP,Shipping,4
+NCP,Skill Development And Entrepreneurship,3
+NCP,Social Justice,0
+NCP,Statistics And Programme Implementation,1
+NCP,Steel,0
+NCP,Textiles,1
+NCP,Tourism,2
+NCP,Tribal Affairs,3
+NCP,Urban Development,2
+NCP,"Water Resources, River Development And Ganaga Rejuvenation",3
+NCP,Women & Child,2
+NCP,Youth Affairs And Sports,2
+Regional,Agriculture,63
+Regional,Atomic Energy,8
+Regional,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",11
+Regional,Ayush,2
+Regional,Chemicals And Fertilizers,13
+Regional,Civil Aviation,37
+Regional,Coal,16
+Regional,Commerce,32
+Regional,Communications,10
+Regional,Communications And Information Technology,9
+Regional,"Consumer Affairs, Food And Public Distribution",39
+Regional,Cooperation,1
+Regional,Corporate Affairs,9
+Regional,Culture,20
+Regional,Defence,20
+Regional,Drinking Water And Sanitation,10
+Regional,Earth Sciences,6
+Regional,Education,59
+Regional,Electronics And Information Technology,10
+Regional,"Environment,  Forests And Climate Change",32
+Regional,"Environment, Forest And Climate Change",3
+Regional,External Affairs,16
+Regional,Finance,69
+Regional,"Fisheries, Animal Husbandry And Dairying",15
+Regional,Food Processing Industries,13
+Regional,Health,73
+Regional,Heavy Industries,3
+Regional,Heavy Industries And Public Enterprises,4
+Regional,Home Affairs,32
+Regional,Housing And Urban  Poverty Alleviation,6
+Regional,I&B,18
+Regional,Jal Shakti,28
+Regional,Labour,25
+Regional,Law And Justice,18
+Regional,"Micro, Small And Medium Enterprises",4
+Regional,"Micro,Small And Medium Enterprises",13
+Regional,Mines,9
+Regional,Minority Affairs,21
+Regional,New And Renewable Energy,20
+Regional,Panchayati Raj,12
+Regional,"Personnel, Public Grievances And Pensions",5
+Regional,Petroleum,18
+Regional,Planning,7
+Regional,"Ports, Shipping And Waterways",3
+Regional,Power,18
+Regional,Railways,58
+Regional,Road Transport,45
+Regional,Rural Development,32
+Regional,Science & Tech,11
+Regional,Shipping,4
+Regional,Skill Development And Entrepreneurship,14
+Regional,Social Justice,22
+Regional,Statistics And Programme Implementation,5
+Regional,Steel,4
+Regional,Textiles,19
+Regional,Tourism,8
+Regional,Tribal Affairs,20
+Regional,Urban Development,22
+Regional,"Water Resources, River Development And Ganaga Rejuvenation",10
+Regional,Women & Child,24
+Regional,Youth Affairs And Sports,15
+RJD,Agriculture,4
+RJD,Atomic Energy,0
 RJD,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",0
+RJD,Ayush,1
 RJD,Chemicals And Fertilizers,1
 RJD,Civil Aviation,4
 RJD,Coal,2
 RJD,Commerce,1
 RJD,Communications,0
-RJD,"Consumer Affairs, Food And Public Distribution",0
+RJD,Communications And Information Technology,0
+RJD,"Consumer Affairs, Food And Public Distribution",1
+RJD,Cooperation,0
 RJD,Corporate Affairs,0
 RJD,Culture,0
 RJD,Defence,0
 RJD,Drinking Water And Sanitation,0
+RJD,Earth Sciences,0
 RJD,Education,0
 RJD,Electronics And Information Technology,1
 RJD,"Environment,  Forests And Climate Change",2
+RJD,"Environment, Forest And Climate Change",1
 RJD,External Affairs,0
 RJD,Finance,2
 RJD,"Fisheries, Animal Husbandry And Dairying",0
 RJD,Food Processing Industries,0
-RJD,Health,1
+RJD,Health,2
+RJD,Heavy Industries,0
+RJD,Heavy Industries And Public Enterprises,0
 RJD,Home Affairs,0
-RJD,I&B,0
-RJD,Jal Shakti,0
+RJD,Housing And Urban  Poverty Alleviation,1
+RJD,I&B,1
+RJD,Jal Shakti,1
 RJD,Labour,3
 RJD,Law And Justice,0
+RJD,"Micro, Small And Medium Enterprises",1
 RJD,"Micro,Small And Medium Enterprises",0
+RJD,Mines,1
 RJD,Minority Affairs,0
 RJD,New And Renewable Energy,0
+RJD,Panchayati Raj,0
+RJD,"Personnel, Public Grievances And Pensions",0
 RJD,Petroleum,1
-RJD,Power,0
-RJD,Railways,2
-RJD,Road Transport,1
+RJD,Planning,0
+RJD,"Ports, Shipping And Waterways",1
+RJD,Power,1
+RJD,Railways,6
+RJD,Road Transport,2
 RJD,Rural Development,2
 RJD,Science & Tech,0
+RJD,Shipping,0
 RJD,Skill Development And Entrepreneurship,1
 RJD,Social Justice,0
+RJD,Statistics And Programme Implementation,0
+RJD,Steel,0
 RJD,Textiles,0
 RJD,Tourism,0
 RJD,Tribal Affairs,0
@@ -343,132 +670,308 @@ RJD,Urban Development,0
 RJD,"Water Resources, River Development And Ganaga Rejuvenation",3
 RJD,Women & Child,0
 RJD,Youth Affairs And Sports,0
-Shiv Sena,Agriculture,8
-Shiv Sena,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",3
-Shiv Sena,Chemicals And Fertilizers,1
-Shiv Sena,Civil Aviation,2
-Shiv Sena,Coal,1
-Shiv Sena,Commerce,5
-Shiv Sena,Communications,4
-Shiv Sena,"Consumer Affairs, Food And Public Distribution",3
-Shiv Sena,Corporate Affairs,3
-Shiv Sena,Culture,5
-Shiv Sena,Defence,5
-Shiv Sena,Drinking Water And Sanitation,3
-Shiv Sena,Education,7
-Shiv Sena,Electronics And Information Technology,1
-Shiv Sena,"Environment,  Forests And Climate Change",8
-Shiv Sena,External Affairs,1
-Shiv Sena,Finance,6
-Shiv Sena,"Fisheries, Animal Husbandry And Dairying",0
-Shiv Sena,Food Processing Industries,4
-Shiv Sena,Health,4
-Shiv Sena,Home Affairs,7
-Shiv Sena,I&B,0
-Shiv Sena,Jal Shakti,4
-Shiv Sena,Labour,3
-Shiv Sena,Law And Justice,2
-Shiv Sena,"Micro,Small And Medium Enterprises",3
-Shiv Sena,Minority Affairs,0
-Shiv Sena,New And Renewable Energy,4
-Shiv Sena,Petroleum,5
-Shiv Sena,Power,5
-Shiv Sena,Railways,11
-Shiv Sena,Road Transport,6
-Shiv Sena,Rural Development,8
-Shiv Sena,Science & Tech,2
-Shiv Sena,Skill Development And Entrepreneurship,2
-Shiv Sena,Social Justice,1
-Shiv Sena,Textiles,2
-Shiv Sena,Tourism,2
-Shiv Sena,Tribal Affairs,0
-Shiv Sena,Urban Development,4
-Shiv Sena,"Water Resources, River Development And Ganaga Rejuvenation",1
-Shiv Sena,Women & Child,2
-Shiv Sena,Youth Affairs And Sports,1
-SP,Agriculture,2
+Shiv Sena,Agriculture,46
+Shiv Sena,Atomic Energy,8
+Shiv Sena,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",16
+Shiv Sena,Ayush,3
+Shiv Sena,Chemicals And Fertilizers,18
+Shiv Sena,Civil Aviation,22
+Shiv Sena,Coal,6
+Shiv Sena,Commerce,24
+Shiv Sena,Communications,15
+Shiv Sena,Communications And Information Technology,2
+Shiv Sena,"Consumer Affairs, Food And Public Distribution",23
+Shiv Sena,Cooperation,0
+Shiv Sena,Corporate Affairs,11
+Shiv Sena,Culture,17
+Shiv Sena,Defence,19
+Shiv Sena,Drinking Water And Sanitation,5
+Shiv Sena,Earth Sciences,5
+Shiv Sena,Education,39
+Shiv Sena,Electronics And Information Technology,4
+Shiv Sena,"Environment,  Forests And Climate Change",19
+Shiv Sena,"Environment, Forest And Climate Change",3
+Shiv Sena,External Affairs,9
+Shiv Sena,Finance,33
+Shiv Sena,"Fisheries, Animal Husbandry And Dairying",9
+Shiv Sena,Food Processing Industries,11
+Shiv Sena,Health,41
+Shiv Sena,Heavy Industries,0
+Shiv Sena,Heavy Industries And Public Enterprises,2
+Shiv Sena,Home Affairs,25
+Shiv Sena,Housing And Urban  Poverty Alleviation,3
+Shiv Sena,I&B,10
+Shiv Sena,Jal Shakti,17
+Shiv Sena,Labour,20
+Shiv Sena,Law And Justice,10
+Shiv Sena,"Micro, Small And Medium Enterprises",3
+Shiv Sena,"Micro,Small And Medium Enterprises",9
+Shiv Sena,Mines,2
+Shiv Sena,Minority Affairs,3
+Shiv Sena,New And Renewable Energy,6
+Shiv Sena,Panchayati Raj,5
+Shiv Sena,"Personnel, Public Grievances And Pensions",3
+Shiv Sena,Petroleum,23
+Shiv Sena,Planning,2
+Shiv Sena,"Ports, Shipping And Waterways",1
+Shiv Sena,Power,12
+Shiv Sena,Railways,67
+Shiv Sena,Road Transport,33
+Shiv Sena,Rural Development,28
+Shiv Sena,Science & Tech,9
+Shiv Sena,Shipping,4
+Shiv Sena,Skill Development And Entrepreneurship,16
+Shiv Sena,Social Justice,14
+Shiv Sena,Statistics And Programme Implementation,3
+Shiv Sena,Steel,3
+Shiv Sena,Textiles,16
+Shiv Sena,Tourism,15
+Shiv Sena,Tribal Affairs,9
+Shiv Sena,Urban Development,25
+Shiv Sena,"Water Resources, River Development And Ganaga Rejuvenation",5
+Shiv Sena,Women & Child,16
+Shiv Sena,Youth Affairs And Sports,13
+SP,Agriculture,10
+SP,Atomic Energy,1
 SP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",0
-SP,Chemicals And Fertilizers,0
-SP,Civil Aviation,0
-SP,Coal,0
-SP,Commerce,0
+SP,Ayush,1
+SP,Chemicals And Fertilizers,2
+SP,Civil Aviation,4
+SP,Coal,2
+SP,Commerce,1
 SP,Communications,1
-SP,"Consumer Affairs, Food And Public Distribution",0
-SP,Corporate Affairs,1
-SP,Culture,0
+SP,Communications And Information Technology,2
+SP,"Consumer Affairs, Food And Public Distribution",3
+SP,Cooperation,3
+SP,Corporate Affairs,3
+SP,Culture,2
 SP,Defence,1
 SP,Drinking Water And Sanitation,0
-SP,Education,5
-SP,Electronics And Information Technology,0
+SP,Earth Sciences,0
+SP,Education,13
+SP,Electronics And Information Technology,2
 SP,"Environment,  Forests And Climate Change",0
-SP,External Affairs,0
-SP,Finance,2
-SP,"Fisheries, Animal Husbandry And Dairying",0
-SP,Food Processing Industries,0
-SP,Health,1
-SP,Home Affairs,0
+SP,"Environment, Forest And Climate Change",0
+SP,External Affairs,1
+SP,Finance,8
+SP,"Fisheries, Animal Husbandry And Dairying",1
+SP,Food Processing Industries,3
+SP,Health,7
+SP,Heavy Industries,0
+SP,Heavy Industries And Public Enterprises,1
+SP,Home Affairs,1
+SP,Housing And Urban  Poverty Alleviation,0
 SP,I&B,0
-SP,Jal Shakti,0
-SP,Labour,1
+SP,Jal Shakti,5
+SP,Labour,6
 SP,Law And Justice,0
+SP,"Micro, Small And Medium Enterprises",3
 SP,"Micro,Small And Medium Enterprises",0
-SP,Minority Affairs,0
-SP,New And Renewable Energy,0
-SP,Petroleum,1
-SP,Power,1
-SP,Railways,2
-SP,Road Transport,2
-SP,Rural Development,1
+SP,Mines,1
+SP,Minority Affairs,2
+SP,New And Renewable Energy,4
+SP,Panchayati Raj,0
+SP,"Personnel, Public Grievances And Pensions",0
+SP,Petroleum,2
+SP,Planning,2
+SP,"Ports, Shipping And Waterways",1
+SP,Power,3
+SP,Railways,8
+SP,Road Transport,10
+SP,Rural Development,3
 SP,Science & Tech,0
-SP,Skill Development And Entrepreneurship,0
-SP,Social Justice,0
-SP,Textiles,1
-SP,Tourism,1
-SP,Tribal Affairs,0
-SP,Urban Development,1
-SP,"Water Resources, River Development And Ganaga Rejuvenation",1
-SP,Women & Child,0
-SP,Youth Affairs And Sports,1
-TDP,Agriculture,2
-TDP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",0
-TDP,Chemicals And Fertilizers,0
-TDP,Civil Aviation,1
-TDP,Coal,0
-TDP,Commerce,1
-TDP,Communications,0
-TDP,"Consumer Affairs, Food And Public Distribution",0
-TDP,Corporate Affairs,0
-TDP,Culture,1
-TDP,Defence,3
-TDP,Drinking Water And Sanitation,0
-TDP,Education,3
-TDP,Electronics And Information Technology,0
-TDP,"Environment,  Forests And Climate Change",0
-TDP,External Affairs,3
-TDP,Finance,2
-TDP,"Fisheries, Animal Husbandry And Dairying",0
-TDP,Food Processing Industries,1
-TDP,Health,2
-TDP,Home Affairs,2
-TDP,I&B,3
-TDP,Jal Shakti,0
-TDP,Labour,0
-TDP,Law And Justice,0
-TDP,"Micro,Small And Medium Enterprises",0
-TDP,Minority Affairs,0
-TDP,New And Renewable Energy,1
-TDP,Petroleum,0
-TDP,Power,1
-TDP,Railways,0
-TDP,Road Transport,2
-TDP,Rural Development,1
-TDP,Science & Tech,0
-TDP,Skill Development And Entrepreneurship,0
-TDP,Social Justice,0
-TDP,Textiles,0
-TDP,Tourism,2
-TDP,Tribal Affairs,1
-TDP,Urban Development,0
-TDP,"Water Resources, River Development And Ganaga Rejuvenation",0
-TDP,Women & Child,1
-TDP,Youth Affairs And Sports,1
+SP,Shipping,0
+SP,Skill Development And Entrepreneurship,4
+SP,Social Justice,3
+SP,Statistics And Programme Implementation,0
+SP,Steel,0
+SP,Textiles,3
+SP,Tourism,4
+SP,Tribal Affairs,1
+SP,Urban Development,3
+SP,"Water Resources, River Development And Ganaga Rejuvenation",2
+SP,Women & Child,5
+SP,Youth Affairs And Sports,3
+TDP,Agriculture,26
+TDP,Atomic Energy,3
+TDP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",1
+TDP,Ayush,1
+TDP,Chemicals And Fertilizers,6
+TDP,Civil Aviation,3
+TDP,Coal,4
+TDP,Commerce,10
+TDP,Communications,4
+TDP,Communications And Information Technology,2
+TDP,"Consumer Affairs, Food And Public Distribution",6
+TDP,Cooperation,1
+TDP,Corporate Affairs,4
+TDP,Culture,5
+TDP,Defence,9
+TDP,Drinking Water And Sanitation,3
+TDP,Earth Sciences,1
+TDP,Education,15
+TDP,Electronics And Information Technology,6
+TDP,"Environment,  Forests And Climate Change",9
+TDP,"Environment, Forest And Climate Change",4
+TDP,External Affairs,12
+TDP,Finance,27
+TDP,"Fisheries, Animal Husbandry And Dairying",4
+TDP,Food Processing Industries,2
+TDP,Health,22
+TDP,Heavy Industries,0
+TDP,Heavy Industries And Public Enterprises,0
+TDP,Home Affairs,11
+TDP,Housing And Urban  Poverty Alleviation,1
+TDP,I&B,5
+TDP,Jal Shakti,9
+TDP,Labour,9
+TDP,Law And Justice,2
+TDP,"Micro, Small And Medium Enterprises",6
+TDP,"Micro,Small And Medium Enterprises",4
+TDP,Mines,1
+TDP,Minority Affairs,2
+TDP,New And Renewable Energy,6
+TDP,Panchayati Raj,1
+TDP,"Personnel, Public Grievances And Pensions",0
+TDP,Petroleum,5
+TDP,Planning,2
+TDP,"Ports, Shipping And Waterways",4
+TDP,Power,5
+TDP,Railways,17
+TDP,Road Transport,16
+TDP,Rural Development,9
+TDP,Science & Tech,1
+TDP,Shipping,3
+TDP,Skill Development And Entrepreneurship,6
+TDP,Social Justice,5
+TDP,Statistics And Programme Implementation,1
+TDP,Steel,3
+TDP,Textiles,3
+TDP,Tourism,4
+TDP,Tribal Affairs,5
+TDP,Urban Development,7
+TDP,"Water Resources, River Development And Ganaga Rejuvenation",2
+TDP,Women & Child,8
+TDP,Youth Affairs And Sports,8
+TMC,Agriculture,22
+TMC,Atomic Energy,0
+TMC,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",2
+TMC,Ayush,2
+TMC,Chemicals And Fertilizers,7
+TMC,Civil Aviation,6
+TMC,Coal,1
+TMC,Commerce,7
+TMC,Communications,2
+TMC,Communications And Information Technology,0
+TMC,"Consumer Affairs, Food And Public Distribution",3
+TMC,Cooperation,0
+TMC,Corporate Affairs,0
+TMC,Culture,1
+TMC,Defence,2
+TMC,Drinking Water And Sanitation,1
+TMC,Earth Sciences,2
+TMC,Education,10
+TMC,Electronics And Information Technology,1
+TMC,"Environment,  Forests And Climate Change",3
+TMC,"Environment, Forest And Climate Change",0
+TMC,External Affairs,2
+TMC,Finance,18
+TMC,"Fisheries, Animal Husbandry And Dairying",3
+TMC,Food Processing Industries,2
+TMC,Health,17
+TMC,Heavy Industries,1
+TMC,Heavy Industries And Public Enterprises,0
+TMC,Home Affairs,10
+TMC,Housing And Urban  Poverty Alleviation,2
+TMC,I&B,4
+TMC,Jal Shakti,5
+TMC,Labour,9
+TMC,Law And Justice,4
+TMC,"Micro, Small And Medium Enterprises",1
+TMC,"Micro,Small And Medium Enterprises",3
+TMC,Mines,2
+TMC,Minority Affairs,6
+TMC,New And Renewable Energy,2
+TMC,Panchayati Raj,1
+TMC,"Personnel, Public Grievances And Pensions",1
+TMC,Petroleum,13
+TMC,Planning,0
+TMC,"Ports, Shipping And Waterways",4
+TMC,Power,2
+TMC,Railways,11
+TMC,Road Transport,4
+TMC,Rural Development,9
+TMC,Science & Tech,0
+TMC,Shipping,2
+TMC,Skill Development And Entrepreneurship,3
+TMC,Social Justice,2
+TMC,Statistics And Programme Implementation,0
+TMC,Steel,0
+TMC,Textiles,5
+TMC,Tourism,6
+TMC,Tribal Affairs,2
+TMC,Urban Development,2
+TMC,"Water Resources, River Development And Ganaga Rejuvenation",2
+TMC,Women & Child,8
+TMC,Youth Affairs And Sports,4
+YSRCP,Agriculture,42
+YSRCP,Atomic Energy,4
+YSRCP,"Ayurveda,Yoga & Naturopathy,Unani,Siddha And Homeopathy (Ayush)",13
+YSRCP,Ayush,1
+YSRCP,Chemicals And Fertilizers,7
+YSRCP,Civil Aviation,13
+YSRCP,Coal,6
+YSRCP,Commerce,7
+YSRCP,Communications,5
+YSRCP,Communications And Information Technology,1
+YSRCP,"Consumer Affairs, Food And Public Distribution",7
+YSRCP,Cooperation,1
+YSRCP,Corporate Affairs,1
+YSRCP,Culture,2
+YSRCP,Defence,3
+YSRCP,Drinking Water And Sanitation,0
+YSRCP,Earth Sciences,3
+YSRCP,Education,19
+YSRCP,Electronics And Information Technology,3
+YSRCP,"Environment,  Forests And Climate Change",11
+YSRCP,"Environment, Forest And Climate Change",0
+YSRCP,External Affairs,1
+YSRCP,Finance,23
+YSRCP,"Fisheries, Animal Husbandry And Dairying",2
+YSRCP,Food Processing Industries,6
+YSRCP,Health,19
+YSRCP,Heavy Industries,3
+YSRCP,Heavy Industries And Public Enterprises,1
+YSRCP,Home Affairs,9
+YSRCP,Housing And Urban  Poverty Alleviation,2
+YSRCP,I&B,2
+YSRCP,Jal Shakti,16
+YSRCP,Labour,7
+YSRCP,Law And Justice,7
+YSRCP,"Micro, Small And Medium Enterprises",0
+YSRCP,"Micro,Small And Medium Enterprises",3
+YSRCP,Mines,1
+YSRCP,Minority Affairs,3
+YSRCP,New And Renewable Energy,5
+YSRCP,Panchayati Raj,2
+YSRCP,"Personnel, Public Grievances And Pensions",1
+YSRCP,Petroleum,3
+YSRCP,Planning,1
+YSRCP,"Ports, Shipping And Waterways",4
+YSRCP,Power,6
+YSRCP,Railways,19
+YSRCP,Road Transport,10
+YSRCP,Rural Development,8
+YSRCP,Science & Tech,1
+YSRCP,Shipping,1
+YSRCP,Skill Development And Entrepreneurship,2
+YSRCP,Social Justice,4
+YSRCP,Statistics And Programme Implementation,0
+YSRCP,Steel,1
+YSRCP,Textiles,9
+YSRCP,Tourism,4
+YSRCP,Tribal Affairs,2
+YSRCP,Urban Development,9
+YSRCP,"Water Resources, River Development And Ganaga Rejuvenation",4
+YSRCP,Women & Child,3
+YSRCP,Youth Affairs And Sports,2

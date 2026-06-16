@@ -99,34 +99,12 @@ get_primary <- function(x) {
 starred <- starred %>%
   mutate(primary_raw = map_chr(members, get_primary))
 
-# Name normaliser
-strip_hon <- function(s) {
-  s <- str_to_upper(str_squish(s))
-  s <- str_remove_all(s, "\\b(SHRIMATI|SMT\\.?|KUMARI|MRS\\.?|MS\\.?|DR\\.?|PROF\\.?|SH\\.?|SHRI\\.?)\\b")
-  str_squish(s)
-}
-norm_fl <- function(s) {
-  parts <- str_split(str_squish(s), "\\s+")[[1]]
-  if (length(parts) <= 2) return(s)
-  paste(parts[1], parts[length(parts)])
-}
-
-lookup <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"), show_col_types = FALSE) %>%
-  mutate(
-    mp_key      = str_to_upper(str_squish(mp_name)),
-    mp_stripped = vapply(mp_key, strip_hon, character(1)),
-    mp_norm     = vapply(mp_stripped, norm_fl, character(1))
-  ) %>%
-  arrange(desc(lok_no)) %>%
-  distinct(mp_norm, .keep_all = TRUE)
-
-mp_party <- setNames(lookup$party_family, lookup$mp_norm)
+crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"), show_col_types = FALSE)
 
 starred <- starred %>%
-  mutate(
-    primary_norm = vapply(vapply(primary_raw, strip_hon, character(1)), norm_fl, character(1)),
-    party_family = mp_party[primary_norm]
-  ) %>%
+  mutate(primary_norm = primary_raw) %>%
+  left_join(crosswalk %>% select(raw_name, lok_no, party_family),
+            by = c("primary_norm" = "raw_name", "lok_no")) %>%
   filter(!is.na(party_family), !is.na(question_text))
 
 cat(sprintf("  Starred (LS 16-18, party-matched): %d questions\n", nrow(starred)))

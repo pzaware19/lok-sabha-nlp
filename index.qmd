@@ -654,15 +654,16 @@ The word loadings reveal the substantive content of each dimension. Words with h
 rs_centroids <- read_csv(file.path(TABDIR, "rs_party_centroids.csv"), show_col_types = FALSE)
 rs_ip        <- read_csv(file.path(TABDIR, "rs_ideal_points.csv"),    show_col_types = FALSE)
 rs_n_members <- nrow(rs_ip)
-rs_n_q       <- 1816L
+rs_n_q       <- 3487L
 
 rs_bjp_dim1  <- round(rs_centroids$dim1[rs_centroids$party_family == "BJP"], 5)
 rs_inc_dim1  <- round(rs_centroids$dim1[rs_centroids$party_family == "INC"], 5)
 rs_bjp_n     <- rs_centroids$n[rs_centroids$party_family == "BJP"]
 rs_inc_n     <- rs_centroids$n[rs_centroids$party_family == "INC"]
 
-ls_bjp_dim1  <- 0.000894
-ls_inc_dim1  <- 0.000940
+ip_ls        <- read_csv(file.path(TABDIR, "ideal_points.csv"), show_col_types = FALSE)
+ls_bjp_dim1  <- mean(ip_ls$dim1[ip_ls$party_family == "BJP"], na.rm = TRUE)
+ls_inc_dim1  <- mean(ip_ls$dim1[ip_ls$party_family == "INC"], na.rm = TRUE)
 ```
 
 The J1 ideal points analysis found no party clustering in Lok Sabha question vocabulary. The explanation offered was structural: starred questions are constituency-service instruments, so vocabulary variation is driven by where an MP's constituents live, not which party they belong to.
@@ -678,11 +679,11 @@ Rajya Sabha members provide a direct test. They represent **states**, not indivi
 
 **Lok Sabha BJP-INC Dim1 spread (normalised): `r round(abs(ls_bjp_dim1 - ls_inc_dim1) / max(abs(ls_bjp_dim1), abs(ls_inc_dim1)), 3)`**
 
-**Rajya Sabha BJP-INC Dim1 spread (normalised): 0.466**
+**Rajya Sabha BJP-INC Dim1 spread (normalised): 1.417**
 
-Removing individual constituency variation does produce more party separation. The BJP centroid (`r rs_bjp_dim1`) and INC centroid (`r rs_inc_dim1`) are further apart in Rajya Sabha than their Lok Sabha equivalents (0.000894 vs 0.000940). The normalised spread is roughly 350 times larger.
+Removing individual constituency variation does produce more party separation. The BJP centroid (`r rs_bjp_dim1`) and INC centroid (`r rs_inc_dim1`) are further apart in Rajya Sabha than their Lok Sabha equivalents (`r round(ls_bjp_dim1, 5)` vs `r round(ls_inc_dim1, 5)`). The normalised spread is roughly 8 times larger.
 
-But within-party variance still dominates. The between-party variance is about 10% of the within-party variance (ratio = 0.099). Even in Rajya Sabha, individual members vary enormously around their party's centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.
+But within-party variance still dominates. The between-party variance is less than 1% of the within-party variance (ratio = 0.009). Even in Rajya Sabha, individual members vary enormously around their party's centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.
 
 The constituency effect is real and accounts for a large share of the J1 finding. But something else is also at work: party coordination over starred questions is weak in both houses. MPs across both Lok Sabha and Rajya Sabha follow their own judgment on what to ask, shaped by background, state, seniority, and committee assignments rather than a party whip.
 :::
@@ -708,10 +709,10 @@ Left parties and BJD (Biju Janata Dal, Odisha) sit further along the dimension, 
 |-------|---------|--------------|
 | BJP | `r rs_bjp_n` | `r rs_bjp_dim1` |
 | INC | `r rs_inc_n` | `r rs_inc_dim1` |
-| Left | 5 | 0.00222 |
-| BJD  | 6 | 0.00202 |
+| Left | 9 | `r round(rs_centroids$dim1[rs_centroids$party_family=="Left"], 5)` |
+| BJD  | 8 | `r round(rs_centroids$dim1[rs_centroids$party_family=="BJD"], 5)` |
 
-Variance explained: Dim1 = 55.8%, Dim2 = 22.7%
+Variance explained: Dim1 = 86.0%, Dim2 = 7.8%
 :::
 
 ---

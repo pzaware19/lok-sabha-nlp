@@ -1,7 +1,7 @@
 seat_type,lok_no,n_mps,avg_margin,avg_questions,med_questions
-Competitive,16,90,0.147,14.1,14.5
-Competitive,17,93,0.167,12.2,12
-Marginal,16,109,0.051,13.2,12
-Marginal,17,77,0.052,11.2,11
-Safe,16,4,0.322,14.5,14.5
-Safe,17,61,0.325,11.4,10
+Competitive,16,120,0.148,13.5,12
+Competitive,17,133,0.168,12.6,12
+Marginal,16,162,0.05,13.8,13
+Marginal,17,117,0.049,11.2,11
+Safe,16,5,0.309,16.2,13
+Safe,17,92,0.328,11.8,11

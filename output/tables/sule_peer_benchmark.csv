@@ -1,0 +1,44 @@
+primary_mp,n_questions,hhi,cosign_reach,adv_rate,mean_score,constituency,is_sule_flag,name_clean
+RAHUL SHEWALE,56,0.05,19,NA,NA,Mumbai South Central,FALSE,Rahul Shewale
+KRUPAL TUMANE,53,0.051,20,20.8,0.345,Ramtek (SC),FALSE,Krupal Tumane
+VINAYAK RAUT,53,0.05,22,NA,NA,Ratnagiri–Sindhudurg,FALSE,Vinayak Raut
+RAMDAS TADAS,50,0.064,22,NA,NA,Wardha,FALSE,Ramdas Tadas
+ASHOK NETE,46,0.047,13,NA,NA,Gadchiroli–Chimur (ST),FALSE,Ashok Nete
+GAJANAN KIRTIKAR,44,0.061,25,NA,NA,Mumbai North West,FALSE,Gajanan Kirtikar
+GOPAL SHETTY,44,0.046,9,NA,NA,Mumbai North,FALSE,Gopal Shetty
+SANJAY JADHAV,43,0.051,8,9.5,0.347,Parbhani,FALSE,Sanjay Jadhav
+HEMANT GODSE,42,0.046,16,NA,NA,Nashik,FALSE,Hemant Godse
+ARVIND SAWANT,41,0.048,22,NA,NA,Mumbai South,FALSE,Arvind Sawant
+HEENA GAVIT,41,0.067,19,NA,NA,Nandurbar (ST),FALSE,Heena Gavit
+RAKSHA KHADSE,41,0.067,13,NA,NA,Raver,FALSE,Raksha Khadse
+SADASHIV LOKHANDE,40,0.059,12,NA,NA,Shirdi (SC),FALSE,Sadashiv Lokhande
+SHRIKANT SHINDE,39,0.061,19,20.5,0.267,Kalyan,FALSE,Shrikant Shinde
+SHRIRANG BARNE,36,0.057,18,NA,NA,Maval,FALSE,Shrirang Barne
+SUPRIYA SULE,35,0.061,16,NA,NA,Baramati,TRUE,Supriya Sule
+KAPIL PATIL,34,0.062,7,NA,NA,Bhiwandi,FALSE,Kapil Patil
+PRATAPRAO JADHAV,34,0.071,20,5.6,0.361,Buldhana,FALSE,Prataprao Jadhav
+SANJAY SHAMRAO DHOTRE,31,0.053,15,12.9,0.321,Akola,FALSE,Sanjay Shamrao Dhotre
+SUSHIL KUMAR SINGH,30,0.058,9,16.7,0.243,Aurangabad,FALSE,Sushil Kumar Singh
+DHANANJAY MAHADIK,28,0.054,12,NA,NA,Kolhapur,FALSE,Dhananjay Mahadik
+RAJAN VICHARE,28,0.087,10,NA,NA,Thane,FALSE,Rajan Vichare
+RAJEEV SATAV,25,0.059,9,NA,NA,Hingoli,FALSE,Rajeev Satav
+RAVINDRA GAIKWAD,25,0.062,11,NA,NA,Osmanabad,FALSE,Ravindra Gaikwad
+ANANDRAO VITHOBA ADSUL,24,0.062,12,NA,NA,Amravati (SC),FALSE,Anandrao Vithoba Adsul
+CHANDRAKANT KHAIRE,23,0.085,10,NA,NA,Aurangabad,FALSE,Chandrakant Khaire
+ASHOK CHAVAN,21,0.07,14,NA,NA,Nanded,FALSE,Ashok Chavan
+RAJENDRA GAVIT,20,0.075,7,NA,NA,Palghar (ST),FALSE,Rajendra Gavit
+SUBHASH BHAMRE,20,0.095,7,NA,NA,Dhule,FALSE,Subhash Bhamre
+SANJAY MANDLIK,18,0.062,11,NA,NA,Kolhapur,FALSE,Sanjay Mandlik
+OMPRAKASH RAJENIMBALKAR,16,0.078,4,NA,NA,Osmanabad,FALSE,Omprakash Rajenimbalkar
+SUNIL GAIKWAD,14,0.112,9,NA,NA,Latur (SC),FALSE,Sunil Gaikwad
+MANOJ KOTAK,13,0.136,3,NA,NA,Mumbai North East,FALSE,Manoj Kotak
+KIRIT SOMAIYA,12,0.167,6,8.3,0.449,Mumbai North East,FALSE,Kirit Somaiya
+POONAM MAHAJAN,12,0.083,3,NA,NA,Mumbai North Central,FALSE,Poonam Mahajan
+PRATAPRAO GOVINDRAO CHIKHALIKAR,11,0.124,5,NA,NA,Nanded,FALSE,Prataprao Govindrao Chikhalikar
+UNMESH BHAIYYASAHEB PATIL,10,0.12,4,0,0.398,Jalgaon,FALSE,Unmesh Bhaiyyasaheb Patil
+SUNIL BABURAO MENDHE,9,0.136,2,11.1,0.284,Bhandara–Gondiya,FALSE,Sunil Baburao Mendhe
+AMOL KOLHE,7,0.184,4,NA,NA,Shirur,FALSE,Amol Kolhe
+SUNIL TATKARE,6,0.222,4,NA,NA,Raigad,FALSE,Sunil Tatkare
+ANIL SHIROLE,4,0.25,4,0,0.435,Pune,FALSE,Anil Shirole
+HEMANT PATIL,3,0.333,2,33.3,0.394,Hingoli,FALSE,Hemant Patil
+SHARAD BANSODE,3,0.333,2,0,0.321,Solapur (SC),FALSE,Sharad Bansode

@@ -1,41 +1,91 @@
 p_lo,p_hi,n_coquestions
-AAP,BJP,2
+AAP,BJP,6
 AAP,Regional,2
-BJP,BJP,477
-BJP,DMK,11
-BJP,INC,70
-BJP,Independent,3
-BJP,JDU,49
-BJP,Left,10
-BJP,RJD,4
-BJP,Regional,84
-BJP,SP,4
-BJP,Shiv Sena,34
-BJP,TDP,4
-DMK,DMK,1
-DMK,INC,2
-DMK,Regional,10
-INC,INC,57
-INC,JDU,4
-INC,Left,4
-INC,RJD,7
-INC,Regional,19
-INC,Shiv Sena,2
-INC,TDP,15
-Independent,Shiv Sena,1
-JDU,JDU,9
-JDU,RJD,1
-JDU,Regional,2
-Left,Left,1
-Left,Regional,3
-Left,Shiv Sena,1
-Left,TDP,1
+AAP,TDP,1
+AAP,YSRCP,1
+BJP,BJP,1417
+BJP,BSP,2
+BJP,DMK,30
+BJP,INC,279
+BJP,Independent,9
+BJP,JDU,81
+BJP,Left,40
+BJP,NCP,60
+BJP,RJD,7
+BJP,Regional,301
+BJP,SP,32
+BJP,Shiv Sena,364
+BJP,TDP,40
+BJP,TMC,45
+BJP,YSRCP,55
+BSP,BSP,1
+BSP,INC,1
+DMK,DMK,60
+DMK,INC,17
+DMK,Independent,1
+DMK,JDU,2
+DMK,Left,5
+DMK,NCP,6
+DMK,Regional,26
+DMK,SP,1
+DMK,Shiv Sena,22
+DMK,TDP,1
+DMK,TMC,4
+DMK,YSRCP,6
+INC,INC,162
+INC,Independent,2
+INC,JDU,5
+INC,Left,24
+INC,NCP,60
+INC,RJD,12
+INC,Regional,98
+INC,SP,12
+INC,Shiv Sena,71
+INC,TDP,21
+INC,TMC,19
+INC,YSRCP,19
+Independent,Left,4
+Independent,TMC,1
+JDU,JDU,21
+JDU,RJD,5
+JDU,Regional,3
+JDU,SP,1
+JDU,Shiv Sena,6
+JDU,TDP,1
+JDU,TMC,5
+JDU,YSRCP,1
+Left,Left,8
+Left,NCP,1
+Left,Regional,13
+Left,SP,1
+Left,Shiv Sena,4
+Left,TDP,6
+Left,TMC,2
+Left,YSRCP,1
+NCP,NCP,40
+NCP,RJD,1
+NCP,Regional,11
+NCP,Shiv Sena,9
+NCP,TMC,1
 RJD,RJD,1
+RJD,Shiv Sena,1
 Regional,RJD,1
-Regional,Regional,15
-Regional,SP,2
-Regional,Shiv Sena,6
-Regional,TDP,3
-Shiv Sena,SP,3
-Shiv Sena,Shiv Sena,6
-TDP,TDP,1
+Regional,Regional,73
+Regional,SP,5
+Regional,Shiv Sena,89
+Regional,TDP,19
+Regional,TMC,12
+Regional,YSRCP,38
+SP,SP,4
+SP,TDP,1
+Shiv Sena,SP,29
+Shiv Sena,Shiv Sena,209
+Shiv Sena,TDP,7
+Shiv Sena,TMC,4
+Shiv Sena,YSRCP,4
+TDP,TDP,29
+TDP,TMC,3
+TDP,YSRCP,13
+TMC,TMC,6
+TMC,YSRCP,2
+YSRCP,YSRCP,80

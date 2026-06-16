@@ -179,28 +179,20 @@ raw <- purrr::map_dfr(parquet_files, function(f)
   read_parquet(f, col_select = c("id","lok_no","type","ministry","members","question_text")))
 starred <- raw %>% filter(type == "STARRED", lok_no >= 16)
 
-strip_hon <- function(s) {
-  s <- str_to_upper(str_squish(s))
-  s <- str_remove_all(s, "\\b(SHRIMATI|SMT\\.?|KUMARI|MRS\\.?|MS\\.?|DR\\.?|PROF\\.?|SH\\.?|SHRI\\.?)\\b")
-  str_squish(s)
-}
-norm_fl <- function(s) {
-  parts <- str_split(str_squish(s), "\\s+")[[1]]
-  if (length(parts) <= 2) return(s)
-  paste(parts[1], parts[length(parts)])
-}
+crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"),
+                      show_col_types = FALSE)
 
-mp_religion <- setNames(lookup$religion,     lookup$mp_norm)
-mp_party    <- setNames(lookup$party_family, lookup$mp_norm)
+# Religion is derived from the matched canonical name (via regex on lookup)
+religion_map <- setNames(lookup$religion, lookup$mp_name)
 
 starred <- starred %>%
   mutate(
-    primary_raw  = map_chr(members, function(x)
-      tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_)),
-    primary_norm = vapply(vapply(primary_raw, strip_hon, character(1)), norm_fl, character(1)),
-    religion     = coalesce(mp_religion[primary_norm], "Other/Hindu"),
-    party_family = mp_party[primary_norm]
+    primary_raw = map_chr(members, function(x)
+      tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_))
   ) %>%
+  left_join(crosswalk %>% select(raw_name, lok_no, party_family, matched_mp_name),
+            by = c("primary_raw" = "raw_name", "lok_no")) %>%
+  mutate(religion = coalesce(religion_map[matched_mp_name], "Other/Hindu")) %>%
   filter(!is.na(question_text))
 
 # Ministry cleaning (reuse the same recode as F1)
