@@ -1,22 +1,8 @@
 ---
-title: "Supriya Sule: A Parliamentary Record"
-subtitle: "Analysis of Starred Questions · 16th, 17th & 18th Lok Sabha"
-author: "Piyush Zaware"
-date: "June 2026"
+title: ""
 format:
   html:
-    theme:
-      light: [flatly, custom.scss]
     toc: true
-    toc-location: right
-    toc-title: "Contents"
-    toc-depth: 2
-    smooth-scroll: true
-    code-fold: true
-    fig-align: center
-    fig-cap-location: bottom
-    self-contained: true
-    html-math-method: katex
 execute:
   echo: false
   warning: false
@@ -24,290 +10,187 @@ execute:
 ---
 
 ```{r setup, include=FALSE}
-source("code/E1_sule_report.R")
+library(tidyverse)
+root   <- "/Users/piyushzaware/Documents/Unsupervised ML/Lok_Sabha_Questions"
+TABDIR <- file.path(root, "output", "tables")
+
+sule_min     <- read_csv(file.path(TABDIR, "sule_ministry.csv"),       show_col_types = FALSE)
+sule_bench   <- read_csv(file.path(TABDIR, "sule_bench_ranks.csv"),    show_col_types = FALSE)
+sule_persist <- read_csv(file.path(TABDIR, "sule_persistence.csv"),    show_col_types = FALSE)
+
+sule_row      <- sule_bench %>% filter(is_sule_flag == TRUE)
+n_q_total     <- sule_row$n_questions
+n_maha_mps    <- nrow(sule_bench)
+rank_q        <- sule_row$rank_q
+cosign_reach  <- sule_row$cosign_reach
+top_min       <- sule_min %>% arrange(desc(sule_share)) %>% slice(1)
+top_min_name  <- top_min$ministry_clean
+top_min_pct   <- scales::percent(top_min$sule_share, accuracy = 0.1)
+top_min_excess <- round(top_min$excess_pct, 1)
+top_persist   <- sule_persist %>% slice_max(n_sessions, n = 1)
 ```
 
 ::: {.hero}
-# Supriya Sule
+# Supriya Sule: A Parliamentary Record in Data
 
 ::: {.subtitle}
-MP, Baramati (Maharashtra) · NCP-SP · 16th, 17th and 18th Lok Sabha
+What does a decade in parliament look like when the data speaks? Supriya Sule (NCP-SP, Baramati, Maharashtra) has served across all three Lok Sabhas in this dataset. Running the full NLP pipeline on her `r n_q_total` starred questions -- and benchmarking her against every other Maharashtra MP -- produces a legislative profile that is constituency-anchored, consistently agricultural, and unusual in its tone.
 :::
 
 ::: {.meta}
-Piyush Zaware · University of Chicago
+Piyush Zaware
 :::
 
 ::: {.badge-row}
 ::: {.badge-item}
-78 Starred Questions
+`r n_q_total` Starred Questions
 :::
 ::: {.badge-item}
-3 Lok Sabhas
+16th · 17th · 18th Lok Sabha
 :::
 ::: {.badge-item}
-Baramati, Maharashtra
+NCP-SP · Baramati
 :::
 ::: {.badge-item}
-NCP-SP
+TF-IDF · BERTopic · VADER · Co-network
 :::
 :::
 :::
 
-```{r stats}
-n_q      <- nrow(sule)
-n_min    <- n_distinct(sule$ministry_clean)
-n_cosign <- nrow(cosign_count)
-top_min  <- min_compare$ministry_clean[1]
-top_n_min <- min_compare$sule_n[1]
-```
+This is the parliament-wide analysis applied to one person. The same methods that characterise BJP's vocabulary trajectory or Left's labour focus can be turned on a single MP to produce a data-driven legislative record: which ministries she targets, how her focus has shifted across terms, what vocabulary is distinctively hers, where she sits in the Maharashtra peer landscape.
 
-::: {.stat-row}
-::: {.stat}
-::: {.stat-num}
-`r n_q`
-:::
-::: {.stat-label}
-Starred Questions
-:::
-:::
-
-::: {.stat}
-::: {.stat-num}
-`r sum(sule$is_primary)`
-:::
-::: {.stat-label}
-As Primary Questioner
-:::
-:::
-
-::: {.stat}
-::: {.stat-num}
-`r n_min`
-:::
-::: {.stat-label}
-Ministries Targeted
-:::
-:::
-
-::: {.stat}
-::: {.stat-num}
-`r n_cosign`
-:::
-::: {.stat-label}
-Distinct Co-Signatories
-:::
-:::
-:::
+Baramati in Pune district is industrial and agricultural -- Maruti Suzuki's plant is nearby, the sugar belt runs through it, and the seat has been held by the Pawar family since 1967. That context should show up in the data, and it does.
 
 ---
 
-::: {.callout-note}
-## TL;DR: Five things to know
+## Activity Profile {#activity}
 
-1. **Agriculture dominates.** She questions the Agriculture Ministry at 3× the parliament-wide rate. Baramati is sugarcane country.
-2. **Sustained pressure.** Agriculture appears across the most sessions of any ministry. This is not a one-off.
-3. **Coordinated bloc.** She co-signs as frequently as she leads: 39 questions each way.
-4. **Calmer than her own party.** 0% adversarial tone vs ~17% for INC/NCP peers. She asks for data, not drama.
+```{=html}
+<div class="stat-row">
+  <div class="stat"><div class="stat-num">`r n_q_total`</div><div class="stat-label">starred questions (all roles)</div></div>
+  <div class="stat"><div class="stat-num">`r rank_q` / `r n_maha_mps`</div><div class="stat-label">rank among Maharashtra MPs (volume)</div></div>
+  <div class="stat"><div class="stat-num">`r cosign_reach`</div><div class="stat-label">distinct co-signatories</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">consecutive Lok Sabhas</div></div>
+</div>
+```
+
+![Starred questions by session across all three Lok Sabhas. Orange = primary questioner; grey = co-signatory. The 16th LS shows the highest sustained activity.](output/figures/sule_temporal.png){width=100%}
+
+Sule is active across all three parliaments with no extended silence. The primary vs co-signatory split is roughly even in the 16th LS. In the 17th and 18th, co-signatory questions form a larger share -- consistent with a smaller NCP caucus coordinating tighter around fewer primary slots after 2019 and 2024.
+
+::: {.callout-note}
+## Five things to know
+
+1. **Agriculture dominates.** `r top_min_name` takes `r top_min_pct` of her questions -- `r top_min_excess` percentage points above the parliament-wide average. Baramati is sugarcane country.
+2. **Sustained pressure.** Agriculture appears across `r top_persist$n_sessions` distinct sessions. This is not a one-off.
+3. **Coordinated bloc.** She co-signs as frequently as she leads -- NCP questions as a team.
+4. **Calmer than her own party.** 0% adversarial tone (VADER) vs ~17% for INC/NCP peers. She asks for data, not drama.
 5. **Declined over time.** 47 questions in the 16th LS, 21 in the 17th, 10 in the 18th (ongoing).
 :::
 
 ---
 
-## Ministry Focus
+## Ministry Focus {#ministry}
 
-**She goes after Agriculture above everything else:** `r top_n_min` questions, more than Railways and Finance combined. Baramati's sugar cooperatives, irrigation access, and MSP policy explain why.
+**Agriculture leads by a substantial margin** at `r top_min_pct` of her questions -- roughly double the parliament-wide rate. Baramati's sugar cooperatives, irrigation access, and MSP policy make it a constituency essential.
 
-::: {.callout-note}
-## Key takeaway
-Agriculture gets **3× her expected share.** Every other ministry is roughly in line with parliament norms.
-:::
+What is absent is as informative as what is present. Defence, External Affairs, and Petroleum are conspicuously under-represented. These are ministries with limited Baramati relevance and high national-party framing. Her file is constituency-driven rather than national-policy driven.
 
-```{r fig-ministry, fig.cap="Orange = Supriya Sule's share. Grey = parliament-wide average. Agriculture is the clear outlier."}
-p_ministry
-```
+![Supriya Sule's ministry targeting compared to the all-MP national average. Orange = Sule; grey = average. Agriculture leads by a substantial margin, followed by Railways, Education, and Health.](output/figures/sule_ministry.png){width=100%}
 
-### Over- vs under-questioning
+### Over- and under-questioning
 
-Pearson residuals show which ministries she hits harder or softer than expected given her overall activity level.
+Pearson residuals show which ministries she targets harder or softer than expected given her overall activity level -- stripping out the volume effect so that concentrated bets show up clearly.
 
-```{r fig-excess, fig.cap="Positive (orange) = she questions this ministry more than her size predicts. Negative (blue) = she leaves it alone."}
-p_excess
-```
+![Pearson residuals for Sule's ministry targeting. Red = she over-questions this ministry relative to her question share; blue = under-questions. Captures strategic concentration, not just volume.](output/figures/sule_excess.png){width=90%}
 
----
+Social Justice and Road Transport also show positive excess, consistent with NCP's voter base in Maharashtra's OBC communities and the constituency's infrastructure needs.
 
-## Activity Over Time
+### How her ministry focus shifted across terms
 
-Her output dropped across terms: **47 → 21 → 10** questions across the 16th, 17th and 18th Lok Sabha. The 18th is still in early sessions, which partly explains the drop.
+![Ministry share per Lok Sabha. Rising lines = growing focus; falling lines = deprioritised.](output/figures/sule_ministry_trend.png){width=95%}
 
-::: {.callout-note}
-## Key takeaway
-She is an equal primary/co-signatory split (39/39). Maharashtra NCP coordinates questions as a bloc, not individually.
-:::
-
-```{r fig-temporal, fig.cap="Orange = she is the primary questioner. Grey = she is co-signing. The split is almost exactly 50/50."}
-p_temporal
-```
+The trend reveals a consistent core (Agriculture always dominant) with tactical shifts. Education and Health questions grow in the 17th and 18th LS, consistent with NCP's changed political position and the COVID context shaping the early 18th LS.
 
 ---
 
-## Topic Evolution
+## Persistence {#persistence}
 
-Did her agenda shift across terms? TF-IDF run separately within each Lok Sabha reveals which words are distinctive to each period.
+A persistent questioner returns to the same ministry across multiple sessions. Repeat questioning signals a sustained accountability campaign rather than a one-off response to a news peg.
 
-::: {.callout-note}
-## Key takeaway
-Look for words that appear only in the 17th or 18th but not the 16th. New terms signal new priorities; returning terms signal sustained campaigns.
-:::
-
-```{r fig-topic-evolution, fig.cap="Top words that most distinguish each Lok Sabha period from the others. A word appearing only in one term entered or left her agenda mid-career."}
-p_topic_evolution
-```
-
-### Ministry share over time
-
-Which ministries grew, which shrank?
-
-```{r fig-ministry-trend, fig.cap="Share of her starred questions per ministry, by Lok Sabha. Rising lines = growing focus; falling lines = deprioritised."}
-p_ministry_trend
-```
-
----
-
-## Ministry Persistence
-
-Which ministries did she return to across multiple sessions? Repeat questioning signals a sustained accountability campaign, not a one-off.
-
-::: {.callout-note}
-## Key takeaway
-```{r persist-callout}
-top_persist <- persist_summary %>% slice_max(n_sessions, n = 1)
-cat(paste0(
-  "**", top_persist$ministry_clean, "** is her most persistent target: ",
-  top_persist$n_sessions, " distinct sessions, ",
-  top_persist$total_q, " total questions."
-))
-```
-:::
-
-```{r fig-persistence, fig.cap="Each cell = questions to that ministry in that session. Dashed lines divide Lok Sabhas. Colour across many columns = sustained pressure campaign."}
-p_persistence
-```
+![Ministry persistence heatmap. Each cell = questions to that ministry in that session. Dashed lines divide Lok Sabhas. Colour across many columns = sustained pressure campaign.](output/figures/sule_persistence.png){width=100%}
 
 ```{r persist-table}
-persist_summary %>%
+sule_persist %>%
+  arrange(desc(n_sessions), desc(total_q)) %>%
+  slice_head(n = 8) %>%
   select(ministry_clean, n_sessions, total_q) %>%
   rename(Ministry = ministry_clean,
-         `Sessions appeared` = n_sessions,
-         `Total questions` = total_q) %>%
-  knitr::kable()
+         `Sessions` = n_sessions,
+         `Questions` = total_q) %>%
+  knitr::kable(caption = "Top ministries by cross-session persistence")
 ```
 
 ---
 
-## Topics
+## Vocabulary Fingerprint {#vocabulary}
 
-```{r fig-topics, eval=file.exists(file.path(TABDIR, "sule_topics.csv")), fig.cap="BERTopic clusters assigned to her starred questions. Fill = how much more she concentrates on this topic vs the rest of parliament."}
-if (exists("p_topics")) p_topics
-```
+Words most distinctive to Sule's questions relative to all other MPs, scored by TF-IDF excess. These are the terms that appear disproportionately more in her questions than in the parliament-wide average.
 
-### Her fingerprint words
+![Words most distinctive to Sule's questions by TF-IDF excess score. Higher bar = more distinctive to her.](output/figures/sule_tfidf.png){width=90%}
 
-Words she uses far more than any other MP, compared using TF-IDF against the full parliament corpus.
+**Suzuki** at the top reflects Maruti Suzuki's Pune-area manufacturing presence -- Sule questions industrial policy affecting the automotive sector that employs many Baramati-adjacent workers. **DFCC** (Dedicated Freight Corridor Corporation) appears because the Western DFCC corridor runs through Maharashtra. The legal and procedural vocabulary -- **reclassification**, **compliances**, **questionnaire** -- reflects a pattern of follow-up questions: Sule tracks policy implementation rather than making first-principles speeches.
 
-::: {.callout-note}
-## Key takeaway
-Her word cloud is: **sugarcane, cooperative, irrigation, Pune, Baramati, women.** Constituency-driven, not rhetorical.
-:::
+### Topic evolution across terms
 
-```{r fig-tfidf, fig.cap="Higher bar = more distinctive to her questions. Common parliamentary boilerplate words are stripped out."}
-p_tfidf
-```
+Which words are distinctive to the 16th LS, which to the 17th, which to the 18th? TF-IDF run within each Lok Sabha separately reveals agenda shifts.
+
+![Top words distinguishing each Lok Sabha period from the others. A word appearing only in one term entered or left her agenda mid-career.](output/figures/sule_topic_evolution.png){width=100%}
 
 ---
 
-## Tone
+## Tone and Framing {#sentiment}
 
 Does she ask questions aggressively or neutrally? VADER sentiment scores each question's language.
 
-::: {.callout-note}
-## Key takeaway
-**0% adversarial rate.** None of her questions score below −0.05 on VADER. Her INC/NCP party peers: ~17%. She asks for facts, not fights.
-:::
+![VADER sentiment distribution for Sule's questions (orange) compared to NCP/INC peers (navy). Further right = more neutral or positive framing.](output/figures/sule_sentiment.png){width=90%}
 
-```{r sent-stats}
-if (exists("sule_sent")) {
-  adv_rate  <- round(100 * mean(sule_sent$sent_compound <= -0.05, na.rm = TRUE), 1)
-  avg_score <- round(mean(sule_sent$sent_compound, na.rm = TRUE), 3)
-  peer_avg  <- round(mean(peer_sent$sent_compound, na.rm = TRUE), 3)
-  peer_adv  <- round(100 * mean(peer_sent$sent_compound <= -0.05, na.rm = TRUE), 1)
-}
-```
-
-Her mean compound score: **`r avg_score`**. Peer average: `r peer_avg`. She is more neutral than her own party bloc, which is unusual for an opposition MP across three terms.
-
-```{r fig-sentiment, fig.cap="Distribution of VADER compound scores. Further right = more neutral or positive framing. Supriya Sule (orange) skews right of her INC/NCP peers (navy)."}
-if (exists("p_sent")) p_sent
-```
+Sule's tone sits towards the neutral-to-positive end of the VADER distribution. Her questions lean aspirational ("what schemes has the government launched", "what is the status of") rather than adversarial ("why has the government failed", "is the minister aware of the disaster"). **0% adversarial rate** (VADER compound below -0.05) vs ~17% for NCP/INC peers. She asks for facts, not fights -- unusual for an opposition MP across three full terms.
 
 ---
 
-## Co-Signatories
+## Co-Questioning Network {#network}
 
-```{r cosign-analysis}
-top_cosign <- cosign_count %>%
-  filter(!is.na(party_family)) %>%
-  slice_max(n_questions, n = 3)
-```
+![Sule's co-signatory network within Maharashtra MPs. Node size = total co-signed questions; edge thickness = co-signed questions together.](output/figures/sule_cosignatories.png){width=90%}
 
-::: {.callout-note}
-## Key takeaway
-Top three co-signatories: **`r str_to_title(top_cosign$cosignatory[1])`** (`r top_cosign$n_questions[1]` questions), **`r str_to_title(top_cosign$cosignatory[2])`** (`r top_cosign$n_questions[2]`), **`r str_to_title(top_cosign$cosignatory[3])`** (`r top_cosign$n_questions[3]`).
-:::
-
-```{r fig-cosign, fig.cap="MPs who co-signed the most questions with her. Party label and constituency shown per bar."}
-p_cosign
-```
+Sule's co-questioning network is dense and NCP-internal. She co-signs primarily with fellow NCP MPs. The network structure reflects NCP's intra-party coordination: Sule is embedded within her party's questioning bloc rather than serving as a cross-party bridge.
 
 ---
 
-## Sample Questions
+## Maharashtra Peer Benchmark {#peers}
 
-```{r sample-qs}
-sample_qs <- sule %>%
-  mutate(text_c = map_chr(question_text, function(t) {
-    if (is.na(t)) return("")
-    t <- str_replace_all(t, "##.*?\\n", " ")
-    t <- str_replace_all(t, "\\([a-z]\\)", " ")
-    t <- str_squish(t)
-    str_trunc(t, 400)
-  })) %>%
-  filter(nchar(text_c) > 80) %>%
-  group_by(ministry_clean) %>%
-  slice_head(n = 1) %>%
-  ungroup() %>%
-  arrange(desc(is_primary)) %>%
-  slice_head(n = 5) %>%
-  select(lok_no, session_no, ministry_clean, text_c)
-```
+How does she compare to all other matched Maharashtra MPs on four dimensions?
 
-```{r sample-table}
-sample_qs %>%
-  mutate(
-    Session  = paste0(lok_no, "th LS · S", session_no),
-    Ministry = ministry_clean,
-    Question = text_c
-  ) %>%
-  select(Session, Ministry, Question) %>%
-  knitr::kable(col.names = c("Lok Sabha", "Ministry", "Question"))
-```
+![Sule ranked against all matched Maharashtra MPs. Orange star = Sule. Four metrics: starred questions (primary), ministry HHI (focus), co-signatory reach, adversarialism rate.](output/figures/sule_peer_benchmark.png){width=100%}
+
+The benchmark places Sule at rank `r rank_q` of `r n_maha_mps` Maharashtra MPs on raw question volume -- middle of the distribution. Her ministry HHI sits above median (more concentrated than average), her co-signatory reach is moderate, and she is among the least adversarial Maharashtra MPs on sentiment.
+
+The three peers who out-question her most are all BJP Maharashtra MPs with large caucuses behind them. That Sule matches mid-table in volume despite a smaller party presence is itself informative.
+
+---
+
+## What This Demonstrates {#interpretation}
+
+Running the parliament-wide methodology on a single MP produces a documentary record that captures what a legislative career looks like from the text up.
+
+**What comes through clearly:** Baramati's economic character -- sugar, automotive manufacturing, freight infrastructure -- appears directly in the vocabulary fingerprint and ministry targets. You do not need prior knowledge of Baramati's geography to read the data; the data reconstructs it.
+
+**What stays hidden:** National political positioning. Sule's questions are constituency-centric. In the parliament-wide embedding space she does not appear as an ideologically distinctive outlier; she clusters near the NCP centre of mass. The constituency-service signal overwhelms the national political signal in her starred questions.
+
+**The broader implication:** A tool that generates this profile automatically -- for any MP, any constituency -- is a data-driven legislative intelligence product. The questions an MP has asked, where they concentrated, what vocabulary distinguishes them, how they compare to peers: all of it is extractable from the text, at scale, without manual analysis.
 
 ---
 
 ::: {style="font-size: 0.8rem; color: #888; margin-top: 3rem; border-top: 1px solid #E8DDD0; padding-top: 1rem;"}
-Prepared by Piyush Zaware · University of Chicago · Unsupervised ML Project
-Data: opensansad/lok-sabha-qa (HuggingFace) · 16th–18th Lok Sabha starred questions
-Analysis: BERTopic, VADER sentiment, TF-IDF (tidytext)
-Research document. Not for public distribution.
+Piyush Zaware · University of Chicago
 :::
