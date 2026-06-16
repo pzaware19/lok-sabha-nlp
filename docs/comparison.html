@@ -130,6 +130,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#coverage" id="toc-coverage" class="nav-link" data-scroll-target="#coverage">Coverage and Scale</a></li>
   <li><a href="#volume" id="toc-volume" class="nav-link" data-scroll-target="#volume">The Volume Question: Who Drives Each House?</a></li>
   <li><a href="#vocabulary" id="toc-vocabulary" class="nav-link" data-scroll-target="#vocabulary">What Words Separate the Two Houses?</a></li>
+  <li><a href="#language" id="toc-language" class="nav-link" data-scroll-target="#language">Linguistic Register: Hindi Framing vs English vs Regional</a></li>
   <li><a href="#ministry" id="toc-ministry" class="nav-link" data-scroll-target="#ministry">Ministry Targeting: Same Party, Same Ministries?</a></li>
   <li><a href="#discipline" id="toc-discipline" class="nav-link" data-scroll-target="#discipline">Party Discipline: Does the Upper House Coordinate Better?</a></li>
   <li><a href="#adversarialism" id="toc-adversarialism" class="nav-link" data-scroll-target="#adversarialism">Adversarialism: Which House is More Confrontational?</a></li>
@@ -300,6 +301,47 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>TMC</strong> in Lok Sabha is almost entirely West Bengal-focused. In Rajya Sabha, the constituency anchor is loosened, and TMC members broaden into national welfare and rights vocabulary.</p>
 </div>
 </div>
+<hr>
+</section>
+</section>
+<section id="language" class="level2">
+<h2 class="anchored" data-anchor-id="language">Linguistic Register: Hindi Framing vs English vs Regional</h2>
+<p>Indian Parliament officially functions in Hindi and English, with members permitted to speak in any scheduled language. But all starred question titles in this dataset are recorded in Latin script – either English or transliterated Hindi and regional terms. The question is whether parties differ systematically in how much they rely on Hindi-origin policy vocabulary versus English framing, and whether that pattern changes between houses.</p>
+<p>The measure is a lexicon-based count: what proportion of each party’s question titles contain at least one recognisably Hindi-origin policy term (yojana, kisan, swachh, jal, vikas, mudra, bima, krishi, gram, shakti, etc.) rather than the English equivalent (scheme, farmer, clean, water, development, loan, crop, village, empowerment).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/compare_hindi_intensity.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>% of starred question titles containing at least one transliterated Hindi policy term, by party. Connected dots show the same party in LS (blue) vs RS (gold). Parties to the right use more Hindi framing.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What the Hindi intensity comparison shows
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Left parties consistently use the least Hindi-origin vocabulary</strong> in both houses (under 2% in LS, under 3% in RS). This fits Kerala’s long-standing resistance to Hindi imposition – Left MPs from Kerala and West Bengal systematically prefer English framing for policy questions, even when asking about centrally-sponsored schemes that carry Hindi names.</p>
+<p><strong>TMC uses the most Hindi vocabulary in Lok Sabha (6.6%)</strong> – higher than BJP. This is counterintuitive at first but makes sense: TMC LS members in constituencies across West Bengal ask heavily about central government schemes (PMAY, PMGSY, PMJDY) that BJP has branded with Hindi names. Asking about these schemes in Lok Sabha requires using BJP’s vocabulary. In Rajya Sabha (4.9%), where TMC members are more likely to debate policy design than local delivery, the Hindi framing drops.</p>
+<p><strong>BJP’s Hindi vocabulary increases from LS (4.1%) to RS (5.1%)</strong>. In LS, BJP members are the governing party defending implementation – they often use English administrative vocabulary. In RS, where BJP faced a more adversarial floor during much of this period, members appear to lean harder into Hindi policy framing as a positioning choice.</p>
+<p><strong>RJD</strong> (Rashtriya Janata Dal – Hindi-belt Bihar) shows the largest RS jump: 3.3% LS to 6.2% RS. Hindi is both the natural language and the political identity marker for Bihar-based parties; the RS platform amplifies that.</p>
+<p><strong>TDP</strong> is consistently low in both houses (~3.5%), consistent with Andhra Pradesh’s position in the anti-Hindi imposition bloc.</p>
+</div>
+</div>
+<section id="regional-geographic-vocabulary-rs-as-a-platform-for-state-advocacy" class="level3">
+<h3 class="anchored" data-anchor-id="regional-geographic-vocabulary-rs-as-a-platform-for-state-advocacy">Regional geographic vocabulary: RS as a platform for state advocacy</h3>
+<p>The second linguistic signal is geographic – which parties invoke place names from their home region in question titles.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/compare_regional_markers.png" class="img-fluid figure-img" style="width:95.0%"></p>
+<figcaption>Regional geographic markers in RS question titles, by party. Only RS bars are shown because southern parties (DMK, AIADMK, TDP) have too few LS matched questions for comparison. The markers capture Tamil, Telugu, and Bengali geographic place names appearing in question titles.</figcaption>
+</figure>
+</div>
+<p>The pattern here validates a straightforward claim: <strong>Rajya Sabha functions as the primary national platform for regional parties</strong>. AIADMK and DMK invoke Tamil geographic vocabulary (Cauvery, Mettur, Madurai, Tuticorin) in about 1% of their RS questions. TDP invokes Telugu geographic markers (Polavaram, Godavari, Rayalaseema) in 2.6% of RS questions – the highest rate of any regional geographic marker. TMC references Bengali geography (Sundarbans, Hooghly, Damodar) in 0.2% of RS questions.</p>
+<p>These numbers are small as proportions, but the asymmetry is the finding: these parties do not have enough Lok Sabha seats to appear in the LS data at all during this period. Their national geographic advocacy is conducted entirely through the upper house.</p>
 <hr>
 </section>
 </section>
