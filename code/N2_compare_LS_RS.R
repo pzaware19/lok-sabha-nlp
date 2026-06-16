@@ -206,8 +206,10 @@ key_ministry <- c("Finance", "Home Affairs", "Railways", "Road Transport",
                   "Tribal Affairs", "Minority Affairs", "Agriculture",
                   "Jal Shakti / Water", "Women & Child")
 
-# LS ministry_party_counts uses ministry_clean (already title-cased) and no party_n
-ls_party_total <- ls_q %>% count(party_family, name = "party_n")
+# Derive party_n from the ministry file itself so denominator matches the numerator
+ls_party_total <- ls_min_raw %>%
+  group_by(party_family) %>%
+  summarise(party_n = sum(n), .groups = "drop")
 
 ls_min_clean <- ls_min_raw %>%
   rename(ministry = ministry_clean) %>%
