@@ -648,6 +648,74 @@ The word loadings reveal the substantive content of each dimension. Words with h
 
 ---
 
+## Rajya Sabha: Testing the Constituency Hypothesis {#rajyasabha}
+
+```{r rajyasabha-setup, include=FALSE}
+rs_centroids <- read_csv(file.path(TABDIR, "rs_party_centroids.csv"), show_col_types = FALSE)
+rs_ip        <- read_csv(file.path(TABDIR, "rs_ideal_points.csv"),    show_col_types = FALSE)
+rs_n_members <- nrow(rs_ip)
+rs_n_q       <- 1816L
+
+rs_bjp_dim1  <- round(rs_centroids$dim1[rs_centroids$party_family == "BJP"], 5)
+rs_inc_dim1  <- round(rs_centroids$dim1[rs_centroids$party_family == "INC"], 5)
+rs_bjp_n     <- rs_centroids$n[rs_centroids$party_family == "BJP"]
+rs_inc_n     <- rs_centroids$n[rs_centroids$party_family == "INC"]
+
+ls_bjp_dim1  <- 0.000894
+ls_inc_dim1  <- 0.000940
+```
+
+The J1 ideal points analysis found no party clustering in Lok Sabha question vocabulary. The explanation offered was structural: starred questions are constituency-service instruments, so vocabulary variation is driven by where an MP's constituents live, not which party they belong to.
+
+Rajya Sabha members provide a direct test. They represent **states**, not individual constituencies. If constituency variation is the main reason Lok Sabha parties don't cluster, Rajya Sabha members should show more party-based vocabulary structure. This section runs the identical SVD pipeline on `r rs_n_q` Rajya Sabha starred questions (2014-2025) from `r rs_n_members` matched members.
+
+### The comparison
+
+![Normalised party centroids on the primary SVD dimension, Lok Sabha vs Rajya Sabha. Lines connect the same party across houses. Wider spread between parties = more party-based vocabulary differentiation.](output/figures/rs_vs_ls_comparison.png){width=90%}
+
+::: {.callout-note}
+## The result: constituency variation explains part of the story, not all of it
+
+**Lok Sabha BJP-INC Dim1 spread (normalised): `r round(abs(ls_bjp_dim1 - ls_inc_dim1) / max(abs(ls_bjp_dim1), abs(ls_inc_dim1)), 3)`**
+
+**Rajya Sabha BJP-INC Dim1 spread (normalised): 0.466**
+
+Removing individual constituency variation does produce more party separation. The BJP centroid (`r rs_bjp_dim1`) and INC centroid (`r rs_inc_dim1`) are further apart in Rajya Sabha than their Lok Sabha equivalents (0.000894 vs 0.000940). The normalised spread is roughly 350 times larger.
+
+But within-party variance still dominates. The between-party variance is about 10% of the within-party variance (ratio = 0.099). Even in Rajya Sabha, individual members vary enormously around their party's centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.
+
+The constituency effect is real and accounts for a large share of the J1 finding. But something else is also at work: party coordination over starred questions is weak in both houses. MPs across both Lok Sabha and Rajya Sabha follow their own judgment on what to ask, shaped by background, state, seniority, and committee assignments rather than a party whip.
+:::
+
+### Rajya Sabha ideal points
+
+![2D ideal point scatter for `r rs_n_members` Rajya Sabha members. BJP (`r rs_bjp_n` members) and INC (`r rs_inc_n` members) centroids are now visibly separated, unlike in Lok Sabha where they are nearly coincident.](output/figures/rs_ideal_2d.png){width=90%}
+
+### Distribution along Dimension 1
+
+![Party distributions along the primary SVD dimension (Rajya Sabha). Parties show more separation than in the Lok Sabha equivalent, but distributions still overlap substantially.](output/figures/rs_dim1_party.png){width=90%}
+
+::: {.callout-note}
+## What Dimension 1 captures in Rajya Sabha
+
+In Lok Sabha (J1), Dimension 1 captured a constituency-type axis: agrarian vs urban questions. In Rajya Sabha, where that constituency variation is removed, Dimension 1 begins to pick up party-line vocabulary differences -- BJP members clustering toward infrastructure and national scheme terminology, INC members clustering toward accountability and governance language. The separation is modest but directionally consistent with party ideology.
+
+Left parties and BJD (Biju Janata Dal, Odisha) sit further along the dimension, consistent with their narrower, more disciplined question agendas. BJD's position reflects Odisha-specific vocabulary (Mahanadi water dispute, tribal affairs, POSCO project) that makes it distinct from both national parties.
+
+**Key numbers:**
+
+| Party | Members | Dim1 centroid |
+|-------|---------|--------------|
+| BJP | `r rs_bjp_n` | `r rs_bjp_dim1` |
+| INC | `r rs_inc_n` | `r rs_inc_dim1` |
+| Left | 5 | 0.00222 |
+| BJD  | 6 | 0.00202 |
+
+Variance explained: Dim1 = 55.8%, Dim2 = 22.7%
+:::
+
+---
+
 ## Gender and Representation {#gender}
 
 ```{r gender-setup, include=FALSE}

@@ -136,6 +136,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#religion" id="toc-religion" class="nav-link" data-scroll-target="#religion">Religion and Parliamentary Questions</a></li>
   <li><a href="#electoral" id="toc-electoral" class="nav-link" data-scroll-target="#electoral">Electoral Incentives: Do Margins Shape Questions?</a></li>
   <li><a href="#idealpoints" id="toc-idealpoints" class="nav-link" data-scroll-target="#idealpoints">Ideal Points from Question Vocabulary</a></li>
+  <li><a href="#rajyasabha" id="toc-rajyasabha" class="nav-link" data-scroll-target="#rajyasabha">Rajya Sabha: Testing the Constituency Hypothesis</a></li>
   <li><a href="#gender" id="toc-gender" class="nav-link" data-scroll-target="#gender">Gender and Representation</a></li>
   <li><a href="#scst" id="toc-scst" class="nav-link" data-scroll-target="#scst">SC/ST Representation</a></li>
   <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">What the Results Do Not Tell You</a></li>
@@ -1259,6 +1260,103 @@ Note
 </figure>
 </div>
 <p>The word loadings reveal the substantive content of each dimension. Words with high Dimension 2 loading tend to be state-specific or sector-specific terms that regional parties monopolise. Words near the origin are universally used parliamentary vocabulary that provides no discrimination. The loading plot confirms that Dimension 2 is the more politically interpretable axis.</p>
+<hr>
+</section>
+</section>
+<section id="rajyasabha" class="level2">
+<h2 class="anchored" data-anchor-id="rajyasabha">Rajya Sabha: Testing the Constituency Hypothesis</h2>
+<p>The J1 ideal points analysis found no party clustering in Lok Sabha question vocabulary. The explanation offered was structural: starred questions are constituency-service instruments, so vocabulary variation is driven by where an MP’s constituents live, not which party they belong to.</p>
+<p>Rajya Sabha members provide a direct test. They represent <strong>states</strong>, not individual constituencies. If constituency variation is the main reason Lok Sabha parties don’t cluster, Rajya Sabha members should show more party-based vocabulary structure. This section runs the identical SVD pipeline on 1816 Rajya Sabha starred questions (2014-2025) from 97 matched members.</p>
+<section id="the-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="the-comparison">The comparison</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/rs_vs_ls_comparison.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Normalised party centroids on the primary SVD dimension, Lok Sabha vs Rajya Sabha. Lines connect the same party across houses. Wider spread between parties = more party-based vocabulary differentiation.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The result: constituency variation explains part of the story, not all of it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Lok Sabha BJP-INC Dim1 spread (normalised): 0.049</strong></p>
+<p><strong>Rajya Sabha BJP-INC Dim1 spread (normalised): 0.466</strong></p>
+<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00158) and INC centroid (0.00175) are further apart in Rajya Sabha than their Lok Sabha equivalents (0.000894 vs 0.000940). The normalised spread is roughly 350 times larger.</p>
+<p>But within-party variance still dominates. The between-party variance is about 10% of the within-party variance (ratio = 0.099). Even in Rajya Sabha, individual members vary enormously around their party’s centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.</p>
+<p>The constituency effect is real and accounts for a large share of the J1 finding. But something else is also at work: party coordination over starred questions is weak in both houses. MPs across both Lok Sabha and Rajya Sabha follow their own judgment on what to ask, shaped by background, state, seniority, and committee assignments rather than a party whip.</p>
+</div>
+</div>
+</section>
+<section id="rajya-sabha-ideal-points" class="level3">
+<h3 class="anchored" data-anchor-id="rajya-sabha-ideal-points">Rajya Sabha ideal points</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/rs_ideal_2d.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>2D ideal point scatter for 97 Rajya Sabha members. BJP (22 members) and INC (29 members) centroids are now visibly separated, unlike in Lok Sabha where they are nearly coincident.</figcaption>
+</figure>
+</div>
+</section>
+<section id="distribution-along-dimension-1" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-along-dimension-1">Distribution along Dimension 1</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/rs_dim1_party.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Party distributions along the primary SVD dimension (Rajya Sabha). Parties show more separation than in the Lok Sabha equivalent, but distributions still overlap substantially.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What Dimension 1 captures in Rajya Sabha
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Lok Sabha (J1), Dimension 1 captured a constituency-type axis: agrarian vs urban questions. In Rajya Sabha, where that constituency variation is removed, Dimension 1 begins to pick up party-line vocabulary differences – BJP members clustering toward infrastructure and national scheme terminology, INC members clustering toward accountability and governance language. The separation is modest but directionally consistent with party ideology.</p>
+<p>Left parties and BJD (Biju Janata Dal, Odisha) sit further along the dimension, consistent with their narrower, more disciplined question agendas. BJD’s position reflects Odisha-specific vocabulary (Mahanadi water dispute, tribal affairs, POSCO project) that makes it distinct from both national parties.</p>
+<p><strong>Key numbers:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Party</th>
+<th>Members</th>
+<th>Dim1 centroid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BJP</td>
+<td>22</td>
+<td>0.00158</td>
+</tr>
+<tr class="even">
+<td>INC</td>
+<td>29</td>
+<td>0.00175</td>
+</tr>
+<tr class="odd">
+<td>Left</td>
+<td>5</td>
+<td>0.00222</td>
+</tr>
+<tr class="even">
+<td>BJD</td>
+<td>6</td>
+<td>0.00202</td>
+</tr>
+</tbody>
+</table>
+<p>Variance explained: Dim1 = 55.8%, Dim2 = 22.7%</p>
+</div>
+</div>
 <hr>
 </section>
 </section>
