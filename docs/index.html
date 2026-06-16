@@ -1266,7 +1266,7 @@ Note
 <section id="rajyasabha" class="level2">
 <h2 class="anchored" data-anchor-id="rajyasabha">Rajya Sabha: Testing the Constituency Hypothesis</h2>
 <p>The J1 ideal points analysis found no party clustering in Lok Sabha question vocabulary. The explanation was structural: starred questions are constituency-service instruments, so vocabulary variation is driven by where an MP’s constituents live, not which party they belong to.</p>
-<p>Rajya Sabha members provide a direct test. They represent <strong>states</strong>, not individual constituencies. If constituency variation is the main reason Lok Sabha parties don’t cluster, Rajya Sabha members should show more party-based vocabulary structure. The identical SVD pipeline runs on 3487 Rajya Sabha starred questions (2014-2025) from 185 matched members, covering roughly 65% of the starred RS question archive.</p>
+<p>Rajya Sabha members provide a direct test. They represent <strong>states</strong>, not individual constituencies. If constituency variation is the main reason Lok Sabha parties don’t cluster, Rajya Sabha members should show more party-based vocabulary structure. The identical SVD pipeline runs on 4907 Rajya Sabha starred questions (2014-2025) from 264 matched members, covering roughly 97% of the starred RS question archive.</p>
 <section id="the-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="the-comparison">The comparison</h3>
 <div class="quarto-figure quarto-figure-center">
@@ -1286,9 +1286,9 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Lok Sabha BJP-INC Dim1 spread (normalised): 0.175</strong></p>
-<p><strong>Rajya Sabha BJP-INC Dim1 spread (normalised): 1.417</strong></p>
-<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00698) and INC centroid (-0.00291) are further apart in Rajya Sabha than their Lok Sabha equivalents (0.00112 vs 9.3^{-4}). The normalised BJP-INC spread is roughly 8 times larger.</p>
-<p>Within-party variance still dominates, though. The between-party variance is less than 1% of the within-party variance (ratio = 0.009). Even in Rajya Sabha, individual members vary enormously around their party’s centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.</p>
+<p><strong>Rajya Sabha BJP-INC Dim1 spread (normalised): 1.373</strong></p>
+<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00552) and INC centroid (-0.00206) are further apart in Rajya Sabha than their Lok Sabha equivalents (-0.00112 vs -9.3^{-4}). The normalised BJP-INC spread is roughly 8 times larger.</p>
+<p>Within-party variance still dominates, though. The between-party variance is about 2% of the within-party variance (ratio = 0.018). Even in Rajya Sabha, individual members vary enormously around their party’s centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.</p>
 <p>The constituency effect is real and accounts for a large share of the J1 finding. But something else is also at work: party coordination over starred questions is weak in both houses. MPs across both Lok Sabha and Rajya Sabha follow their own judgment on what to ask, shaped by background, state, seniority, and committee assignments rather than a party whip.</p>
 </div>
 </div>
@@ -1298,7 +1298,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/figures/rs_ideal_2d.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption>2D ideal point scatter for 185 Rajya Sabha members. BJP (51 members) and INC (49 members) centroids are now visibly separated, unlike in Lok Sabha where they are nearly coincident.</figcaption>
+<figcaption>2D ideal point scatter for 264 Rajya Sabha members. BJP (68 members) and INC (69 members) centroids are now visibly separated, unlike in Lok Sabha where they are nearly coincident.</figcaption>
 </figure>
 </div>
 </section>
@@ -1334,27 +1334,27 @@ Note
 <tbody>
 <tr class="odd">
 <td>BJP</td>
-<td>51</td>
-<td>0.00698</td>
+<td>68</td>
+<td>0.00552</td>
 </tr>
 <tr class="even">
 <td>INC</td>
-<td>49</td>
-<td>-0.00291</td>
+<td>69</td>
+<td>-0.00206</td>
 </tr>
 <tr class="odd">
 <td>Left</td>
-<td>9</td>
-<td>-0.00297</td>
+<td>15</td>
+<td>-0.00207</td>
 </tr>
 <tr class="even">
 <td>BJD</td>
-<td>8</td>
-<td>-0.00294</td>
+<td>10</td>
+<td>-0.00211</td>
 </tr>
 </tbody>
 </table>
-<p>Variance explained: Dim1 = 86.0%, Dim2 = 7.8%</p>
+<p>Variance explained: Dim1 = 83.7%, Dim2 = 9.2%</p>
 </div>
 </div>
 <hr>

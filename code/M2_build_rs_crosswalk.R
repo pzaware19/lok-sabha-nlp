@@ -91,10 +91,15 @@ cat("[M2] Name cleaning functions defined\n")
 # SECTION 2: Build year-aware lookup key table
 # =============================================================================
 #{
-cat("[M2] Building year-aware lookup from rs_party_lookup.csv...\n")
+cat("[M2] Building year-aware lookup from rs_party_lookup.csv + rs_supplement_lookup.csv...\n")
 
-rs_lookup <- read_csv(file.path(INPDIR, "rs_party_lookup.csv"),
-                      show_col_types = FALSE) %>%
+rs_lookup_main <- read_csv(file.path(INPDIR, "rs_party_lookup.csv"),
+                           show_col_types = FALSE)
+rs_lookup_supp <- read_csv(file.path(INPDIR, "rs_supplement_lookup.csv"),
+                           show_col_types = FALSE)
+
+rs_lookup <- bind_rows(rs_lookup_main, rs_lookup_supp) %>%
+  distinct(name, elected_year, .keep_all = TRUE) %>%
   mutate(
     party_family = case_when(
       # rs_party_lookup.csv already stores some values as normalized families

@@ -1,0 +1,402 @@
+raw_name,party_family,matched_rs_name,method
+(Dr.) D. P. Vats (Retd.),BJP,D. P. Vats,exact
+A. A. Rahim,Left,A. A. Rahim,exact
+A. D. Singh,INC,Karan Singh,exact
+A. K. Selvaraj,DMK,K. Selvaraj,exact
+A. Vijayakumar,AIADMK,A. Vijayakumar,exact
+A. W. Rabi Bernard,INC,A. W. Rabi Bernard,exact
+A.U. Singh Deo,BJD,Ananga Udaya Singh Deo,exact
+A.V. Swamy,BJP,Subramanian Swamy,exact
+Aayanur Manjunatha,BJP,Aayanur Manjunath,exact
+Abdul Wahab,Other,Abdul Wahab,exact
+Abhishek Manu Singhvi,INC,Abhishek Singhvi,exact
+Abir Ranjan Biswas,TMC,Abir Ranjan Biswas,exact
+Aditya Prasad,BJP,Ravi Shankar Prasad,exact
+Ahamed Hassan,TMC,Ahmed Hassan Imran,token_overlap
+Ahmad Ashfaque Karim,RJD,Ashfaque Karim,exact
+Ahmed Patel,INC,Rajmani Patel,exact
+Ajay Makan,BJP,Ajay Sancheti,exact
+Ajay Pratap Singh,JDU,Ramchandra Prasad Singh,exact
+Ajay Sancheti,BJP,Ajay Sancheti,exact
+Ajit Kumar Bhuyan,INC,Ajit Kumar Bhuyan,exact
+Akhilesh Prasad Singh,INC,Akhilesh Prasad Singh,exact
+Ali Anwar Ansari,BSP,Salim Ansari,exact
+Alok Tiwari,NCP,Yogendra P. Tiwari,exact
+Amar Pal Maurya,BJP,Amar Shankar Sable,exact
+Amar Patnaik,BJD,Amar Patnaik,exact
+Amar Shankar Sable,BJP,Amar Shankar Sable,exact
+Amar Singh,Other,Amar Singh,exact
+Ambeth Rajan,BSP,Ambeth Rajan,exact
+Ambika Soni,INC,Ambika Soni,exact
+Amee Yajnik,INC,Amee Yajnik,exact
+Anand Sharma,INC,Anand Sharma,exact
+Aneel Prasad Hegde,JDU,Anil Hegde,exact
+Anil Agrawal,BJP,Naresh Chandra Agrawal,exact
+Anil Baluni,BJP,Anil Baluni,exact
+Anil Desai,Other,Anil Desai,exact
+Anil Jain,BJP,Meghraj Jain,exact
+Anil Kumar Sahani,RJD,Anil Kumar Sahani,exact
+Anil Kumar Yadav Mandadi,RJD,Anil Kumar Sahani,exact
+Anil Madhav Dave,BJP,Anil Madhav Dave,exact
+Anil Sukhdeorao Bonde,RJD,Anil Kumar Sahani,exact
+Anubhav Mohanty,BJD,Anubhav Mohanty,exact
+Arun Singh,INC,Karan Singh,exact
+Arvind Kumar Singh,SP,Arvind Kumar Singh,exact
+Ashk Ali Tak,BJP,Ashk Ali Tak,exact
+Ashok Bajpai,BJP,Ashok Gasti,exact
+Ashok Kumar Mittal,BJP,Ashok Gasti,exact
+Ashokrao Shankarrao Chavan,NCP,Vandana Chavan,exact
+Ashwini Vaishnaw,BJP,Ashwini Vaishnaw,exact
+Avinash Pande,BJP,Avinash Rai Khanna,exact
+Avinash Rai Khanna,BJP,Avinash Rai Khanna,exact
+Ayodhya Rami Reddy Alla,YSRCP,Ayodhya Rami Reddy Alla,exact
+B. Lingaiah Yadav,JDU,Sharad Yadav,exact
+B. Parthasaradhi Reddy,Other,D. Kupendra Reddy,exact
+B.K. Hariprasad,INC,B. K. Hariprasad,exact
+BHAGAT SINGH KOSHYARI,BJP,Bhagat Singh Koshyari,exact
+Babubhai Jesangbhai Desai,Other,Anil Desai,exact
+Baburam Nishad,SP,Vishambhar Prasad Nishad,exact
+Baishnab Parida,BJD,Baishnab Charan Parida,exact
+Balwinder Singh Bhunder,Other,Balwinder Singh Bhunder,exact
+Banda Prakash,TRS,Banda Prakash,exact
+Basawaraj Patil,INC,Rajni Patil,exact
+Bashistha Narain Singh,JDU,Bashistha Narain Singh,exact
+Bhagwat Karad,BJP,Bhagat Singh Koshyari,fuzzy_jw
+Bhalchandra Mungekar,INC,Bhalchandra Mungekar,exact
+Bhaskar Rao Nekkanti,INC,Rapolu Ananda Bhaskar,exact
+Bhim Singh,INC,Karan Singh,exact
+Bhubaneswar Kalita,INC,Bhubaneswar Kalita,exact
+Bhupender Yadav,BJP,Bhupender Yadav,exact
+Bhupinder Singh,BJD,Bhupinder Singh,exact
+Bhushan Lal Jangde,BJP,Bhushan Lal Jangde,exact
+Bikash Ranjan Bhattacharyya,Left,Bikash Ranjan Bhattacharyya,exact
+Bimla Kashyap Sood,BJP,Bimla Kashyap Sood,exact
+Binoy Viswam,Left,Binoy Viswam,exact
+Biplab Kumar Deb,BJP,Biplab Kumar Deb,exact
+Birender Singh,BJP,Birender Singh,exact
+Bishnu Charan Das,Left,Jharna Das,exact
+Brij Lal,BJP,Lal Sinh Vadodia,exact
+C. Ve. Shanmugam,AIADMK,C. Ve. Shanmugam,exact
+C.M. Ramesh,TDP,C. M. Ramesh,exact
+C.P. Narayanan,Left,C.P. Narayanan,exact
+Chandan Mitra,BJP,Chandan Mitra,exact
+Chandrapal Singh Yadav,SP,Ram Gopal Yadav,exact
+Chhaya Verma,INC,Chhaya Verma,exact
+Chunibhai Kanjibhai Gohel,BJP,Chunibhai K Gohel,exact
+D. Kupendra Reddy,Other,D. Kupendra Reddy,exact
+D. Raja,Left,D. Raja,exact
+D.P. Tripathi,NCP,D. P. Tripathi,exact
+Darshan Singh Yadav,SP,Ram Gopal Yadav,exact
+Darshana Singh,INC,Karan Singh,exact
+Deepak Prakash,TRS,Banda Prakash,exact
+Deepender Singh Hooda,INC,Deepender Singh Hooda,exact
+Derek O' Brien,TMC,Derek O' Brien,exact
+Devender Goud T.,TDP,Tulla Devender Goud,exact
+Dhairyashil Mohan Patil,INC,Rajni Patil,exact
+Dhananjay Bhimrao Mahadik,BJP,Dhananjay Bhimrao Mahadik,exact
+Dharmapuri Srinivas,TRS,Dharmapuri Srinivas,exact
+Dhiraj Prasad Sahu,BJP,Dhiraj Prasad Sahu,exact
+Digvijaya Singh,INC,Digvijaya Singh,exact
+Dilip Kumar Tirkey,INC,Dilip Kumar Tirkey,exact
+Dilipbhai Pandya,BJP,Dilipbhai Pandya,exact
+Dinesh Sharma,INC,Anand Sharma,exact
+Dinesh Trivedi,BJP,Sudhanshu Trivedi,exact
+Dola Sen,Left,Tapan Kumar Sen,exact
+E.M. Sudarsana Natchiappan,INC,E.M. Sudarsana Natchiappan,exact
+Elamaram Kareem,Left,Elamaram Kareem,exact
+Fauzia Khan,INC,K. Rahman Khan,exact
+G.C. Chandrashekhar,INC,G.C. Chandrashekhar,exact
+G.V.L. Narasimha Rao,TRS,V. Hanumantha Rao,exact
+Garikapati Mohan Rao,BJP,Garikapati Mohan Rao,exact
+Geeta alias Chandraprabha,AIADMK,Geeta alias Chandraprabha,exact
+Ghanshyam Tiwari,INC,Pramod Tiwari,exact
+Gopal Narayan Singh,BJP,Gopal Narayan Singh,exact
+Gulam Rasool Balyawi,JDU,Gulam Rasool Balyawi,exact
+Gundu Sudharani,TDP,Gundu Sudha Rani,exact
+Harbhajan Singh,INC,Karan Singh,exact
+Harivansh,JDU,Harivansh Narayan Singh,exact
+Harnath Singh Yadav,JDU,Sharad Yadav,exact
+Harsh Mahajan,BJP,Harshvardhan Singh Dungarpur,fuzzy_jw
+Harshvardhan Singh Dungarpur,BJP,Harshvardhan Singh Dungarpur,exact
+Husain Dalwai,INC,Husain Dalwai,exact
+Imran Pratapgarhi,TMC,Ahmed Hassan Imran,exact
+Indu Bala Goswami,BJP,Indu Bala Goswami,exact
+Iranna Kadadi,INC,Iranna Kadadi,exact
+Ishwarlal Shankarlal Jain,NCP,Ishwarlal Jain,exact
+JAI PRAKASH NARAYAN SINGH,BJP,Jai Prakash Narayan Singh,exact
+Jaggesh,BJP,Jaggesh,exact
+Javed Ali Khan,INC,K. Rahman Khan,exact
+Jawhar Sircar,TMC,Jawhar Sircar,exact
+Jaya Amitabh Bachchan,SP,Jaya Bachchan,exact
+Jebi Mather Hisham,INC,Jebi Mather Hisham,exact
+Jesudasu Seelam,YSRCP,Jesudasu Seelam,exact
+Jharna Das Baidya,Left,Jharna Das,exact
+John Brittas,Left,John Brittas,exact
+Jose K. Mani,Other,Jose K. Mani,exact
+Jugul Kishore,BSP,Jugal Kishore,exact
+Jyotiraditya M. Scindia,BJP,Jyotiraditya Scindia,exact
+K. Bhabananda Singh,BJP,Bhabananda Singh,exact
+K. Keshava Rao,TRS,K. Keshava Rao,exact
+K. Laxman,BJP,K. Laxman,exact
+K. Rahman Khan,INC,K. Rahman Khan,exact
+K. Somaprasad,Left,K. Somaprasad,exact
+K.C. Ramamurthy,INC,K.C. Ramamurthy,exact
+K.C. Tyagi,JDU,K. C. Tyagi,exact
+K.C. Venugopal,INC,K. C. Venugopal,exact
+K.J. Alphons,BJP,Alphons Kannanthanam,exact
+K.K. Ragesh,Left,K.K. Ragesh,exact
+K.N. Balagopal,Left,K.N. Balagopal,exact
+K.P. Ramalingam,DMK,K. P. Ramalingam,exact
+K.R. Suresh Reddy,Other,D. Kupendra Reddy,exact
+K.R.N. Rajeshkumar,AIADMK,K.R.N. Rajeshkumar,exact
+K.T.S. Tulsi,INC,K.T.S. Tulsi,exact
+K.V.P. Ramachandra Rao,TRS,V. Hanumantha Rao,exact
+KANWAR DEEP SHARMA,INC,Raghunandan Sharma,exact
+Kahkashan Perween,RJD,Kahkashan Perween,exact
+Kailash Soni,INC,Ambika Soni,exact
+Kalpana Saini,BSP,Rajpal Singh Saini,exact
+Kalpataru Das,Left,Jharna Das,exact
+Kamakhya Prasad Tasa,BJP,Kamakhya Prasad Tasa,exact
+Kanak Lata Singh,BJP,Shivpratap Singh,exact
+Kanakamedala Ravindra Kumar,TDP,Kanakamedala Ravindra Kumar,exact
+Kanimozhi,INC,Kanimozhi NVN Somu,exact
+Kanimozhi NVN Somu,INC,Kanimozhi NVN Somu,exact
+Kanwar Deep Singh,TMC,Kanwar Deep Singh,exact
+Kapil Sibal,INC,Kapil Sibal,exact
+Kartikeya Sharma,INC,Anand Sharma,exact
+Kiranmay Nanda,TMC,Kiranmay Nanda,exact
+Kirodi Lal Meena,BJP,Kirodi Lal Meena,exact
+Kumar Ketkar,INC,Kumar Ketkar,exact
+Kusum Rai,BJP,Kusum Rai,exact
+L. Hanumanthaiah,INC,L. Hanumanthaiah,exact
+Lal Sinh Vadodia,BJP,Lal Sinh Vadodia,exact
+Laxmikant Bajpayee,BJP,Laxmikant Bajpayee,exact
+M. Mohamed Abdulla,DMK,M. Mohamed Abdulla,exact
+M. Shanmugam,AIADMK,M. Shanmugam,exact
+M. Thambidurai,AIADMK,M. Thambidurai,exact
+M.P. Achuthan,Left,M.P. Achuthan,exact
+M.P. Veerendra Kumar,Other,M. P. Veerendra Kumar,exact
+M.V. Rajeev Gowda,INC,Rajeev Gowda,exact
+M.V. Shreyams Kumar,Left,M. V. Shreyams Kumar,exact
+Madhusudan Mistry,INC,Madhusudan Mistry,exact
+Mahendra Bhatt,JDU,Mahendra Prasad,exact
+Mahendra Singh Mahra,INC,Mahendra Singh Mahra,exact
+Mahesh Poddar,BJP,Mahesh Poddar,exact
+Majeed Memon,NCP,Majeed Memon,exact
+Mamata Mohanta,BJD,Mamata Mohanta,exact
+Manas Ranjan Bhunia,TMC,Manas Ranjan Bhunia,exact
+Manas Ranjan Mangaraj,TMC,Manas Ranjan Bhunia,exact
+Mani Shankar Aiyar,Other,Jose K. Mani,exact
+Manish Gupta,TMC,Manish Gupta,exact
+Manoj Kumar Jha,BJP,Prabhat Jha,exact
+Mansukh Mandaviya,BJP,Mansukh Mandaviya,exact
+Masthan Rao Yadav Beedha,TDP,Masthan Rao Yadav Beedha,exact
+Medha Vishram Kulkarni,BJP,Medha Vishram Kulkarni,exact
+Meghraj Jain,BJP,Meghraj Jain,exact
+Misha Bharti,RJD,Misa Bharti,exact
+Mission Ranjan Das,Left,Jharna Das,exact
+Mithlesh Kumar,BJP,Sanjiv Kumar,exact
+Mohammed Adeeb,INC,Mohammed Adeeb,exact
+Mohammed Nadimul Haque,TMC,Nadimul Haque,exact
+Mohd. Ali Khan,INC,K. Rahman Khan,exact
+Motilal Vora,INC,Motilal Vora,exact
+Mukul Balkrishna Wasnik,INC,Mukul Balkrishna Wasnik,exact
+Muzibulla Khan,INC,K. Rahman Khan,exact
+N. Gokulakrishnan,AIADMK,N. Gokulakrishnan,exact
+N.K. SINGH,BJP,Shivpratap Singh,exact
+Narain Dass Gupta,TMC,Manish Gupta,exact
+Naranbhai J. Rathwa,BJP,Naranbhai J. Rathwa,exact
+Narayan Lal Panchariya,BJP,Narayan Lal Panchariya,exact
+Narayan Rane,BJP,Narayan Lal Panchariya,exact
+Narendra Budania,BSP,Narendra Kumar Kashyap,exact
+Narendra Jadhav,BSP,Narendra Kumar Kashyap,exact
+Narendra Kumar Kashyap,BSP,Narendra Kumar Kashyap,exact
+Narendra Kumar Swain,BJD,Narendra Kumar Swain,exact
+Naresh Agrawal,BJP,Naresh Chandra Agrawal,exact
+Naresh Bansal,BJP,Naresh Chandra Agrawal,exact
+Naresh Gujral,Other,Naresh Gujral,exact
+Narhari Amin,BJP,Narhari Amin,exact
+Naveen Jain,BJP,Meghraj Jain,exact
+Naznin Faruque,INC,Naznin Faruque,exact
+Neeraj Dangi,INC,Neeraj Dangi,exact
+Neeraj Shekhar,SP,Neeraj Shekhar,exact
+Niranjan Bishi,BJD,Niranjan Bishi,exact
+Om Prakash Mathur,BJP,Om Prakash Mathur,exact
+Oscar Fernandes,INC,Oscar Fernandes,exact
+P. Bhattacharya,INC,P. Bhattacharya,exact
+P. Rajeeve,Left,P. Rajeeve,exact
+P. Wilson,DMK,P. Wilson,exact
+P.L. Punia,INC,P. L. Punia,exact
+PERVEZ HASHMI,INC,Parvez Hashmi,exact
+Palvai Govardhan Reddy,INC,T. Subbarami Reddy,exact
+Pankaj Bora,INC,Ripun Bora,exact
+Parimal Nathwani,Other,Parimal Nathwani,exact
+Partap Singh Bajwa,INC,Pratap Singh Bajwa,exact
+Parvez Hashmi,INC,Parvez Hashmi,exact
+Paul Manoj Pandian,AIADMK,Paul Manoj Pandian,exact
+Pavan Kumar Varma,JDU,Pavan Kumar Varma,exact
+Phulo Devi Netam,BJP,Ramvichar Netam,exact
+Piyush Goyal,BJP,Piyush Goyal,exact
+Prabhakar Kore,BJP,Prabhakar Kore,exact
+Prabhakar Reddy Vemireddy,YSRCP,Vemireddy Prabhakar Reddy,exact
+Prabhat Jha,BJP,Prabhat Jha,exact
+Pradeep Kumar Balmuchu,INC,Pradeep Kumar Balmuchu,exact
+Prakash Chik Baraik,TRS,Banda Prakash,exact
+Prakash Javadekar,BJP,Prakash Javadekar,exact
+Pramod Tiwari,INC,Pramod Tiwari,exact
+Prashanta Nanda,TMC,Kiranmay Nanda,exact
+Pratap Keshari Deb,BJP,Biplab Kumar Deb,exact
+Prem Chand Gupta,RJD,Prem Chand Gupta,exact
+Priyanka Chaturvedi,INC,Satyavrat Chaturvedi,exact
+Pyarimohan Mohapatra,BJD,Pyarimohan Mohapatra,exact
+R. Dharmar,DMK,R. Dharmar,exact
+R. Girirajan,DMK,R. Girirajan,exact
+R. K. Sinha,BJP,Ravindra Kishore Sinha,exact
+R. Vaithilingam,INC,R. Vaithilingam,exact
+RABINARAYAN MOHAPATRA:,BJD,Pyarimohan Mohapatra,exact
+RAGHUNANDAN SHARMA,INC,Raghunandan Sharma,exact
+RAMA CHANDRA KHUNTIA,INC,Ramachandra Khuntia,exact
+Radha Mohan Das Agrawal,BJP,Naresh Chandra Agrawal,exact
+Raghav Chadha,AAP,Raghav Chadha,exact
+Raj Babbar,INC,Raj Babbar,exact
+Rajani Ashokrao Patil,INC,Rajni Patil,exact
+Rajeev Chandrasekhar,BJP,Rajeev Chandrasekhar,exact
+Rajeev Satav,INC,Rajeev Shukla,exact
+Rajeev Shukla,INC,Rajeev Shukla,exact
+Rajendra Gehlot,INC,Rajendra Gehlot,exact
+Rajkumar Dhoot,Other,Rajkumar Dhoot,exact
+Rajmani Patel,INC,Rajmani Patel,exact
+Rakesh Sinha,BJP,Ravindra Kishore Sinha,exact
+Ram Chander Jangra,BJP,Ram Jethmalani,exact
+Ram Chandra Prasad Singh,BJP,Shivpratap Singh,exact
+Ram Kripal Yadav,RJD,Ram Kripal Yadav,exact
+Ram Kumar Kashyap,BSP,Narendra Kumar Kashyap,exact
+Ram Narain Dudi,INC,Ramnarayan Dudi,exact
+Ram Nath Thakur,BJP,C. P. Thakur,exact
+Ram Shakal,BJP,Ram Jethmalani,exact
+Ram Vichar Netam,BJP,Ramvichar Netam,exact
+Ramdas Athawale,Other,Ramdas Athawale,exact
+Ramji Lal Suman,SP,Ramji Lal Suman,exact
+Ramkumar Verma,INC,Chhaya Verma,exact
+Ranee Narah,INC,Ranee Narah,exact
+Rangasayee Ramakrishna,BJP,R Ramakrishna,exact
+Ranjeet Ranjan,Left,Bikash Ranjan Bhattacharyya,token_overlap
+Ranjib Biswal,INC,Ranjib Biswal,exact
+Ranvijay Singh Judev,BJP,Ranvijay Singh Judev,exact
+Ratanjit Pratap Narain Singh,TMC,Kanwar Deep Singh,exact
+Ravi Chandra Vaddiraju,TRS,Vaddiraju Ravichandra,exact
+Ravi Prakash Verma,BJP,Ravi Prakash Verma,exact
+Ravi Shankar Prasad,BJP,Ravi Shankar Prasad,exact
+Rekha Sharma,INC,Anand Sharma,exact
+Renuka Chowdhury,INC,Renuka Chowdhury,exact
+Rewati Raman Singh,SP,Rewati Raman Singh,exact
+Ripun Bora,INC,Ripun Bora,exact
+Ritabrata Banerjee,Other,Ritabrata Banerjee,exact
+Ronald Sapa Tlau,INC,Ronald Sapa Tlau,exact
+Roopa Ganguly,BJP,Roopa Ganguly,exact
+Ryaga Krishnaiah,BJP,R. Krishnaiah,exact
+S Niranjan Reddy,Other,D. Kupendra Reddy,exact
+S. Muthukaruppan,TMC,S. Muthukaruppan,exact
+S. Selvaganabathy,AIADMK,S. Selvaganabathy,exact
+S. Thangavelu,DMK,S. Thangavelu,exact
+SABIR ALI,BSP,Munquad Ali,exact
+Saket Gokhale,TMC,Saket Gokhale,exact
+Salim Ansari,BSP,Salim Ansari,exact
+Sambhaji Chhatrapati,BJP,Sambhaji Chhatrapati,exact
+Samik Bhattacharya,BJP,Samik Bhattacharya,exact
+Samir Oraon,BJP,Sameer Oraon,exact
+Sandeep Kumar Pathak,BSP,Brajesh Pathak,exact
+Sandosh Kumar P,BJP,Sanjiv Kumar,exact
+Sangeeta Yadav,BJP,Bhupender Yadav,exact
+Sanjay Kumar Jha,BJP,Prabhat Jha,exact
+Sanjay Raut,Other,Sanjay Raut,exact
+Sanjay Seth,Other,Sanjay Raut,exact
+Sanjay Singh,AAP,Sanjay Singh,exact
+Sanjay Sinh,Other,Sanjay Raut,exact
+Sanjeev Arora,AAP,Sanjeev Arora,exact
+Sanjiv Kumar,BJP,Sanjiv Kumar,exact
+Sant Balbir Singh,INC,Karan Singh,exact
+Santanu Sen,Left,Tapan Kumar Sen,exact
+Santiuse Kujur,INC,Santiuse Kujur,exact
+Saroj Pandey,BJP,Saroj Pandey,exact
+Sarojini Hembram,BJD,Sarojini Hembram,exact
+Sasikala Pushpa Ramaswamy,AIADMK,Sasikala Pushpa,exact
+Sasmit Patra,BJD,Sasmit Patra,exact
+Satish Chandra Dubey,BSP,Satish Chandra Mishra,exact
+Satnam Singh Sandhu,BJP,Satnam Singh Sandhu,exact
+Satyanarayan Jatiya,BJP,Satyanarayan Jatiya,exact
+Seema Dwivedi,Left,T N Seema,exact
+Selja,INC,Selja Kumari,exact
+Shadi Lal Batra,INC,Shadi Lal Batra,exact
+Shaktisinh Gohil,INC,Shaktisinh Gohil,exact
+Shambhu Sharan Patel,INC,Rajmani Patel,exact
+Shambhuprasadji Tundiya,BJP,Shambhuprasad Tundiya,exact
+Shamsher Singh Dullo,INC,Shamsher Singh Dullo,exact
+Shamsher Singh Manhas,INC,Shamsher Singh Dullo,exact
+Shankarbhai N. Vegad,BJP,Shankarbhai N. Vegad,exact
+Shanta Chhetri,BJP,Shanta Kumar,exact
+Shantaram Naik,BJP,Shanta Kumar,fuzzy_jw
+Shwait Malik,BJP,Shwait Malik,exact
+Sikander Kumar,BJP,Sanjiv Kumar,exact
+Sonal Mansingh,BJP,Sonal Mansingh,exact
+Subhas Chandra Bose Pilli,BJD,Subhash Chandra Singh,fuzzy_jw
+Subhash Barala,Other,Subhash Chandra,exact
+Subhash Chandra,Other,Subhash Chandra,exact
+Subhash Chandra Singh,BJD,Subhash Chandra Singh,exact
+Subhasish Khuntia,INC,Ramachandra Khuntia,exact
+Subramanian Swamy,BJP,Subramanian Swamy,exact
+Sudhanshu Trivedi,BJP,Sudhanshu Trivedi,exact
+Sujeet Kumar,BJP,Sanjiv Kumar,exact
+Sukhdev Singh Dhindsa,Other,Sukhdev Singh Dhindsa,exact
+Sukhendu Sekhar Ray,TMC,Sukhendu Sekhar Ray,exact
+Sukhram Singh Yadav,SP,Ram Gopal Yadav,exact
+Sulata Deo,BJD,Ananga Udaya Singh Deo,exact
+Sumer Singh Solanki,INC,Sumer Singh Solanki,exact
+Sunetra Ajit Pawar,NCP,Sharad Pawar,exact
+Surendra Singh Nagar,BJP,Surendra Singh Nagar,exact
+Suresh Gopi,BJP,Suresh Prabhu,exact
+Suresh Prabhu,BJP,Suresh Prabhu,exact
+Sushil Kumar Gupta,TMC,Manish Gupta,exact
+Sushil Kumar Modi,BJP,Sushil Modi,exact
+Syed Naseer Hussain,INC,Syed Naseer Hussain,exact
+Syed Zafar Islam,INC,Syed Naseer Hussain,exact
+T. RATNA BAI,TDP,T. Ratna Bai,exact
+T. Rathinavel,DMK,T. Rathinavel,exact
+T. Subbarami Reddy,INC,T. Subbarami Reddy,exact
+T.G. Venkatesh,TDP,T.G. Venkatesh,exact
+T.K. Rangarajan,Left,T. K. Rangarajan,exact
+T.N. Seema,Left,T N Seema,exact
+Tapan Kumar Sen,Left,Tapan Kumar Sen,exact
+Tarun Vijay,BJP,Tarun Vijay,exact
+Tejveer Singh,INC,Karan Singh,exact
+Thaawar Chand Gehlot,INC,Rajendra Gehlot,exact
+Thota Seetharama Lakshmi,TDP,Thota Seetharama Lakshmi,exact
+Tiruchi Siva,DMK,Tiruchi Siva,exact
+V. Hanumantha Rao,TRS,V. Hanumantha Rao,exact
+V. Maitreyan,AIADMK,V. Maitreyan,exact
+V. Sivadasan,Left,V. Sivadasan,exact
+V. Vijayasai Reddy,YSRCP,V. Vijayasai Reddy,exact
+V.P. Singh Badnore,BJP,Shivpratap Singh,exact
+VAIKO,Other,VAIKO,exact
+VASANTHI STANLEY,DMK,Vasanthi Stanley,exact
+Vandana Chavan,NCP,Vandana Chavan,exact
+Veer Singh,BSP,Veer Singh,exact
+Venkataramana Rao Mopidevi,YSRCP,Mopidevi Venkataramana,exact
+Vijay Goel,BJP,Tarun Vijay,exact
+Vijay Jawaharlal Darda,BJP,Tarun Vijay,exact
+Vijay Mallya,BJP,Tarun Vijay,exact
+Vijay Pal Singh Tomar,SP,Vijaypal Singh Tomar,exact
+Vijaylaxmi Sadho,INC,Vijaylaxmi Sadho,exact
+Vijila Sathyananth,AIADMK,Vijila Sathyananth,exact
+Vikas Mahatme,BJP,Vikas Mahatme,exact
+Vikramjit Singh Sahney,INC,Vikramjit Singh Sahney,exact
+Vinay Dinu Tendulkar,BJP,Sachin Tendulkar,exact
+Vinay P. Sahasrabuddhe,BJP,Vinay Katiyar,exact
+Viplove Thakur,INC,Viplove Thakur,exact
+Vishambhar Prasad Nishad,SP,Vishambhar Prasad Nishad,exact
+Vivek Gupta,RJD,Prem Chand Gupta,exact
+Vivek K. Tankha,INC,Vivek Tankha,exact
+Vivek Thakur,BJP,Vivek Thakur,exact
+Wansuk Syiem,INC,Wansuk Syiem,exact
+Y. S. Chowdary,TDP,Sujana Chowdary,exact
+Yerram Venkata Subba Reddy,Other,D. Kupendra Reddy,exact
