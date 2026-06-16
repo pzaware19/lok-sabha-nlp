@@ -38,9 +38,25 @@ Co-questioning Network · igraph
 :::
 :::
 
-Starred questions are one of the more underused datasets in Indian political science. Every session, MPs submit written questions to ministries before the House sits. A minister has to be present to answer them. That matters, because it means parties use these questions deliberately. What is the government doing about farmer suicides? What is the status of the highway in Bihar? How many minorities were displaced? These are not speeches. They are on-the-record demands, filed by name, attached to a party.
+::: {.lead-para}
+Every parliamentary session, Indian MPs file written questions to ministries before the House sits. A minister must be present to answer them -- which means parties choose what to ask carefully. These are not speeches or votes. They are on-the-record demands, filed by name, attached to a party: what is the government doing about farmer suicides, the highway in Bihar, the displaced minorities. Across three Lok Sabhas (2014-2026), that record runs to 150,000 questions.
 
-I assembled the complete archive of Lok Sabha starred questions, matched MPs to their parties, and ran topic models, word embeddings, and clustering. The question I started with was simple: does the ideological structure of Indian politics show up in how parties phrase their questions? It does, pretty clearly.
+This project applies unsupervised machine learning to that corpus -- topic models, word embeddings, network analysis, ideal point estimation -- without any hand-labelling. The question: does the ideological and institutional structure of Indian politics show up in the language parties choose when they have a minister's attention?
+:::
+
+::: {.abstract-box}
+**Five findings from 150,000 starred questions**
+
+1. **Party ideology is visible, but weaker than expected.** BJP's governing-party vocabulary (scheme rollouts, infrastructure achievements) separates cleanly from opposition language (delays, failures, accountability). But between-party variance is less than 1× within-party variance -- far below what US Congressional roll-call votes show. Indian starred questions are not party-whipped.
+
+2. **The dominant signal is constituency, not party.** MPs from agrarian districts ask about MSP and crop insurance regardless of which party they belong to. The ideal point space recovers geographic and sectoral cleavages, not left-right ideology. Party affiliation explains a surprisingly small fraction of what any individual MP asks about -- who they represent matters more than who they represent it for.
+
+3. **Rajya Sabha shows more party clustering -- but not much more.** RS members represent states, not constituencies. Removing the constituency pull widens the BJP-INC vocabulary gap 8-fold and roughly doubles party discipline. The upper house is not purely a constituency-service instrument. But within-party variance still dominates in both chambers; the party whip does not reach starred questions.
+
+4. **BJP's question language has shifted toward welfare-state vocabulary across three parliaments.** Topic models and word embeddings both capture the drift: infrastructure-heavy language in the 16th LS gives way to social scheme vocabulary (PM-KISAN, Ayushman Bharat, Jan Dhan) in the 17th and 18th. The Hindutva dimension remains a stable BJP signal throughout -- it does not fade as welfare vocabulary grows.
+
+5. **Regional parties concentrate their parliamentary access on specific state grievances.** DMK over-questions communications and railways at 2× the expected rate. TDP over-questions finance by 2.7× -- almost entirely about Andhra bifurcation compensation. In Rajya Sabha, where these parties lack the LS seat share to set the agenda, the concentration intensifies: question slots are too scarce to waste on anything but the core state issue.
+:::
 
 ## The Data {#data}
 

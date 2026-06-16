@@ -279,6 +279,49 @@ a:hover {
   text-underline-offset: 3px;
 }
 
+/* Abstract / findings panel */
+.abstract-box {
+  background: #FEF8F0;
+  border-left: 4px solid #FF9933;
+  border-radius: 0 4px 4px 0;
+  padding: 1.8rem 2.2rem;
+  margin: 2.8rem 0;
+}
+.abstract-box > p:first-child {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0D1B2A;
+  margin-bottom: 1.1rem;
+  margin-top: 0;
+}
+.abstract-box ol {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+.abstract-box ol li {
+  margin-bottom: 0.8rem;
+  line-height: 1.72;
+  color: #2C2C2E;
+}
+.abstract-box ol li:last-child {
+  margin-bottom: 0;
+}
+.abstract-box ol > li::marker {
+  color: #B5440E;
+  font-weight: 700;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+}
+
+/* Lead paragraph -- intro lede before findings panel */
+.lead-para p, p.lead-para {
+  font-size: 1.06rem;
+  line-height: 1.85;
+  color: #1C1C1E;
+  max-width: 760px;
+}
+
 /* Horizontal rule */
 hr {
   border: none;
