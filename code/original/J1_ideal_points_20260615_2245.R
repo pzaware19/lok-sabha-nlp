@@ -53,33 +53,55 @@ MIN_WORD_DOCS <- 5    # word must appear in at least 5 different MPs' corpora
 #{
 cat("\n[J1] Loading questions from parquet...\n")
 
+strip_hon <- function(s) {
+  s <- str_to_upper(str_squish(s))
+  str_remove_all(s,
+    "\\b(SHRIMATI|SMT\\.?|KUMARI|MRS\\.?|MS\\.?|DR\\.?|PROF\\.?|SH\\.?|SHRI\\.?)\\b")
+}
+norm_fl <- function(s) {
+  parts <- str_split(str_squish(s), "\\s+")[[1]]
+  if (length(parts) <= 2) return(s)
+  paste(parts[1], parts[length(parts)])
+}
+
 parquet_files <- list.files(TMPDIR, pattern = "train-.*\\.parquet$", full.names = TRUE)
 raw <- map_dfr(parquet_files, function(f)
   read_parquet(f, col_select = c("lok_no", "type", "members", "question_text")))
-
-crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"), show_col_types = FALSE)
 
 starred <- raw %>%
   filter(type == "STARRED", lok_no >= 16L) %>%
   mutate(
     primary_raw  = map_chr(members, function(x)
       tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_)),
-    primary_norm = primary_raw
+    primary_norm = vapply(vapply(replace_na(primary_raw, ""),
+                                  strip_hon, character(1)),
+                           norm_fl, character(1))
   ) %>%
-  filter(!is.na(primary_norm), primary_norm != "", !is.na(question_text))
+  filter(primary_norm != "", !is.na(question_text))
 
 cat("  Starred questions loaded:", nrow(starred), "\n")
 #}
 
 # =============================================================================
-# SECTION 2: Attach party labels from crosswalk
+# SECTION 2: Attach party labels from lookup
 # =============================================================================
 #{
 cat("[J1] Attaching party labels...\n")
 
+lookup <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"),
+                   show_col_types = FALSE) %>%
+  mutate(
+    mp_norm = vapply(vapply(str_to_upper(str_squish(mp_name)),
+                            strip_hon, character(1)),
+                     norm_fl, character(1))
+  ) %>%
+  arrange(desc(lok_no)) %>%
+  distinct(mp_norm, .keep_all = TRUE)
+
+mp_party_map <- setNames(lookup$party_family, lookup$mp_norm)
+
 starred <- starred %>%
-  left_join(crosswalk %>% select(raw_name, lok_no, party_family),
-            by = c("primary_norm" = "raw_name", "lok_no")) %>%
+  mutate(party_family = mp_party_map[primary_norm]) %>%
   filter(!is.na(party_family))
 
 cat("  After party match:", nrow(starred), "questions from",

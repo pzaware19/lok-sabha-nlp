@@ -55,7 +55,7 @@ I assembled the complete archive of Lok Sabha starred questions, matched MPs to 
 
 The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.
 
-Party matching came from scraping Wikipedia's constituency lists for all three Lok Sabhas. The match rate on starred questions was 38%, which gives enough coverage for BJP, INC, and most major opposition parties to work with reliably.
+Party matching used a multi-pass name normalization pipeline that handles honorific prefixes (Dr., Prof., Adv.), word-order reversals, compound initials, and fuzzy spelling variation. The match rate on starred questions is 95.5%, covering all major parties reliably across all three Lok Sabhas. The remaining 4.5% are primarily Tamil Nadu AIADMK MPs from the 16th Lok Sabha whose names were absent from the Wikipedia constituency lists used as the lookup source.
 
 The unit of analysis is the **party-session document**: all starred questions submitted by a party in a given session, concatenated into one text. That gives 205 documents and a 3,258-term vocabulary after pruning.
 
@@ -63,8 +63,8 @@ The unit of analysis is the **party-session document**: all starred questions su
 |---|---|
 | Total questions | 150,629 |
 | Starred questions | 11,881 |
-| Starred with party match | 4,356 |
-| Unique MPs matched | 1,642 |
+| Starred with party match | 11,340 |
+| Unique MPs matched | 1,215 |
 | Party-session documents | 205 |
 | Vocabulary (after pruning) | 3,258 terms |
 
@@ -618,7 +618,7 @@ n_parties <- n_distinct(ip$party_family)
 
 A standard approach to measuring political positions in legislatures is ideal point estimation: project legislators into a low-dimensional space where proximity means similarity in behavior. NOMINATE does this for US roll-call votes; here we apply the same logic to question vocabulary using SVD (the W3-2 matrix factorization framework). Each MP is represented by their TF-IDF word vector; truncated SVD extracts the two dimensions that explain the most cross-MP variation.
 
-**Method:** Build a `r n_mps_ideal`-MP by 3,921-word TF-IDF matrix (MPs as documents, words as features). Column-center to remove average term frequency (equivalent to mean-centering before PCA). Run truncated SVD via irlba; extract 2 components. The left singular vectors scaled by singular values give MP coordinates; right singular vectors give word loadings.
+**Method:** Build a `r n_mps_ideal`-MP by 5,251-word TF-IDF matrix (MPs as documents, words as features). Column-center to remove average term frequency (equivalent to mean-centering before PCA). Run truncated SVD via irlba; extract 2 components. The left singular vectors scaled by singular values give MP coordinates; right singular vectors give word loadings.
 
 ![2D ideal point scatter for `r n_mps_ideal` Indian MPs across the 16th-18th Lok Sabha. Each point is one MP; diamonds are party centroids.](output/figures/ideal_2d.png){width=95%}
 

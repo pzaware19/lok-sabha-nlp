@@ -190,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="stat"><div class="stat-num">3,258</div><div class="stat-label">vocabulary terms</div></div>
 </div>
 <p>The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.</p>
-<p>Party matching came from scraping Wikipedia’s constituency lists for all three Lok Sabhas. The match rate on starred questions was 38%, which gives enough coverage for BJP, INC, and most major opposition parties to work with reliably.</p>
+<p>Party matching used a multi-pass name normalization pipeline that handles honorific prefixes (Dr., Prof., Adv.), word-order reversals, compound initials, and fuzzy spelling variation. The match rate on starred questions is 95.5%, covering all major parties reliably across all three Lok Sabhas. The remaining 4.5% are primarily Tamil Nadu AIADMK MPs from the 16th Lok Sabha whose names were absent from the Wikipedia constituency lists used as the lookup source.</p>
 <p>The unit of analysis is the <strong>party-session document</strong>: all starred questions submitted by a party in a given session, concatenated into one text. That gives 205 documents and a 3,258-term vocabulary after pruning.</p>
 <table class="caption-top table">
 <tbody>
@@ -204,11 +204,11 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>Starred with party match</td>
-<td>4,356</td>
+<td>11,340</td>
 </tr>
 <tr class="even">
 <td>Unique MPs matched</td>
-<td>1,642</td>
+<td>1,215</td>
 </tr>
 <tr class="odd">
 <td>Party-session documents</td>
@@ -994,7 +994,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>BJP scores <strong>0.107</strong> in the 16th LS vs INC’s <strong>0.197</strong>: INC is notably more coordinated despite being in opposition. This flips the conventional narrative. The explanation is structural:</p>
+<p>BJP scores <strong>0.094</strong> in the 16th LS vs INC’s <strong>0.181</strong>: INC is notably more coordinated despite being in opposition. This flips the conventional narrative. The explanation is structural:</p>
 <p><strong>Why ruling parties are less disciplined:</strong> BJP sent 272–303 MPs to each Lok Sabha. With that many MPs spread across hundreds of constituencies, the party cannot enforce a single questioning agenda. Each MP has their own local infrastructure project, state scheme, or sectoral concern. The result is a wide vocabulary of questions that reduces the average similarity to any centroid.</p>
 <p><strong>Why smaller opposition parties are more disciplined:</strong> INC (44–52 eligible MPs in our data) has fewer MPs, and each MP carries a higher proportion of the party’s total questioning load. Smaller parties like Left and TDP score highest precisely because they have 5–15 MPs all focused on a narrow issue set (labour rights, Andhra Pradesh concerns).</p>
 <p><strong>Regional parties:</strong> Left, BSP, TDP, JDU all score above 0.3, well above both national parties. These are single-issue or single-region parties where thematic focus is by design.</p>
@@ -1019,8 +1019,8 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>BJP’s discipline <strong>rises</strong> from 0.107 in the 16th LS to 0.161 in the 18th. The 18th Lok Sabha returned a smaller BJP cohort (240 seats vs 303 in the 17th), forcing the party to deploy fewer MPs on a similar range of questions. A smaller caucus is mechanically more coordinated.</p>
-<p>INC also rises, from 0.197 in the 16th to 0.22 in the 18th, consistent with the INDIA alliance giving INC a clearer opposition identity and reducing the reactive, event-driven questioning that depressed the 17th LS score.</p>
+<p>BJP’s discipline <strong>rises</strong> from 0.094 in the 16th LS to 0.129 in the 18th. The 18th Lok Sabha returned a smaller BJP cohort (240 seats vs 303 in the 17th), forcing the party to deploy fewer MPs on a similar range of questions. A smaller caucus is mechanically more coordinated.</p>
+<p>INC also rises, from 0.181 in the 16th to 0.149 in the 18th, consistent with the INDIA alliance giving INC a clearer opposition identity and reducing the reactive, event-driven questioning that depressed the 17th LS score.</p>
 </div>
 </div>
 </section>
@@ -1210,11 +1210,11 @@ Note
 <section id="idealpoints" class="level2">
 <h2 class="anchored" data-anchor-id="idealpoints">Ideal Points from Question Vocabulary</h2>
 <p>A standard approach to measuring political positions in legislatures is ideal point estimation: project legislators into a low-dimensional space where proximity means similarity in behavior. NOMINATE does this for US roll-call votes; here we apply the same logic to question vocabulary using SVD (the W3-2 matrix factorization framework). Each MP is represented by their TF-IDF word vector; truncated SVD extracts the two dimensions that explain the most cross-MP variation.</p>
-<p><strong>Method:</strong> Build a 395-MP by 3,921-word TF-IDF matrix (MPs as documents, words as features). Column-center to remove average term frequency (equivalent to mean-centering before PCA). Run truncated SVD via irlba; extract 2 components. The left singular vectors scaled by singular values give MP coordinates; right singular vectors give word loadings.</p>
+<p><strong>Method:</strong> Build a 860-MP by 5,251-word TF-IDF matrix (MPs as documents, words as features). Column-center to remove average term frequency (equivalent to mean-centering before PCA). Run truncated SVD via irlba; extract 2 components. The left singular vectors scaled by singular values give MP coordinates; right singular vectors give word loadings.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/figures/ideal_2d.png" class="img-fluid figure-img" style="width:95.0%"></p>
-<figcaption>2D ideal point scatter for 395 Indian MPs across the 16th-18th Lok Sabha. Each point is one MP; diamonds are party centroids.</figcaption>
+<figcaption>2D ideal point scatter for 860 Indian MPs across the 16th-18th Lok Sabha. Each point is one MP; diamonds are party centroids.</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">

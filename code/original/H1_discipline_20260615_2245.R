@@ -55,16 +55,34 @@ raw <- purrr::map_dfr(parquet_files, function(f)
   read_parquet(f, col_select = c("id","lok_no","type","members","question_text")))
 starred <- raw %>% filter(type == "STARRED", lok_no >= 16)
 
-crosswalk <- read_csv(file.path(INPDIR, "mp_name_crosswalk.csv"), show_col_types = FALSE)
+strip_hon <- function(s) {
+  s <- str_to_upper(str_squish(s))
+  s <- str_remove_all(s, "\\b(SHRIMATI|SMT\\.?|KUMARI|MRS\\.?|MS\\.?|DR\\.?|PROF\\.?|SH\\.?|SHRI\\.?)\\b")
+  str_squish(s)
+}
+norm_fl <- function(s) {
+  parts <- str_split(str_squish(s), "\\s+")[[1]]
+  if (length(parts) <= 2) return(s)
+  paste(parts[1], parts[length(parts)])
+}
+
+lookup <- read_csv(file.path(INPDIR, "mp_party_lookup.csv"), show_col_types = FALSE) %>%
+  mutate(
+    mp_key  = str_to_upper(str_squish(mp_name)),
+    mp_norm = vapply(vapply(mp_key, strip_hon, character(1)), norm_fl, character(1))
+  ) %>%
+  arrange(desc(lok_no)) %>%
+  distinct(mp_norm, .keep_all = TRUE)
+
+mp_party <- setNames(lookup$party_family, lookup$mp_norm)
 
 starred <- starred %>%
   mutate(
     primary_raw  = map_chr(members, function(x)
       tryCatch(str_squish(as.character(list(x)[[1]])[1]), error = function(e) NA_character_)),
-    primary_norm = primary_raw
+    primary_norm = vapply(vapply(primary_raw, strip_hon, character(1)), norm_fl, character(1)),
+    party_family = mp_party[primary_norm]
   ) %>%
-  left_join(crosswalk %>% select(raw_name, lok_no, party_family),
-            by = c("primary_norm" = "raw_name", "lok_no")) %>%
   filter(!is.na(party_family), !is.na(question_text), !is.na(primary_norm))
 
 cat(sprintf("  Starred (party-matched): %d\n", nrow(starred)))
