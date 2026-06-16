@@ -71,7 +71,7 @@ ls_files <- list.files(TMPDIR, pattern = "train-0000[0-4]-of-00005\\.parquet", f
 ls_q <- bind_rows(lapply(ls_files, read_parquet)) %>%
   filter(type == "STARRED") %>%
   mutate(
-    primary_raw = str_to_upper(str_squish(str_extract(members, "^[^,\n]+"))),
+    primary_raw = str_to_upper(str_squish(map_chr(members, ~.x[[1]]))),
     lok_no      = as.integer(lok_no)
   ) %>%
   left_join(cw_ls %>% select(raw_name, lok_no, party_family),
@@ -375,7 +375,7 @@ p5 <- ggplot(sent_compare %>% filter(party_family %in% sent_wide$party_family),
   coord_flip() +
   labs(
     title    = "Adversarialism: Lok Sabha vs Rajya Sabha",
-    subtitle = "% of starred question titles with negative AFINN sentiment",
+    subtitle = "% of starred question titles with negative sentiment (BING lexicon)",
     x = NULL, y = "% adversarial questions"
   ) +
   theme_minimal(base_size = 12) +
