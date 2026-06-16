@@ -190,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="stat"><div class="stat-num">3,258</div><div class="stat-label">vocabulary terms</div></div>
 </div>
 <p>The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.</p>
-<p>Party matching used a multi-pass name normalization pipeline that handles honorific prefixes (Dr., Prof., Adv.), word-order reversals, compound initials, and fuzzy spelling variation. The match rate on starred questions is 95.5%, covering all major parties reliably across all three Lok Sabhas. The remaining 4.5% are primarily Tamil Nadu AIADMK MPs from the 16th Lok Sabha whose names were absent from the Wikipedia constituency lists used as the lookup source.</p>
+<p>Matching MPs to their parties requires handling a consistent set of problems in the raw records: honorific prefixes in varying formats (Dr., Prof., Adv.), word-order reversals across data sources, compound initials, and spelling variation. A multi-pass normalization pipeline resolves these, achieving a 95.5% match rate on starred questions across all major parties and all three Lok Sabhas. The remaining 4.5% are Tamil Nadu AIADMK MPs from the 16th Lok Sabha whose names were absent from the Wikipedia constituency lists used as the lookup source.</p>
 <p>The unit of analysis is the <strong>party-session document</strong>: all starred questions submitted by a party in a given session, concatenated into one text. That gives 205 documents and a 3,258-term vocabulary after pruning.</p>
 <table class="caption-top table">
 <tbody>
@@ -556,7 +556,7 @@ Note
 <section id="bertopic" class="level2">
 <h2 class="anchored" data-anchor-id="bertopic">BERTopic: Topics Without the Bag-of-Words Assumption</h2>
 <p>LDA treats each document as a bag of tokens. It doesn’t know that “railway” and “train” are related, or that “farmer suicide” is a compound concept. BERTopic uses sentence embeddings instead: each question is projected into a 384-dimensional semantic space using a multilingual transformer, then HDBSCAN finds clusters of semantically similar questions, and c-TF-IDF extracts the distinctive terms per cluster.</p>
-<p>Running BERTopic on all 11,841 starred questions (not the party-session aggregates) finds 29 coherent topics. About 25% of questions land in the outlier cluster, questions with no clean fit to any topic. That’s not a failure; it’s honest. LDA forces every document into every topic with some weight; BERTopic refuses to.</p>
+<p>Running BERTopic on all 11,881 starred questions (not the party-session aggregates) finds 29 coherent topics. About 25% of questions land in the outlier cluster, questions with no clean fit to any topic. That’s not a failure; it’s honest. LDA forces every document into every topic with some weight; BERTopic refuses to.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/figures/bertopic_top_terms.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -838,7 +838,7 @@ Note
 </section>
 <section id="manifesto" class="level2">
 <h2 class="anchored" data-anchor-id="manifesto">Manifestos vs Parliament</h2>
-<p>Election manifestos are the public contract between a party and its voters. But parliament is where that contract is tested. This section asks two questions: <strong>do parties actually raise in parliament what they promised in their manifestos?</strong> And <strong>does the opposition use parliament to hold the ruling party to its own commitments?</strong></p>
+<p>Election manifestos are the public contract between a party and its voters. But parliament is where that contract is tested. Two questions: <strong>do parties actually raise in parliament what they promised in their manifestos?</strong> And <strong>does the opposition use parliament to hold the ruling party to its own commitments?</strong></p>
 <p>Sixteen manifestos are compared: BJP and INC across three elections (2014, 2019, 2024), plus AIADMK, NCP, AITC, CPI(M), and DMK where data permits. For each party × Lok Sabha combination, we compute the TF-IDF cosine similarity between manifesto word frequencies and the starred question word frequencies of that party’s MPs in the subsequent parliament. Higher cosine means more manifesto language actually surfaces in questions.</p>
 <p>All MP names, constituency names, and parliamentary boilerplate are stripped before the comparison to ensure we’re measuring policy vocabulary, not procedural noise.</p>
 <section id="how-aligned-are-parties-with-their-own-manifestos" class="level3">
@@ -1046,7 +1046,7 @@ Note
 </section>
 <section id="religion" class="level2">
 <h2 class="anchored" data-anchor-id="religion">Religion and Parliamentary Questions</h2>
-<p>Indian parliamentary democracy has no formal religious caucus system. But if identity shapes agenda, religious minority MPs might systematically direct questions toward ministries that serve their communities. This section uses name-pattern inference to identify Muslim, Sikh, and Christian MPs and tests whether their questioning behaviour differs from the majority.</p>
+<p>Indian parliamentary democracy has no formal religious caucus system. But if identity shapes agenda, religious minority MPs might systematically direct questions toward ministries that serve their communities. Name-pattern inference identifies Muslim, Sikh, and Christian MPs and tests whether their questioning behaviour differs from the majority.</p>
 <p><strong>Method:</strong> Islamic first names (Mohammad, Abdul, Syed, Ghulam, etc.) and surnames (Ansari, Siddiqui, Qureshi, etc.) flag Muslim MPs. Punjabi first names combined with Singh/Kaur flag Sikh MPs. South Indian Christian surnames (Varghese, Mathew, Thomas, George, Sebastian, etc.) flag Christian MPs. All others are pooled as Other/Hindu. This is a lower bound: Muslim MPs without Arabic-origin names are not captured.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1142,7 +1142,7 @@ Note
 </section>
 <section id="electoral" class="level2">
 <h2 class="anchored" data-anchor-id="electoral">Electoral Incentives: Do Margins Shape Questions?</h2>
-<p>The electoral connection in legislatures is one of the central mechanisms in political economy: legislators who fear losing their seat should work harder to signal effort to constituents. Starred questions are one of the few visible, public effort signals available to Indian MPs. This section links ECI election results (2014 and 2019) to question behavior to test whether the margin of victory shapes how MPs use this instrument.</p>
+<p>The electoral connection in legislatures is one of the central mechanisms in political economy: legislators who fear losing their seat should work harder to signal effort to constituents. Starred questions are one of the few visible, public effort signals available to Indian MPs. The analysis links ECI election results (2014 and 2019) to question behavior to test whether the margin of victory shapes how MPs use the instrument.</p>
 <p><strong>Method:</strong> Margin of victory is computed as (winner votes - runner-up votes) / total votes cast, using the Bhavnani national election dataset (2014) and the ECI 2019 constituency-level results. MPs are classified as Marginal (margin below 10%), Competitive (10-25%), or Safe (above 25%). Merged to Lok Sabha question data by normalized constituency name.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1209,7 +1209,7 @@ Note
 </section>
 <section id="idealpoints" class="level2">
 <h2 class="anchored" data-anchor-id="idealpoints">Ideal Points from Question Vocabulary</h2>
-<p>A standard approach to measuring political positions in legislatures is ideal point estimation: project legislators into a low-dimensional space where proximity means similarity in behavior. NOMINATE does this for US roll-call votes; here we apply the same logic to question vocabulary using SVD (the W3-2 matrix factorization framework). Each MP is represented by their TF-IDF word vector; truncated SVD extracts the two dimensions that explain the most cross-MP variation.</p>
+<p>A standard approach to measuring political positions in legislatures is ideal point estimation: project legislators into a low-dimensional space where proximity means similarity in behavior. NOMINATE does this for US roll-call votes; the same logic applies to question vocabulary using truncated SVD. Each MP is represented by their TF-IDF word vector; truncated SVD extracts the two dimensions that explain the most cross-MP variation.</p>
 <p><strong>Method:</strong> Build a 860-MP by 5,251-word TF-IDF matrix (MPs as documents, words as features). Column-center to remove average term frequency (equivalent to mean-centering before PCA). Run truncated SVD via irlba; extract 2 components. The left singular vectors scaled by singular values give MP coordinates; right singular vectors give word loadings.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1227,7 +1227,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The central finding is what does NOT appear: Indian MPs do not sort into a clear left-right spectrum in question vocabulary. BJP, INC, Left, and Shiv Sena centroids all cluster near the origin. TDP is the clearest outlier, displaced strongly on Dimension 2. This is the opposite of what NOMINATE finds for US Congress, where a single ideological axis explains most roll-call variation.</p>
+<p>The central finding is what does not appear: Indian MPs do not sort into a clear left-right spectrum in question vocabulary. BJP, INC, Left, and Shiv Sena centroids all cluster near the origin. TDP is the clearest outlier, displaced strongly on Dimension 2. This is the opposite of what NOMINATE finds for US Congress, where a single ideological axis explains most roll-call variation.</p>
 <p>The explanation is structural: starred questions are not party-whipped. Unlike roll-call votes, MPs face no party pressure on which topics to raise. The result is that question vocabulary variation is dominated by constituency-level agendas (which state the MP represents, which industries their constituents work in, which central schemes matter locally) rather than by party ideology. The ideal point space recovers <strong>geographic and sectoral cleavages</strong>, not ideological ones.</p>
 </div>
 </div>
@@ -1265,8 +1265,8 @@ Note
 </section>
 <section id="rajyasabha" class="level2">
 <h2 class="anchored" data-anchor-id="rajyasabha">Rajya Sabha: Testing the Constituency Hypothesis</h2>
-<p>The J1 ideal points analysis found no party clustering in Lok Sabha question vocabulary. The explanation offered was structural: starred questions are constituency-service instruments, so vocabulary variation is driven by where an MP’s constituents live, not which party they belong to.</p>
-<p>Rajya Sabha members provide a direct test. They represent <strong>states</strong>, not individual constituencies. If constituency variation is the main reason Lok Sabha parties don’t cluster, Rajya Sabha members should show more party-based vocabulary structure. This section runs the identical SVD pipeline on 3487 Rajya Sabha starred questions (2014-2025) from 185 matched members.</p>
+<p>The J1 ideal points analysis found no party clustering in Lok Sabha question vocabulary. The explanation was structural: starred questions are constituency-service instruments, so vocabulary variation is driven by where an MP’s constituents live, not which party they belong to.</p>
+<p>Rajya Sabha members provide a direct test. They represent <strong>states</strong>, not individual constituencies. If constituency variation is the main reason Lok Sabha parties don’t cluster, Rajya Sabha members should show more party-based vocabulary structure. The identical SVD pipeline runs on 3487 Rajya Sabha starred questions (2014-2025) from 185 matched members, covering roughly 65% of the starred RS question archive.</p>
 <section id="the-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="the-comparison">The comparison</h3>
 <div class="quarto-figure quarto-figure-center">
@@ -1287,8 +1287,8 @@ Note
 <div class="callout-body-container callout-body">
 <p><strong>Lok Sabha BJP-INC Dim1 spread (normalised): 0.175</strong></p>
 <p><strong>Rajya Sabha BJP-INC Dim1 spread (normalised): 1.417</strong></p>
-<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00698) and INC centroid (-0.00291) are further apart in Rajya Sabha than their Lok Sabha equivalents (-0.00112 vs -9.3^{-4}). The normalised spread is roughly 8 times larger.</p>
-<p>But within-party variance still dominates. The between-party variance is less than 1% of the within-party variance (ratio = 0.009). Even in Rajya Sabha, individual members vary enormously around their party’s centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.</p>
+<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00698) and INC centroid (-0.00291) are further apart in Rajya Sabha than their Lok Sabha equivalents (0.00112 vs 9.3^{-4}). The normalised BJP-INC spread is roughly 8 times larger.</p>
+<p>Within-party variance still dominates, though. The between-party variance is less than 1% of the within-party variance (ratio = 0.009). Even in Rajya Sabha, individual members vary enormously around their party’s centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.</p>
 <p>The constituency effect is real and accounts for a large share of the J1 finding. But something else is also at work: party coordination over starred questions is weak in both houses. MPs across both Lok Sabha and Rajya Sabha follow their own judgment on what to ask, shaped by background, state, seniority, and committee assignments rather than a party whip.</p>
 </div>
 </div>
