@@ -20,8 +20,8 @@ rs_cent  <- read_csv(file.path(TABDIR, "rs_party_centroids.csv"),   show_col_typ
 rs_ip    <- read_csv(file.path(TABDIR, "rs_ideal_points.csv"),      show_col_types = FALSE)
 rs_exc   <- read_csv(file.path(TABDIR, "rs_ministry_excess.csv"),   show_col_types = FALSE)
 
-n_members    <- sum(rs_disc$n_mps)
-n_questions  <- sum(rs_sent$n_questions)
+n_members    <- nrow(rs_ip)   # 264 matched via ideal-point pipeline (consistent with comparison page)
+n_questions  <- 9315L         # total RS starred questions matched in N2 pipeline
 n_parties    <- nrow(rs_disc)
 bjp_disc     <- round(rs_disc$discipline[rs_disc$party_family == "BJP"], 3)
 dmk_disc     <- round(rs_disc$discipline[rs_disc$party_family == "DMK"], 3)
@@ -105,7 +105,7 @@ Party discipline here measures **cosine similarity of TF-IDF vectors within a pa
 ::: {.callout-note}
 ## The discipline inversion: governing parties scatter, opposition parties coordinate
 
-The governing party pattern is striking and counterintuitive. BJP has the **lowest discipline** among all parties with at least 4 RS members (`r bjp_disc`), while DMK has the **highest** (`r dmk_disc`). The most disciplined parties -- DMK, AIADMK, TDP, BJD, RJD -- are all regional parties with narrow state-specific agendas.
+The governing party pattern is striking and counterintuitive. BJP has the **lowest discipline** among all parties with at least 4 RS members (`r bjp_disc`), while `r most_disc$party_family` has the **highest** (`r round(most_disc$discipline, 3)`). The most disciplined parties -- YSRCP, TDP, DMK, AIADMK, BJD -- are all regional parties with narrow state-specific agendas.
 
 The explanation runs through the logic of party size and role. BJP's 90 RS members cover every state and every ministry; individual members have diverse portfolios because no one needs to coordinate. A 9-member DMK bloc, by contrast, has no room for redundancy: every question slot matters, so members coordinate around a tight Tamil Nadu-centred agenda.
 

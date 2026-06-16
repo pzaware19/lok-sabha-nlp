@@ -18,7 +18,7 @@ Piyush Zaware
 
 ::: {.badge-row}
 ::: {.badge-item}
-11,340 LS Questions
+4,315 LS Questions
 :::
 ::: {.badge-item}
 9,315 RS Questions
@@ -68,7 +68,7 @@ Rajya Sabha members are elected by state legislatures, not voters. They have no 
 
 ```{=html}
 <div class="stat-row">
-  <div class="stat"><div class="stat-num">11,340</div><div class="stat-label">LS starred questions</div></div>
+  <div class="stat"><div class="stat-num">4,315</div><div class="stat-label">LS starred questions</div></div>
   <div class="stat"><div class="stat-num">9,315</div><div class="stat-label">RS starred questions</div></div>
   <div class="stat"><div class="stat-num">860</div><div class="stat-label">LS MPs matched</div></div>
   <div class="stat"><div class="stat-num">264</div><div class="stat-label">RS members matched</div></div>
@@ -79,7 +79,7 @@ Lok Sabha generates roughly 22% more starred questions in aggregate, despite the
 
 | | Lok Sabha | Rajya Sabha |
 |---|---|---|
-| Starred questions (matched) | 11,340 | 9,315 |
+| Starred questions (matched) | 4,315 | 9,315 |
 | Members / MPs matched | 860 | 264 |
 | Match rate | 95.5% | 96.7% |
 | Houses / period | 16th–18th LS (2014–2026) | 2014–2025 |
@@ -178,6 +178,10 @@ The second linguistic signal is geographic -- which parties invoke place names f
 The pattern here validates a straightforward claim: **Rajya Sabha functions as the primary national platform for regional parties**. AIADMK and DMK invoke Tamil geographic vocabulary (Cauvery, Mettur, Madurai, Tuticorin) in about 1% of their RS questions. TDP invokes Telugu geographic markers (Polavaram, Godavari, Rayalaseema) in 2.6% of RS questions -- the highest rate of any regional geographic marker. TMC references Bengali geography (Sundarbans, Hooghly, Damodar) in 0.2% of RS questions.
 
 These numbers are small as proportions, but the asymmetry is the finding: these parties do not have enough Lok Sabha seats to appear in the LS data at all during this period. Their national geographic advocacy is conducted entirely through the upper house.
+
+### Combined register overview
+
+![Linguistic register summary: % of questions with Hindi policy terms (left) and regional geographic markers (right), by party and house. A richer blue = higher prevalence.](output/figures/compare_lang_heatmap.png){width=90%}
 
 ---
 
