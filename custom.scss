@@ -59,17 +59,29 @@ body::before {
   color: #FF9933 !important;
 }
 
-/* Hero banner */
+/* Hero banner — word cloud image with dark overlay and text overlay */
 .hero {
-  background: linear-gradient(160deg, #0D1B2A 0%, #0F2D18 55%, #1A0800 100%);
-  color: white;
-  padding: 4.5rem 2rem 3.5rem 2rem;
-  margin: -1.5rem -1.5rem 3.5rem -1.5rem;
-  border-radius: 0 0 2px 2px;
   position: relative;
+  margin: -1.5rem -1.5rem 3.5rem -1.5rem;
+  padding: 0;
+  border-radius: 0 0 2px 2px;
   overflow: hidden;
+  color: white;
+  background: #0D1B2A; /* fallback while image loads */
 }
-/* Ashoka Chakra watermark */
+/* Hero word cloud image */
+.hero-img {
+  display: block !important;
+  width: 100% !important;
+  height: 420px !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  filter: brightness(0.40) !important;
+}
+/* Ashoka Chakra watermark — sits above the image */
 .hero::after {
   content: '';
   position: absolute;
@@ -78,56 +90,91 @@ body::before {
   transform: translateY(-50%);
   width: 400px;
   height: 400px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='white' stroke-width='6' opacity='0.025'/%3E%3Ccircle cx='100' cy='100' r='12' fill='none' stroke='white' stroke-width='4' opacity='0.025'/%3E%3Cg stroke='white' stroke-width='2' opacity='0.025'%3E%3Cline x1='100' y1='10' x2='100' y2='34'/%3E%3Cline x1='100' y1='166' x2='100' y2='190'/%3E%3Cline x1='10' y1='100' x2='34' y2='100'/%3E%3Cline x1='166' y1='100' x2='190' y2='100'/%3E%3Cline x1='27' y1='27' x2='44' y2='44'/%3E%3Cline x1='156' y1='156' x2='173' y2='173'/%3E%3Cline x1='173' y1='27' x2='156' y2='44'/%3E%3Cline x1='44' y1='156' x2='27' y2='173'/%3E%3Cline x1='100' y1='10' x2='85' y2='34'/%3E%3Cline x1='100' y1='10' x2='115' y2='34'/%3E%3Cline x1='100' y1='190' x2='85' y2='166'/%3E%3Cline x1='100' y1='190' x2='115' y2='166'/%3E%3Cline x1='10' y1='100' x2='34' y2='85'/%3E%3Cline x1='10' y1='100' x2='34' y2='115'/%3E%3Cline x1='190' y1='100' x2='166' y2='85'/%3E%3Cline x1='190' y1='100' x2='166' y2='115'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='white' stroke-width='6' opacity='0.04'/%3E%3Ccircle cx='100' cy='100' r='12' fill='none' stroke='white' stroke-width='4' opacity='0.04'/%3E%3Cg stroke='white' stroke-width='2' opacity='0.04'%3E%3Cline x1='100' y1='10' x2='100' y2='34'/%3E%3Cline x1='100' y1='166' x2='100' y2='190'/%3E%3Cline x1='10' y1='100' x2='34' y2='100'/%3E%3Cline x1='166' y1='100' x2='190' y2='100'/%3E%3Cline x1='27' y1='27' x2='44' y2='44'/%3E%3Cline x1='156' y1='156' x2='173' y2='173'/%3E%3Cline x1='173' y1='27' x2='156' y2='44'/%3E%3Cline x1='44' y1='156' x2='27' y2='173'/%3E%3Cline x1='100' y1='10' x2='85' y2='34'/%3E%3Cline x1='100' y1='10' x2='115' y2='34'/%3E%3Cline x1='100' y1='190' x2='85' y2='166'/%3E%3Cline x1='100' y1='190' x2='115' y2='166'/%3E%3Cline x1='10' y1='100' x2='34' y2='85'/%3E%3Cline x1='10' y1='100' x2='34' y2='115'/%3E%3Cline x1='190' y1='100' x2='166' y2='85'/%3E%3Cline x1='190' y1='100' x2='166' y2='115'/%3E%3C/g%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
+  z-index: 2;
 }
 .hero h1 {
+  position: absolute;
+  top: 44px;
+  left: 2rem;
+  right: 30%;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   font-weight: 800;
   color: #F5E6D3;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0;
   border: none;
   line-height: 1.2;
-  max-width: 750px;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.7);
+  z-index: 3;
 }
-.hero .subtitle,
+.hero .subtitle {
+  position: absolute;
+  top: 190px;
+  left: 2rem;
+  right: 32%;
+  z-index: 3;
+}
 .hero .subtitle p {
-  font-size: 1.12rem !important;
-  color: #FFFFFF !important;
-  max-width: 680px;
-  line-height: 1.78;
+  font-size: 0.97rem !important;
+  color: rgba(255,255,255,0.90) !important;
+  line-height: 1.72;
   font-weight: 400;
-  margin-top: 1rem;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
   opacity: 1 !important;
 }
-.hero .meta,
+.hero .meta {
+  position: absolute;
+  top: 310px;
+  left: 2rem;
+  z-index: 3;
+}
 .hero .meta p {
-  margin-top: 2rem;
-  font-size: 0.82rem !important;
+  font-size: 0.80rem !important;
   color: #FF9933 !important;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  margin: 0;
   opacity: 1 !important;
 }
 .hero .badge-row {
-  margin-top: 1.2rem;
+  position: absolute;
+  top: 345px;
+  left: 2rem;
+  right: 2rem;
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+  z-index: 3;
 }
 .hero .badge-item {
-  background: #FF9933;
+  background: rgba(255,153,51,0.92);
   border: none;
   border-radius: 3px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: #0D1B2A;
   letter-spacing: 0.02em;
+}
+
+/* Era word cloud image */
+.era-img {
+  border-radius: 4px !important;
+  box-shadow: 0 2px 18px rgba(13,27,42,0.22) !important;
+  margin: 2rem 0 !important;
+}
+
+/* Party art */
+.party-art {
+  border-radius: 4px !important;
+  box-shadow: 0 2px 18px rgba(13,27,42,0.22) !important;
+  margin: 2rem 0 !important;
 }
 
 /* Stat row */

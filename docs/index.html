@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-58f65581fc16a020bf8c0dce5340cfae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-56e5b2059fb2260942cec96b62102339.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -134,8 +134,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul class="collapse">
-  <li><a href="#what-does-indias-parliament-actually-talk-about" id="toc-what-does-indias-parliament-actually-talk-about" class="nav-link active" data-scroll-target="#what-does-indias-parliament-actually-talk-about">What Does India’s Parliament Actually Talk About?</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">The Data</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">The Data</a></li>
   <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methods</a></li>
   <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Results</a></li>
   <li><a href="#bertopic" id="toc-bertopic" class="nav-link" data-scroll-target="#bertopic">BERTopic: Topics Without the Bag-of-Words Assumption</a></li>
@@ -162,7 +161,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="what-does-indias-parliament-actually-talk-about" class="level1 hero">
+<div class="hero">
+<p><img src="output/figures/fig_hero_wordcloud.png" class="hero-img img-fluid"></p>
+<section id="what-does-indias-parliament-actually-talk-about" class="level1">
 <h1>What Does India’s Parliament Actually Talk About?</h1>
 <div class="subtitle">
 <p>I ran unsupervised machine learning on 150,000 parliamentary questions from three Lok Sabhas. No labels, no hand-coding. Just the raw text of what Indian MPs ask the government, and what falls out when you let the data speak.</p>
@@ -191,6 +192,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
+</div>
 <div class="lead-para">
 <p>Every parliamentary session, Indian MPs file written questions to ministries before the House sits. A minister must be present to answer them – which means parties choose what to ask carefully. These are not speeches or votes. They are on-the-record demands, filed by name, attached to a party: what is the government doing about farmer suicides, the highway in Bihar, the displaced minorities. Across three Lok Sabhas (2014-2026), that record runs to 150,000 questions.</p>
 <p>This project applies unsupervised machine learning to that corpus – topic models, word embeddings, network analysis, ideal point estimation – without any hand-labelling. The question: does the ideological and institutional structure of Indian politics show up in the language parties choose when they have a minister’s attention?</p>
@@ -212,6 +214,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="stat"><div class="stat-num">13</div><div class="stat-label">parties</div></div>
   <div class="stat"><div class="stat-num">205</div><div class="stat-label">documents</div></div>
   <div class="stat"><div class="stat-num">3,258</div><div class="stat-label">vocabulary terms</div></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/figures/fig_ls_era_wordclouds.png" class="era-img img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>The most frequent subjects in parliamentary questions across 150,000 starred and unstarred questions, 16th–18th Lok Sabha. Size proportional to question frequency after removing parliamentary boilerplate.</figcaption>
+</figure>
 </div>
 <p>The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.</p>
 <p>Matching MPs to their parties requires handling a consistent set of problems in the raw records: honorific prefixes in varying formats (Dr., Prof., Adv.), word-order reversals across data sources, compound initials, and spelling variation. A multi-pass normalization pipeline resolves these, achieving a 95.5% match rate on starred questions across all major parties and all three Lok Sabhas. The remaining 4.5% are Tamil Nadu AIADMK MPs from the 16th Lok Sabha whose names were absent from the Wikipedia constituency lists used as the lookup source.</p>
@@ -315,8 +323,14 @@ Note
 <p>Start with the simplest question: does the word embedding space recover anything that looks like Indian political ideology?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
+<p><img src="output/figures/fig_party_art.png" class="party-art img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Party vocabulary positions in two-dimensional ideological space. Economic axis (x): pro-labour/welfare to market/growth. Cultural axis (y): secular to Hindu nationalist. Each point is a party’s mean projection across all sessions.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="output/figures/ideological_space.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<figcaption>Party positions on two ideological dimensions. X-axis runs from pro-labour/welfare language on the left to market/growth language on the right. Y-axis runs from secular to Hindu nationalist vocabulary. Each point is a party’s mean across all sessions.</figcaption>
+<figcaption>Raw output: party positions on two ideological dimensions recovered by word2vec + antonym projection. X-axis = market/growth (right) vs welfare/labour (left). Y-axis = secular (bottom) vs Hindu nationalist (top).</figcaption>
 </figure>
 </div>
 <p>It does. BJP and Shiv Sena are at the nationalist end. Left parties and AAP are at the secular end. INC is in the centre-left. The ordering you’d expect if you just asked a political scientist to draw it by hand is basically what comes out.</p>
@@ -1311,7 +1325,7 @@ Note
 <div class="callout-body-container callout-body">
 <p><strong>Lok Sabha BJP-INC Dim1 spread (normalised): 0.175</strong></p>
 <p><strong>Rajya Sabha BJP-INC Dim1 spread (normalised): 1.373</strong></p>
-<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00552) and INC centroid (-0.00206) are further apart in Rajya Sabha than their Lok Sabha equivalents (0.00112 vs 9.3^{-4}). The normalised BJP-INC spread is roughly 8 times larger.</p>
+<p>Removing individual constituency variation does produce more party separation. The BJP centroid (0.00552) and INC centroid (-0.00206) are further apart in Rajya Sabha than their Lok Sabha equivalents (-0.00112 vs -9.3^{-4}). The normalised BJP-INC spread is roughly 8 times larger.</p>
 <p>Within-party variance still dominates, though. The between-party variance is about 2% of the within-party variance (ratio = 0.018). Even in Rajya Sabha, individual members vary enormously around their party’s centroid. For comparison, US Congress NOMINATE produces between/within ratios above 10. Indian parliamentary questions, even in the upper house, do not sort cleanly by party.</p>
 <p>The constituency effect is real and accounts for a large share of the J1 finding. But something else is also at work: party coordination over starred questions is weak in both houses. MPs across both Lok Sabha and Rajya Sabha follow their own judgment on what to ask, shaped by background, state, seniority, and committee assignments rather than a party whip.</p>
 </div>

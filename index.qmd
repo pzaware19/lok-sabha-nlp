@@ -6,6 +6,8 @@ format:
 ---
 
 ::: {.hero}
+![](output/figures/fig_hero_wordcloud.png){.hero-img}
+
 # What Does India's Parliament Actually Talk About?
 
 ::: {.subtitle}
@@ -69,6 +71,8 @@ This project applies unsupervised machine learning to that corpus -- topic model
 </div>
 ```
 
+![The most frequent subjects in parliamentary questions across 150,000 starred and unstarred questions, 16th–18th Lok Sabha. Size proportional to question frequency after removing parliamentary boilerplate.](output/figures/fig_ls_era_wordclouds.png){.era-img width=100%}
+
 The dataset covers the 16th (2014-2019), 17th (2019-2024), and 18th (2024-) Lok Sabha. I focused on starred questions since they carry more political content. Unstarred questions are written submissions; starred ones require a minister to answer in the House, so parties pick them more carefully.
 
 Matching MPs to their parties requires handling a consistent set of problems in the raw records: honorific prefixes in varying formats (Dr., Prof., Adv.), word-order reversals across data sources, compound initials, and spelling variation. A multi-pass normalization pipeline resolves these, achieving a 95.5% match rate on starred questions across all major parties and all three Lok Sabhas. The remaining 4.5% are Tamil Nadu AIADMK MPs from the 16th Lok Sabha whose names were absent from the Wikipedia constituency lists used as the lookup source.
@@ -108,7 +112,9 @@ Source: ["The Geometry of Culture"](https://doi.org/10.1177/0003122419877135), *
 
 Start with the simplest question: does the word embedding space recover anything that looks like Indian political ideology?
 
-![Party positions on two ideological dimensions. X-axis runs from pro-labour/welfare language on the left to market/growth language on the right. Y-axis runs from secular to Hindu nationalist vocabulary. Each point is a party's mean across all sessions.](output/figures/ideological_space.png){width=85%}
+![Party vocabulary positions in two-dimensional ideological space. Economic axis (x): pro-labour/welfare to market/growth. Cultural axis (y): secular to Hindu nationalist. Each point is a party's mean projection across all sessions.](output/figures/fig_party_art.png){.party-art width=85%}
+
+![Raw output: party positions on two ideological dimensions recovered by word2vec + antonym projection. X-axis = market/growth (right) vs welfare/labour (left). Y-axis = secular (bottom) vs Hindu nationalist (top).](output/figures/ideological_space.png){width=85%}
 
 It does. BJP and Shiv Sena are at the nationalist end. Left parties and AAP are at the secular end. INC is in the centre-left. The ordering you'd expect if you just asked a political scientist to draw it by hand is basically what comes out.
 
