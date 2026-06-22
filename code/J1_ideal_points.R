@@ -186,6 +186,21 @@ ideal_pts <- mp_coords %>%
   left_join(mp_party_tbl, by = "primary_norm") %>%
   mutate(party_family = replace_na(party_family, "Other"))
 
+# --- Deterministic sign orientation -------------------------------------------
+# SVD singular-vector signs are arbitrary and can flip between runs. Anchor the
+# polarity to substantive references so figures and the article narrative always
+# agree: Dim 1 positive on the BJP side, Dim 2 positive on the Telugu (TDP/YSRCP)
+# side. This is a display convention only and changes no distances or variances.
+.bjp_d1 <- mean(ideal_pts$dim1[ideal_pts$party_family == "BJP"], na.rm = TRUE)
+.tel_d2 <- mean(ideal_pts$dim2[ideal_pts$party_family %in% c("TDP", "YSRCP")], na.rm = TRUE)
+s1 <- if (is.finite(.bjp_d1) && .bjp_d1 < 0) -1 else 1
+s2 <- if (is.finite(.tel_d2) && .tel_d2 < 0) -1 else 1
+ideal_pts$dim1     <- ideal_pts$dim1 * s1
+ideal_pts$dim2     <- ideal_pts$dim2 * s2
+word_loadings$load1 <- word_loadings$load1 * s1
+word_loadings$load2 <- word_loadings$load2 * s2
+cat(sprintf("  Sign orientation: Dim1 x%d (BJP+), Dim2 x%d (Telugu+)\n", s1, s2))
+
 party_colors <- c(
   "BJP"      = "#FF9933",
   "INC"      = "#19AAED",
@@ -209,32 +224,46 @@ party_centroids <- ideal_pts %>%
 #{
 cat("[J1] Figure 1: 2D ideal point scatter...\n")
 
+# Clip display to the central mass: a handful of extreme MPs (e.g. dim1 ~ 0.9)
+# otherwise compress all 850+ MPs and the party centroids into an unreadable
+# blob at the origin, hiding the very BJP/INC overlap this figure is meant to
+# show. coord_cartesian trims the VIEW only; all points and estimates are kept.
+.d1 <- quantile(ideal_pts$dim1, c(0.01, 0.99)); .d2 <- quantile(ideal_pts$dim2, c(0.01, 0.99))
+.p1 <- 0.18 * diff(.d1); .p2 <- 0.18 * diff(.d2)
+xlim1 <- c(.d1[1] - .p1, .d1[2] + .p1); ylim1 <- c(.d2[1] - .p2, .d2[2] + .p2)
+n_off <- sum(ideal_pts$dim1 < xlim1[1] | ideal_pts$dim1 > xlim1[2] |
+             ideal_pts$dim2 < ylim1[1] | ideal_pts$dim2 > ylim1[2])
+
 p1 <- ggplot(ideal_pts, aes(x = dim1, y = dim2)) +
+  geom_hline(yintercept = 0, color = "grey85", linewidth = 0.3) +
+  geom_vline(xintercept = 0, color = "grey85", linewidth = 0.3) +
   geom_point(aes(color = party_family), alpha = 0.30, size = 1.1) +
   geom_point(data = party_centroids, aes(color = party_family),
              size = 5, shape = 18, alpha = 0.95) +
   geom_label_repel(
     data = party_centroids,
-    aes(label = paste0(party_family, "\n(n=", n, ")"), color = party_family),
-    fontface = "bold", size = 3.2, box.padding = 0.6,
-    label.padding = unit(0.15, "lines"), max.overlaps = 15, fill = "white"
+    aes(label = paste0(party_family, " (n=", n, ")"), color = party_family),
+    fontface = "bold", size = 3.0, box.padding = 0.7, point.padding = 0.3,
+    label.padding = unit(0.15, "lines"), max.overlaps = Inf, fill = "white",
+    force = 8, min.segment.length = 0, segment.size = 0.3, seed = 7
   ) +
   scale_color_manual(values = party_colors, na.value = "#95A5A6") +
+  coord_cartesian(xlim = xlim1, ylim = ylim1, clip = "off") +
   labs(
     title = "Parliamentary ideal points from question vocabulary",
     subtitle = sprintf(
-      "Each point = one MP. Diamonds = party centroids. SVD on TF-IDF matrix.\nDim 1: %.1f%% variance  |  Dim 2: %.1f%% variance",
+      "Each point = one MP. Diamonds = party centroids. The BJP and INC centroids sit almost on top of each other.\nSVD on TF-IDF matrix.  Dim 1: %.1f%% variance  |  Dim 2: %.1f%% variance",
       var_expl[1]*100, var_expl[2]*100
     ),
     x = sprintf("Dimension 1 (%.1f%% variance)", var_expl[1]*100),
     y = sprintf("Dimension 2 (%.1f%% variance)", var_expl[2]*100),
     color = NULL,
-    caption = "Pooled across 16th-18th Lok Sabha. Stop words, MP names, fragments removed."
+    caption = sprintf("Pooled across 16th-18th Lok Sabha. Stop words, MP names, fragments removed. %d extreme MPs fall outside the plotted range.", n_off)
   ) +
   theme_minimal(base_size = 12) +
   theme(plot.title = element_text(face = "bold"), legend.position = "none")
 
-ggsave(file.path(FIGDIR, "ideal_2d.png"), p1, width = 10, height = 7, dpi = 150)
+ggsave(file.path(FIGDIR, "ideal_2d.png"), p1, width = 10, height = 7, dpi = 300)
 file.copy(file.path(FIGDIR, "ideal_2d.png"),
           file.path(dirname(OUTDIR), "docs", "output", "figures", "ideal_2d.png"),
           overwrite = TRUE)
@@ -259,19 +288,27 @@ party_order_d1 <- ideal_pts %>%
   arrange(med) %>%
   pull(party_family)
 
+# Trim x-axis to exclude one extreme outlier (C.S. PUTTARAJU, dim1 = -0.898)
+# All other 859 MPs fall within [-0.020, +0.004]; outlier is 52x more extreme
+# than the next most negative MP. coord_cartesian clips display only -- the
+# outlier remains in the data and ideal point estimates are unchanged.
+dim1_trim_lo <- quantile(ideal_pts$dim1, 0.005)
+dim1_trim_hi <- quantile(ideal_pts$dim1, 0.995) + 0.001
+
 p2 <- ideal_pts %>%
   filter(party_family %in% big_parties) %>%
   mutate(party_family = factor(party_family, levels = party_order_d1)) %>%
   ggplot(aes(x = dim1, y = party_family, fill = party_family)) +
   geom_density_ridges(alpha = 0.7, scale = 0.9, rel_min_height = 0.01) +
   scale_fill_manual(values = party_colors, na.value = "#95A5A6") +
+  coord_cartesian(xlim = c(dim1_trim_lo, dim1_trim_hi)) +
   labs(
     title    = "Dimension 1: primary axis of parliamentary vocabulary",
     subtitle = "Distribution of MP ideal points along Dim 1 by party (sorted by median)",
     x        = sprintf("Dimension 1 (%.1f%% variance)", var_expl[1]*100),
     y        = NULL,
     fill     = NULL,
-    caption  = "Sign of dimension is arbitrary: interpret based on party separation."
+    caption  = "Sign of dimension is arbitrary. One outlier (dim1 = -0.90) excluded from display."
   ) +
   theme_minimal(base_size = 12) +
   theme(plot.title = element_text(face = "bold"), legend.position = "none")
@@ -296,24 +333,32 @@ party_order_d2 <- ideal_pts %>%
   arrange(med) %>%
   pull(party_family)
 
+# Trim x-axis: a few extreme MPs (e.g. a JDU outlier near dim2 = 0.36) otherwise
+# stretch the axis and crush the Telugu (TDP/YSRCP) separation near 0.005 into an
+# invisible sliver. coord_cartesian clips the view only; densities use all data.
+d2_lo <- quantile(ideal_pts$dim2, 0.02); d2_hi <- quantile(ideal_pts$dim2, 0.98)
+d2_pad <- 0.25 * (d2_hi - d2_lo)
+
 p3 <- ideal_pts %>%
   filter(party_family %in% big_parties) %>%
   mutate(party_family = factor(party_family, levels = party_order_d2)) %>%
   ggplot(aes(x = dim2, y = party_family, fill = party_family)) +
+  geom_vline(xintercept = 0, color = "grey80", linewidth = 0.3) +
   geom_density_ridges(alpha = 0.7, scale = 0.9, rel_min_height = 0.01) +
   scale_fill_manual(values = party_colors, na.value = "#95A5A6") +
+  coord_cartesian(xlim = c(d2_lo - d2_pad, d2_hi + d2_pad)) +
   labs(
-    title    = "Dimension 2: secondary axis of parliamentary vocabulary",
-    subtitle = "Distribution of MP ideal points along Dim 2 by party (sorted by median)",
+    title    = "Dimension 2: the Telugu exception",
+    subtitle = "Distribution of MP ideal points along Dim 2 by party (sorted by median).\nTDP and YSRCP separate sharply from the national parties; the Left anchors the other end.",
     x        = sprintf("Dimension 2 (%.1f%% variance)", var_expl[2]*100),
     y        = NULL,
     fill     = NULL,
-    caption  = "Sign of dimension is arbitrary: interpret based on party separation."
+    caption  = "Oriented so the Telugu parties (TDP/YSRCP) are positive. A few extreme MPs fall outside the plotted range."
   ) +
   theme_minimal(base_size = 12) +
   theme(plot.title = element_text(face = "bold"), legend.position = "none")
 
-ggsave(file.path(FIGDIR, "ideal_dim2_party.png"), p3, width = 9, height = 6, dpi = 150)
+ggsave(file.path(FIGDIR, "ideal_dim2_party.png"), p3, width = 9, height = 6, dpi = 300)
 file.copy(file.path(FIGDIR, "ideal_dim2_party.png"),
           file.path(dirname(OUTDIR), "docs", "output", "figures", "ideal_dim2_party.png"),
           overwrite = TRUE)
